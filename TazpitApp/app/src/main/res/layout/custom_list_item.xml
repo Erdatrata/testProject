@@ -9,13 +9,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="10dp"
-        android:textColor="@color/colorPrimaryDark"
         android:textSize="16sp"
         android:textStyle="bold" />
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/colorPrimary" />
+        android:layout_height="1dp" />
 
 </LinearLayout>

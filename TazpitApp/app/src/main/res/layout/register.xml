@@ -19,7 +19,7 @@
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.804" />
+        app:layout_constraintVertical_bias="0.827" />
 
     <EditText
         android:id="@+id/LastName"
@@ -32,10 +32,10 @@
         android:text="Last Name"
         app:layout_constraintBottom_toTopOf="@+id/PhoneNumber"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.74"
+        app:layout_constraintHorizontal_bias="0.785"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.804" />
+        app:layout_constraintVertical_bias="0.827" />
 
     <EditText
         android:id="@+id/Email"
@@ -125,29 +125,43 @@
         android:id="@+id/PhoneNumber"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="568dp"
+        android:layout_marginBottom="118dp"
         android:ems="10"
         android:hint="Phone Number"
         android:inputType="number"
-        tools:layout_editor_absoluteX="97dp"
-        tools:layout_editor_absoluteY="528dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/guideline"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <AutoCompleteTextView
         android:id="@+id/actv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="29dp"
         android:completionHint="Select a country"
         android:completionThreshold="1"
         android:dropDownAnchor="@id/text_view_countries"
-        android:hint="Select a country"
-        android:popupBackground="@color/colorAccent" />
+        android:hint="Select a city"
+        app:layout_constraintBottom_toTopOf="@+id/text_view_countries"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/passwordAgain" />
 
     <TextView
         android:id="@+id/text_view_countries"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="12dp"
         android:paddingBottom="16dp"
-        android:text="Countries"
-        android:textSize="20sp" />
+        android:text="Citys:"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/FirstName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/actv" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
