@@ -18,12 +18,15 @@
         android:layout_height="match_parent" />
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/sync_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:scaleX="0.5"
-        android:scaleY=".5"
-        app:srcCompat="@mipmap/TPS_LOGO_NOTEXT_foreground" />
+        android:contentDescription="refreshing_news"
+        android:scaleX="0.25"
+        android:scaleY="0.25"
+        app:srcCompat="@mipmap/sync_button_foreground"
+        tools:ignore="HardcodedText" />
+
 
     <!--    <com.google.android.material.navigation.NavigationView-->
 <!--        android:id="@+id/nav_view"-->
