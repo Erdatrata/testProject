@@ -28,17 +28,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="de1d0e9e-3953-470a-afa4-3dcf848e88ac" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.gradle/6.5/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.5/executionHistory/executionHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/6.5/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.5/fileHashes/fileHashes.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/app/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/dimens.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/dimens.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[Pixel_3a_API_30_x86]" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[]" />
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
@@ -62,9 +65,9 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
         <option value="layoutResourceFile" />
         <option value="valueResourceFile" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -84,6 +87,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="android.sdk.path" value="$USER_HOME$/AppData/Local/Android/Sdk" />
+    <property name="last_directory_selection" value="$PROJECT_DIR$/app/src/main/java" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/app/src/main/java/com/example/tazpitapp/ui" />
     <property name="project.structure.last.edited" value="SDK Location" />
     <property name="project.structure.proportion" value="0.17" />
@@ -91,13 +95,16 @@
     <property name="settings.editor.selected.configurable" value="preferences.editor" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="D:\git\tazpit\TazpitApp\app\src\main\java\com\example\tazpitapp\ui" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\git\tazpit\TazpitApp\app\src\main\assets" />
       <recent name="D:\git\tazpit\TazpitApp\app\src\main\res" />
       <recent name="D:\GIT\TazpitApp\app\src\main" />
+    </key>
+    <key name="android.template.-602712684">
+      <recent name="com.example.tazpitapp" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\git\tazpit\TazpitApp\app\src\main\java\com\example\tazpitapp\ui" />
     </key>
   </component>
   <component name="RunManager" selected="Android App.register">
@@ -270,10 +277,10 @@
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
     <state x="860" y="454" key="AndroidCreateResourceDirectoryDialog/-1920.541.1920.1020/0.0.2560.1400@0.0.2560.1400" timestamp="1619046593962" />
-    <state x="860" y="454" key="AndroidCreateResourceFileDialog" timestamp="1619037482173">
+    <state x="860" y="454" key="AndroidCreateResourceFileDialog" timestamp="1619188860881">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state x="860" y="454" key="AndroidCreateResourceFileDialog/-1920.541.1920.1020/0.0.2560.1400@0.0.2560.1400" timestamp="1619037482173" />
+    <state x="860" y="454" key="AndroidCreateResourceFileDialog/-1920.541.1920.1020/0.0.2560.1400@0.0.2560.1400" timestamp="1619188860881" />
     <state x="1303" y="380" key="FileChooserDialogImpl" timestamp="1619040700700">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
@@ -318,6 +325,10 @@
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
     <state width="1287" height="707" key="XDebugger.FullValuePopup/-1920.541.1920.1020/0.0.2560.1400@0.0.2560.1400" timestamp="1619047019126" />
+    <state x="1416" y="477" key="chooseDestDirectoryDialog" timestamp="1619188730510">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state x="1416" y="477" key="chooseDestDirectoryDialog/-1920.541.1920.1020/0.0.2560.1400@0.0.2560.1400" timestamp="1619188730510" />
     <state x="943" y="315" width="672" height="678" key="search.everywhere.popup" timestamp="1619045501897">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
