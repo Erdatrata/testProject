@@ -4,6 +4,11 @@ plugins {
 
 android {
     compileSdkVersion 29
+	
+    lintOptions {
+        disable 'ContentDescription'
+    }
+
 
     defaultConfig {
         applicationId "com.example.tazpitapp"

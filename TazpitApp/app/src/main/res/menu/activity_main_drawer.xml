@@ -5,8 +5,12 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_slideshow"
+            android:id="@+id/contact_button"
             android:icon="@android:drawable/ic_dialog_email"
-            android:title="Contact Us" />
+            android:title="צור קשר" />
+        <item
+            android:id="@+id/about_button"
+            android:icon="@android:drawable/ic_dialog_info"
+            android:title="אודות" />
     </group>
 </menu>

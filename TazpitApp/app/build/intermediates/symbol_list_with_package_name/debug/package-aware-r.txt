@@ -1428,12 +1428,15 @@ id ALT
 id BOTTOM_END
 id BOTTOM_START
 id CTRL
+id EmailAddressInputLogin
 id FUNCTION
 id META
+id PasswordInputLogin
 id SHIFT
 id SYM
 id TOP_END
 id TOP_START
+id about_button
 id accessibility_action_clickable_span
 id accessibility_custom_action_0
 id accessibility_custom_action_1
@@ -1493,6 +1496,7 @@ id all
 id always
 id async
 id auto
+id backFromLogin
 id barrier
 id beginning
 id blocking
@@ -1513,6 +1517,7 @@ id clip_horizontal
 id clip_vertical
 id collapseActionView
 id confirm_button
+id contact_button
 id container
 id content
 id contentPanel
@@ -1575,6 +1580,7 @@ id line1
 id line3
 id listMode
 id list_item
+id loginButton
 id main_page_logo
 id masked
 id message
@@ -1798,6 +1804,7 @@ layout abc_search_dropdown_item_icons_2line
 layout abc_search_view
 layout abc_select_dialog_material
 layout abc_tooltip
+layout activity_login
 layout activity_main
 layout app_bar_main
 layout content_main

@@ -17,3 +17,5 @@ com/example/tazpitapp/BuildConfig.java
  com.example.tazpitapp.BuildConfig
 com/example/tazpitapp/MainActivity.java
  com.example.tazpitapp.MainActivity
+com/example/tazpitapp/LoginActivity.java
+ com.example.tazpitapp.LoginActivity
