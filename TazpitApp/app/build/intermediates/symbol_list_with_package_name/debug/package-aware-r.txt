@@ -1436,6 +1436,8 @@ id SHIFT
 id SYM
 id TOP_END
 id TOP_START
+id TimePickerSettings
+id TimeViewSettings
 id about_button
 id accessibility_action_clickable_span
 id accessibility_custom_action_0
@@ -1498,6 +1500,7 @@ id async
 id auto
 id backFromLogin
 id backFromScenario
+id backFromSettings
 id barrier
 id beginning
 id blocking
@@ -1700,6 +1703,7 @@ id start
 id stretch
 id submenuarrow
 id submit_area
+id switch1
 id sync_button
 id tabMode
 id tag_accessibility_actions
@@ -1718,8 +1722,11 @@ id textEnd
 id textSpacerNoButtons
 id textSpacerNoTitle
 id textStart
+id textView
 id textView2
+id textView3
 id textView4
+id textView5
 id text_gallery
 id text_home
 id text_input_end_icon
@@ -1817,6 +1824,7 @@ layout abc_tooltip
 layout activity_login
 layout activity_main
 layout activity_scenario
+layout activity_setting
 layout app_bar_main
 layout content_main
 layout custom_dialog

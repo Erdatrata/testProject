@@ -7,6 +7,8 @@ com/example/tazpitapp/ui/home/HomeViewModel.java
  com.example.tazpitapp.ui.home.HomeViewModel
 com/example/tazpitapp/ui/slideshow/SlideshowViewModel.java
  com.example.tazpitapp.ui.slideshow.SlideshowViewModel
+com/example/tazpitapp/SettingActivity.java
+ com.example.tazpitapp.SettingActivity
 com/example/tazpitapp/ui/gallery/GalleryFragment.java
  com.example.tazpitapp.ui.gallery.GalleryFragment
  com.example.tazpitapp.ui.gallery.GalleryFragment$1
