@@ -15,6 +15,8 @@ com/example/tazpitapp/ui/slideshow/SlideshowFragment.java
  com.example.tazpitapp.ui.slideshow.SlideshowFragment$1
 com/example/tazpitapp/BuildConfig.java
  com.example.tazpitapp.BuildConfig
+com/example/tazpitapp/ScenarioActivity.java
+ com.example.tazpitapp.ScenarioActivity
 com/example/tazpitapp/MainActivity.java
  com.example.tazpitapp.MainActivity
 com/example/tazpitapp/LoginActivity.java

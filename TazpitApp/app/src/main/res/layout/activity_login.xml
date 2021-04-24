@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 
-
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/loginPage"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".LoginActivity">
@@ -33,10 +33,10 @@
 
         android:gravity="center_horizontal"
         android:hint='כתובת דוא"ל'
+        android:importantForAutofill="no"
         android:inputType="textEmailAddress"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:importantForAutofill="no" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/PasswordInputLogin"
@@ -48,10 +48,10 @@
         android:ems="10"
         android:gravity="center_horizontal"
         android:hint="ססמא"
+        android:importantForAutofill="no"
         android:inputType="textPassword"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/EmailAddressInputLogin"
-        android:importantForAutofill="no" />
+        app:layout_constraintTop_toBottomOf="@+id/EmailAddressInputLogin" />
 
     <Button
         android:id="@+id/loginButton"
@@ -62,4 +62,10 @@
         android:text="התחברות"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/PasswordInputLogin" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:layout_editor_absoluteX="198dp"
+        tools:layout_editor_absoluteY="215dp"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

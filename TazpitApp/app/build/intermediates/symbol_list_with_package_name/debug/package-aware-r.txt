@@ -1497,11 +1497,13 @@ id always
 id async
 id auto
 id backFromLogin
+id backFromScenario
 id barrier
 id beginning
 id blocking
 id bottom
 id buttonPanel
+id buttonScenario
 id cancel_button
 id center
 id center_horizontal
@@ -1512,6 +1514,7 @@ id checked
 id chip
 id chip_group
 id chronometer
+id cityGetScenario
 id clear_text
 id clip_horizontal
 id clip_vertical
@@ -1543,6 +1546,7 @@ id edit_query
 id end
 id enterAlways
 id enterAlwaysCollapsed
+id eventTypeGetScenario
 id exitUntilCollapsed
 id expand_activities_button
 id expanded_menu
@@ -1559,6 +1563,7 @@ id fragment_container_view_tag
 id ghost_view
 id ghost_view_holder
 id gone
+id gpsLink
 id group_divider
 id groups
 id hideable
@@ -1581,6 +1586,7 @@ id line3
 id listMode
 id list_item
 id loginButton
+id loginPage
 id main_page_logo
 id masked
 id message
@@ -1652,6 +1658,7 @@ id rounded
 id save_non_transition_alpha
 id save_overlay_view
 id scale
+id scenarioDesc
 id screen
 id scroll
 id scrollIndicatorDown
@@ -1711,6 +1718,8 @@ id textEnd
 id textSpacerNoButtons
 id textSpacerNoTitle
 id textStart
+id textView2
+id textView4
 id text_gallery
 id text_home
 id text_input_end_icon
@@ -1722,6 +1731,7 @@ id textinput_helper_text
 id time
 id title
 id titleDividerNoCustom
+id titleScenario
 id title_template
 id toolbar
 id top
@@ -1806,6 +1816,7 @@ layout abc_select_dialog_material
 layout abc_tooltip
 layout activity_login
 layout activity_main
+layout activity_scenario
 layout app_bar_main
 layout content_main
 layout custom_dialog
