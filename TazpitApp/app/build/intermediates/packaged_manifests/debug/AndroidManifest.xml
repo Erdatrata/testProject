@@ -17,8 +17,20 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:testOnly="true"
         android:theme="@style/Theme.TazpitApp" >
+        <activity
+            android:name="com.example.tazpitapp.SceneriosListActivity"
+            android:label="@string/title_scenerios_list"
+            android:theme="@style/Theme.TazpitApp.NoActionBar" />
+        <activity
+            android:name="com.example.tazpitapp.SceneriosDetailActivity"
+            android:label="@string/title_scenerios_detail"
+            android:parentActivityName="com.example.tazpitapp.SceneriosListActivity"
+            android:theme="@style/Theme.TazpitApp.NoActionBar" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.tazpitapp.SceneriosListActivity" />
+        </activity>
         <activity
             android:name="com.example.tazpitapp.register"
             android:label="@string/app_name"

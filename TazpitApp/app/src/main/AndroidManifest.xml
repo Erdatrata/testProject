@@ -12,7 +12,7 @@
         <activity
             android:name=".SceneriosListActivity"
             android:label="@string/title_scenerios_list"
-            android:theme="@style/Theme.TazpitApp.NoActionBar"></activity>
+            android:theme="@style/Theme.TazpitApp.NoActionBar" />
         <activity
             android:name=".SceneriosDetailActivity"
             android:label="@string/title_scenerios_detail"

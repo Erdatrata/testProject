@@ -7,12 +7,26 @@ com/example/tazpitapp/ui/home/HomeViewModel.java
  com.example.tazpitapp.ui.home.HomeViewModel
 com/example/tazpitapp/ui/slideshow/SlideshowViewModel.java
  com.example.tazpitapp.ui.slideshow.SlideshowViewModel
-com/example/tazpitapp/ui/gallery/GalleryFragment.java
- com.example.tazpitapp.ui.gallery.GalleryFragment
- com.example.tazpitapp.ui.gallery.GalleryFragment$1
 com/example/tazpitapp/ui/slideshow/SlideshowFragment.java
  com.example.tazpitapp.ui.slideshow.SlideshowFragment
  com.example.tazpitapp.ui.slideshow.SlideshowFragment$1
+com/example/tazpitapp/SceneriosDetailActivity.java
+ com.example.tazpitapp.SceneriosDetailActivity
+ com.example.tazpitapp.SceneriosDetailActivity$1
+com/example/tazpitapp/SceneriosDetailFragment.java
+ com.example.tazpitapp.SceneriosDetailFragment
+com/example/tazpitapp/ui/gallery/GalleryFragment.java
+ com.example.tazpitapp.ui.gallery.GalleryFragment
+ com.example.tazpitapp.ui.gallery.GalleryFragment$1
+com/example/tazpitapp/dummy/DummyContent.java
+ com.example.tazpitapp.dummy.DummyContent
+ com.example.tazpitapp.dummy.DummyContent$DummyItem
+com/example/tazpitapp/SceneriosListActivity.java
+ com.example.tazpitapp.SceneriosListActivity
+ com.example.tazpitapp.SceneriosListActivity$1
+ com.example.tazpitapp.SceneriosListActivity$SimpleItemRecyclerViewAdapter
+ com.example.tazpitapp.SceneriosListActivity$SimpleItemRecyclerViewAdapter$1
+ com.example.tazpitapp.SceneriosListActivity$SimpleItemRecyclerViewAdapter$ViewHolder
 com/example/tazpitapp/BuildConfig.java
  com.example.tazpitapp.BuildConfig
 com/example/tazpitapp/MainActivity.java

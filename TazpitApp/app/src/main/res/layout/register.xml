@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/purple">
 
     <EditText
         android:id="@+id/FirstName"
@@ -12,8 +13,8 @@
         android:layout_marginTop="404dp"
         android:layout_marginBottom="43dp"
         android:ems="10"
+        android:hint="First Name:"
         android:inputType="textPersonName"
-        android:text="First Name"
         app:layout_constraintBottom_toTopOf="@+id/PhoneNumber"
         app:layout_constraintEnd_toStartOf="@+id/LastName"
         app:layout_constraintHorizontal_bias="1.0"
@@ -28,8 +29,8 @@
         android:layout_marginTop="404dp"
         android:layout_marginBottom="43dp"
         android:ems="10"
+        android:hint="Last Name:"
         android:inputType="textPersonName"
-        android:text="Last Name"
         app:layout_constraintBottom_toTopOf="@+id/PhoneNumber"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.785"
@@ -46,8 +47,8 @@
         android:layout_marginEnd="104dp"
         android:layout_marginBottom="20dp"
         android:ems="10"
+        android:hint="Email:"
         android:inputType="textPersonName"
-        android:text="Email:"
         app:layout_constraintBottom_toTopOf="@+id/Password"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -55,9 +56,12 @@
 
     <Button
         android:id="@+id/next"
+        app:backgroundTint="@color/purpleSec"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="@android:color/white"
         android:text="next"
+        android:textColor="@android:color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.95"
@@ -67,15 +71,18 @@
 
     <Button
         android:id="@+id/back"
+        app:backgroundTint="@color/purpleSec"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="back"
+        android:layout_marginBottom="663dp"
+        android:text="@string/back"
+        android:textColor="@android:color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.092"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.029" />
+        app:layout_constraintVertical_bias="1.0" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline"
