@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fillReport">
+
+    <ImageView
+        android:id="@+id/back_button"
+        android:layout_width="160dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="300dp"
+        android:rotationX="0"
+        android:rotationY="-180"
+        android:tint="@color/black"
+        app:layout_constraintBottom_toTopOf="@+id/fill_report_title"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.437"
+        app:srcCompat="@drawable/abc_vector_test" />
+
+    <EditText
+        android:id="@+id/fill_report_title"
+        android:layout_width="239dp"
+        android:layout_height="50dp"
+        android:autofillHints=""
+        android:ems="10"
+        android:hint="כותרת:"
+        android:inputType="textPersonName"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.563"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.067" />
+
+    <EditText
+        android:id="@+id/fill_report_description"
+        android:layout_width="239dp"
+        android:layout_height="50dp"
+        android:layout_marginBottom="560dp"
+        android:ems="10"
+        android:gravity="start|top"
+        android:hint="כתוב תיאור:"
+        android:inputType="textMultiLine"
+        android:lines="4"
+        android:maxLines="4"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.56"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/fill_report_upload_media_text"
+        android:layout_width="239dp"
+        android:layout_height="50dp"
+        android:gravity="center"
+        android:text="העלה תמונות ווידאו"
+        android:textAlignment="center"
+        android:textAllCaps="false"
+        android:textColor="#000000"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.627"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fill_report_description"
+        app:layout_constraintVertical_bias="0.237" />
+
+    <ImageButton
+        android:id="@+id/fill_report_upload_button"
+        android:layout_width="55dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="122dp"
+        android:scaleX="1.22"
+        android:scaleY="1.38"
+        app:layout_constraintEnd_toStartOf="@+id/fill_report_upload_media_text"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fill_report_description"
+        app:srcCompat="@android:drawable/ic_menu_upload" />
+
+    <RadioButton
+        android:id="@+id/fill_report_add_credit"
+        android:layout_width="180dp"
+        android:layout_height="48dp"
+        android:layout_gravity="start"
+        android:layoutDirection="rtl"
+        android:text="הוסף קרדיטים"
+        android:textAlignment="textStart"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.584"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fill_report_upload_media_text"
+        app:layout_constraintVertical_bias="0.055" />
+
+    <Button
+        android:id="@+id/fill_report_send_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="56dp"
+        android:text="שלח"
+        android:textSize="20dp"
+        app:backgroundTint="@color/mycyan"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.551"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fill_report_add_credit" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
