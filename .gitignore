@@ -1,0 +1,16 @@
+TazpitApp/*.iml
+TazpitApp/.gradle
+TazpitApp/app/build
+TazpitApp/local.properties
+TazpitApp/.idea/caches
+TazpitApp/.idea/libraries
+TazpitApp/.idea/modules.xml
+TazpitApp/.idea/workspace.xml
+TazpitApp/.idea/navEditor.xml
+TazpitApp/.idea/assetWizardSettings.xml
+TazpitApp/.DS_Store
+TazpitApp/**/build/
+TazpitApp/captures
+TazpitApp/externalNativeBuild
+TazpitApp/.cxx
+TazpitApp/local.properties
