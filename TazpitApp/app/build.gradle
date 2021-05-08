@@ -4,10 +4,15 @@ plugins {
 
 android {
     compileSdkVersion 29
+	
+    lintOptions {
+        disable 'ContentDescription'
+    }
+
 
     defaultConfig {
         applicationId "com.example.tazpitapp"
-        minSdkVersion 29
+        minSdkVersion 28
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"
