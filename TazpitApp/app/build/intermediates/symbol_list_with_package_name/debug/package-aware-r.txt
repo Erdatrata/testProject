@@ -915,6 +915,7 @@ color mtrl_textinput_disabled_color
 color mtrl_textinput_filled_box_default_background_color
 color mtrl_textinput_focused_box_stroke_color
 color mtrl_textinput_hovered_box_stroke_color
+color mycyan
 color notification_action_color_filter
 color notification_icon_bg_color
 color primary_dark_material_dark
@@ -925,7 +926,6 @@ color primary_text_default_material_dark
 color primary_text_default_material_light
 color primary_text_disabled_material_dark
 color primary_text_disabled_material_light
-color purple_200
 color purple_500
 color purple_700
 color ripple_material_dark
@@ -1544,7 +1544,12 @@ id fab
 id fade
 id fill
 id fill_horizontal
+id fill_report_add_credit
+id fill_report_description
+id fill_report_send_button
 id fill_report_title
+id fill_report_upload_button
+id fill_report_upload_media_text
 id fill_vertical
 id filled
 id filter_chip

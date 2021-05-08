@@ -15,9 +15,11 @@
         android:rotationY="-180"
         android:tint="@color/black"
         app:layout_constraintBottom_toTopOf="@+id/fill_report_title"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.437"
+        app:layout_constraintVertical_bias="0.363"
         app:srcCompat="@drawable/abc_vector_test" />
 
     <EditText
@@ -28,30 +30,33 @@
         android:ems="10"
         android:hint="כותרת:"
         android:inputType="textPersonName"
+        android:textDirection="rtl"
         android:textSize="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.563"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.067" />
+        app:layout_constraintVertical_bias="0.108" />
 
     <EditText
         android:id="@+id/fill_report_description"
         android:layout_width="239dp"
         android:layout_height="50dp"
-        android:layout_marginBottom="560dp"
         android:ems="10"
         android:gravity="start|top"
         android:hint="כתוב תיאור:"
         android:inputType="textMultiLine"
         android:lines="4"
         android:maxLines="4"
+        android:textDirection="rtl"
         android:textSize="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.56"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintHorizontal_bias="0.563"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.208" />
 
     <TextView
         android:id="@+id/fill_report_upload_media_text"
@@ -62,42 +67,31 @@
         android:textAlignment="center"
         android:textAllCaps="false"
         android:textColor="#000000"
+        android:textDirection="rtl"
         android:textSize="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.627"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/fill_report_description"
-        app:layout_constraintVertical_bias="0.237" />
+        app:layout_constraintVertical_bias="0.163" />
+
+    <!--    <checkbox-->
+    <!--        />-->
 
     <ImageButton
         android:id="@+id/fill_report_upload_button"
         android:layout_width="55dp"
         android:layout_height="50dp"
-        android:layout_marginTop="122dp"
         android:scaleX="1.22"
         android:scaleY="1.38"
+        app:layout_constraintBottom_toBottomOf="@+id/fill_report_upload_media_text"
         app:layout_constraintEnd_toStartOf="@+id/fill_report_upload_media_text"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/fill_report_description"
+        app:layout_constraintVertical_bias="1.0"
         app:srcCompat="@android:drawable/ic_menu_upload" />
-
-    <RadioButton
-        android:id="@+id/fill_report_add_credit"
-        android:layout_width="180dp"
-        android:layout_height="48dp"
-        android:layout_gravity="start"
-        android:layoutDirection="rtl"
-        android:text="הוסף קרדיטים"
-        android:textAlignment="textStart"
-        android:textSize="20dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.584"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/fill_report_upload_media_text"
-        app:layout_constraintVertical_bias="0.055" />
 
     <Button
         android:id="@+id/fill_report_send_button"
@@ -112,6 +106,22 @@
         app:layout_constraintHorizontal_bias="0.551"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/fill_report_add_credit" />
+
+    <CheckBox
+        android:id="@+id/fill_report_add_credit"
+        android:layout_width="180dp"
+        android:layout_height="48dp"
+        android:layout_gravity="start"
+        android:layoutDirection="rtl"
+        android:text="הוסף קרדיטים"
+        android:textAlignment="textStart"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.519"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fill_report_upload_media_text"
+        app:layout_constraintVertical_bias="0.116" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
