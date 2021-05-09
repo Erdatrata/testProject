@@ -14,7 +14,20 @@
         <activity android:name=".ScenarioActivity" />
         <activity android:name=".LoginActivity" />
         <activity
-            android:name=".MainActivity"
+            android:name=".SceneriosListActivity"
+            android:label="@string/title_scenerios_list"
+            android:theme="@style/Theme.TazpitApp.NoActionBar" />
+        <activity
+            android:name=".SceneriosDetailActivity"
+            android:label="@string/title_scenerios_detail"
+            android:parentActivityName=".SceneriosListActivity"
+            android:theme="@style/Theme.TazpitApp.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.tazpitapp.SceneriosListActivity" />
+        </activity>
+        <activity
+            android:name=".register"
             android:label="@string/app_name"
             android:theme="@style/Theme.TazpitApp.NoActionBar">
 =======

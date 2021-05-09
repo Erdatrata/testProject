@@ -1,6 +1,9 @@
 *.iml
 .gradle
+<<<<<<< HEAD
 /app/build
+=======
+>>>>>>> elieAndroid
 /local.properties
 /.idea/caches
 /.idea/libraries
@@ -9,7 +12,11 @@
 /.idea/navEditor.xml
 /.idea/assetWizardSettings.xml
 .DS_Store
+<<<<<<< HEAD
 **/build/
+=======
+/build
+>>>>>>> elieAndroid
 /captures
 .externalNativeBuild
 .cxx
