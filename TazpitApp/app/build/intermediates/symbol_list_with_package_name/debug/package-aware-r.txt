@@ -1438,7 +1438,6 @@ id SYM
 id TOP_END
 id TOP_START
 id TimePickerSettings
-id TimeViewSettings
 id about_button
 id accessibility_action_clickable_span
 id accessibility_custom_action_0
@@ -1517,6 +1516,7 @@ id checkbox
 id checked
 id chip
 id chip_group
+id choose_text
 id chronometer
 id cityGetScenario
 id clear_text
@@ -1533,6 +1533,13 @@ id custom
 id customPanel
 id cut
 id date_picker_actions
+id day_friday
+id day_monday
+id day_saturday
+id day_sunday
+id day_thursday
+id day_tuesday
+id day_wednesday
 id decor_content_parent
 id default_activity_button
 id design_bottom_sheet
@@ -1655,6 +1662,9 @@ id pin
 id progress_circular
 id progress_horizontal
 id radio
+id radioGroup
+id radio_by_city
+id radio_by_gps
 id right
 id right_icon
 id right_side
@@ -1704,7 +1714,6 @@ id start
 id stretch
 id submenuarrow
 id submit_area
-id switch1
 id sync_button
 id tabMode
 id tag_accessibility_actions
@@ -1723,9 +1732,7 @@ id textEnd
 id textSpacerNoButtons
 id textSpacerNoTitle
 id textStart
-id textView
 id textView2
-id textView3
 id textView4
 id textView5
 id text_gallery
