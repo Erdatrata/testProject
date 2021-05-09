@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/TazpitApp.iml" filepath="$PROJECT_DIR$/.idea/modules/TazpitApp.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/TazpitApp.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/TazpitApp.app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/tazpit.TazpitApp.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/tazpit.TazpitApp.app.iml" />
     </modules>
   </component>
 </project>

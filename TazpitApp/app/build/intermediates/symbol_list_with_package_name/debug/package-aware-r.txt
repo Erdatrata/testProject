@@ -56,10 +56,7 @@ animator mtrl_fab_hide_motion_spec
 animator mtrl_fab_show_motion_spec
 animator mtrl_fab_transformation_sheet_collapse_spec
 animator mtrl_fab_transformation_sheet_expand_spec
-<<<<<<< HEAD
-=======
 array citysOnTest
->>>>>>> elieAndroid
 attr action
 attr actionBarDivider
 attr actionBarItemBackground
@@ -919,13 +916,7 @@ color mtrl_textinput_disabled_color
 color mtrl_textinput_filled_box_default_background_color
 color mtrl_textinput_focused_box_stroke_color
 color mtrl_textinput_hovered_box_stroke_color
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
 color mycyan
->>>>>>> fillReport
-=======
->>>>>>> elieAndroid
 color notification_action_color_filter
 color notification_icon_bg_color
 color primary_dark_material_dark
@@ -936,15 +927,8 @@ color primary_text_default_material_dark
 color primary_text_default_material_light
 color primary_text_disabled_material_dark
 color primary_text_disabled_material_light
-<<<<<<< HEAD
-<<<<<<< HEAD
-color purple_200
-=======
->>>>>>> fillReport
-=======
 color purple
 color purpleSec
->>>>>>> elieAndroid
 color purple_500
 color purple_700
 color ripple_material_dark
@@ -1047,10 +1031,7 @@ dimen abc_text_size_title_material_toolbar
 dimen action_bar_size
 dimen activity_horizontal_margin
 dimen activity_vertical_margin
-<<<<<<< HEAD
-=======
 dimen app_bar_height
->>>>>>> elieAndroid
 dimen appcompat_dialog_background_inset
 dimen cardview_compat_inset_shadow
 dimen cardview_default_elevation
@@ -1125,10 +1106,7 @@ dimen hint_pressed_alpha_material_light
 dimen item_touch_helper_max_drag_scroll_per_frame
 dimen item_touch_helper_swipe_escape_max_velocity
 dimen item_touch_helper_swipe_escape_velocity
-<<<<<<< HEAD
-=======
 dimen item_width
->>>>>>> elieAndroid
 dimen material_emphasis_disabled
 dimen material_emphasis_high_type
 dimen material_emphasis_medium
@@ -1297,10 +1275,7 @@ dimen notification_subtext_size
 dimen notification_top_pad
 dimen notification_top_pad_large_text
 dimen test_mtrl_calendar_day_cornerSize
-<<<<<<< HEAD
-=======
 dimen text_margin
->>>>>>> elieAndroid
 dimen tooltip_corner_radius
 dimen tooltip_horizontal_padding
 dimen tooltip_margin
@@ -1450,59 +1425,31 @@ drawable notification_template_icon_low_bg
 drawable notification_tile_bg
 drawable notify_panel_notification_icon_bg
 drawable side_nav_bar
-<<<<<<< HEAD
-<<<<<<< HEAD
 drawable sync_button_background
 drawable test_custom_background
 drawable tooltip_frame_dark
 drawable tooltip_frame_light
 drawable tps_logo_full_background
-=======
-drawable test_custom_background
-drawable tooltip_frame_dark
-drawable tooltip_frame_light
->>>>>>> fillReport
-=======
-drawable test_custom_background
-drawable tooltip_frame_dark
-drawable tooltip_frame_light
->>>>>>> elieAndroid
 id ALT
 id BOTTOM_END
 id BOTTOM_START
 id CTRL
-<<<<<<< HEAD
-<<<<<<< HEAD
-id EmailAddressInputLogin
-id FUNCTION
-id META
-id PasswordInputLogin
-=======
-id FUNCTION
-id META
->>>>>>> fillReport
-=======
 id Email
+id EmailAddressInputLogin
 id FUNCTION
 id FirstName
 id LastName
 id META
 id Password
+id PasswordInputLogin
 id PhoneNumber
->>>>>>> elieAndroid
 id SHIFT
 id SYM
 id TOP_END
 id TOP_START
-<<<<<<< HEAD
-<<<<<<< HEAD
 id TimePickerSettings
 id TimeViewSettings
 id about_button
-=======
->>>>>>> fillReport
-=======
->>>>>>> elieAndroid
 id accessibility_action_clickable_span
 id accessibility_custom_action_0
 id accessibility_custom_action_1
@@ -1556,42 +1503,25 @@ id action_settings
 id action_text
 id actions
 id activity_chooser_view_content
-<<<<<<< HEAD
-=======
 id actv
->>>>>>> elieAndroid
 id add
 id alertTitle
 id all
 id always
-<<<<<<< HEAD
-id async
-id auto
-<<<<<<< HEAD
-id backFromLogin
-id backFromScenario
-id backFromSettings
-=======
-id back_button
->>>>>>> fillReport
-=======
 id app_bar
 id async
 id auto
 id back
->>>>>>> elieAndroid
+id backFromLogin
+id backFromScenario
+id backFromSettings
+id back_button
 id barrier
 id beginning
 id blocking
 id bottom
 id buttonPanel
-<<<<<<< HEAD
-<<<<<<< HEAD
 id buttonScenario
-=======
->>>>>>> fillReport
-=======
->>>>>>> elieAndroid
 id cancel_button
 id center
 id center_horizontal
@@ -1602,25 +1532,13 @@ id checked
 id chip
 id chip_group
 id chronometer
-<<<<<<< HEAD
-<<<<<<< HEAD
 id cityGetScenario
-=======
->>>>>>> fillReport
-=======
->>>>>>> elieAndroid
 id clear_text
 id clip_horizontal
 id clip_vertical
 id collapseActionView
 id confirm_button
-<<<<<<< HEAD
-<<<<<<< HEAD
 id contact_button
-=======
->>>>>>> fillReport
-=======
->>>>>>> elieAndroid
 id container
 id content
 id contentPanel
@@ -1636,10 +1554,7 @@ id design_menu_item_action_area
 id design_menu_item_action_area_stub
 id design_menu_item_text
 id design_navigation_view
-<<<<<<< HEAD
-=======
 id detail_toolbar
->>>>>>> elieAndroid
 id dialog_button
 id dimensions
 id direct
@@ -1650,18 +1565,7 @@ id edit_query
 id end
 id enterAlways
 id enterAlwaysCollapsed
-<<<<<<< HEAD
-<<<<<<< HEAD
 id eventTypeGetScenario
-id exitUntilCollapsed
-id expand_activities_button
-id expanded_menu
-id fade
-id fill
-id fill_horizontal
-=======
-=======
->>>>>>> elieAndroid
 id exitUntilCollapsed
 id expand_activities_button
 id expanded_menu
@@ -1669,16 +1573,12 @@ id fab
 id fade
 id fill
 id fill_horizontal
-<<<<<<< HEAD
 id fill_report_add_credit
 id fill_report_description
 id fill_report_send_button
 id fill_report_title
 id fill_report_upload_button
 id fill_report_upload_media_text
->>>>>>> fillReport
-=======
->>>>>>> elieAndroid
 id fill_vertical
 id filled
 id filter_chip
@@ -1686,35 +1586,21 @@ id fitToContents
 id fixed
 id forever
 id fragment_container_view_tag
-<<<<<<< HEAD
-id ghost_view
-id ghost_view_holder
-id gone
-<<<<<<< HEAD
-id gpsLink
-=======
->>>>>>> fillReport
-id group_divider
-id groups
-=======
 id frameLayout
 id ghost_view
 id ghost_view_holder
 id gone
+id gpsLink
 id group_divider
 id groups
 id guideline
 id guideline2
->>>>>>> elieAndroid
 id hideable
 id home
 id homeAsUp
 id icon
 id icon_group
-<<<<<<< HEAD
-=======
 id id_text
->>>>>>> elieAndroid
 id ifRoom
 id image
 id imageView
@@ -1729,15 +1615,9 @@ id line1
 id line3
 id listMode
 id list_item
-<<<<<<< HEAD
-<<<<<<< HEAD
 id loginButton
 id loginPage
 id main_page_logo
-=======
->>>>>>> fillReport
-=======
->>>>>>> elieAndroid
 id masked
 id message
 id middle
@@ -1779,14 +1659,8 @@ id nav_slideshow
 id nav_view
 id navigation_header_container
 id never
-<<<<<<< HEAD
-<<<<<<< HEAD
 id news_recycle
-=======
->>>>>>> fillReport
-=======
 id next
->>>>>>> elieAndroid
 id noScroll
 id none
 id normal
@@ -1801,10 +1675,7 @@ id parallax
 id parent
 id parentPanel
 id parent_matrix
-<<<<<<< HEAD
-=======
 id passwordAgain
->>>>>>> elieAndroid
 id password_toggle
 id peekHeight
 id percent
@@ -1819,16 +1690,10 @@ id rounded
 id save_non_transition_alpha
 id save_overlay_view
 id scale
-<<<<<<< HEAD
-<<<<<<< HEAD
 id scenarioDesc
-=======
->>>>>>> fillReport
-=======
 id scenerios_detail
 id scenerios_detail_container
 id scenerios_list
->>>>>>> elieAndroid
 id screen
 id scroll
 id scrollIndicatorDown
@@ -1870,14 +1735,8 @@ id start
 id stretch
 id submenuarrow
 id submit_area
-<<<<<<< HEAD
-<<<<<<< HEAD
 id switch1
 id sync_button
-=======
->>>>>>> fillReport
-=======
->>>>>>> elieAndroid
 id tabMode
 id tag_accessibility_actions
 id tag_accessibility_clickable_spans
@@ -1896,44 +1755,27 @@ id textSpacerNoButtons
 id textSpacerNoTitle
 id textStart
 id textView
-<<<<<<< HEAD
-<<<<<<< HEAD
 id textView2
 id textView3
 id textView4
 id textView5
-=======
->>>>>>> fillReport
-=======
->>>>>>> elieAndroid
 id text_gallery
 id text_home
 id text_input_end_icon
 id text_input_start_icon
 id text_slideshow
-<<<<<<< HEAD
-=======
 id text_view_countries
 id text_view_list_item
->>>>>>> elieAndroid
 id textinput_counter
 id textinput_error
 id textinput_helper_text
 id time
 id title
 id titleDividerNoCustom
-<<<<<<< HEAD
-<<<<<<< HEAD
 id titleScenario
-=======
->>>>>>> fillReport
-id title_template
-id toolbar
-=======
 id title_template
 id toolbar
 id toolbar_layout
->>>>>>> elieAndroid
 id top
 id topPanel
 id touch_outside
@@ -2014,28 +1856,17 @@ layout abc_search_dropdown_item_icons_2line
 layout abc_search_view
 layout abc_select_dialog_material
 layout abc_tooltip
-<<<<<<< HEAD
-<<<<<<< HEAD
+layout activity_fill_report
 layout activity_login
 layout activity_main
 layout activity_scenario
-layout activity_setting
-=======
-layout activity_fill_report
-layout activity_main
->>>>>>> fillReport
-layout app_bar_main
-layout content_main
-layout custom_dialog
-=======
-layout activity_main
 layout activity_scenerios_detail
 layout activity_scenerios_list
+layout activity_setting
 layout app_bar_main
 layout content_main
 layout custom_dialog
 layout custom_list_item
->>>>>>> elieAndroid
 layout design_bottom_navigation_item
 layout design_bottom_sheet_dialog
 layout design_layout_snackbar
@@ -2089,13 +1920,10 @@ layout notification_template_custom_big
 layout notification_template_icon_group
 layout notification_template_part_chronometer
 layout notification_template_part_time
-<<<<<<< HEAD
-=======
 layout register
 layout scenerios_detail
 layout scenerios_list
 layout scenerios_list_content
->>>>>>> elieAndroid
 layout select_dialog_item_material
 layout select_dialog_multichoice_material
 layout select_dialog_singlechoice_material
@@ -2116,8 +1944,6 @@ menu activity_main_drawer
 menu main
 mipmap ic_launcher
 mipmap ic_launcher_round
-<<<<<<< HEAD
-<<<<<<< HEAD
 mipmap sync_button
 mipmap sync_button_foreground
 mipmap sync_button_round
@@ -2128,10 +1954,6 @@ mipmap tps_logo_full
 mipmap tps_logo_full_foreground
 mipmap tps_logo_full_round
 mipmap tps_logo_round
-=======
->>>>>>> fillReport
-=======
->>>>>>> elieAndroid
 navigation mobile_navigation
 plurals mtrl_badge_content_description
 string abc_action_bar_home_description
@@ -2164,10 +1986,7 @@ string abc_toolbar_collapse_description
 string action_settings
 string app_name
 string appbar_scrolling_view_behavior
-<<<<<<< HEAD
-=======
 string back
->>>>>>> elieAndroid
 string bottom_sheet_behavior
 string character_counter_content_description
 string character_counter_overflowed_content_description
@@ -2231,11 +2050,8 @@ string path_password_eye_mask_visible
 string path_password_strike_through
 string search_menu_title
 string status_bar_notification_info_overflow
-<<<<<<< HEAD
-=======
 string title_scenerios_detail
 string title_scenerios_list
->>>>>>> elieAndroid
 style AlertDialog_AppCompat
 style AlertDialog_AppCompat_Light
 style Animation_AppCompat_Dialog
