@@ -5,6 +5,7 @@
       <map>
         <entry key="imageWizard">
           <value>
+<<<<<<< HEAD
             <PersistentState>
               <option name="children">
                 <map>
@@ -295,6 +296,8 @@
         </entry>
         <entry key="vectorWizard">
           <value>
+=======
+>>>>>>> fillReport
             <PersistentState />
           </value>
         </entry>

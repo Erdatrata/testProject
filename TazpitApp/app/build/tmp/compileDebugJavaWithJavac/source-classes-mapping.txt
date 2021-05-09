@@ -7,8 +7,11 @@ com/example/tazpitapp/ui/home/HomeViewModel.java
  com.example.tazpitapp.ui.home.HomeViewModel
 com/example/tazpitapp/ui/slideshow/SlideshowViewModel.java
  com.example.tazpitapp.ui.slideshow.SlideshowViewModel
+<<<<<<< HEAD
 com/example/tazpitapp/SettingActivity.java
  com.example.tazpitapp.SettingActivity
+=======
+>>>>>>> fillReport
 com/example/tazpitapp/ui/gallery/GalleryFragment.java
  com.example.tazpitapp.ui.gallery.GalleryFragment
  com.example.tazpitapp.ui.gallery.GalleryFragment$1
@@ -17,9 +20,17 @@ com/example/tazpitapp/ui/slideshow/SlideshowFragment.java
  com.example.tazpitapp.ui.slideshow.SlideshowFragment$1
 com/example/tazpitapp/BuildConfig.java
  com.example.tazpitapp.BuildConfig
+<<<<<<< HEAD
 com/example/tazpitapp/ScenarioActivity.java
  com.example.tazpitapp.ScenarioActivity
 com/example/tazpitapp/MainActivity.java
  com.example.tazpitapp.MainActivity
 com/example/tazpitapp/LoginActivity.java
  com.example.tazpitapp.LoginActivity
+=======
+com/example/tazpitapp/fillReport.java
+ com.example.tazpitapp.fillReport
+com/example/tazpitapp/MainActivity.java
+ com.example.tazpitapp.MainActivity
+ com.example.tazpitapp.MainActivity$1
+>>>>>>> fillReport

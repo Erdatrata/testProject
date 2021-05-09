@@ -19,11 +19,16 @@
         android:supportsRtl="true"
         android:testOnly="true"
         android:theme="@style/Theme.TazpitApp" >
+<<<<<<< HEAD
         <activity android:name="com.example.tazpitapp.SettingActivity" />
         <activity android:name="com.example.tazpitapp.ScenarioActivity" />
         <activity android:name="com.example.tazpitapp.LoginActivity" />
         <activity
             android:name="com.example.tazpitapp.MainActivity"
+=======
+        <activity
+            android:name="com.example.tazpitapp.fillReport"
+>>>>>>> fillReport
             android:label="@string/app_name"
             android:theme="@style/Theme.TazpitApp.NoActionBar" >
             <intent-filter>
@@ -32,6 +37,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+<<<<<<< HEAD
+=======
+        <activity
+            android:name="com.example.tazpitapp.MainActivity"
+            android:label="@string/app_name"
+            android:theme="@style/Theme.TazpitApp.NoActionBar" >
+        </activity>
+>>>>>>> fillReport
     </application>
 
 </manifest>
