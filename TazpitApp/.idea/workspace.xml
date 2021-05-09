@@ -29,6 +29,11 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$/.." value="androidStyle" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="ProjectId" id="1rRNRBMdHeOK79RkZuqizV2NfYd" />
@@ -143,6 +148,9 @@
     </task>
     <servers />
   </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
   <component name="WindowStateProjectService">
     <state x="499" y="159" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1619042740726">
       <screen x="0" y="0" width="1536" height="824" />
@@ -152,11 +160,11 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="93" y="93" width="1350" height="638" key="AVDManager/0.0.1536.824@0.0.1536.824" timestamp="1619097777570" />
-    <state x="488" y="148" key="FileChooserDialogImpl" timestamp="1619269078741">
-      <screen x="0" y="0" width="1366" height="728" />
+    <state x="696" y="93" key="FileChooserDialogImpl" timestamp="1620547515638">
+      <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="488" y="148" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1619269078741" />
-    <state x="549" y="167" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1619091771856" />
+    <state x="696" y="93" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1620547515638" />
     <state width="1306" height="176" key="GridCell.Tab.0.bottom" timestamp="1619271223769">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -181,18 +189,19 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="349" y="155" key="IDE.errors.dialog/0.0.1536.824@0.0.1536.824" timestamp="1619034570953" />
-    <state x="189" y="6" key="SettingsEditor" timestamp="1619270534104">
-      <screen x="0" y="0" width="1366" height="728" />
+    <state x="213" y="7" key="SettingsEditor" timestamp="1619544976469">
+      <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="189" y="6" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1619270534104" />
+    <state x="213" y="7" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1619544976469" />
     <state x="578" y="326" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1619091289869">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="578" y="326" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1536.824@0.0.1536.824" timestamp="1619091289869" />
-    <state x="475" y="144" width="838" height="534" key="find.popup" timestamp="1619263021442">
+    <state x="475" y="144" width="838" height="534" key="find.popup" timestamp="1620546972404">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="475" y="144" width="838" height="534" key="find.popup/0.0.1536.824@0.0.1536.824" timestamp="1619263021442" />
+    <state x="475" y="144" width="838" height="534" key="find.popup/0.0.1536.824@0.0.1536.824" timestamp="1620546972404" />
     <state width="300" height="36" key="javadoc.popup.new" timestamp="1619266917257">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -205,5 +214,12 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="431" y="145" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1619091750305" />
+  </component>
+  <component name="XDebuggerManager">
+    <pin-to-top-manager>
+      <pinned-members>
+        <PinnedItemInfo typeName="android.content.res.AssetManager$AssetInputStream" fieldName="shadow$_klass_" />
+      </pinned-members>
+    </pin-to-top-manager>
   </component>
 </project>
