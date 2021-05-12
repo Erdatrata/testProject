@@ -5,6 +5,10 @@
 
     <group android:checkableBehavior="single">
         <item
+            android:id="@+id/login_button"
+            android:icon="@android:drawable/ic_dialog_email"
+            android:title="התחברות" />
+        <item
             android:id="@+id/contact_button"
             android:icon="@android:drawable/ic_dialog_email"
             android:title="צור קשר" />
