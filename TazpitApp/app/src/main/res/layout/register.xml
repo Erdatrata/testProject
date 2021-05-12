@@ -6,6 +6,41 @@
     android:layout_height="match_parent"
     android:background="@color/purple">
 
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/til_city"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Hello World!"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="20dp"
+        style ="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu">
+        app: starIconDrawable="@drawable/ic_baseline_ac_unit_24"
+        >
+        <AutoCompleteTextView
+            android:id="@+id/act_city"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:hint="city"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            android:layout_marginTop="20dp"
+            android:padding="20dp"
+            ></AutoCompleteTextView>
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+
+
+
+
+
     <EditText
         android:id="@+id/FirstName"
         android:layout_width="119dp"
