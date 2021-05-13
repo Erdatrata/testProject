@@ -42,10 +42,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setNavigationViewListener();
         setContentView(R.layout.activity_main);
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        aToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.drawable.navig, R.string.open, R.string.Close);
+
+        aToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         navigationView = (NavigationView) findViewById(R.id.nav_view);
         mDrawerLayout.addDrawerListener(aToggle);
-        toolbar = (Toolbar) findViewById(R.id.nav_action);
+//        toolbar = (Toolbar) findViewById(R.id.nav);
         toolbar.setNavigationIcon(R.drawable.ic_menu_camera);
         setSupportActionBar(toolbar);
         aToggle.syncState();

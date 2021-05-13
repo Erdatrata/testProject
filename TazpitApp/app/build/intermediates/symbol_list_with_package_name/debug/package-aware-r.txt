@@ -1483,6 +1483,7 @@ id accessibility_custom_action_6
 id accessibility_custom_action_7
 id accessibility_custom_action_8
 id accessibility_custom_action_9
+id act_city
 id action_bar
 id action_bar_activity_content
 id action_bar_container
@@ -1503,7 +1504,6 @@ id action_settings
 id action_text
 id actions
 id activity_chooser_view_content
-id actv
 id add
 id alertTitle
 id all
@@ -1625,6 +1625,7 @@ id listMode
 id list_item
 id loginButton
 id loginPage
+id login_button
 id main_page_logo
 id masked
 id message
@@ -1772,11 +1773,11 @@ id text_home
 id text_input_end_icon
 id text_input_start_icon
 id text_slideshow
-id text_view_countries
 id text_view_list_item
 id textinput_counter
 id textinput_error
 id textinput_helper_text
+id til_city
 id time
 id title
 id titleDividerNoCustom
