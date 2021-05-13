@@ -80,10 +80,10 @@ MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.0] C:\Users\א
 		ADDED from C:\GIT\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:6:9-35
 	android:theme
 		ADDED from C:\GIT\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:11:9-47
-activity#com.example.tazpitapp.SettingActivity
+activity#com.example.tazpitapp.LoginActivity
 ADDED from C:\GIT\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:17:9-23:20
 	android:name
-		ADDED from C:\GIT\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:17:19-50
+		ADDED from C:\GIT\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:17:19-48
 intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
 ADDED from C:\GIT\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:18:13-22:29
 action#android.intent.action.MAIN
@@ -98,10 +98,10 @@ activity#com.example.tazpitapp.ScenarioActivity
 ADDED from C:\GIT\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:24:9-54
 	android:name
 		ADDED from C:\GIT\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:24:19-51
-activity#com.example.tazpitapp.LoginActivity
-ADDED from C:\GIT\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:26:9-51
+activity#com.example.tazpitapp.SettingActivity
+ADDED from C:\GIT\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:26:9-53
 	android:name
-		ADDED from C:\GIT\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:26:19-48
+		ADDED from C:\GIT\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:26:19-50
 activity#com.example.tazpitapp.SceneriosListActivity
 ADDED from C:\GIT\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:27:9-30:66
 	android:label
