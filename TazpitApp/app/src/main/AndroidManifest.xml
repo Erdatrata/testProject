@@ -9,9 +9,20 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.TazpitApp">
+<<<<<<< HEAD
 
         <activity android:name=".SettingActivity"></activity>
         <activity android:name=".register"></activity>
+=======
+        <activity android:name=".SettingActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".ScenarioActivity" />
+>>>>>>> main
         <activity android:name=".LoginActivity" />
         <activity
             android:name=".SceneriosListActivity"
@@ -22,6 +33,7 @@
             android:label="@string/title_scenerios_detail"
             android:parentActivityName=".SceneriosListActivity"
             android:theme="@style/Theme.TazpitApp.NoActionBar">
+<<<<<<< HEAD
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.tazpitapp.SceneriosListActivity" />
@@ -32,9 +44,9 @@
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+=======
+>>>>>>> main
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".MainActivity"

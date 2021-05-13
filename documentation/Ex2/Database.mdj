@@ -212,6 +212,7 @@
 													"model": {
 														"$ref": "AAAAAAF4wnf6UJnmKXc="
 													},
+													"visible": false,
 													"font": "Arial;13;0",
 													"left": 429,
 													"top": 124,
@@ -229,7 +230,7 @@
 													},
 													"font": "Arial;13;0",
 													"left": 429,
-													"top": 139,
+													"top": 126,
 													"width": 247,
 													"height": 13
 												},
@@ -244,7 +245,7 @@
 													},
 													"font": "Arial;13;0",
 													"left": 429,
-													"top": 154,
+													"top": 141,
 													"width": 247,
 													"height": 13
 												},
@@ -259,7 +260,7 @@
 													},
 													"font": "Arial;13;0",
 													"left": 429,
-													"top": 169,
+													"top": 156,
 													"width": 247,
 													"height": 13
 												},
@@ -274,7 +275,7 @@
 													},
 													"font": "Arial;13;0",
 													"left": 429,
-													"top": 184,
+													"top": 171,
 													"width": 247,
 													"height": 13
 												},
@@ -289,7 +290,7 @@
 													},
 													"font": "Arial;13;0",
 													"left": 429,
-													"top": 199,
+													"top": 186,
 													"width": 247,
 													"height": 13
 												}
@@ -298,7 +299,7 @@
 											"left": 424,
 											"top": 119,
 											"width": 257,
-											"height": 98
+											"height": 85
 										}
 									],
 									"font": "Arial;13;0",
@@ -930,6 +931,21 @@
 												},
 												{
 													"_type": "ERDColumnView",
+													"_id": "AAAAAAF5XKgm/nT/7wc=",
+													"_parent": {
+														"$ref": "AAAAAAF4wpbM+ZugJco="
+													},
+													"model": {
+														"$ref": "AAAAAAF5XKgm6HT8Jls="
+													},
+													"font": "Arial;13;0",
+													"left": 581,
+													"top": 291,
+													"width": 199,
+													"height": 13
+												},
+												{
+													"_type": "ERDColumnView",
 													"_id": "AAAAAAF4wpejfpvPL58=",
 													"_parent": {
 														"$ref": "AAAAAAF4wpbM+ZugJco="
@@ -939,7 +955,7 @@
 													},
 													"font": "Arial;13;0",
 													"left": 581,
-													"top": 291,
+													"top": 306,
 													"width": 199,
 													"height": 13
 												}
@@ -948,7 +964,7 @@
 											"left": 576,
 											"top": 271,
 											"width": 209,
-											"height": 38
+											"height": 53
 										}
 									],
 									"font": "Arial;13;0",
@@ -1508,6 +1524,7 @@
 									"name": "UserID",
 									"type": "INTEGER",
 									"length": 0,
+									"primaryKey": true,
 									"foreignKey": true,
 									"referenceTo": {
 										"$ref": "AAAAAAF4wnC5qZmvB+k="
@@ -1522,6 +1539,7 @@
 									"name": "ScenarioID",
 									"type": "INTEGER",
 									"length": 0,
+									"primaryKey": true,
 									"foreignKey": true
 								},
 								{
@@ -1932,13 +1950,24 @@
 									"_parent": {
 										"$ref": "AAAAAAF4wpbM+JucMRE="
 									},
-									"name": "ReportID",
+									"name": "UserID",
 									"type": "INTEGER",
 									"length": 0,
 									"foreignKey": true,
 									"referenceTo": {
 										"$ref": "AAAAAAF4wnf6UJnmKXc="
 									}
+								},
+								{
+									"_type": "ERDColumn",
+									"_id": "AAAAAAF5XKgm6HT8Jls=",
+									"_parent": {
+										"$ref": "AAAAAAF4wpbM+JucMRE="
+									},
+									"name": "ScenarioID",
+									"type": "INTEGER",
+									"length": 0,
+									"foreignKey": true
 								},
 								{
 									"_type": "ERDColumn",
