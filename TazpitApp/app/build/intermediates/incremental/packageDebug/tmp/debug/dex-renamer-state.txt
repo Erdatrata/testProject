@@ -1,7 +1,7 @@
-#Sun May 09 11:36:51 EEST 2021
-base.0=D\:\\git\\tazpit\\TazpitApp\\app\\build\\intermediates\\dex\\debug\\mergeExtDexDebug\\classes.dex
+#Thu May 13 14:10:55 IDT 2021
+base.0=C\:\\GIT\\tazpit\\TazpitApp\\app\\build\\intermediates\\dex\\debug\\mergeExtDexDebug\\classes.dex
 path.1=classes.dex
 renamed.1=classes2.dex
 path.0=classes.dex
 renamed.0=classes.dex
-base.1=D\:\\git\\tazpit\\TazpitApp\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\classes.dex
+base.1=C\:\\GIT\\tazpit\\TazpitApp\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\classes.dex
