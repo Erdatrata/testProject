@@ -15,8 +15,8 @@ com/example/tazpitapp/ScenarioActivity.java
 com/example/tazpitapp/SceneriosDetailActivity.java
  com.example.tazpitapp.SceneriosDetailActivity
  com.example.tazpitapp.SceneriosDetailActivity$1
-com/example/tazpitapp/LoginActivity.java
- com.example.tazpitapp.LoginActivity
+com/example/tazpitapp/register.java
+ com.example.tazpitapp.register
 com/example/tazpitapp/SceneriosDetailFragment.java
  com.example.tazpitapp.SceneriosDetailFragment
 com/example/tazpitapp/SettingActivity.java
@@ -39,5 +39,6 @@ com/example/tazpitapp/fillReport.java
  com.example.tazpitapp.fillReport
 com/example/tazpitapp/MainActivity.java
  com.example.tazpitapp.MainActivity
-com/example/tazpitapp/register.java
- com.example.tazpitapp.register
+com/example/tazpitapp/LoginActivity.java
+ com.example.tazpitapp.LoginActivity
+ com.example.tazpitapp.LoginActivity$1
