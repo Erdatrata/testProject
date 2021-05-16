@@ -12,6 +12,7 @@ import java.time.Instant;
 public class LoginActivity extends AppCompatActivity {
 
     Button login;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

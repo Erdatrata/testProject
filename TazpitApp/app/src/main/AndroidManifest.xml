@@ -15,15 +15,16 @@
 <!--        <activity android:name=".register"></activity>-->
 
         <activity android:name=".LoginActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".ScenarioActivity" />
 
-        <activity android:name=".SettingActivity" />
+        <activity android:name=".SettingActivity" >
+        <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
+
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter>
+        </activity>
         <activity
             android:name=".SceneriosListActivity"
             android:label="@string/title_scenerios_list"
