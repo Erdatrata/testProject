@@ -1623,9 +1623,11 @@ id line1
 id line3
 id listMode
 id list_item
+id logged_user_menu
 id loginButton
 id loginPage
 id login_button
+id logout_button
 id main_page_logo
 id masked
 id message
@@ -1724,6 +1726,7 @@ id search_src_text
 id search_voice_btn
 id select_dialog_listview
 id selected
+id settings_button
 id shortcut
 id showCustom
 id showHome
@@ -1796,6 +1799,7 @@ id transition_transform
 id unchecked
 id uniform
 id unlabeled
+id unlogged_user_menu
 id up
 id useLogo
 id view_offset_helper
@@ -1868,6 +1872,8 @@ layout abc_tooltip
 layout activity_fill_report
 layout activity_login
 layout activity_main
+layout activity_register2
+layout activity_register3
 layout activity_scenario
 layout activity_scenerios_detail
 layout activity_scenerios_list
