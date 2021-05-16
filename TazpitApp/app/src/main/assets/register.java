@@ -1,4 +1,4 @@
-package com.example.tazpitapp;
+package com.example.testing;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -61,7 +61,7 @@ class register {
         private void cleanText(){
 
         }
-        private boolean cheakPassword(){
+    private boolean cheakPassword(){
             String password=password1.getText().toString();
 
             if(password.length()<8||!ContainSpecial(password)||!noUpper(password)){return false;}
@@ -80,28 +80,28 @@ class register {
             return false;
         }
 
-        private boolean checkEqualPassword(){
+    private boolean checkEqualPassword(){
             if(password1.getText().toString().equals(password2.getText().toString())){return true;}return false;
 
 
 
-        }
-        private boolean Integritycheck(){
-            String mail=email.getText().toString();
-            String password=password1.getText().toString();
-            String passwordAgain=password2.getText().toString();
-            String city=this.city.getText().toString();
-            String fname=FName.getText().toString();
-            String Lname=this.LName.getText().toString();
-            String phone=this.phone.getText().toString();
+    }
+    private boolean Integritycheck(){
+             String mail=email.getText().toString();
+             String password=password1.getText().toString();
+             String passwordAgain=password2.getText().toString();
+             String city=this.city.getText().toString();
+             String fname=FName.getText().toString();
+             String Lname=this.LName.getText().toString();
+             String phone=this.phone.getText().toString();
             if(mail.length()<1||password.length()<1||passwordAgain.length()<1||city.length()<1||fname.length()<1||Lname.length()<1||phone.length()<1){return false;}return true;
-        }
-        //    private boolean checkMailWithDB(){}
+    }
+//    private boolean checkMailWithDB(){}
 //    private boolean cheakCity(){}
-        private boolean checkMailIntegrity(){
-            String mail=email.getText().toString();
-            if(mail.contains("@")){return true;}return false;
-        }
+    private boolean checkMailIntegrity(){
+        String mail=email.getText().toString();
+        if(mail.contains("@")){return true;}return false;
+    }
 
 
 
@@ -133,11 +133,11 @@ class register {
             next = (Button) findViewById(R.id.next);
 
             back.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
+            @Override
+            public void onClick(View view) {
 
-                }
-            });
+            }
+          });
 
             next.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -362,7 +362,3 @@ class register {
 //        switch2.setChecked(switchOnOff);
 //    }
 //}
-
-
-
-
