@@ -24,8 +24,8 @@
 
     <EditText
         android:id="@+id/fill_report_title"
-        android:layout_width="239dp"
-        android:layout_height="50dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:autofillHints=""
         android:ems="10"
         android:hint="כותרת:"
@@ -41,11 +41,12 @@
 
     <EditText
         android:id="@+id/fill_report_description"
-        android:layout_width="239dp"
-        android:layout_height="50dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:ems="10"
-        android:gravity="start|top"
+        android:gravity="bottom"
         android:hint="כתוב תיאור:"
+        android:importantForAutofill="no"
         android:inputType="textMultiLine"
         android:lines="4"
         android:maxLines="4"
@@ -53,10 +54,10 @@
         android:textSize="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.563"
+        app:layout_constraintHorizontal_bias="0.583"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.208" />
+        app:layout_constraintVertical_bias="0.204" />
 
     <TextView
         android:id="@+id/fill_report_upload_media_text"
@@ -122,6 +123,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/fill_report_upload_media_text"
         app:layout_constraintVertical_bias="0.116" />
+
+    <ImageView
+        android:id="@+id/check_upload_phto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="48dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:srcCompat="@tools:sample/avatars" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
