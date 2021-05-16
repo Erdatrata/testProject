@@ -6,110 +6,94 @@
 6
 7    <uses-sdk
 8        android:minSdkVersion="28"
-8-->C:\GIT\tazpit\TazpitApp\app\src\main\AndroidManifest.xml
+8-->D:\git\tazpit\TazpitApp\app\src\main\AndroidManifest.xml
 9        android:targetSdkVersion="29" />
-9-->C:\GIT\tazpit\TazpitApp\app\src\main\AndroidManifest.xml
+9-->D:\git\tazpit\TazpitApp\app\src\main\AndroidManifest.xml
 10
 11    <application
-11-->C:\GIT\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:5:5-66:19
+11-->D:\git\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:5:5-54:19
 12        android:allowBackup="true"
-12-->C:\GIT\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:6:9-35
+12-->D:\git\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:6:9-35
 13        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
-13-->[androidx.core:core:1.1.0] C:\Users\ארדט רטה\.gradle\caches\transforms-2\files-2.1\e601daed4ba62929db8b322b2974c8f8\core-1.1.0\AndroidManifest.xml:24:18-86
+13-->[androidx.core:core:1.1.0] C:\Users\mac\.gradle\caches\transforms-2\files-2.1\e601daed4ba62929db8b322b2974c8f8\core-1.1.0\AndroidManifest.xml:24:18-86
 14        android:debuggable="true"
 15        android:extractNativeLibs="false"
 16        android:icon="@mipmap/ic_launcher"
-16-->C:\GIT\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:7:9-43
+16-->D:\git\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:7:9-43
 17        android:label="@string/app_name"
-17-->C:\GIT\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:8:9-41
+17-->D:\git\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:8:9-41
 18        android:roundIcon="@mipmap/ic_launcher_round"
-18-->C:\GIT\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:9:9-54
+18-->D:\git\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:9:9-54
 19        android:supportsRtl="true"
-19-->C:\GIT\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:10:9-35
+19-->D:\git\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:10:9-35
 20        android:testOnly="true"
 21        android:theme="@style/Theme.TazpitApp" >
-21-->C:\GIT\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:11:9-47
-22
-23        <!-- <activity android:name=".SettingActivity"></activity> -->
+21-->D:\git\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:11:9-47
+22        <activity android:name="com.example.tazpitapp.register3" />
+22-->D:\git\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:12:9-56
+22-->D:\git\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:12:19-44
+23        <activity android:name="com.example.tazpitapp.register2" /> <!-- <activity android:name=".SettingActivity"></activity> -->
+23-->D:\git\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:13:9-47
+23-->D:\git\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:13:19-44
 24        <!-- <activity android:name=".register"></activity> -->
-25
-26        <activity android:name="com.example.tazpitapp.LoginActivity" >
-26-->C:\GIT\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:17:9-23:20
-26-->C:\GIT\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:17:19-48
-27            <intent-filter>
-27-->C:\GIT\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:18:13-22:29
-28                <action android:name="android.intent.action.MAIN" />
-28-->C:\GIT\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:19:17-69
-28-->C:\GIT\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:19:25-66
-29
-30                <category android:name="android.intent.category.LAUNCHER" />
-30-->C:\GIT\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:21:17-77
-30-->C:\GIT\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:21:27-74
-31            </intent-filter>
-32        </activity>
-33        <activity android:name="com.example.tazpitapp.ScenarioActivity" />
-33-->C:\GIT\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:24:9-54
-33-->C:\GIT\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:24:19-51
-34        <activity android:name="com.example.tazpitapp.SettingActivity" />
-34-->C:\GIT\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:26:9-53
-34-->C:\GIT\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:26:19-50
-35        <activity
-35-->C:\GIT\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:27:9-30:66
-36            android:name="com.example.tazpitapp.SceneriosListActivity"
-36-->C:\GIT\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:28:13-50
-37            android:label="@string/title_scenerios_list"
-37-->C:\GIT\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:29:13-57
-38            android:theme="@style/Theme.TazpitApp.NoActionBar" />
-38-->C:\GIT\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:30:13-63
-39        <activity
-39-->C:\GIT\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:31:9-53:20
-40            android:name="com.example.tazpitapp.SceneriosDetailActivity"
-40-->C:\GIT\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:32:13-52
-41            android:label="@string/title_scenerios_detail"
-41-->C:\GIT\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:33:13-59
-42            android:parentActivityName="com.example.tazpitapp.SceneriosListActivity"
-42-->C:\GIT\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:34:13-64
-43            android:theme="@style/Theme.TazpitApp.NoActionBar" >
-43-->C:\GIT\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:35:13-63
-44
-45            <!-- <<<<<<< HEAD -->
-46            <!-- <meta-data -->
-47            <!-- android:name="android.support.PARENT_ACTIVITY" -->
-48            <!-- android:value="com.example.tazpitapp.SceneriosListActivity" /> -->
-49            <!-- </activity> -->
-50            <!-- <activity android:name=".fillReport" -->
-51            <!-- android:label="@string/app_name" -->
-52            <!-- android:theme="@style/Theme.TazpitApp.NoActionBar"> -->
+25        <activity android:name="com.example.tazpitapp.MainActivity" >
+25-->D:\git\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:15:9-21:20
+25-->D:\git\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:15:19-47
+26            <intent-filter>
+26-->D:\git\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:16:13-20:29
+27                <action android:name="android.intent.action.MAIN" />
+27-->D:\git\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:17:17-69
+27-->D:\git\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:17:25-66
+28
+29                <category android:name="android.intent.category.LAUNCHER" />
+29-->D:\git\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:19:17-77
+29-->D:\git\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:19:27-74
+30            </intent-filter>
+31        </activity>
+32        <activity android:name="com.example.tazpitapp.ScenarioActivity" />
+32-->D:\git\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:22:9-54
+32-->D:\git\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:22:19-51
+33        <activity android:name="com.example.tazpitapp.SettingActivity" />
+33-->D:\git\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:23:9-53
+33-->D:\git\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:23:19-50
+34        <activity
+34-->D:\git\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:24:9-27:66
+35            android:name="com.example.tazpitapp.SceneriosListActivity"
+35-->D:\git\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:25:13-50
+36            android:label="@string/title_scenerios_list"
+36-->D:\git\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:26:13-57
+37            android:theme="@style/Theme.TazpitApp.NoActionBar" />
+37-->D:\git\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:27:13-63
+38        <activity
+38-->D:\git\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:28:9-52:20
+39            android:name="com.example.tazpitapp.SceneriosDetailActivity"
+39-->D:\git\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:29:13-52
+40            android:label="@string/title_scenerios_detail"
+40-->D:\git\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:30:13-59
+41            android:parentActivityName="com.example.tazpitapp.SceneriosListActivity"
+41-->D:\git\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:31:13-64
+42            android:theme="@style/Theme.TazpitApp.NoActionBar" >
+42-->D:\git\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:32:13-63
+43
+44            <!-- <<<<<<< HEAD -->
+45            <!-- <meta-data -->
+46            <!-- android:name="android.support.PARENT_ACTIVITY" -->
+47            <!-- android:value="com.example.tazpitapp.SceneriosListActivity" /> -->
+48            <!-- </activity> -->
+49            <!-- <activity android:name=".fillReport" -->
+50            <!-- android:label="@string/app_name" -->
+51            <!-- android:theme="@style/Theme.TazpitApp.NoActionBar"> -->
+52
 53
-54
-55            <!-- <<<<<<< HEAD -->
-56            <!-- ======= -->
-57            <!-- <intent-filter> -->
-58            <!-- <action android:name="android.intent.action.MAIN" /> -->
-59            <!-- ======= -->
+54            <!-- <<<<<<< HEAD -->
+55            <!-- ======= -->
+56            <!-- <intent-filter> -->
+57            <!-- <action android:name="android.intent.action.MAIN" /> -->
+58            <!-- ======= -->
+59            <!-- &gt;>>>>>> main -->
 60            <!-- &gt;>>>>>> main -->
-61            <!-- &gt;>>>>>> main -->
-62
-63        </activity>
-64        <activity
-64-->C:\GIT\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:54:9-63:20
-65            android:name="com.example.tazpitapp.MainActivity"
-65-->C:\GIT\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:55:13-41
-66            android:label="@string/app_name"
-66-->C:\GIT\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:56:13-45
-67            android:theme="@style/Theme.TazpitApp.NoActionBar" >
-67-->C:\GIT\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:57:13-63
-68            <intent-filter>
-68-->C:\GIT\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:18:13-22:29
-69                <action android:name="android.intent.action.MAIN" />
-69-->C:\GIT\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:19:17-69
-69-->C:\GIT\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:19:25-66
-70
-71                <category android:name="android.intent.category.LAUNCHER" />
-71-->C:\GIT\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:21:17-77
-71-->C:\GIT\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:21:27-74
-72            </intent-filter>
-73        </activity>
-74    </application>
-75
-76</manifest>
+61
+62        </activity>
+63    </application>
+64
+65</manifest>
