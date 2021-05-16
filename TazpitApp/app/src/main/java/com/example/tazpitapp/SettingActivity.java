@@ -103,9 +103,10 @@ public class SettingActivity extends AppCompatActivity {
         SharedPreferences.Editor editor = sharedpreferences.edit();
         String idd= ""+v.getId();
 
-        dayTime dt = new dayTime(0,0,0,0);
+        dayTime dt = new dayTime(0,0,0,1);
 
-        int getInt = sharedpreferences.getInt(idd,-1);
+//        int getInt = sharedpreferences.(idd,-1);
+        int getInt = 1;
         editor.putInt(idd,getInt+1);
         editor.commit();
 

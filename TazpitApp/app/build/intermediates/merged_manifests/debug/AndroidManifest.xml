@@ -23,14 +23,14 @@
         <activity android:name="com.example.tazpitapp.register2" /> <!-- <activity android:name=".SettingActivity"></activity> -->
         <!-- <activity android:name=".register"></activity> -->
         <activity android:name="com.example.tazpitapp.MainActivity" >
+        </activity>
+        <activity android:name="com.example.tazpitapp.SettingActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.example.tazpitapp.ScenarioActivity" />
-        <activity android:name="com.example.tazpitapp.SettingActivity" />
         <activity
             android:name="com.example.tazpitapp.SceneriosListActivity"
             android:label="@string/title_scenerios_list"
