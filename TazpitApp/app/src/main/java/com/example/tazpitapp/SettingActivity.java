@@ -12,6 +12,8 @@ import android.widget.RadioGroup;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import com.example.tazpitapp.assistClasses.dayTime;
+
 public class SettingActivity extends AppCompatActivity {
     //----------global variables--------------------------
     //the radio buttons for choosing between gps or city
@@ -100,12 +102,15 @@ public class SettingActivity extends AppCompatActivity {
                 Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedpreferences.edit();
         String idd= ""+v.getId();
+
+        dayTime dt = new dayTime(0,0,0,0);
+
         int getInt = sharedpreferences.getInt(idd,-1);
         editor.putInt(idd,getInt+1);
         editor.commit();
 
         toToast="id "+idd+": "+getInt;
-        Toast.makeText(getApplicationContext(), toToast, Toast.LENGTH_LONG).show();
+        Toast.makeText(getApplicationContext(), toToast, Toast.LENGTH_SHORT).show();
     }
 
 
