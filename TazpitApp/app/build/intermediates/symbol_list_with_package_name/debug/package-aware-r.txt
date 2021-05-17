@@ -1513,7 +1513,6 @@ id async
 id auto
 id back
 id backFromLogin
-id backFromScenario
 id backFromSettings
 id back_button
 id barrier
@@ -1573,7 +1572,6 @@ id edit_query
 id end
 id enterAlways
 id enterAlwaysCollapsed
-id eventTypeGetScenario
 id exitUntilCollapsed
 id expand_activities_button
 id expanded_menu
@@ -1969,6 +1967,7 @@ mipmap tps_logo_full
 mipmap tps_logo_full_foreground
 mipmap tps_logo_full_round
 mipmap tps_logo_round
+mipmap tps_logoo
 navigation mobile_navigation
 plurals mtrl_badge_content_description
 string abc_action_bar_home_description

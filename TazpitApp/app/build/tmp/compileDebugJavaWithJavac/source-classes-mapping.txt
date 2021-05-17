@@ -1,3 +1,5 @@
+<<<<<<< HEAD
+=======
 com/example/tazpitapp/ui/gallery/GalleryViewModel.java
  com.example.tazpitapp.ui.gallery.GalleryViewModel
 com/example/tazpitapp/ui/home/HomeFragment.java
@@ -7,41 +9,42 @@ com/example/tazpitapp/ui/home/HomeViewModel.java
  com.example.tazpitapp.ui.home.HomeViewModel
 com/example/tazpitapp/ui/slideshow/SlideshowViewModel.java
  com.example.tazpitapp.ui.slideshow.SlideshowViewModel
+com/example/tazpitapp/assistClasses/dayTime.java
+ com.example.tazpitapp.assistClasses.dayTime
 com/example/tazpitapp/ui/slideshow/SlideshowFragment.java
  com.example.tazpitapp.ui.slideshow.SlideshowFragment
  com.example.tazpitapp.ui.slideshow.SlideshowFragment$1
-com/example/tazpitapp/ScenarioActivity.java
- com.example.tazpitapp.ScenarioActivity
 com/example/tazpitapp/SceneriosDetailActivity.java
  com.example.tazpitapp.SceneriosDetailActivity
  com.example.tazpitapp.SceneriosDetailActivity$1
-com/example/tazpitapp/LoginActivity.java
- com.example.tazpitapp.LoginActivity
- com.example.tazpitapp.LoginActivity$1
+com/example/tazpitapp/MainActivity.java
+ com.example.tazpitapp.MainActivity
 com/example/tazpitapp/SceneriosDetailFragment.java
  com.example.tazpitapp.SceneriosDetailFragment
-com/example/tazpitapp/SettingActivity.java
- com.example.tazpitapp.SettingActivity
+com/example/tazpitapp/register.java
+ com.example.tazpitapp.register
+ com.example.tazpitapp.register$register1
+ com.example.tazpitapp.register$register1$1
+ com.example.tazpitapp.register$register1$2
+ com.example.tazpitapp.register$register2
+ com.example.tazpitapp.register$register3
 com/example/tazpitapp/ui/gallery/GalleryFragment.java
  com.example.tazpitapp.ui.gallery.GalleryFragment
  com.example.tazpitapp.ui.gallery.GalleryFragment$1
+>>>>>>> 5d55873b525450912dccc944094f622bc305141b
 com/example/tazpitapp/dummy/DummyContent.java
  com.example.tazpitapp.dummy.DummyContent
  com.example.tazpitapp.dummy.DummyContent$DummyItem
-com/example/tazpitapp/SceneriosListActivity.java
- com.example.tazpitapp.SceneriosListActivity
- com.example.tazpitapp.SceneriosListActivity$1
- com.example.tazpitapp.SceneriosListActivity$SimpleItemRecyclerViewAdapter
- com.example.tazpitapp.SceneriosListActivity$SimpleItemRecyclerViewAdapter$1
- com.example.tazpitapp.SceneriosListActivity$SimpleItemRecyclerViewAdapter$ViewHolder
-com/example/tazpitapp/BuildConfig.java
- com.example.tazpitapp.BuildConfig
 com/example/tazpitapp/fillReport.java
  com.example.tazpitapp.fillReport
-com/example/tazpitapp/MainActivity.java
- com.example.tazpitapp.MainActivity
-com/example/tazpitapp/register.java
- com.example.tazpitapp.DataRegister
- com.example.tazpitapp.register
- com.example.tazpitapp.register2
- com.example.tazpitapp.register3
+<<<<<<< HEAD
+=======
+ com.example.tazpitapp.fillReport$1
+ com.example.tazpitapp.fillReport$2
+com/example/tazpitapp/SettingActivity.java
+ com.example.tazpitapp.SettingActivity
+ com.example.tazpitapp.SettingActivity$1
+com/example/tazpitapp/LoginActivity.java
+ com.example.tazpitapp.LoginActivity
+ com.example.tazpitapp.LoginActivity$1
+>>>>>>> 5d55873b525450912dccc944094f622bc305141b

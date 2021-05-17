@@ -14,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.ActionBar;
 
 import android.view.MenuItem;
+import android.widget.Button;
 
 /**
  * An activity representing a single Scenerios detail screen. This
@@ -84,3 +85,30 @@ public class SceneriosDetailActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 }
+
+//package com.example.tazpitapp;
+//
+//        import androidx.appcompat.app.AppCompatActivity;
+//        import android.widget.Button;
+//        import android.content.Intent;
+//        import android.view.View;
+//
+//        import android.os.Bundle;
+//
+//public class ScenarioActivity extends AppCompatActivity {
+//    public Button button;
+//    @Override
+//    protected void onCreate(Bundle savedInstanceState) {
+//        super.onCreate(savedInstanceState);
+//        setContentView(R.layout.activity_scenario);
+//
+//        button = (Button)findViewById(R.id.buttonScenario);
+//        button.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(ScenarioActivity.this,LoginActivity.class);
+//                startActivity(intent);
+//            }
+//        });
+//    }
+//}

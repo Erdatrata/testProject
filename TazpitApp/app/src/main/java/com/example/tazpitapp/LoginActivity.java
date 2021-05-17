@@ -12,6 +12,7 @@ import java.time.Instant;
 public class LoginActivity extends AppCompatActivity {
 
     Button login;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,7 +23,7 @@ public class LoginActivity extends AppCompatActivity {
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-              startActivity(new Intent(LoginActivity.this, SettingActivity.class));
+              startActivity(new Intent(LoginActivity.this, MainActivity.class));
             }
         });
 

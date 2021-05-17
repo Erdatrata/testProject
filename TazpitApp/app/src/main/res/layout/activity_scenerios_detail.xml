@@ -8,6 +8,78 @@
     tools:context=".SceneriosDetailActivity"
     tools:ignore="MergeRootFrame">
 
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="117dp"
+        android:layout_height="42dp"
+        android:layout_marginLeft="250dp"
+        android:layout_marginTop="230dp"
+        android:text="סוג האירוע:"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView4" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="150dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="260dp"
+        android:layout_marginLeft="210dp"
+        android:text="עיר:"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/cityGetScenario"
+        android:layout_width="150dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="260dp"
+        android:layout_marginLeft="180dp"
+        android:text="עיר"
+        app:layout_constraintEnd_toStartOf="@+id/textView4"
+        app:layout_constraintTop_toTopOf="@+id/textView4" />
+
+    <TextView
+        android:layout_width="117dp"
+        android:layout_height="42dp"
+        android:layout_marginLeft="250dp"
+        android:layout_marginTop="290dp"
+        android:text="סוג אירוע"
+        app:layout_constraintEnd_toStartOf="@+id/textView2"
+        app:layout_constraintTop_toTopOf="@+id/textView2" />
+
+    <TextView
+        android:id="@+id/gpsLink"
+        android:layout_width="117dp"
+        android:layout_height="42dp"
+        android:layout_marginLeft="250dp"
+        android:layout_marginTop="320dp"
+        android:text="לחץ למיקום"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+    <Button
+        android:id="@+id/buttonScenario"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="160dp"
+        android:layout_marginTop="550dp"
+        android:text="צא לאירוע"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/scenarioDesc" />
+
+    <EditText
+        android:id="@+id/scenarioDesc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="100dp"
+        android:layout_marginTop="400dp"
+        android:ems="10"
+        android:gravity="start|top"
+        android:importantForAutofill="no"
+        android:inputType="textMultiLine"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/app_bar"
         android:layout_width="match_parent"
@@ -38,8 +110,10 @@
     <androidx.core.widget.NestedScrollView
         android:id="@+id/scenerios_detail_container"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="534dp"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab"
@@ -50,5 +124,7 @@
         app:layout_anchor="@+id/scenerios_detail_container"
         app:layout_anchorGravity="top|end"
         app:srcCompat="@android:drawable/stat_notify_chat" />
+
+
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
