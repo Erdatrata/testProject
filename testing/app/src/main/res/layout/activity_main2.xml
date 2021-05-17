@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity2">
+
+    <TextView
+        android:id="@+id/textShow"
+        android:layout_width="149dp"
+        android:layout_height="442dp"
+        android:text="TextView"
+        android:translationX="250sp"
+        android:translationY="200sp" />
+
+    <EditText
+        android:id="@+id/name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Name"
+        android:translationY="300sp" />
+
+    <EditText
+        android:id="@+id/inner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="inner"
+        android:translationY="400sp" />
+
+    <Button
+        android:id="@+id/getAllData"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="getAllData" />
+
+    <Button
+        android:id="@+id/sendDATA"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="SENDdaTA"
+        android:translationX="300sp" />
+
+    <Button
+        android:id="@+id/remove"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="remove"
+        android:translationX="150sp" />
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
