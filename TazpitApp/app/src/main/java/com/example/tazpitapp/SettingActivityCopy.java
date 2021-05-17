@@ -1,9 +1,5 @@
 //package com.example.tazpitapp;
 //
-//import androidx.appcompat.app.AppCompatActivity;
-//
-//import android.app.AlertDialog;
-//import android.app.TimePickerDialog;
 //import android.content.Context;
 //import android.content.SharedPreferences;
 //import android.os.Bundle;
@@ -11,13 +7,12 @@
 //import android.widget.Button;
 //import android.widget.RadioButton;
 //import android.widget.RadioGroup;
-//import android.widget.TimePicker;
-//import android.widget.Toast;
-////Used for inner logic
-//import com.example.tazpitapp.assistClasses.dayTime;
+//
 //import com.google.gson.Gson;
-//import java.util.Locale;
-//class SettingActivity extends AppCompatActivity {
+//
+//import androidx.appcompat.app.AppCompatActivity;
+//
+//class SettingActivityCopy extends AppCompatActivity {
 //    //----------global variables--------------------------
 //        //the radio buttons for choosing between gps or city
 //        private RadioGroup locationRadioGroup;
@@ -115,7 +110,6 @@
 //            }
 //        });
 //    }
-
 ////    //this function will apply all the settings in this page back to the server
 ////    private void changeDay(View v){
 ////        //if switching between days after changing hours, save into temp

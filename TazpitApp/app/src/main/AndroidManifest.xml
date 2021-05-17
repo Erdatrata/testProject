@@ -9,23 +9,24 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.TazpitApp">
-        <activity android:name=".register3"></activity>
-        <activity android:name=".register2" /> <!-- <activity android:name=".SettingActivity"></activity> -->
-        <!-- <activity android:name=".register"></activity> -->
-        <activity android:name=".MainActivity">
-
-        </activity>
-        <activity android:name=".SettingActivity">
+        <activity android:name=".SetActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".register3" />
+        <activity android:name=".register2" />
+<!--        <activity android:name=".SettingActivity">-->
+
+<!--        </activity> -->
+    <!-- <activity android:name=".register"></activity> -->
+        <activity android:name=".MainActivity"></activity> <!-- <activity android:name=".SettingActivity"></activity> -->
         <activity
             android:name=".SceneriosListActivity"
             android:label="@string/title_scenerios_list"
-            android:theme="@style/Theme.TazpitApp.NoActionBar" />
+            android:theme="@style/Theme.TazpitApp.NoActionBar"></activity>
         <activity
             android:name=".SceneriosDetailActivity"
             android:label="@string/title_scenerios_detail"
@@ -51,7 +52,6 @@
             <!-- &gt;>>>>>> main -->
 
         </activity>
-
     </application>
 
 </manifest>
