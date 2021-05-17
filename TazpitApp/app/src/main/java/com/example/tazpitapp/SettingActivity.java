@@ -2,6 +2,8 @@ package com.example.tazpitapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
+import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -11,10 +13,11 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TimePicker;
 import android.widget.Toast;
-
+//Used for inner logic
 import com.example.tazpitapp.assistClasses.dayTime;
-
-public class SettingActivity extends AppCompatActivity {
+import com.google.gson.Gson;
+import java.util.Locale;
+class SettingActivity extends AppCompatActivity {
     //----------global variables--------------------------
     //the radio buttons for choosing between gps or city
     RadioGroup locationRadioGroup;
@@ -29,10 +32,24 @@ public class SettingActivity extends AppCompatActivity {
     Button daysButton5;//THU
     Button daysButton6;//FRI
     Button daysButton7;//SAT
-    TimePicker timePicker;
+    Button timePickerFrom;
+    Button timePickerTo;
+
+    Button rightNow=null;
 
     //apply settings button
     Button applyButton;
+    int hour = 0, minute=0;
+    int hourStart = 0, minuteStart=0;
+    int hoursEnd = 0, minutesEnd=0;
+    //sharedprefs, dT and gson
+    SharedPreferences sharedpreferences;
+    SharedPreferences.Editor editor;
+    Gson gson;
+    boolean unsaved;
+    SharedPreferences local;
+    SharedPreferences.Editor localEditor;
+
 
 
 
@@ -54,18 +71,38 @@ public class SettingActivity extends AppCompatActivity {
         daysButton6=findViewById(R.id.day_friday);
         daysButton7=findViewById(R.id.day_saturday);
         //timepicker & apply
-        timePicker=findViewById(R.id.TimePickerSettings);
+        timePickerFrom=findViewById(R.id.timePickerSettingsFrom);
+        timePickerTo=findViewById(R.id.timePickerSettingsTo);
         applyButton=findViewById(R.id.applySettingsButton);
+        rightNow=null;
 
+
+        //sharedPrefs
+        sharedpreferences = getSharedPreferences("SharedPreferences",
+                Context.MODE_PRIVATE);
+        editor = sharedpreferences.edit();
+        gson = new Gson();
+        local=getPreferences(MODE_PRIVATE);
+        localEditor = local.edit();
 
         //setting event listeners
+
         //for day listeners
         Button[] daysArr = {daysButton1,daysButton2,daysButton3,daysButton4,daysButton5,
                 daysButton6,daysButton7};
         for(Button day: daysArr){
             day.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
-                    applySettings(v);
+                    changeDay(v);
+                }
+            });
+        }
+        //for timePickers
+        Button[] timers= {timePickerFrom,timePickerTo};
+        for(Button b:timers){
+            b.setOnClickListener(new View.OnClickListener(){
+                public void onClick(View v){
+                    popTimePicker(v);
                 }
             });
         }
@@ -73,47 +110,99 @@ public class SettingActivity extends AppCompatActivity {
 
 
     //this function will apply all the settings in this page back to the server
-    private void applySettings(View v){
+    private void changeDay(View v){
         String toToast ="";
-//        switch(v.getId()){
-//            case R.id.day_sunday:
-//                toToast="1";
-//                break;
-//            case R.id.day_monday:
-//                toToast="2";
-//                break;
-//            case R.id.day_tuesday:
-//                toToast="3";
-//                break;
-//            case R.id.day_wednesday:_:
-//                toToast="4";
-//                break;
-//            case R.id.day_thursday:
-//                toToast="5";
-//                break;
-//            case R.id.day_friday:
-//                toToast="6";
-//                break;
-//            case R.id.day_saturday:
-//                toToast="7";
-//                break;
-//        }
-        SharedPreferences sharedpreferences = getSharedPreferences("SharedPreferences",
-                Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedpreferences.edit();
+        rightNow = (Button)v;
         String idd= ""+v.getId();
 
-        dayTime dt = new dayTime(0,0,0,1);
+        dayTime dtDEF = new dayTime(0,0,0,1);//default for first time
+        String dtGetString = sharedpreferences.getString(idd,"DEFAULT");
+        dayTime dtGET;
+        if(dtGetString.equals("DEFAULT"))
+            dtGET=gson.fromJson(dtGetString,dayTime.class);
+        else
+            dtGET=dtDEF;
 
-//        int getInt = sharedpreferences.(idd,-1);
-        int getInt = 1;
-        editor.putInt(idd,getInt+1);
-        editor.commit();
+        hourStart=dtGET.getHourStart();
+        hoursEnd=dtGET.getHourEnd();
+        minuteStart=dtGET.getMinuteStart();
+        minutesEnd=dtGET.getMinuteEnd();
 
-        toToast="id "+idd+": "+getInt;
-        Toast.makeText(getApplicationContext(), toToast, Toast.LENGTH_SHORT).show();
+        ((Button)findViewById(R.id.timePickerSettingsFrom)).setText(
+                String.format(Locale.getDefault(),"%02d:%02d",hourStart,minuteStart));
+        ((Button)findViewById(R.id.timePickerSettingsTo)).setText(
+                String.format(Locale.getDefault(),"%02d:%02d",hoursEnd,minutesEnd));
+
+
+        //how to store gson back
+//        toToast="Time:\t"+dtGET+", delte:\t"+dtGET.calcDelta();
+//        Toast.makeText(getApplicationContext(), toToast, Toast.LENGTH_SHORT).show();
+//        //add 1 hour to time
+//        dtGET.setHourEnd(dtGET.getHourEnd()+1);
+//        dtGetString=gson.toJson(dtGET);
+//        editor.putString("time",dtGetString);
+//        editor.commit();
     }
 
+
+    //function to call and set the timer hours
+    public void popTimePicker(View v){
+        if(rightNow==null){
+            Toast.makeText(this, "אנא בחר באחד הימים בכפתורים מימין ", Toast.LENGTH_LONG).show();
+            return;
+        }
+        if(v.getId()==R.id.timePickerSettingsFrom){
+            hour=hourStart;minute=minuteStart;
+        } else {
+            hour=hoursEnd;minute=minutesEnd;
+        }
+        String timeString = ((Button)v).getText().toString();
+        System.out.println("before time picker");
+        TimePickerDialog.OnTimeSetListener onTimeSetListener = new TimePickerDialog.OnTimeSetListener() {
+
+
+            @Override
+            public void onTimeSet(TimePicker view, int hourOfDay, int minutes) {
+                String toPut="";
+                int hr = hourStart;
+//                if(v.getId()==)
+                view.setHour(1);
+                if(v.getId()==R.id.timePickerSettingsFrom){//for upper textView
+                    //check for time correctness here (time should be chronological)
+                    if(hourOfDay>hoursEnd || ((hourOfDay==hoursEnd)&&(minutes>=minutesEnd))){
+                        Toast.makeText(SettingActivity.this,
+                                "לא ניתן לכוון זמן התחלה מאוחר מזמן סיום", Toast.LENGTH_LONG).show();
+                        return;
+                    }
+                    hourStart = hourOfDay; minuteStart = minutes;
+                    toPut=String.format(Locale.getDefault(),"%02d:%02d",hourStart,minuteStart);
+                } else {//for lower textView
+                    //check for time correctness here also
+                    if(hourOfDay<hourStart || ((hourOfDay==hourStart)&&(minutes<=minuteStart))){
+                        Toast.makeText(SettingActivity.this,
+                                "לא ניתן לכוון זמן סיום מוקדם מזמן התחלה", Toast.LENGTH_LONG).show();
+                        return;
+                    }
+                    hoursEnd=hourOfDay;minutesEnd=minutes;
+                    toPut=String.format(Locale.getDefault(),"%02d:%02d",hoursEnd,minutesEnd);
+                }
+                //if changes were made to time, make sure to let it be known in logic
+                if(((Button)v).getText()!=toPut)
+                    unsaved=true;
+                ((Button)v).setText(toPut);
+            }
+        };
+        int style= AlertDialog.THEME_HOLO_DARK;
+        TimePickerDialog timePickerDialog=new TimePickerDialog(this,style,onTimeSetListener,
+                hour,minute,true);
+        timePickerDialog.show();
+//                (TimePicker tpick,Integer.parseInt(hours),
+//                Integer.parseInt(mins));
+    }
+
+    public void saveToTemp(View v, dayTime dt){
+
+    }
 
     public void onDestroy() {
 

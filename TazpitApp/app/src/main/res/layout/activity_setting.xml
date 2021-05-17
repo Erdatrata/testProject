@@ -6,76 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".SettingActivity">
 
-    <ImageView
-        android:id="@+id/backFromSettings"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:scaleX="-2"
-        android:scaleY="2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="?attr/actionModeCloseDrawable" />
-
-    <!--    <TextView-->
-    <!--        android:id="@+id/textView3"-->
-    <!--        android:layout_width="wrap_content"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:text="לפי מיקום GPS"-->
-    <!--        tools:layout_editor_absoluteX="162dp"-->
-    <!--        tools:layout_editor_absoluteY="53dp" />-->
-
-    <!--    <TextView-->
-    <!--        android:id="@+id/textView"-->
-    <!--        android:layout_width="wrap_content"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:text="לפי עיר"-->
-    <!--        tools:layout_editor_absoluteX="184dp"-->
-    <!--        tools:layout_editor_absoluteY="72dp" />-->
-
-
-    <!--    <TextView-->
-    <!--        android:id="@+id/TimeViewSettings"-->
-    <!--        android:layout_width="wrap_content"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:text="TextView"-->
-    <!--        tools:layout_editor_absoluteX="103dp"-->
-    <!--        tools:layout_editor_absoluteY="117dp" />-->
-
-    <TextView
-        android:id="@+id/textView5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="בחר שעות וימי פעילות רצויים:"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/locationRadioGroup" />
-
-    <TimePicker
-        android:id="@+id/TimePickerSettings"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="72dp"
-        android:layout_marginTop="36dp"
-        android:timePickerMode="spinner"
-        android:visibility="invisible"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView5" />
-
-    <TextView
-        android:id="@+id/choose_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="בחר עדיפות לקבלת אירוע:"
-        app:layout_constraintEnd_toStartOf="@+id/backFromSettings"
-        app:layout_constraintHorizontal_bias="0.654"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <RadioGroup
         android:id="@+id/locationRadioGroup"
         android:layout_width="238dp"
@@ -123,15 +53,60 @@
 
     </RadioGroup>
 
+    <!--    <TextView-->
+    <!--        android:id="@+id/textView3"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:text="לפי מיקום GPS"-->
+    <!--        tools:layout_editor_absoluteX="162dp"-->
+    <!--        tools:layout_editor_absoluteY="53dp" />-->
+
+    <!--    <TextView-->
+    <!--        android:id="@+id/textView"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:text="לפי עיר"-->
+    <!--        tools:layout_editor_absoluteX="184dp"-->
+    <!--        tools:layout_editor_absoluteY="72dp" />-->
+
+
+    <!--    <TextView-->
+    <!--        android:id="@+id/TimeViewSettings"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:text="TextView"-->
+    <!--        tools:layout_editor_absoluteX="103dp"-->
+    <!--        tools:layout_editor_absoluteY="117dp" />-->
+
+    <TextView
+        android:id="@+id/choose_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="116dp"
+        android:layout_marginTop="20dp"
+        android:text="בחר עדיפות לקבלת אירוע:"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <Button
         android:id="@+id/day_sunday"
         android:layout_width="50dp"
         android:layout_height="37dp"
-        android:layout_marginTop="172dp"
+        android:layout_marginTop="212dp"
         android:layout_marginEnd="16dp"
         android:text="א'"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/backFromSettings" />
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/day_monday"
+        android:layout_width="50dp"
+        android:layout_height="37dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="16dp"
+        android:text="ב'"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/day_sunday" />
 
     <Button
         android:id="@+id/day_tuesday"
@@ -163,6 +138,17 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/day_wednesday" />
 
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="בחר שעות וימי פעילות רצויים:"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/locationRadioGroup" />
+
     <Button
         android:id="@+id/day_friday"
         android:layout_width="50dp"
@@ -184,24 +170,34 @@
         app:layout_constraintTop_toBottomOf="@+id/day_friday" />
 
     <Button
-        android:id="@+id/day_monday"
-        android:layout_width="50dp"
-        android:layout_height="37dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginEnd="16dp"
-        android:text="ב'"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/day_sunday" />
+        android:id="@+id/timePickerSettingsFrom"
+        android:layout_width="214dp"
+        android:layout_height="70dp"
+        android:layout_marginStart="56dp"
+        android:layout_marginTop="32dp"
+        android:text="XX:XX"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView5" />
 
     <Button
         android:id="@+id/applySettingsButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="160dp"
+        android:layout_marginStart="124dp"
+        android:layout_marginTop="40dp"
         android:text="החל"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/TimePickerSettings" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/timePickerSettingsTo" />
+
+    <Button
+        android:id="@+id/timePickerSettingsTo"
+        android:layout_width="214dp"
+        android:layout_height="70dp"
+        android:layout_marginStart="56dp"
+        android:layout_marginTop="56dp"
+        android:text="XX:XX"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/timePickerSettingsFrom" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
