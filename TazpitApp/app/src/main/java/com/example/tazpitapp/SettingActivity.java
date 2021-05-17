@@ -49,8 +49,7 @@ class SettingActivity extends AppCompatActivity {
     boolean unsaved;
     SharedPreferences local;
     SharedPreferences.Editor localEditor;
-
-
+    //----------global variables END----------------------
 
 
     @Override
@@ -106,11 +105,30 @@ class SettingActivity extends AppCompatActivity {
                 }
             });
         }
+
+        //for apply button
+        applyButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                editor.apply();
+            }
+        });
     }
 
 
     //this function will apply all the settings in this page back to the server
     private void changeDay(View v){
+        //if switching between days after changing hours, save into temp
+        if(unsaved){
+            //take hours from both start and end, put into new dayTime
+
+
+            //put dayTime into gson and store locally with rightNow's id
+
+
+            //apply changes
+            localEditor.commit();
+        }
         String toToast ="";
         rightNow = (Button)v;
         String idd= ""+v.getId();
@@ -143,7 +161,6 @@ class SettingActivity extends AppCompatActivity {
 //        editor.putString("time",dtGetString);
 //        editor.commit();
     }
-
 
     //function to call and set the timer hours
     public void popTimePicker(View v){
@@ -200,6 +217,7 @@ class SettingActivity extends AppCompatActivity {
 //                Integer.parseInt(mins));
     }
 
+    //used to save changes to a temporary gson file, might be unnecessary
     public void saveToTemp(View v, dayTime dt){
 
     }
