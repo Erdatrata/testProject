@@ -1,10 +1,13 @@
 package com.example.tazpitapp;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
+import android.Manifest;
 import android.app.AlertDialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
@@ -53,7 +56,6 @@ public class SetActivity extends AppCompatActivity {
     private static boolean unsaved;
 
 
-
     //----------global variables END----------------------
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,7 +82,7 @@ public class SetActivity extends AppCompatActivity {
         applyButton = findViewById(R.id.applySettingsButton);
         rightNow = null;
         Button[] daysArr = {daysButton1, daysButton2, daysButton3, daysButton4,
-                daysButton5,daysButton6, daysButton7};
+                daysButton5, daysButton6, daysButton7};
 
         //sharedPrefs
         sharedpreferences = getSharedPreferences("SharedPreferences",
@@ -103,6 +105,47 @@ public class SetActivity extends AppCompatActivity {
 
 
         //setting event listeners
+
+        //for location radio group
+        locationRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                //this will give give us the button that we checked just now
+                RadioButton checkedButton = (RadioButton) group.findViewById
+                        (locationRadioGroup.getCheckedRadioButtonId());
+
+                String toString = "GPS";
+                if (checkedButton.getId() != gpsButton.getId()) {
+                    toString = "City";
+                } else {
+                    //open dialogue requesting user authorization to use gps location
+                    new AlertDialog.Builder(SetActivity.this)
+                            .setTitle("צורך בקבלת אישור מיקום")
+                            .setMessage("על מנת שנוכל ליידע אותך על אירועים באיזור," +
+                                    " אנא אשרו לנו לקבל את מיקומכם.")
+                            .setPositiveButton("למעבר לאישור", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    //Prompt the user once explanation has been shown
+                                    ActivityCompat.requestPermissions(SetActivity.this,
+                                            new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                                            119);
+                                }
+                            }).setNeutralButton("ביטול", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            //in case user didn't want to authorize us location
+                            cityButton.setChecked(true);
+                            gpsButton.setChecked(!true);
+                        }
+                    }).setCancelable(false)
+                            .create()
+                            .show();
+                }
+                Toast.makeText(SetActivity.this, toString, Toast.LENGTH_SHORT).show();
+
+            }
+        });
 
         //for day listeners
 
@@ -132,6 +175,8 @@ public class SetActivity extends AppCompatActivity {
                 applyButtonFunction(daysArr);
             }
         });
+
+
     }
 
 
@@ -253,7 +298,7 @@ public class SetActivity extends AppCompatActivity {
     }
 
     //to be used if apply button pressed
-    public void applyButtonFunction(Button[] daysArr){
+    public void applyButtonFunction(Button[] daysArr) {
         //if unsaved, save it first
         if (unsaved) {
             //take hours from both start and end, put into new dayTime
@@ -262,15 +307,14 @@ public class SetActivity extends AppCompatActivity {
             unsaved = false;
         }
         //put the dayTimes back into the sp
-        for(Button v: daysArr){
-            String idd = ""+v.getId();
-            String tidd="temp_"+idd;
-            String toPut = sharedpreferences.getString(tidd,null);
-            editor.putString(idd,toPut);
+        for (Button v : daysArr) {
+            String idd = "" + v.getId();
+            String tidd = "temp_" + idd;
+            String toPut = sharedpreferences.getString(tidd, null);
+            editor.putString(idd, toPut);
         }
 
         //put gps-city into locationPref
-
 
 
         //finally, apply all edited
