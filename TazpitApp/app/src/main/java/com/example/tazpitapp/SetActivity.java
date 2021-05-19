@@ -1,5 +1,6 @@
 package com.example.tazpitapp;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
@@ -9,6 +10,8 @@ import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -19,6 +22,8 @@ import android.widget.Toast;
 
 import com.example.tazpitapp.assistClasses.dayTime;
 import com.google.gson.Gson;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Locale;
 
@@ -110,40 +115,9 @@ public class SetActivity extends AppCompatActivity {
         locationRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
-                //this will give give us the button that we checked just now
-                RadioButton checkedButton = (RadioButton) group.findViewById
-                        (locationRadioGroup.getCheckedRadioButtonId());
-
-                String toString = "GPS";
-                if (checkedButton.getId() != gpsButton.getId()) {
-                    toString = "City";
-                } else {
-                    //open dialogue requesting user authorization to use gps location
-                    new AlertDialog.Builder(SetActivity.this)
-                            .setTitle("צורך בקבלת אישור מיקום")
-                            .setMessage("על מנת שנוכל ליידע אותך על אירועים באיזור," +
-                                    " אנא אשרו לנו לקבל את מיקומכם.")
-                            .setPositiveButton("למעבר לאישור", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialogInterface, int i) {
-                                    //Prompt the user once explanation has been shown
-                                    ActivityCompat.requestPermissions(SetActivity.this,
-                                            new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
-                                            119);
-                                }
-                            }).setNeutralButton("ביטול", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            //in case user didn't want to authorize us location
-                            cityButton.setChecked(true);
-                            gpsButton.setChecked(!true);
-                        }
-                    }).setCancelable(false)
-                            .create()
-                            .show();
-                }
-                Toast.makeText(SetActivity.this, toString, Toast.LENGTH_SHORT).show();
-
+                locationSettingChecker(group, checkedId);
+                editor.commit();
+                System.out.println(sharedpreferences.getString("location_temp","CAT"));
             }
         });
 
@@ -177,6 +151,78 @@ public class SetActivity extends AppCompatActivity {
         });
 
 
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull @NotNull String[] permissions, @NonNull @NotNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if(requestCode == 105){
+            if(grantResults[0]==PackageManager.PERMISSION_GRANTED){
+                Toast.makeText(this, "ההרשאה התקבלה",
+                        Toast.LENGTH_SHORT).show();
+                editor.putString("location_temp","GPS");
+            } else {
+                Toast.makeText(this, "ההרשאה נדחתה, אנא אשרו אותה במידה ותרצו להשתמש בתכונה",
+                        Toast.LENGTH_LONG).show();
+                editor.putString("location_temp","city");
+                cityButton.setChecked(true);
+                gpsButton.setChecked(!true);
+            }
+
+        }
+        editor.commit();
+    }
+
+    private void locationSettingChecker(RadioGroup group, int checkedId) {
+
+        //this will give give us the button that we checked just now
+        RadioButton checkedButton = (RadioButton) group.findViewById
+                (locationRadioGroup.getCheckedRadioButtonId());
+
+        String toString = "GPS";
+        if (checkedButton.getId() != gpsButton.getId()) {
+            toString = "City";
+        } else {
+            //open dialogue requesting user authorization to use gps location
+            new AlertDialog.Builder(SetActivity.this)
+                    .setTitle("צורך בקבלת אישור מיקום")
+                    .setMessage("על מנת שנוכל ליידע אותך על אירועים באיזור," +
+                            " אנא אשרו לנו לקבל את מיקומכם.")
+                    .setPositiveButton("למעבר לאישור", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            //Prompt the user once explanation has been shown
+                            if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+                                //if phone version is M or greater
+                                if(getApplicationContext().checkSelfPermission(Manifest.permission.ACCESS_BACKGROUND_LOCATION)
+                                        == PackageManager.PERMISSION_GRANTED){
+                                    Toast.makeText(SetActivity.this, "שימוש במיקום אושר",
+                                            Toast.LENGTH_SHORT).show();
+                                } else {
+                                    requestPermissions(new String[]
+                                        {Manifest.permission.ACCESS_BACKGROUND_LOCATION},105);
+                                }
+
+
+                            } else {
+                                Toast.makeText(SetActivity.this, "שימוש במיקום אושר",
+                                        Toast.LENGTH_SHORT).show();
+                                editor.putString("location_temp","GPS");
+                            }
+                        }
+                    }).setNeutralButton("ביטול", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    //in case user didn't want to authorize us location
+                    cityButton.setChecked(true);
+                    gpsButton.setChecked(!true);
+                }
+            }).setCancelable(false)
+                    .create()
+                    .show();
+        }
+        Toast.makeText(SetActivity.this, toString, Toast.LENGTH_SHORT).show();
+        editor.commit();
     }
 
 
@@ -315,6 +361,7 @@ public class SetActivity extends AppCompatActivity {
         }
 
         //put gps-city into locationPref
+        editor.putString("location",sharedpreferences.getString("location_temp",null));
 
 
         //finally, apply all edited
