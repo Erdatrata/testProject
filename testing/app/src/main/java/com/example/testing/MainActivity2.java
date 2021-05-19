@@ -25,7 +25,7 @@ import java.util.Map;
 import java.util.Scanner;
 
 public class MainActivity2 extends AppCompatActivity {
-    private DocumentReference mDocRef= FirebaseFirestore.getInstance().document("new/new");
+    private DocumentReference mDocRef= FirebaseFirestore.getInstance().document("new/new");//fet from firestore new/new doc
     private EditText Name;
     private EditText Inner;
     private Button getData;
@@ -45,14 +45,14 @@ public class MainActivity2 extends AppCompatActivity {
         TextShow = findViewById(R.id.textShow);
         remove=findViewById(R.id.remove);
 
-        final Map<String, Object>[] dataToSave = new Map[]{new HashMap<String, Object>()};
+        final Map<String, Object>[] dataToSave = new Map[]{new HashMap<String, Object>()};//file comeing in map object [key,data] example [name,"moshe"] //map comes as array at size one ,cause ansync resons
         getData.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mDocRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                mDocRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {//do get to firestore file
                     @Override
                     public void onSuccess(DocumentSnapshot documentSnapshot) {
-                        dataToSave[0] =documentSnapshot.getData();
+                        dataToSave[0] =documentSnapshot.getData();//store file in dataTosave[0]
                         String str=dataToSave[0].toString();
                         TextShow.setText(str);
                     }
@@ -63,7 +63,7 @@ public class MainActivity2 extends AppCompatActivity {
         sendData.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mDocRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                mDocRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {//get the data first ,change something then reuplod the data to the server
                     @Override
                     public void onSuccess(DocumentSnapshot documentSnapshot) {
                         if(documentSnapshot.exists()){
@@ -71,7 +71,7 @@ public class MainActivity2 extends AppCompatActivity {
                             if(!Name.getText().toString().equals("")&&!Inner.getText().toString().equals(""))
                             {
                                 dataToSave[0].put(Name.getText().toString(), Inner.getText().toString());
-                                mDocRef.set(dataToSave[0]).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                mDocRef.set(dataToSave[0]).addOnSuccessListener(new OnSuccessListener<Void>() {//set into doc new/new on the server what's in dataToSave
                                     @Override
                                     public void onSuccess(Void aVoid) {
                                         Log.d("testing", "saved");
