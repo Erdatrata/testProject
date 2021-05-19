@@ -53,6 +53,23 @@
                         "endColumns": "100",
                         "endOffsets": "3270"
                     }
+                },
+                {
+                    "source": "C:\\Users\\natih\\.gradle\\caches\\transforms-2\\files-2.1\\225fcf3e8a055ca0f23e80da8feb9bb4\\navigation-ui-2.2.2\\res\\values-bg\\values-bg.xml",
+                    "from": {
+                        "startLines": "2,3",
+                        "startColumns": "4,4",
+                        "startOffsets": "55,168",
+                        "endColumns": "112,123",
+                        "endOffsets": "163,287"
+                    },
+                    "to": {
+                        "startLines": "29,30",
+                        "startColumns": "4,4",
+                        "startOffsets": "2854,2967",
+                        "endColumns": "112,123",
+                        "endOffsets": "2962,3086"
+                    }
                 }
             ]
         }

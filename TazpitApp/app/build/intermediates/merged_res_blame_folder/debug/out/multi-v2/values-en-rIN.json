@@ -53,6 +53,23 @@
                         "endColumns": "100",
                         "endOffsets": "3163"
                     }
+                },
+                {
+                    "source": "C:\\Users\\natih\\.gradle\\caches\\transforms-2\\files-2.1\\e601daed4ba62929db8b322b2974c8f8\\core-1.1.0\\res\\values-en-rIN\\values-en-rIN.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "100",
+                        "endOffsets": "151"
+                    },
+                    "to": {
+                        "startLines": "32",
+                        "startColumns": "4",
+                        "startOffsets": "3067",
+                        "endColumns": "100",
+                        "endOffsets": "3163"
+                    }
                 }
             ]
         }

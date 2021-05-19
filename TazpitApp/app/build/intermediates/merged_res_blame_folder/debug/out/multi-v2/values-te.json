@@ -23,18 +23,18 @@
                 {
                     "source": "C:\\Users\\Evja\\.gradle\\caches\\transforms-2\\files-2.1\\1428ba91d1d072e00af0351e2d1d3244\\navigation-ui-2.2.2\\res\\values-te\\values-te.xml",
                     "from": {
-                        "startLines": "2,3",
-                        "startColumns": "4,4",
-                        "startOffsets": "55,168",
-                        "endColumns": "112,122",
-                        "endOffsets": "163,286"
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "100",
+                        "endOffsets": "151"
                     },
                     "to": {
-                        "startLines": "29,30",
-                        "startColumns": "4,4",
-                        "startOffsets": "2845,2958",
-                        "endColumns": "112,122",
-                        "endOffsets": "2953,3076"
+                        "startLines": "32",
+                        "startColumns": "4",
+                        "startOffsets": "3161",
+                        "endColumns": "100",
+                        "endOffsets": "3257"
                     }
                 },
                 {

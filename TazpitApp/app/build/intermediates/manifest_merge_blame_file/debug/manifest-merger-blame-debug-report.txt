@@ -82,16 +82,4 @@
 50            <!-- android:label="@string/app_name" -->
 51            <!-- android:theme="@style/Theme.TazpitApp.NoActionBar"> -->
 52
-53
-54            <!-- <<<<<<< HEAD -->
-55            <!-- ======= -->
-56            <!-- <intent-filter> -->
-57            <!-- <action android:name="android.intent.action.MAIN" /> -->
-58            <!-- ======= -->
-59            <!-- &gt;>>>>>> main -->
-60            <!-- &gt;>>>>>> main -->
-61
-62        </activity>
-63    </application>
-64
-65</manifest>
+53</manifest>

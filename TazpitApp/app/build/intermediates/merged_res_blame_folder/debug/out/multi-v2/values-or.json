@@ -53,6 +53,23 @@
                         "endColumns": "118,109,106,85,103,119,77,76,90,91,95,94,100,92,94,95,90,89,87,109,103,105,110,103,117,162,105,88",
                         "endOffsets": "219,329,436,522,626,746,824,901,992,1084,1180,1275,1376,1469,1564,1660,1751,1841,1929,2039,2143,2249,2360,2464,2582,2745,2851,3178"
                     }
+                },
+                {
+                    "source": "C:\\Users\\natih\\.gradle\\caches\\transforms-2\\files-2.1\\225fcf3e8a055ca0f23e80da8feb9bb4\\navigation-ui-2.2.2\\res\\values-or\\values-or.xml",
+                    "from": {
+                        "startLines": "2,3",
+                        "startColumns": "4,4",
+                        "startOffsets": "55,172",
+                        "endColumns": "116,120",
+                        "endOffsets": "167,288"
+                    },
+                    "to": {
+                        "startLines": "29,30",
+                        "startColumns": "4,4",
+                        "startOffsets": "2856,2973",
+                        "endColumns": "116,120",
+                        "endOffsets": "2968,3089"
+                    }
                 }
             ]
         }

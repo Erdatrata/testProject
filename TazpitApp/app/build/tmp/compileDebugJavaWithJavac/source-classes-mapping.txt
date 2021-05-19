@@ -1,3 +1,5 @@
+<<<<<<< HEAD
+=======
 com/example/tazpitapp/ui/gallery/GalleryViewModel.java
  com.example.tazpitapp.ui.gallery.GalleryViewModel
 com/example/tazpitapp/ui/home/HomeFragment.java
@@ -29,19 +31,14 @@ com/example/tazpitapp/register.java
 com/example/tazpitapp/ui/gallery/GalleryFragment.java
  com.example.tazpitapp.ui.gallery.GalleryFragment
  com.example.tazpitapp.ui.gallery.GalleryFragment$1
+>>>>>>> 5d55873b525450912dccc944094f622bc305141b
 com/example/tazpitapp/dummy/DummyContent.java
  com.example.tazpitapp.dummy.DummyContent
  com.example.tazpitapp.dummy.DummyContent$DummyItem
-com/example/tazpitapp/SceneriosListActivity.java
- com.example.tazpitapp.SceneriosListActivity
- com.example.tazpitapp.SceneriosListActivity$1
- com.example.tazpitapp.SceneriosListActivity$SimpleItemRecyclerViewAdapter
- com.example.tazpitapp.SceneriosListActivity$SimpleItemRecyclerViewAdapter$1
- com.example.tazpitapp.SceneriosListActivity$SimpleItemRecyclerViewAdapter$ViewHolder
-com/example/tazpitapp/BuildConfig.java
- com.example.tazpitapp.BuildConfig
 com/example/tazpitapp/fillReport.java
  com.example.tazpitapp.fillReport
+<<<<<<< HEAD
+=======
  com.example.tazpitapp.fillReport$1
  com.example.tazpitapp.fillReport$2
 com/example/tazpitapp/SettingActivity.java
@@ -50,3 +47,4 @@ com/example/tazpitapp/SettingActivity.java
 com/example/tazpitapp/LoginActivity.java
  com.example.tazpitapp.LoginActivity
  com.example.tazpitapp.LoginActivity$1
+>>>>>>> 5d55873b525450912dccc944094f622bc305141b

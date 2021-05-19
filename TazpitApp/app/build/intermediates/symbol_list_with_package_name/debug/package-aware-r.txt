@@ -1509,7 +1509,6 @@ id alertTitle
 id all
 id always
 id app_bar
-id applySettingsButton
 id async
 id auto
 id back
@@ -1521,18 +1520,19 @@ id beginning
 id blocking
 id bottom
 id buttonPanel
+id buttonScenario
 id cancel_button
 id center
 id center_horizontal
 id center_vertical
 id chains
-id check_upload_phto
 id checkbox
 id checked
 id chip
 id chip_group
 id choose_text
 id chronometer
+id cityGetScenario
 id clear_text
 id clip_horizontal
 id clip_vertical
@@ -1596,6 +1596,7 @@ id frameLayout
 id ghost_view
 id ghost_view_holder
 id gone
+id gpsLink
 id group_divider
 id groups
 id guideline
@@ -1620,7 +1621,6 @@ id line1
 id line3
 id listMode
 id list_item
-id locationRadioGroup
 id logged_user_menu
 id loginButton
 id loginPage
@@ -1692,6 +1692,7 @@ id pin
 id progress_circular
 id progress_horizontal
 id radio
+id radioGroup
 id radio_by_city
 id radio_by_gps
 id right
@@ -1701,6 +1702,7 @@ id rounded
 id save_non_transition_alpha
 id save_overlay_view
 id scale
+id scenarioDesc
 id scenerios_detail
 id scenerios_detail_container
 id scenerios_list
@@ -1764,6 +1766,8 @@ id textEnd
 id textSpacerNoButtons
 id textSpacerNoTitle
 id textStart
+id textView2
+id textView4
 id textView5
 id text_gallery
 id text_home
@@ -1778,6 +1782,7 @@ id til_city
 id time
 id title
 id titleDividerNoCustom
+id titleScenario
 id title_template
 id toolbar
 id toolbar_layout
@@ -1867,6 +1872,7 @@ layout activity_login
 layout activity_main
 layout activity_register2
 layout activity_register3
+layout activity_scenario
 layout activity_scenerios_detail
 layout activity_scenerios_list
 layout activity_setting
@@ -1961,6 +1967,7 @@ mipmap tps_logo_full
 mipmap tps_logo_full_foreground
 mipmap tps_logo_full_round
 mipmap tps_logo_round
+mipmap tps_logoo
 navigation mobile_navigation
 plurals mtrl_badge_content_description
 string abc_action_bar_home_description
