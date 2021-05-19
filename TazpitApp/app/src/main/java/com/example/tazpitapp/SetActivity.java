@@ -1,9 +1,13 @@
 package com.example.tazpitapp;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
+import android.Manifest;
+import android.app.AlertDialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
@@ -20,74 +24,132 @@ import java.util.Locale;
 
 public class SetActivity extends AppCompatActivity {
     //----------global variables--------------------------
-        //the radio buttons for choosing between gps or city
-        private RadioGroup locationRadioGroup;
-        private RadioButton gpsButton;
-        private RadioButton cityButton;
+    //the radio buttons for choosing between gps or city
+    private RadioGroup locationRadioGroup;
+    private RadioButton gpsButton;
+    private RadioButton cityButton;
 
-        //the buttons for choosing between different days and timepicker
-        private static Button daysButton1;//SUN
-        private static Button daysButton2;//MON
-        private static Button daysButton3;//TUE
-        private static Button daysButton4;//WED
-        private static Button daysButton5;//THU
-        private static Button daysButton6;//FRI
-        private static Button daysButton7;//SAT
-        private static Button timePickerFrom;
-        private static Button timePickerTo;
-        private static Button rightNow=null;
+    //the buttons for choosing between different days and timepicker
+    private Button daysButton1;//SUN
+    private Button daysButton2;//MON
+    private Button daysButton3;//TUE
+    private Button daysButton4;//WED
+    private Button daysButton5;//THU
+    private Button daysButton6;//FRI
+    private Button daysButton7;//SAT
+    private Button timePickerFrom;
+    private Button timePickerTo;
+    private static Button rightNow = null;
 
-        //apply settings button
-        private Button applyButton;
-        private static int hour = 0;
-    private static int minute=0;
-        private static int hourStart = 0;
-    private static int minuteStart=0;
-        private static int hoursEnd = 0;
-    private static int minutesEnd=0;
-        //sharedprefs, dT and gson
-        private SharedPreferences sharedpreferences;
-        private static SharedPreferences.Editor editor;
-        private static Gson gson;
-        private static boolean unsaved;
+    //apply settings button
+    private Button applyButton;
+    private static int hour = 0;
+    private static int minute = 0;
+    private static int hourStart = 0;
+    private static int minuteStart = 0;
+    private static int hoursEnd = 0;
+    private static int minutesEnd = 0;
+    //sharedprefs, dT and gson
+    private SharedPreferences sharedpreferences;
+    private static SharedPreferences.Editor editor;
+    private static Gson gson;
+    private static boolean unsaved;
+
+
     //----------global variables END----------------------
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_set);
+
+
         //set all the buttons for the settings activity
         //location settings
         locationRadioGroup = findViewById(R.id.locationRadioGroup);
-        gpsButton=findViewById(R.id.radio_by_gps);
-        cityButton=findViewById(R.id.radio_by_city);
+        gpsButton = findViewById(R.id.radio_by_gps);
+        cityButton = findViewById(R.id.radio_by_city);
         //day settings
-        daysButton1=findViewById(R.id.day_sunday);
-        daysButton2=findViewById(R.id.day_monday);
-        daysButton3=findViewById(R.id.day_tuesday);
-        daysButton4=findViewById(R.id.day_wednesday);
-        daysButton5=findViewById(R.id.day_thursday);
-        daysButton6=findViewById(R.id.day_friday);
-        daysButton7=findViewById(R.id.day_saturday);
+        daysButton1 = findViewById(R.id.day_sunday);
+        daysButton2 = findViewById(R.id.day_monday);
+        daysButton3 = findViewById(R.id.day_tuesday);
+        daysButton4 = findViewById(R.id.day_wednesday);
+        daysButton5 = findViewById(R.id.day_thursday);
+        daysButton6 = findViewById(R.id.day_friday);
+        daysButton7 = findViewById(R.id.day_saturday);
         //timepicker & apply
-        timePickerFrom=findViewById(R.id.timePickerSettingsFrom);
-        timePickerTo=findViewById(R.id.timePickerSettingsTo);
-        applyButton=findViewById(R.id.applySettingsButton);
-        rightNow=null;
+        timePickerFrom = findViewById(R.id.timePickerSettingsFrom);
+        timePickerTo = findViewById(R.id.timePickerSettingsTo);
+        applyButton = findViewById(R.id.applySettingsButton);
+        rightNow = null;
+        Button[] daysArr = {daysButton1, daysButton2, daysButton3, daysButton4,
+                daysButton5, daysButton6, daysButton7};
 
-                //sharedPrefs
+        //sharedPrefs
         sharedpreferences = getSharedPreferences("SharedPreferences",
                 Context.MODE_PRIVATE);
         editor = sharedpreferences.edit();
         gson = new Gson();
-//        local=getPreferences(MODE_PRIVATE);
-//        localEditor = local.edit();
+
+        {
+            //loading temps from mains
+            dayTime dtDEF = new dayTime(0, 0, 0, 1);//default for first time
+            String dtDEFSTR = gson.toJson(dtDEF);
+            for (Button v : daysArr) {
+                String idd = "" + v.getId();
+                String tidd = "temp_" + idd;
+                String dt = sharedpreferences.getString(idd, dtDEFSTR);
+                editor.putString(tidd, dt);
+            }
+            editor.apply();
+        }
+
 
         //setting event listeners
 
+        //for location radio group
+        locationRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                //this will give give us the button that we checked just now
+                RadioButton checkedButton = (RadioButton) group.findViewById
+                        (locationRadioGroup.getCheckedRadioButtonId());
+
+                String toString = "GPS";
+                if (checkedButton.getId() != gpsButton.getId()) {
+                    toString = "City";
+                } else {
+                    //open dialogue requesting user authorization to use gps location
+                    new AlertDialog.Builder(SetActivity.this)
+                            .setTitle("צורך בקבלת אישור מיקום")
+                            .setMessage("על מנת שנוכל ליידע אותך על אירועים באיזור," +
+                                    " אנא אשרו לנו לקבל את מיקומכם.")
+                            .setPositiveButton("למעבר לאישור", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    //Prompt the user once explanation has been shown
+                                    ActivityCompat.requestPermissions(SetActivity.this,
+                                            new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                                            119);
+                                }
+                            }).setNeutralButton("ביטול", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            //in case user didn't want to authorize us location
+                            cityButton.setChecked(true);
+                            gpsButton.setChecked(!true);
+                        }
+                    }).setCancelable(false)
+                            .create()
+                            .show();
+                }
+                Toast.makeText(SetActivity.this, toString, Toast.LENGTH_SHORT).show();
+
+            }
+        });
+
         //for day listeners
-        Button[] daysArr = {daysButton1,daysButton2,daysButton3,daysButton4,daysButton5,
-                daysButton6,daysButton7};
-        for(Button day: daysArr){
+
+        for (Button day : daysArr) {
             day.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
                     changeDay(v);
@@ -96,10 +158,10 @@ public class SetActivity extends AppCompatActivity {
             });
         }
         //for timePickers
-        Button[] timers= {timePickerFrom,timePickerTo};
-        for(Button b:timers){
-            b.setOnClickListener(new View.OnClickListener(){
-                public void onClick(View v){
+        Button[] timers = {timePickerFrom, timePickerTo};
+        for (Button b : timers) {
+            b.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
                     popTimePicker(v);
 //                    Toast.makeText(SetActivity.this, ""+v.getId(), Toast.LENGTH_SHORT).show();
                 }
@@ -110,44 +172,45 @@ public class SetActivity extends AppCompatActivity {
         applyButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                editor.apply();
+                applyButtonFunction(daysArr);
             }
         });
+
+
     }
 
 
-
     //this function will apply all the settings in this page back to the server
-    private void changeDay(View v){
+    private void changeDay(View v) {
         //if switching between days after changing hours, save into temp
-        if(unsaved){
+        if (unsaved) {
             //take hours from both start and end, put into new dayTime
             saveTemp();
             //unsave unsaved
-            unsaved=false;
+            unsaved = false;
         }
-        String toToast ="";
-        rightNow = (Button)v;
-        String idd= "temp_"+v.getId();
+        String toToast = "";
+        rightNow = (Button) v;
+        String idd = "temp_" + v.getId();
 
-        dayTime dtDEF = new dayTime(0,0,0,1);//default for first time
-        String dtGetString = sharedpreferences.getString(idd,"DEFAULT");
+        dayTime dtDEF = new dayTime(0, 0, 0, 1);//default for first time
+        String dtGetString = sharedpreferences.getString(idd, "DEFAULT");
         dayTime dtGET;
 
-        if(!dtGetString.equals("DEFAULT"))
-            dtGET=gson.fromJson(dtGetString, dayTime.class);
+        if (!dtGetString.equals("DEFAULT"))
+            dtGET = gson.fromJson(dtGetString, dayTime.class);
         else
-            dtGET=dtDEF;
+            dtGET = dtDEF;
 
-        hourStart=dtGET.getHourStart();
-        hoursEnd=dtGET.getHourEnd();
-        minuteStart=dtGET.getMinuteStart();
-        minutesEnd=dtGET.getMinuteEnd();
+        hourStart = dtGET.getHourStart();
+        hoursEnd = dtGET.getHourEnd();
+        minuteStart = dtGET.getMinuteStart();
+        minutesEnd = dtGET.getMinuteEnd();
 
-        ((Button)findViewById(R.id.timePickerSettingsFrom)).setText(
-                String.format(Locale.getDefault(),"%02d:%02d",hourStart,minuteStart));
-        ((Button)findViewById(R.id.timePickerSettingsTo)).setText(
-                String.format(Locale.getDefault(),"%02d:%02d",hoursEnd,minutesEnd));
+        ((Button) findViewById(R.id.timePickerSettingsFrom)).setText(
+                String.format(Locale.getDefault(), "%02d:%02d", hourStart, minuteStart));
+        ((Button) findViewById(R.id.timePickerSettingsTo)).setText(
+                String.format(Locale.getDefault(), "%02d:%02d", hoursEnd, minutesEnd));
 
 
         //how to store gson back
@@ -162,72 +225,102 @@ public class SetActivity extends AppCompatActivity {
 
 
     //function to call and set the timer hours
-    public void popTimePicker(View v){
-        if(rightNow==null){
+    public void popTimePicker(View v) {
+        if (rightNow == null) {
             Toast.makeText(this, "אנא בחר באחד הימים בכפתורים מימין ", Toast.LENGTH_LONG).show();
             return;
         }
-        if(v.getId()==R.id.timePickerSettingsFrom){
-            hour=hourStart;minute=minuteStart;
+        if (v.getId() == R.id.timePickerSettingsFrom) {
+            hour = hourStart;
+            minute = minuteStart;
         } else {
-            hour=hoursEnd;minute=minutesEnd;
+            hour = hoursEnd;
+            minute = minutesEnd;
         }
-        String timeString = ((Button)v).getText().toString();
+        String timeString = ((Button) v).getText().toString();
         System.out.println("before time picker");
         TimePickerDialog.OnTimeSetListener onTimeSetListener = new TimePickerDialog.OnTimeSetListener() {
 
 
             @Override
             public void onTimeSet(TimePicker view, int hourOfDay, int minutes) {
-                String toPut="";
+                String toPut = "";
 //                if(v.getId()==)
                 view.setHour(1);
-                if(v.getId()==R.id.timePickerSettingsFrom){//for upper textView
+                if (v.getId() == R.id.timePickerSettingsFrom) {//for upper textView
                     //check for time correctness here (time should be chronological)
-                    if(hourOfDay>hoursEnd || ((hourOfDay==hoursEnd)&&(minutes>=minutesEnd))){
+                    if (hourOfDay > hoursEnd || ((hourOfDay == hoursEnd) && (minutes >= minutesEnd))) {
                         Toast.makeText(SetActivity.this,
                                 "לא ניתן לכוון זמן התחלה מאוחר מזמן סיום", Toast.LENGTH_LONG).show();
                         return;
                     }
-                    hourStart = hourOfDay; minuteStart = minutes;
-                    toPut=String.format(Locale.getDefault(),"%02d:%02d",hourStart,minuteStart);
+                    hourStart = hourOfDay;
+                    minuteStart = minutes;
+                    toPut = String.format(Locale.getDefault(), "%02d:%02d", hourStart, minuteStart);
                 } else {//for lower textView
                     //check for time correctness here also
-                    if(hourOfDay<hourStart || ((hourOfDay==hourStart)&&(minutes<=minuteStart))){
+                    if (hourOfDay < hourStart || ((hourOfDay == hourStart) && (minutes <= minuteStart))) {
                         Toast.makeText(SetActivity.this,
                                 "לא ניתן לכוון זמן סיום מוקדם מזמן התחלה", Toast.LENGTH_LONG).show();
                         return;
                     }
-                    hoursEnd=hourOfDay;minutesEnd=minutes;
-                    toPut=String.format(Locale.getDefault(),"%02d:%02d",hoursEnd,minutesEnd);
+                    hoursEnd = hourOfDay;
+                    minutesEnd = minutes;
+                    toPut = String.format(Locale.getDefault(), "%02d:%02d", hoursEnd, minutesEnd);
                 }
                 //if changes were made to time, make sure to let it be known in logic
-                if(((Button)v).getText()!=toPut)
-                    unsaved=true;
-                ((Button)v).setText(toPut);
+                if (((Button) v).getText() != toPut)
+                    unsaved = true;
+                ((Button) v).setText(toPut);
             }
         };
 //        int style= AlertDialog.THEME_HOLO_DARK;
-        int style= R.style.Theme_MaterialComponents_Dialog_Alert;
+        int style = R.style.Theme_MaterialComponents_Dialog_Alert;
 
-        TimePickerDialog timePickerDialog=new TimePickerDialog(this,style,onTimeSetListener,
-                hour,minute,true);
+        TimePickerDialog timePickerDialog = new TimePickerDialog(this, style, onTimeSetListener,
+                hour, minute, true);
         timePickerDialog.show();
     }
 
     //saves number into a temp in sp
-    public static void saveTemp(){
-        String dtKey="";
+    public static void saveTemp() {
+        String dtKey = "";
         String temp = tempName((rightNow).getId());
 
-        dayTime toPut = new dayTime(hourStart,minuteStart,hoursEnd,minutesEnd);
+        dayTime toPut = new dayTime(hourStart, minuteStart, hoursEnd, minutesEnd);
         String stringified = gson.toJson(toPut);
-        editor.putString(temp,stringified);
+        editor.putString(temp, stringified);
         editor.apply();
     }
 
-    public static String tempName(int cur){
-        return "temp_"+cur;
+    public static String tempName(int cur) {
+        return "temp_" + cur;
     }
 
+    //to be used if apply button pressed
+    public void applyButtonFunction(Button[] daysArr) {
+        //if unsaved, save it first
+        if (unsaved) {
+            //take hours from both start and end, put into new dayTime
+            saveTemp();
+            //unsave unsaved
+            unsaved = false;
+        }
+        //put the dayTimes back into the sp
+        for (Button v : daysArr) {
+            String idd = "" + v.getId();
+            String tidd = "temp_" + idd;
+            String toPut = sharedpreferences.getString(tidd, null);
+            editor.putString(idd, toPut);
+        }
+
+        //put gps-city into locationPref
+
+
+        //finally, apply all edited
+        editor.apply();
+        //make sure to call the background service and tell them of a change of hours
+
+        //send data to server
+    }
 }
