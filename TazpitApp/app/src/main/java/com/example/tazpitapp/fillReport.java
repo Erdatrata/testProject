@@ -36,8 +36,8 @@ public class fillReport extends AppCompatActivity {
     Button submit;
     ImageButton pickMedia;
     CheckBox credit;
-    //ImageView checkUploadImage;
-    Bitmap bm;
+       ImageView checkUploadImage;
+    //Bitmap bm;
     private FirebaseStorage storage = FirebaseStorage.getInstance();
 
     private static final int SELECT_PHOTO = 1;
@@ -51,8 +51,7 @@ public class fillReport extends AppCompatActivity {
         submit = (Button) findViewById(R.id.fill_report_send_button);
         pickMedia = (ImageButton) findViewById(R.id.fill_report_upload_button);
         credit = (CheckBox) findViewById(R.id.fill_report_add_credit);
-   // checkUploadImage=(ImageView)findViewById(R.id.check_upload_phto);
-        // checkUploadImage = new ImageView(this);
+     checkUploadImage=(ImageView)findViewById(R.id.check_upload_phto);
         pickMedia.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -65,29 +64,29 @@ public class fillReport extends AppCompatActivity {
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (TextUtils.isEmpty(title.getText()) || TextUtils.isEmpty(description.getText()) || bm==null)
+                if (TextUtils.isEmpty(title.getText()) || TextUtils.isEmpty(description.getText()))
                     Toast.makeText(getApplicationContext(), "כל השדות הינם חובה", Toast.LENGTH_LONG).show();
                 else {
                     String getTitle = title.getText().toString();
                     String getDescription = description.getText().toString();
-//                    if (itemClicked(credit) == true)
-//                        Toast.makeText(getApplicationContext(), "title: " + getTitle + "\n desc: " + getDescription + "\n chekbox chosen ", Toast.LENGTH_SHORT).show();
-//                    else
-//                        Toast.makeText(getApplicationContext(), "title: " + getTitle + "\n desc: " + getDescription + "\n chekbox not chosen ", Toast.LENGTH_SHORT).show();
+                    if (itemClicked(credit) == true)
+                        Toast.makeText(getApplicationContext(), "title: " + getTitle + "\n desc: " + getDescription + "\n chekbox chosen ", Toast.LENGTH_LONG).show();
+                    else
+                        Toast.makeText(getApplicationContext(), "title: " + getTitle + "\n desc: " + getDescription + "\n chekbox not chosen ", Toast.LENGTH_LONG).show();
 
                     //19.5 try to upload image to firebase===========================
+                   Bitmap capture=Bitmap.createBitmap(checkUploadImage.getWidth(),checkUploadImage.getHeight(),Bitmap.Config.ARGB_8888);
+                   Canvas captrueCanvas=new Canvas(capture);
+                    checkUploadImage.draw(captrueCanvas);
                     ByteArrayOutputStream outputStream=new ByteArrayOutputStream();
-                    bm.compress(Bitmap.CompressFormat.PNG, 100, outputStream);
+                    capture.compress(Bitmap.CompressFormat.PNG, 100, outputStream);
                     byte [] data=outputStream.toByteArray();
-                    String path = "firememes/" + "ניסוי ניסוי" +"/"+UUID.randomUUID()+ ".png";
+                    String path = "firememes/" + UUID.randomUUID() + ".png";
                     StorageReference firememeRef = storage.getReference(path);
                     StorageMetadata metadata=new StorageMetadata.Builder().setCustomMetadata("caption", "the photo").build();
                     UploadTask uploadTask=firememeRef.putBytes(data, metadata);
-                    //if(uploadTask.isSuccessful())
-                        Toast.makeText(getApplicationContext(), "image upload succeed ", Toast.LENGTH_LONG).show();
 
-
-
+                    //the photo come to the storage server but not presented well. need to handle
                     //19.5 try to upload image to firebase===========================
 
                 }
@@ -104,18 +103,18 @@ public class fillReport extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), "after pick", Toast.LENGTH_LONG).show();
             //below checks i can get the media and present in on ImageView
             Uri imgUri = data.getData();
-            try {
-                bm = MediaStore.Images.Media.getBitmap(getContentResolver(), imgUri);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-//                        try {
-//                 bm = MediaStore.Images.Media.getBitmap(getContentResolver(), imgUri);
-//                checkUploadImage.setImageBitmap(bm);} catch (FileNotFoundException e) {
-//                e.printStackTrace();
+//            try {
+//                bm = MediaStore.Images.Media.getBitmap(getContentResolver(), imgUri);
 //            } catch (IOException e) {
 //                e.printStackTrace();
 //            }
+                        try {
+               Bitmap  bm = MediaStore.Images.Media.getBitmap(getContentResolver(), imgUri);
+                checkUploadImage.setImageBitmap(bm);} catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 
