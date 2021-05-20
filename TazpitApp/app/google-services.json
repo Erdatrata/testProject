@@ -1,0 +1,69 @@
+{
+  "project_info": {
+    "project_number": "1945811930",
+    "firebase_url": "https://tazpit-testingandprototype-default-rtdb.firebaseio.com",
+    "project_id": "tazpit-testingandprototype",
+    "storage_bucket": "tazpit-testingandprototype.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1945811930:android:4c0d31a03ce1c7cf785ee3",
+        "android_client_info": {
+          "package_name": "com.example.tazpitapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1945811930-e4ugrja20jdv6hdd4dnqth29ccgbrl5e.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAl8MXX7pRuziJyE9AtRv0Fe734FGWTeZw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1945811930-e4ugrja20jdv6hdd4dnqth29ccgbrl5e.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1945811930:android:b9efb064054ec6cb785ee3",
+        "android_client_info": {
+          "package_name": "com.example.testing"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1945811930-e4ugrja20jdv6hdd4dnqth29ccgbrl5e.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAl8MXX7pRuziJyE9AtRv0Fe734FGWTeZw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1945811930-e4ugrja20jdv6hdd4dnqth29ccgbrl5e.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

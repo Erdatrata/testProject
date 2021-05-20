@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "D:\\GIT\\tazpit\\TazpitApp\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-land\\values-land.xml",
+            "outputFile": "D:\\git\\tazpit\\TazpitApp\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-land\\values-land.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\Evja\\.gradle\\caches\\transforms-2\\files-2.1\\1632d70b3da5d55404b67e0cbd7d43bf\\appcompat-1.1.0\\res\\values-land\\values-land.xml",
+                    "source": "C:\\Users\\mac\\.gradle\\caches\\transforms-2\\files-2.1\\a0479976f5ab36cec8c5a89b5b1d2189\\appcompat-1.1.0\\res\\values-land\\values-land.xml",
                     "from": {
                         "startLines": "2,3,4",
                         "startColumns": "4,4,4",
@@ -14,7 +14,7 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\Evja\\.gradle\\caches\\transforms-2\\files-2.1\\d8cd38b00373fe5fa3709d96e5862d5f\\material-1.1.0\\res\\values-land\\values-land.xml",
+                    "source": "C:\\Users\\mac\\.gradle\\caches\\transforms-2\\files-2.1\\78a7ea54ebfb041843dbcb0425e1f7db\\material-1.1.0\\res\\values-land\\values-land.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,24,30",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
