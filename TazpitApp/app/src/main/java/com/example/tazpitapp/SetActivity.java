@@ -164,7 +164,7 @@ public class SetActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(rightNow==null){
-                    Toast.makeText(SetActivity.this, "\"אנא בחרו באחד הימים בכפתורים מימין"
+                    Toast.makeText(SetActivity.this, "אנא בחרו באחד הימים בכפתורים מימין"
                             , Toast.LENGTH_SHORT).show();
                     return;
                 }
