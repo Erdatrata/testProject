@@ -44,6 +44,7 @@ public class SetActivity extends AppCompatActivity {
     private Button daysButton7;//SAT
     private Button timePickerFrom;
     private Button timePickerTo;
+    private Button AllDayPicker;
     private static Button rightNow = null;
 
     //apply settings button
@@ -65,6 +66,12 @@ public class SetActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        try
+        {
+            this.getSupportActionBar().hide();
+        }
+        catch (NullPointerException e){}
+
         setContentView(R.layout.activity_set);
 
 
@@ -81,6 +88,7 @@ public class SetActivity extends AppCompatActivity {
         daysButton5 = findViewById(R.id.day_thursday);
         daysButton6 = findViewById(R.id.day_friday);
         daysButton7 = findViewById(R.id.day_saturday);
+        AllDayPicker = findViewById(R.id.allDayButton);
         //timepicker & apply
         timePickerFrom = findViewById(R.id.timePickerSettingsFrom);
         timePickerTo = findViewById(R.id.timePickerSettingsTo);
@@ -106,6 +114,16 @@ public class SetActivity extends AppCompatActivity {
                 editor.putString(tidd, dt);
             }
             editor.apply();
+            //load location selection
+            String gpsPref = sharedpreferences.getString("location","DEFAULT");
+            if(!gpsPref.equals("DEFAULT")){
+                if(gpsPref.equals("GPS")){
+                    gpsButton.setChecked(true);
+                } else {
+                    cityButton.setChecked(true);
+                }
+            }
+
         }
 
 
@@ -141,6 +159,30 @@ public class SetActivity extends AppCompatActivity {
                 }
             });
         }
+        //for "all day" button
+        AllDayPicker.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(rightNow==null){
+                    Toast.makeText(SetActivity.this, "אנא בחרו באחד הימים בכפתורים מימין"
+                            , Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                String idd = ""+rightNow.getId();
+                String tidd = "temp_"+idd;
+                dayTime dt = new dayTime(0, 0, 23, 59);//default for first time
+                String toPut = gson.toJson(dt);
+                editor.putString(tidd,toPut).commit();
+                hourStart=0;hoursEnd=23;
+                minuteStart=0;minutesEnd=59;
+
+
+                timePickerFrom.setText("00:00");
+                timePickerTo.setText("23:59");
+
+
+            }
+        });
 
         //for apply button
         applyButton.setOnClickListener(new View.OnClickListener() {
@@ -156,7 +198,7 @@ public class SetActivity extends AppCompatActivity {
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull @NotNull String[] permissions, @NonNull @NotNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if(requestCode == 105){
+        if(requestCode == 105){//if checking for gps permission
             if(grantResults[0]==PackageManager.PERMISSION_GRANTED){
                 Toast.makeText(this, "ההרשאה התקבלה",
                         Toast.LENGTH_SHORT).show();
@@ -166,7 +208,7 @@ public class SetActivity extends AppCompatActivity {
                         Toast.LENGTH_LONG).show();
                 editor.putString("location_temp","city");
                 cityButton.setChecked(true);
-                gpsButton.setChecked(!true);
+                gpsButton.setChecked(false);
             }
 
         }
@@ -179,11 +221,15 @@ public class SetActivity extends AppCompatActivity {
         RadioButton checkedButton = (RadioButton) group.findViewById
                 (locationRadioGroup.getCheckedRadioButtonId());
 
-        String toString = "GPS";
+        String toString = "לפי מיקום GPS";
         if (checkedButton.getId() != gpsButton.getId()) {
-            toString = "City";
+            toString = "לפי עיר";
         } else {
             //open dialogue requesting user authorization to use gps location
+            if(getApplicationContext().checkSelfPermission(Manifest.permission.ACCESS_BACKGROUND_LOCATION)
+                    != PackageManager.PERMISSION_GRANTED){
+
+
             new AlertDialog.Builder(SetActivity.this)
                     .setTitle("צורך בקבלת אישור מיקום")
                     .setMessage("על מנת שנוכל ליידע אותך על אירועים באיזור," +
@@ -192,7 +238,7 @@ public class SetActivity extends AppCompatActivity {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
                             //Prompt the user once explanation has been shown
-                            if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+//                            if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
                                 //if phone version is M or greater
                                 if(getApplicationContext().checkSelfPermission(Manifest.permission.ACCESS_BACKGROUND_LOCATION)
                                         == PackageManager.PERMISSION_GRANTED){
@@ -204,11 +250,11 @@ public class SetActivity extends AppCompatActivity {
                                 }
 
 
-                            } else {
-                                Toast.makeText(SetActivity.this, "שימוש במיקום אושר",
-                                        Toast.LENGTH_SHORT).show();
-                                editor.putString("location_temp","GPS");
-                            }
+//                            } else {
+//                                Toast.makeText(SetActivity.this, "שימוש במיקום אושר",
+//                                        Toast.LENGTH_SHORT).show();
+//                                editor.putString("location_temp","GPS");
+//                            }
                         }
                     }).setNeutralButton("ביטול", new DialogInterface.OnClickListener() {
                 @Override
@@ -220,11 +266,10 @@ public class SetActivity extends AppCompatActivity {
             }).setCancelable(false)
                     .create()
                     .show();
-        }
-        Toast.makeText(SetActivity.this, toString, Toast.LENGTH_SHORT).show();
+        }}
+        Toast.makeText(SetActivity.this,"בדיקת מיקום: "+ toString, Toast.LENGTH_SHORT).show();
         editor.commit();
     }
-
 
     //this function will apply all the settings in this page back to the server
     private void changeDay(View v) {
@@ -235,7 +280,6 @@ public class SetActivity extends AppCompatActivity {
             //unsave unsaved
             unsaved = false;
         }
-        String toToast = "";
         rightNow = (Button) v;
         String idd = "temp_" + v.getId();
 
@@ -269,11 +313,10 @@ public class SetActivity extends AppCompatActivity {
 //        editor.commit();
     }
 
-
     //function to call and set the timer hours
     public void popTimePicker(View v) {
         if (rightNow == null) {
-            Toast.makeText(this, "אנא בחר באחד הימים בכפתורים מימין ", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "אנא בחרו באחד הימים בכפתורים מימין ", Toast.LENGTH_LONG).show();
             return;
         }
         if (v.getId() == R.id.timePickerSettingsFrom) {
@@ -363,6 +406,13 @@ public class SetActivity extends AppCompatActivity {
         //put gps-city into locationPref
         editor.putString("location",sharedpreferences.getString("location_temp",null));
 
+        String gpsSet="DEFAULT";
+        if(gpsButton.isChecked())
+            gpsSet="GPS";
+        else if(cityButton.isChecked())
+            gpsSet="city";
+        editor.putString("location",gpsSet);
+
 
         //finally, apply all edited
         editor.apply();
@@ -370,4 +420,5 @@ public class SetActivity extends AppCompatActivity {
 
         //send data to server
     }
+
 }

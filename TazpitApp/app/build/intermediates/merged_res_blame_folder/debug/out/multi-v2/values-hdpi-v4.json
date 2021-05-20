@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "D:\\GIT\\tazpit\\TazpitApp\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-hdpi-v4\\values-hdpi-v4.xml",
+            "outputFile": "D:\\git\\tazpit\\TazpitApp\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-hdpi-v4\\values-hdpi-v4.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\Evja\\.gradle\\caches\\transforms-2\\files-2.1\\1632d70b3da5d55404b67e0cbd7d43bf\\appcompat-1.1.0\\res\\values-hdpi-v4\\values-hdpi-v4.xml",
+                    "source": "C:\\Users\\mac\\.gradle\\caches\\transforms-2\\files-2.1\\a0479976f5ab36cec8c5a89b5b1d2189\\appcompat-1.1.0\\res\\values-hdpi-v4\\values-hdpi-v4.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",

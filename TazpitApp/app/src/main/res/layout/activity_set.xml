@@ -2,9 +2,40 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/makeAllDay"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".SetActivity">
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="44dp"
+        android:layout_height="22dp"
+        android:layout_marginEnd="21dp"
+        android:gravity="center"
+        android:text="יום"
+        app:layout_constraintBottom_toTopOf="@+id/day_sunday"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:gravity="right"
+        android:text="עד שעה"
+        app:layout_constraintBottom_toTopOf="@+id/timePickerSettingsTo"
+        app:layout_constraintStart_toEndOf="@+id/allDayButton" />
+
+    <Button
+        android:id="@+id/allDayButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="120dp"
+        android:layout_marginTop="5dp"
+        android:text="כל היום"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/timePickerSettingsFrom" />
 
     <RadioGroup
         android:id="@+id/locationRadioGroup"
@@ -198,6 +229,15 @@
         android:text="XX:XX"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/timePickerSettingsFrom" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="232dp"
+        android:text="משעה"
+        app:layout_constraintBottom_toTopOf="@+id/timePickerSettingsFrom"
+        app:layout_constraintStart_toStartOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
