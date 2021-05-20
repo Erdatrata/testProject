@@ -2,6 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.tazpitapp">
 
+    <uses-permission
+        android:name="android.permission.ACCESS_BACKGROUND_LOCATION"
+        android:required="false" />
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -18,7 +21,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".register$register2"></activity>
-        <activity android:name=".register$register3" /> <!-- <activity android:name=".SettingActivity"></activity> -->
+        <activity android:name=".register$register3" /> 
+        <!-- <activity android:name=".SettingActivity"></activity> -->
         <!-- <activity android:name=".register"></activity> -->
         <activity android:name=".MainActivity">
 
@@ -34,26 +38,10 @@
             android:parentActivityName=".SceneriosListActivity"
             android:theme="@style/Theme.TazpitApp.NoActionBar">
 
-            <!-- <<<<<<< HEAD -->
-            <!-- <meta-data -->
-            <!-- android:name="android.support.PARENT_ACTIVITY" -->
-            <!-- android:value="com.example.tazpitapp.SceneriosListActivity" /> -->
-            <!-- </activity> -->
-            <!-- <activity android:name=".fillReport" -->
-            <!-- android:label="@string/app_name" -->
-            <!-- android:theme="@style/Theme.TazpitApp.NoActionBar"> -->
-
-
-            <!-- <<<<<<< HEAD -->
-            <!-- ======= -->
-            <!-- <intent-filter> -->
-            <!-- <action android:name="android.intent.action.MAIN" /> -->
-            <!-- ======= -->
-            <!-- &gt;>>>>>> main -->
-            <!-- &gt;>>>>>> main -->
 
         </activity>
 
     </application>
 
+    </application>
 </manifest>
