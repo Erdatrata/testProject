@@ -4,10 +4,12 @@ import com.google.android.material.navigation.NavigationView;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Menu;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -37,7 +39,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private RecyclerView recyclerView;
 //    private RecyclerAdapter recyclerAdapter;
     private RecyclerView.Adapter adapter;
-    private NavigationView navigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,19 +48,30 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
 
         aToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        navigationView = (NavigationView) findViewById(R.id.nav_view);
+        NavigationView mNavigationView = (NavigationView) findViewById(R.id.nav_view);
+
+        if (mNavigationView != null) {
+            mNavigationView.setNavigationItemSelectedListener(this);
+        }
         mDrawerLayout.addDrawerListener(aToggle);
-//        toolbar = (Toolbar) findViewById(R.id.nav);
-        toolbar.setNavigationIcon(R.drawable.ic_menu_camera);
-        setSupportActionBar(toolbar);
+//        toolbar = (Toolbar) findViewById(R.id.na);
+//        toolbar.setNavigationIcon(R.drawable.ic_menu_camera);
+//        setSupportActionBar(toolbar);
         aToggle.syncState();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        navigationView.setItemIconTintList(null);
 //        recyclerView = (RecyclerView) findViewById(R.id.);
 //        recyclerAdapter = new RecyclerAdapter(getApplicationContext());
         RecyclerView.LayoutManager layoutManager = new GridLayoutManager(this, 2);
-        recyclerView.setLayoutManager(layoutManager);
+//        recyclerView.setLayoutManager(layoutManager);
 //        recyclerView.setAdapter(recyclerAdapter);
+
+//        navigationView.
+//        setttings.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//            }
+//        });
 
     }
     private void setNavigationViewListener() {
@@ -75,18 +87,28 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 
     @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+    public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
-        switch (item.getItemId()) {
+        int id = item.getItemId();
 
-            case R.id.login_button: {
-                //do somthing
-                break;
-            }
+        if (id == R.id.settings_button) {
+            Intent intent = new Intent(this, SetActivity.class);
+            startActivity(intent);
         }
-        //close navigation drawer
-        mDrawerLayout.closeDrawer(GravityCompat.START);
+        if (id == R.id.login_button) {
+            Intent intent = new Intent(this, LoginActivity.class);
+            startActivity(intent);
+        }
+        if (id == R.id.register_button) {
+            Intent intent = new Intent(this, register.register1.class);
+            startActivity(intent);
+        }
+        if (id == R.id.scenerios_button) {
+            Intent intent = new Intent(this, SceneriosListActivity.class);
+            startActivity(intent);
+        }
         return true;
+
     }
 
     @Override
@@ -96,4 +118,5 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
         return super.onOptionsItemSelected(item);
 
-    }}
+    }
+}
