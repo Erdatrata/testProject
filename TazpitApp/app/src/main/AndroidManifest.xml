@@ -1,10 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.tazpitapp">
+    <uses-permission android:name="android.permission.INTERNET" />
 
-    <uses-permission
-        android:name="android.permission.ACCESS_BACKGROUND_LOCATION"
-        android:required="false" />
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -12,24 +10,17 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.TazpitApp">
-        <activity android:name=".register$register1">
-        </activity>
-        <activity android:name=".register$register2"></activity>
-        <activity android:name=".register$register3" /> 
-        <!-- <activity android:name=".SettingActivity"></activity> -->
-        <!-- <activity android:name=".register"></activity> -->
-        <activity android:name=".MainActivity">
+
+        <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".SetActivity">
-
-        </activity>
+        <activity android:name=".register$register1" />
+        <activity android:name=".MainActivity" />
         <activity
-            android:name=".SceneriosListActivity"
+            android:name=".register$register2"
             android:label="@string/title_scenerios_list"
             android:theme="@style/Theme.TazpitApp.NoActionBar" />
         <activity
@@ -38,8 +29,13 @@
             android:parentActivityName=".SceneriosListActivity"
             android:theme="@style/Theme.TazpitApp.NoActionBar">
 
-
         </activity>
-
+        <activity
+            android:name=".register$register3"
+            android:label="@string/app_name"
+            android:theme="@style/Theme.TazpitApp.NoActionBar">
+        </activity>
     </application>
+
 </manifest>
+

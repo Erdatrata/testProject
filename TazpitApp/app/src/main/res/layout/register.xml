@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    tools:context="com.example.tazpitapp.MainActivity">
-    //////new line
+    tools:context=".register$register">
+
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/til_city"
@@ -19,14 +19,14 @@
         app:layout_constraintTop_toTopOf="parent"
         android:layout_marginTop="20dp"
         style ="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu">
-    app: starIconDrawable="@drawable/ic_baseline_ac_unit_24"
-    >
+        app: starIconDrawable="@drawable/ic_baseline_ac_unit_24"
+        >
         <AutoCompleteTextView
             android:id="@+id/act_city"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@null"
-            android:hint="city"
+            android:hint="עיר"
             android:textSize="30sp"
             android:textStyle="bold"
             android:layout_marginTop="20dp"
@@ -41,8 +41,8 @@
         android:layout_marginTop="404dp"
         android:layout_marginBottom="43dp"
         android:ems="10"
+        android:hint="שם פרטי"
         android:inputType="textPersonName"
-        android:text="First Name"
         app:layout_constraintBottom_toTopOf="@+id/PhoneNumber"
         app:layout_constraintEnd_toStartOf="@+id/LastName"
         app:layout_constraintHorizontal_bias="1.0"
@@ -57,8 +57,8 @@
         android:layout_marginTop="404dp"
         android:layout_marginBottom="43dp"
         android:ems="10"
+        android:hint="שם משפחה"
         android:inputType="textPersonName"
-        android:text="Last Name"
         app:layout_constraintBottom_toTopOf="@+id/PhoneNumber"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.785"
@@ -76,7 +76,7 @@
         android:layout_marginBottom="20dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="Email@A"
+        android:hint="איימל"
         app:layout_constraintBottom_toTopOf="@+id/Password"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -129,7 +129,7 @@
         android:layout_marginEnd="104dp"
         android:layout_marginBottom="11dp"
         android:ems="10"
-        android:hint="Password"
+        android:hint="סיסמה"
         android:inputType="textPassword"
         app:layout_constraintBottom_toTopOf="@+id/passwordAgain"
         app:layout_constraintEnd_toEndOf="parent"
@@ -144,9 +144,10 @@
         android:layout_marginTop="1dp"
         android:layout_marginEnd="104dp"
         android:ems="10"
-        android:hint="Password Again"
+        android:hint="אימות סיסמה"
         android:inputType="textPassword"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/Password" />
 
@@ -157,40 +158,41 @@
         android:layout_marginTop="568dp"
         android:layout_marginBottom="118dp"
         android:ems="10"
-        android:hint="Phone Number"
+        android:hint="מס פלאפון"
         android:inputType="number"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/guideline"
         app:layout_constraintTop_toTopOf="parent" />
 
-<!--    <AutoCompleteTextView-->
-<!--        android:id="@+id/actv"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginTop="29dp"-->
-<!--        android:completionHint="Select a country"-->
-<!--        android:completionThreshold="1"-->
-<!--        android:dropDownAnchor="@id/text_view_countries"-->
-<!--        android:hint="Select a city"-->
-<!--        app:layout_constraintBottom_toTopOf="@+id/text_view_countries"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toBottomOf="@+id/passwordAgain" />-->
+    <!--    <AutoCompleteTextView-->
+    <!--        android:id="@+id/actv"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_marginTop="29dp"-->
+    <!--        android:completionHint="Select a country"-->
+    <!--        android:completionThreshold="1"-->
+    <!--        android:dropDownAnchor="@id/text_view_countries"-->
+    <!--        android:hint="Select a city"-->
+    <!--        app:layout_constraintBottom_toTopOf="@+id/text_view_countries"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        app:layout_constraintTop_toBottomOf="@+id/passwordAgain" />-->
 
-<!--    <TextView-->
-<!--        android:id="@+id/text_view_countries"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginBottom="12dp"-->
-<!--        android:paddingBottom="16dp"-->
-<!--        android:text="Citys:"-->
-<!--        android:textSize="20sp"-->
-<!--        app:layout_constraintBottom_toTopOf="@+id/FirstName"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintHorizontal_bias="0.0"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toBottomOf="@+id/actv" />-->
+    <!--    <TextView-->
+    <!--        android:id="@+id/text_view_countries"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_marginBottom="12dp"-->
+    <!--        android:paddingBottom="16dp"-->
+    <!--        android:text="Citys:"-->
+    <!--        android:textSize="20sp"-->
+    <!--        app:layout_constraintBottom_toTopOf="@+id/FirstName"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        app:layout_constraintHorizontal_bias="0.0"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        app:layout_constraintTop_toBottomOf="@+id/actv" />-->
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+
