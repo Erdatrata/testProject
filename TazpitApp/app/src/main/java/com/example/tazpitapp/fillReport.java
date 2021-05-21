@@ -21,6 +21,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -40,6 +41,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 import java.util.UUID;
 
 public class fillReport extends AppCompatActivity {
@@ -50,11 +52,11 @@ public class fillReport extends AppCompatActivity {
     CheckBox credit;
     //ImageView checkUploadImage;
     Bitmap bm;
-    Uri download_url;
-    public static final String TITLE_KEY="title";
-    public static final String DESCRIPTION_KEY="description";
+    String returnUrl;
+    public static final String TITLE_KEY = "title";
+    public static final String DESCRIPTION_KEY = "description";
     private FirebaseStorage storage = FirebaseStorage.getInstance();
-    private DocumentReference mDocRef= FirebaseFirestore.getInstance().document("users reports/"+UUID.randomUUID());
+    private DocumentReference mDocRef = FirebaseFirestore.getInstance().document("users reports/" + UUID.randomUUID());
 
     private static final int SELECT_PHOTO = 1;
 
@@ -81,19 +83,19 @@ public class fillReport extends AppCompatActivity {
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (TextUtils.isEmpty(title.getText()) || TextUtils.isEmpty(description.getText()) || bm==null)
+                if (TextUtils.isEmpty(title.getText()) || TextUtils.isEmpty(description.getText()) || bm == null)
                     Toast.makeText(getApplicationContext(), "כל השדות הינם חובה", Toast.LENGTH_LONG).show();
                 else {
                     String getTitle = title.getText().toString();
                     String getDescription = description.getText().toString();
-//                    if (itemClicked(credit) == true)
-//                        Toast.makeText(getApplicationContext(), "title: " + getTitle + "\n desc: " + getDescription + "\n chekbox chosen ", Toast.LENGTH_SHORT).show();
-//                    else
-//                        Toast.makeText(getApplicationContext(), "title: " + getTitle + "\n desc: " + getDescription + "\n chekbox not chosen ", Toast.LENGTH_SHORT).show();
-                        //uploading title and description to firestore firebase============
-                    Map<String,Object> dataToSave=new HashMap<String,Object>();
-                    dataToSave.put(TITLE_KEY,getTitle);
-                    dataToSave.put(DESCRIPTION_KEY,getDescription);
+                    Map<String, Object> dataToSave = new HashMap<String, Object>();
+                    if (itemClicked(credit) == true)
+                        dataToSave.put("credit", true);
+                    else
+                        dataToSave.put("credit", false);
+                    dataToSave.put("media url", returnUrl);
+                    dataToSave.put(DESCRIPTION_KEY, getDescription);
+                    dataToSave.put(TITLE_KEY, getTitle);
                     //dataToSave.put("ImageUrl", "https://firebasestorage.googleapis.com/v0/b/tazpit-testingandprototype.appspot.com/o/firememes%2F%D7%A0%D7%99%D7%A1%D7%95%D7%99%20%D7%A0%D7%99%D7%A1%D7%95%D7%99%2F25d8f449-70ba-448d-a56d-d59128b2ab38.png?alt=media&token=827aa828-cb4c-49a5-b3b3-f5d1c2e2c1fa");
                     mDocRef.set(dataToSave).addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
@@ -110,17 +112,24 @@ public class fillReport extends AppCompatActivity {
                     //==============================================================
 
                     //uploading the image to storage firebase===========================
-                    ByteArrayOutputStream outputStream=new ByteArrayOutputStream();
+                    ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
                     bm.compress(Bitmap.CompressFormat.PNG, 100, outputStream);
-                    byte [] data=outputStream.toByteArray();
-                    String path = "firememes/" + "ניסוי ניסוי" +"/"+UUID.randomUUID()+ ".png";
+                    byte[] data = outputStream.toByteArray();
+                    String path = "firememes/" + "ניסוי ניסוי" + "/" + UUID.randomUUID() + ".png";
                     StorageReference firememeRef = storage.getReference(path);
-                    StorageMetadata metadata=new StorageMetadata.Builder().setCustomMetadata("caption", "the photo").build();
-                    UploadTask uploadTask=firememeRef.putBytes(data, metadata);
-
-                    //if(uploadTask.isSuccessful())
+                    StorageMetadata metadata = new StorageMetadata.Builder().setCustomMetadata("caption", "the photo").build();
+                    UploadTask uploadTask = firememeRef.putBytes(data, metadata);
+                    // if(uploadTask.isSuccessful())
                     Toast.makeText(getApplicationContext(), "image upload succeed ", Toast.LENGTH_LONG).show();
 
+                    uploadTask.addOnCompleteListener(fillReport.this, new OnCompleteListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull @NotNull Task<UploadTask.TaskSnapshot> task) {
+                            Log.i("MA", "upload task completed");
+                        }
+                    });
+
+                    MediaDownloadUral(uploadTask, firememeRef);
 
 
                     //==========================================
@@ -162,6 +171,31 @@ public class fillReport extends AppCompatActivity {
             indc = true;
         }
         return indc;
+    }
+
+    public void MediaDownloadUral(UploadTask uploadTask,StorageReference firememeRef) {
+        Task<Uri> getDownloadUriTask = uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
+       @Override
+          public Task<Uri> then(@NonNull @NotNull Task<UploadTask.TaskSnapshot> task) throws Exception {
+          if (!task.isSuccessful()) {
+             throw task.getException();
+               }
+                return firememeRef.getDownloadUrl();
+                      }
+                    }
+        );
+        getDownloadUriTask.addOnCompleteListener(fillReport.this, new OnCompleteListener<Uri>() {
+            @Override
+            public void onComplete(@NonNull @NotNull Task<Uri> task) {
+                if (task.isSuccessful()) {
+                    Uri downloadUri = task.getResult();
+                    returnUrl=downloadUri.toString();
+                    Log.d("downloaduri", returnUrl);
+
+                }
+            }
+        });
+
     }
 
 }
