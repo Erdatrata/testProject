@@ -3,12 +3,15 @@ package com.example.tazpitapp;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import android.Manifest;
+import android.app.ActivityManager;
 import android.app.AlertDialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Build;
@@ -30,6 +33,7 @@ import java.util.Locale;
 public class SetActivity extends AppCompatActivity {
     //----------global variables--------------------------
     //the radio buttons for choosing between gps or city
+    private static final int REQUEST_CODE_LOCATION_PERMISSION=1;
     private RadioGroup locationRadioGroup;
     private RadioButton gpsButton;
     private RadioButton cityButton;
@@ -196,12 +200,15 @@ public class SetActivity extends AppCompatActivity {
     }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull @NotNull String[] permissions, @NonNull @NotNull int[] grantResults) {
+    public void onRequestPermissionsResult(int requestCode, @NonNull @NotNull String[] permissions, @NonNull @NotNull int[] grantResults)
+    {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if(requestCode == 105){//if checking for gps permission
             if(grantResults[0]==PackageManager.PERMISSION_GRANTED){
                 Toast.makeText(this, "ההרשאה התקבלה",
                         Toast.LENGTH_SHORT).show();
+                if(!RequestPermissionCall())
+                    startLocationService();
                 editor.putString("location_temp","GPS");
             } else {
                 Toast.makeText(this, "ההרשאה נדחתה, אנא אשרו אותה במידה ותרצו להשתמש בתכונה",
@@ -209,10 +216,19 @@ public class SetActivity extends AppCompatActivity {
                 editor.putString("location_temp","city");
                 cityButton.setChecked(true);
                 gpsButton.setChecked(false);
+                stopLocationService();
             }
 
         }
         editor.commit();
+        if(requestCode== REQUEST_CODE_LOCATION_PERMISSION && grantResults.length>0){
+            if(grantResults[0]==PackageManager.PERMISSION_GRANTED){
+                startLocationService();
+            }
+            else{
+                Toast.makeText(this, "Permission denied!", Toast.LENGTH_SHORT).show();
+            }
+        }
     }
 
     private void locationSettingChecker(RadioGroup group, int checkedId) {
@@ -224,6 +240,7 @@ public class SetActivity extends AppCompatActivity {
         String toString = "לפי מיקום GPS";
         if (checkedButton.getId() != gpsButton.getId()) {
             toString = "לפי עיר";
+            stopLocationService();
         } else {
             //open dialogue requesting user authorization to use gps location
             if(getApplicationContext().checkSelfPermission(Manifest.permission.ACCESS_BACKGROUND_LOCATION)
@@ -244,6 +261,8 @@ public class SetActivity extends AppCompatActivity {
                                         == PackageManager.PERMISSION_GRANTED){
                                     Toast.makeText(SetActivity.this, "שימוש במיקום אושר",
                                             Toast.LENGTH_SHORT).show();
+                                    if(!RequestPermissionCall())
+                                        startLocationService();
                                 } else {
                                     requestPermissions(new String[]
                                         {Manifest.permission.ACCESS_BACKGROUND_LOCATION},105);
@@ -266,6 +285,10 @@ public class SetActivity extends AppCompatActivity {
             }).setCancelable(false)
                     .create()
                     .show();
+        }
+        else {
+            if(!RequestPermissionCall())
+                startLocationService();
         }}
         Toast.makeText(SetActivity.this,"בדיקת מיקום: "+ toString, Toast.LENGTH_SHORT).show();
         editor.commit();
@@ -419,6 +442,56 @@ public class SetActivity extends AppCompatActivity {
         //make sure to call the background service and tell them of a change of hours
 
         //send data to server
+    }
+
+    private boolean RequestPermissionCall(){//true if needed false if permmison alridy given
+        if(ContextCompat.checkSelfPermission(
+                getApplicationContext(), Manifest.permission.ACCESS_FINE_LOCATION
+        )!= PackageManager.PERMISSION_GRANTED){
+            ActivityCompat.requestPermissions(
+                    this,
+                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                    REQUEST_CODE_LOCATION_PERMISSION
+            );
+            return true;
+        }
+        return false;
+    }
+
+
+    private boolean isLocationServiceRunning(){
+        ActivityManager activityManager=
+                (ActivityManager)getSystemService(Context.ACTIVITY_SERVICE);
+        if(activityManager!=null){
+            for(ActivityManager.RunningServiceInfo service:
+                    activityManager.getRunningServices(Integer.MAX_VALUE)){
+                if(backgroundService.class.getName().equals(service.service.getClassName())){
+                    if(service.foreground){
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+        return false;
+    }
+
+    private  void startLocationService(){
+        System.out.println("SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS");
+        if(!isLocationServiceRunning()){
+            Intent intent =new Intent(getApplicationContext(),backgroundService.class);
+            intent.setAction(constants.ACTION_START_LOCATION_SERVICE);
+            startService(intent);
+            Toast.makeText(this,"Location service started",Toast.LENGTH_SHORT).show();
+        }
+    }
+    private void stopLocationService(){
+        if(isLocationServiceRunning()){
+            Intent intent =new Intent(getApplicationContext(),backgroundService.class);
+            intent.setAction(constants.ACTION_STOP_LOCATION_SERVICE);
+            startService(intent);
+            Toast.makeText(this,"Location service stopped",Toast.LENGTH_SHORT).show();
+        }
     }
 
 }
