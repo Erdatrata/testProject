@@ -91,18 +91,18 @@ public class LoginActivity extends AppCompatActivity {
                     return;
                 }
                 progressBar.setVisibility(View.VISIBLE);//show the progressbar
-                FAuth.signInWithEmailAndPassword(emailInput,passwordnput).addOnCompleteListener(new OnCompleteListener<AuthResult>() {//if the user exists
+                FAuth.signInWithEmailAndPassword(emailInput,passwordnput).addOnCompleteListener(new
+                                            OnCompleteListener<AuthResult>() {//if the user exists
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful()){//if response success than do
-                            Toast.makeText(LoginActivity.this, "Logged in Successfully", Toast.LENGTH_SHORT).show();
-                            //FirebaseUser user = FAuth.getCurrentUser();
-                            // Toast.makeText(LoginActivity.this, "userid"+user.getUid(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(LoginActivity.this, "ההתחבור הצליחה",
+                                    Toast.LENGTH_SHORT).show();
 
-                            // updateUI(user);
                             startActivity(new Intent(getApplicationContext(),MainActivity.class));
                         }else {//if the response is filed
-                            Toast.makeText(LoginActivity.this, "Error ! " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(LoginActivity.this, "שגיאה: " +
+                                    task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                             progressBar.setVisibility(View.GONE);
                         }
                     }
@@ -135,12 +135,14 @@ public class LoginActivity extends AppCompatActivity {
                         FAuth.sendPasswordResetEmail(mail).addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void aVoid) {
-                                Toast.makeText(LoginActivity.this, "Reset Link Sent To Your Email.", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(LoginActivity.this, "Reset Link Sent To Your Email.",
+                                        Toast.LENGTH_SHORT).show();
                             }
                         }).addOnFailureListener(new OnFailureListener() {
                             @Override
                             public void onFailure(@NonNull Exception e) {
-                                Toast.makeText(LoginActivity.this, "Error ! Reset Link is Not Sent" + e.getMessage(), Toast.LENGTH_SHORT).show();
+                                Toast.makeText(LoginActivity.this, "Error ! Reset Link is Not Sent" +
+                                        e.getMessage(), Toast.LENGTH_SHORT).show();
                             }
                         });
 
