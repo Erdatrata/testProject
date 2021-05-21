@@ -24,7 +24,7 @@
             android:title="התחברות" />
         <item
             android:id="@+id/register_button"
-            android:icon="@android:drawable/ic_dialog_email"
+            android:icon="@drawable/ic_baseline_wc_24"
             android:title="הרשמה" />
     </group>
     <group android:checkableBehavior="single">
