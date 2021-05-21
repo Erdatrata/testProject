@@ -107,6 +107,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             Intent intent = new Intent(this, SceneriosListActivity.class);
             startActivity(intent);
         }
+        if (id == R.id.about_button) {
+            Intent intent = new Intent(this, AboutActivity.class);
+            startActivity(intent);
+        }
         return true;
 
     }
