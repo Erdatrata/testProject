@@ -36,18 +36,20 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public static final String SHARED_PREFS = "sharedPrefs";
 
 
-//    private boolean logged;
     private DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle aToggle;
     private Toolbar toolbar;
     private RecyclerView recyclerView;
-//    private RecyclerAdapter recyclerAdapter;
     private RecyclerView.Adapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        setNavigationViewListener();
+        try
+        {
+            this.getSupportActionBar().hide();
+        }
+        catch (NullPointerException e){}
         setContentView(R.layout.activity_main);
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
 
@@ -58,25 +60,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             mNavigationView.setNavigationItemSelectedListener(this);
         }
         mDrawerLayout.addDrawerListener(aToggle);
-//        toolbar = (Toolbar) findViewById(R.id.na);
-//        toolbar.setNavigationIcon(R.drawable.ic_menu_camera);
-//        setSupportActionBar(toolbar);
         aToggle.syncState();
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-//        recyclerView = (RecyclerView) findViewById(R.id.);
-//        recyclerAdapter = new RecyclerAdapter(getApplicationContext());
+        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
         RecyclerView.LayoutManager layoutManager = new GridLayoutManager(this, 2);
-//        recyclerView.setLayoutManager(layoutManager);
-//        recyclerView.setAdapter(recyclerAdapter);
 
-//        navigationView.
-//        setttings.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//            }
-//        });
-//        logged=getLogged();
         if(FirebaseAuth.getInstance().getCurrentUser() != null){
             mNavigationView.getMenu().setGroupVisible(R.id.logged_user_menu,true);
             mNavigationView.getMenu().setGroupVisible(R.id.unlogged_user_menu,false);
@@ -87,17 +74,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         }
     }
-    private void setNavigationViewListener() {
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull @NotNull MenuItem item) {
-                Toast.makeText(MainActivity.this, ""+item, Toast.LENGTH_SHORT).show();
-                return false;
-            }
-        });
-    }
-
 
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
@@ -140,14 +116,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         return super.onOptionsItemSelected(item);
 
     }
-        public void setLogged(boolean logged){
-            SharedPreferences sharedPreferences = getSharedPreferences("sharedPrefs", MODE_PRIVATE);
-            SharedPreferences.Editor editor = sharedPreferences.edit();
-            editor.putBoolean("logged", logged);
-            editor.apply();
 
-        }
-        public boolean getLogged(){
+    public void setLogged(boolean logged){
+        SharedPreferences sharedPreferences = getSharedPreferences("sharedPrefs", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putBoolean("logged", logged);
+        editor.apply();
+
+    }
+    public boolean getLogged(){
         SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
         System.out.println(sharedPreferences.getBoolean("logged",false));
         return sharedPreferences.getBoolean("logged",false);
