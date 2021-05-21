@@ -29,10 +29,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
+import android.content.SharedPreferences;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+    public static final String SHARED_PREFS = "sharedPrefs";
 
+
+    private boolean logged;
     private DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle aToggle;
     private Toolbar toolbar;
@@ -72,7 +75,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 //
 //            }
 //        });
+        logged=getLogged();
+        if(logged){
+            mNavigationView.getMenu().setGroupVisible(R.id.logged_user_menu,true);
+            mNavigationView.getMenu().setGroupVisible(R.id.unlogged_user_menu,false);
+        }
+        else{
+            mNavigationView.getMenu().setGroupVisible(R.id.logged_user_menu,false);
+            mNavigationView.getMenu().setGroupVisible(R.id.unlogged_user_menu,true);
 
+        }
     }
     private void setNavigationViewListener() {
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
@@ -96,8 +108,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             startActivity(intent);
         }
         if (id == R.id.login_button) {
-            Intent intent = new Intent(this, LoginActivity.class);
-            startActivity(intent);
+            setLogged(true);
+            this.recreate();
         }
         if (id == R.id.register_button) {
             Intent intent = new Intent(this, register.register1.class);
@@ -111,6 +123,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             Intent intent = new Intent(this, AboutActivity.class);
             startActivity(intent);
         }
+        if (id == R.id.logout_button) {
+            setLogged(false);
+            this.recreate();
+
+        }
         return true;
 
     }
@@ -122,5 +139,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
         return super.onOptionsItemSelected(item);
 
+    }
+        public void setLogged(boolean logged){
+            SharedPreferences sharedPreferences = getSharedPreferences("sharedPrefs", MODE_PRIVATE);
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putBoolean("logged", logged);
+            editor.apply();
+
+        }
+        public boolean getLogged(){
+        SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
+        System.out.println(sharedPreferences.getBoolean("logged",false));
+        return sharedPreferences.getBoolean("logged",false);
     }
 }
