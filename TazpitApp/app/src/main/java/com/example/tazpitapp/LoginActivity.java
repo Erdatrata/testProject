@@ -42,14 +42,19 @@ public class LoginActivity extends AppCompatActivity {
                     "(?=.*[0-9])" +
                     "(?=.*[a-z])" +
                     "(?=.*[A-Z])" +
-                    "(?=.*[@#$%^&+=])" +
+                    "(?=.*[!@#$%^&+=])" +
                     "(?=\\S+$)" +
                     ".{7,}" +
                     "$");
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if(FirebaseAuth.getInstance().getCurrentUser() != null){
+            Toast.makeText(this, "אתם כבר מחוברים!", Toast.LENGTH_SHORT).show();
+            finish();
+        }
         setContentView(R.layout.activity_login);
+
 
         EmailAddressInputLogin = (EditText) findViewById(R.id.EmailAddressInputLogin);
         PasswordInputLogin = (EditText) findViewById(R.id.PasswordInputLogin);

@@ -15,6 +15,7 @@ import android.widget.Toast;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.auth.FirebaseAuth;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -35,7 +36,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public static final String SHARED_PREFS = "sharedPrefs";
 
 
-    private boolean logged;
+//    private boolean logged;
     private DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle aToggle;
     private Toolbar toolbar;
@@ -75,8 +76,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 //
 //            }
 //        });
-        logged=getLogged();
-        if(logged){
+//        logged=getLogged();
+        if(FirebaseAuth.getInstance().getCurrentUser() != null){
             mNavigationView.getMenu().setGroupVisible(R.id.logged_user_menu,true);
             mNavigationView.getMenu().setGroupVisible(R.id.unlogged_user_menu,false);
         }
@@ -108,8 +109,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             startActivity(intent);
         }
         if (id == R.id.login_button) {
-            setLogged(true);
-            this.recreate();
+            Intent intent = new Intent(this, LoginActivity.class);
+            startActivity(intent);
         }
         if (id == R.id.register_button) {
             Intent intent = new Intent(this, register.register1.class);
@@ -124,9 +125,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             startActivity(intent);
         }
         if (id == R.id.logout_button) {
-            setLogged(false);
+            FirebaseAuth.getInstance().signOut();
             this.recreate();
-
         }
         return true;
 
