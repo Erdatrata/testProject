@@ -21,6 +21,8 @@ public class  SceneriosDetailActivity extends AppCompatActivity implements View.
         user = FirebaseAuth.getInstance().getCurrentUser();
         button_sign_event = (Button)findViewById(R.id.buttonScenario);
         button_sign_event.setOnClickListener(this);
+        System.out.println(getIntent().getStringExtra("item_id"));
+        System.out.println(getIntent().getStringExtra("item_content"));
     }
     @Override
     public void onClick(View v) {
@@ -35,4 +37,5 @@ public class  SceneriosDetailActivity extends AppCompatActivity implements View.
                break;
         }
     }
+
 }

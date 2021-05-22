@@ -95,6 +95,7 @@ public class SceneriosListActivity extends AppCompatActivity {
                     Context context = view.getContext();
                     Intent intent = new Intent(context, SceneriosDetailActivity.class);
                     intent.putExtra(SceneriosDetailFragment.ARG_ITEM_ID, item.id);
+                    intent.putExtra(SceneriosDetailFragment.ARG_ITEM_CONTENT, item.content);
 
                     context.startActivity(intent);
                 }
@@ -160,5 +161,7 @@ public class SceneriosListActivity extends AppCompatActivity {
     //            } catch (Exception e) {
     //                tv_address.setText("Unale to get address");
     //            }
+
+
 
 }

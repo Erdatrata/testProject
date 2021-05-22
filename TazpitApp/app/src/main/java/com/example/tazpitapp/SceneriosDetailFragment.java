@@ -26,6 +26,7 @@ public class SceneriosDetailFragment extends Fragment {
      * represents.
      */
     public static final String ARG_ITEM_ID = "item_id";
+    public static final String ARG_ITEM_CONTENT = "item_content";
 
     /**
      * The dummy content this fragment is presenting.
@@ -69,4 +70,5 @@ public class SceneriosDetailFragment extends Fragment {
 
         return rootView;
     }
+
 }
