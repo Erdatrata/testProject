@@ -55,7 +55,7 @@ public class DummyContent {
                     int i=0;
                     for (QueryDocumentSnapshot document : task.getResult()) {
                         list.add(document.getId());
-                        addItem(createDummyItem(i,list.get(i)),(GeoPoint)document.getData().get("מיקום"));
+                        addItem(createDummyItem(i,list.get(i)));
                         i++;
                     }
                     Log.d("document=", list.toString());
@@ -69,10 +69,9 @@ public class DummyContent {
 
     }
 
-    private static void addItem(DummyItem item,GeoPoint gpsLocation) {
+    private static void addItem(DummyItem item) {
         ITEMS.add(item);
-        cal gp=new cal();
-        System.out.println(item.content+"-"+gp.Range(gpsLocation));
+        System.out.println(item.content);
         System.out.println(item.id);
         System.out.println(item.details);
 

@@ -23,6 +23,15 @@ import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.GeoPoint;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -42,11 +51,80 @@ public class backgroundService extends Service {
                 editor.putString(constants.latOfGps, String.valueOf(latitude));
                 editor.putString(constants.longOfGps, String.valueOf(longitude));
                 editor.apply();
+                try {
+                    Thread.sleep(10*1000);
+                    AlertIfInRange();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
 
             }
         }
 
+        private void AlertIfInRange() {
+            System.out.println("Tset");
+            FirebaseFirestore.getInstance() .collection("Scenarios").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                    System.out.println("Tset2");
+                    if (task.isSuccessful()) {
+                        for (QueryDocumentSnapshot document : task.getResult()) {
+                            System.out.println("Tset3");
+                            System.out.println(document.getId());
+                            DocumentReference mDocRef= FirebaseFirestore.getInstance().document("Scenarios/"+document.getId());
+                            mDocRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                                @Override
+                                public void onSuccess(DocumentSnapshot documentSnapshot) {
+                                    System.out.println("Tset4");
+                                    double Range=Double.parseDouble(Range((GeoPoint)documentSnapshot.getData().get("מיקום")));
+                                    if(Range<10){
+                                        System.out.println(document.getId()+" IS in range of "+Range);
+                                    }
+
+                                }
+                            });
+                        }
+
+                    }
+                }
+            });
+
+        }
+
     };
+    public  boolean getStateOfGps(){//return true or false if the gps is working
+        SharedPreferences sharedPreferences = getSharedPreferences(constants.SHARED_PREFS, MODE_PRIVATE);
+        return sharedPreferences.getBoolean(constants.gpsState,false);
+    }
+    public  String getlatOfGps(){//get latitude of gps
+        SharedPreferences sharedPreferences = getSharedPreferences(constants.SHARED_PREFS, MODE_PRIVATE);
+        return sharedPreferences.getString(constants.latOfGps,"");
+    }
+    public  String getlongOfGps(){//get longtitude of gps
+        SharedPreferences sharedPreferences = getSharedPreferences(constants.SHARED_PREFS, MODE_PRIVATE);
+        return sharedPreferences.getString(constants.longOfGps,"");
+    }
+    //       try {//must be try and catch,  lat and long for the array in size of 1 , then get into tv_address the address
+    //                List<Address> addresses = geocoder.getFromLocation(location.getLatitude(), location.getLongitude(), 1);
+    //                tv_addressInString=addresses.get(0).getAddressLine(0);
+    //                tv_address.setText(tv_addressInString);
+    //            } catch (Exception e) {
+    //                tv_address.setText("Unale to get address");
+    //            }
+    public  String Range(GeoPoint gpsLocation) {
+        String re="";
+        if(getStateOfGps()){
+            double latCurrent=Double.parseDouble(getlatOfGps());
+            double lonCurrent=Double.parseDouble(getlongOfGps());
+            double latScenerio=gpsLocation.getLatitude();
+            double lonScenerio=gpsLocation.getLongitude();
+
+            double result=Math.pow(Math.pow((111*(latCurrent-latScenerio)),2.0)+Math.pow((111*(lonCurrent-lonScenerio)),2.0),0.5);
+            return String.valueOf(result);
+
+        }
+        return re;
+    }
 
     @Nullable
     @Override
