@@ -34,8 +34,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="de1d0e9e-3953-470a-afa4-3dcf848e88ac" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/../testing/app/src/main/java/com/example/testing/PhoneAuthActivity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/tazpitapp/SceneriosListActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/tazpitapp/SceneriosListActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../testing/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../testing/app/src/main/AndroidManifest.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

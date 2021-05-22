@@ -15,12 +15,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Testing">
-        <activity android:name=".gpsNew">
+        <activity android:name=".PhoneAuthActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity android:name=".gpsNew">
+
         </activity>
         <activity android:name=".gps">
 
