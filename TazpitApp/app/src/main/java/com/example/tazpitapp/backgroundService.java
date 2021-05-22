@@ -35,7 +35,7 @@ public class backgroundService extends Service {
                 double latitude = locationResult.getLastLocation().getLatitude();
                 double longitude = locationResult.getLastLocation().getLongitude();
                 Log.d("Location_Update", latitude + "," + longitude);
-
+                //call funcation here to compare with new scenerios if the distance is right and call the user if  true
             }
         }
 

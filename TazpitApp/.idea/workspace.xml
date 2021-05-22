@@ -35,24 +35,7 @@
   <component name="ChangeListManager">
     <list default="true" id="de1d0e9e-3953-470a-afa4-3dcf848e88ac" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/compile_and_runtime_not_namespaced_r_class_jar/debug/R.jar" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/compile_and_runtime_not_namespaced_r_class_jar/debug/R.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/project_dex_archive/debug/out/com/example/tazpitapp/LoginActivity.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/project_dex_archive/debug/out/com/example/tazpitapp/LoginActivity.dex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/project_dex_archive/debug/out/com/example/tazpitapp/MainActivity.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/project_dex_archive/debug/out/com/example/tazpitapp/MainActivity.dex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/project_dex_archive/debug/out/com/example/tazpitapp/SceneriosDetailActivity.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/project_dex_archive/debug/out/com/example/tazpitapp/SceneriosDetailActivity.dex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/project_dex_archive/debug/out/com/example/tazpitapp/SceneriosDetailFragment.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/project_dex_archive/debug/out/com/example/tazpitapp/SceneriosDetailFragment.dex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/project_dex_archive/debug/out/com/example/tazpitapp/SceneriosListActivity$SimpleItemRecyclerViewAdapter$1.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/project_dex_archive/debug/out/com/example/tazpitapp/SceneriosListActivity$SimpleItemRecyclerViewAdapter$1.dex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/project_dex_archive/debug/out/com/example/tazpitapp/SceneriosListActivity$SimpleItemRecyclerViewAdapter$ViewHolder.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/project_dex_archive/debug/out/com/example/tazpitapp/SceneriosListActivity$SimpleItemRecyclerViewAdapter$ViewHolder.dex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/project_dex_archive/debug/out/com/example/tazpitapp/SceneriosListActivity$SimpleItemRecyclerViewAdapter.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/project_dex_archive/debug/out/com/example/tazpitapp/SceneriosListActivity$SimpleItemRecyclerViewAdapter.dex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/project_dex_archive/debug/out/com/example/tazpitapp/SceneriosListActivity.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/project_dex_archive/debug/out/com/example/tazpitapp/SceneriosListActivity.dex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/project_dex_archive/debug/out/com/example/tazpitapp/SettingActivity.dex" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/project_dex_archive/debug/out/com/example/tazpitapp/fillReport.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/project_dex_archive/debug/out/com/example/tazpitapp/fillReport.dex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/project_dex_archive/debug/out/com/example/tazpitapp/ui/gallery/GalleryFragment.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/project_dex_archive/debug/out/com/example/tazpitapp/ui/gallery/GalleryFragment.dex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/project_dex_archive/debug/out/com/example/tazpitapp/ui/home/HomeFragment.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/project_dex_archive/debug/out/com/example/tazpitapp/ui/home/HomeFragment.dex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/project_dex_archive/debug/out/com/example/tazpitapp/ui/slideshow/SlideshowFragment.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/project_dex_archive/debug/out/com/example/tazpitapp/ui/slideshow/SlideshowFragment.dex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/tazpitapp/SetActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/tazpitapp/SetActivity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/tazpitapp/backgroundService.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/tazpitapp/backgroundService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/local.properties" beforeDir="false" afterPath="$PROJECT_DIR$/local.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -434,31 +417,31 @@
     <state x="580" y="77" key="FileChooserDialogImpl/0.0.1280.680@0.0.1280.680" timestamp="1621169753827" />
     <state x="488" y="148" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1619269078741" />
     <state x="696" y="93" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1621606142938" />
-    <state width="1818" height="110" key="GridCell.Tab.0.bottom" timestamp="1621640774797">
+    <state width="2517" height="486" key="GridCell.Tab.0.bottom" timestamp="1621642231494">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state width="1818" height="110" key="GridCell.Tab.0.bottom/-2880.812.1920.1040/0.0.2560.1400@0.0.2560.1400" timestamp="1621640774797" />
+    <state width="2517" height="486" key="GridCell.Tab.0.bottom/-2880.812.1920.1040/0.0.2560.1400@0.0.2560.1400" timestamp="1621642231494" />
     <state width="1220" height="82" key="GridCell.Tab.0.bottom/0.0.1280.680@0.0.1280.680" timestamp="1621167603989" />
     <state width="1306" height="176" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1619271223769" />
     <state width="1493" height="624" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1621626630119" />
-    <state width="1818" height="110" key="GridCell.Tab.0.center" timestamp="1621640774797">
+    <state width="2517" height="486" key="GridCell.Tab.0.center" timestamp="1621642231494">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state width="1818" height="110" key="GridCell.Tab.0.center/-2880.812.1920.1040/0.0.2560.1400@0.0.2560.1400" timestamp="1621640774797" />
+    <state width="2517" height="486" key="GridCell.Tab.0.center/-2880.812.1920.1040/0.0.2560.1400@0.0.2560.1400" timestamp="1621642231494" />
     <state width="1220" height="82" key="GridCell.Tab.0.center/0.0.1280.680@0.0.1280.680" timestamp="1621167603989" />
     <state width="1306" height="176" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1619271223769" />
     <state width="1493" height="624" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1621626630119" />
-    <state width="1818" height="110" key="GridCell.Tab.0.left" timestamp="1621640774797">
+    <state width="2517" height="486" key="GridCell.Tab.0.left" timestamp="1621642231493">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state width="1818" height="110" key="GridCell.Tab.0.left/-2880.812.1920.1040/0.0.2560.1400@0.0.2560.1400" timestamp="1621640774797" />
+    <state width="2517" height="486" key="GridCell.Tab.0.left/-2880.812.1920.1040/0.0.2560.1400@0.0.2560.1400" timestamp="1621642231493" />
     <state width="1220" height="82" key="GridCell.Tab.0.left/0.0.1280.680@0.0.1280.680" timestamp="1621167603989" />
     <state width="1306" height="176" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1619271223769" />
     <state width="1493" height="624" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1621626630118" />
-    <state width="1818" height="110" key="GridCell.Tab.0.right" timestamp="1621640774797">
+    <state width="2517" height="486" key="GridCell.Tab.0.right" timestamp="1621642231494">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state width="1818" height="110" key="GridCell.Tab.0.right/-2880.812.1920.1040/0.0.2560.1400@0.0.2560.1400" timestamp="1621640774797" />
+    <state width="2517" height="486" key="GridCell.Tab.0.right/-2880.812.1920.1040/0.0.2560.1400@0.0.2560.1400" timestamp="1621642231494" />
     <state width="1220" height="82" key="GridCell.Tab.0.right/0.0.1280.680@0.0.1280.680" timestamp="1621167603989" />
     <state width="1306" height="176" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1619271223769" />
     <state width="1493" height="624" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1621626630119" />
