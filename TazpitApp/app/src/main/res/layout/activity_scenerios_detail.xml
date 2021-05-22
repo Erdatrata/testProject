@@ -8,29 +8,11 @@
     tools:context=".SceneriosDetailActivity"
     tools:ignore="MergeRootFrame">
 
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="117dp"
-        android:layout_height="42dp"
-        android:layout_marginLeft="250dp"
-        android:layout_marginTop="230dp"
-        android:text="סוג האירוע:"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
-    <TextView
-        android:id="@+id/textView4"
-        android:layout_width="150dp"
-        android:layout_height="30dp"
-        android:layout_marginTop="260dp"
-        android:layout_marginLeft="210dp"
-        android:text="עיר:"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/cityGetScenario"
-        android:layout_width="150dp"
+        android:layout_width="190dp"
         android:layout_height="30dp"
         android:layout_marginTop="260dp"
         android:layout_marginLeft="180dp"
@@ -39,6 +21,7 @@
         app:layout_constraintTop_toTopOf="@+id/textView4" />
 
     <TextView
+        android:id="@+id/eventType"
         android:layout_width="117dp"
         android:layout_height="42dp"
         android:layout_marginLeft="250dp"
@@ -66,19 +49,6 @@
         android:text="צא לאירוע"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/scenarioDesc" />
-
-    <EditText
-        android:id="@+id/scenarioDesc"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="100dp"
-        android:layout_marginTop="400dp"
-        android:ems="10"
-        android:gravity="start|top"
-        android:importantForAutofill="no"
-        android:inputType="textMultiLine"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/app_bar"

@@ -71,7 +71,9 @@ public class fillReport extends AppCompatActivity {
         pickMedia = (ImageButton) findViewById(R.id.fill_report_upload_button);
         credit = (CheckBox) findViewById(R.id.fill_report_add_credit);
         mAuth = FirebaseAuth.getInstance();
-        mDocRef = FirebaseFirestore.getInstance().document("users reports/" + mAuth.getCurrentUser().getEmail());
+        String scenarioPressed = getIntent().getStringExtra("pressed scenario");
+        //Log.d("preesed scnario", scenarioPressed);
+        mDocRef = FirebaseFirestore.getInstance().document("Scenarios/" + scenarioPressed+"/"+mAuth.getCurrentUser().getEmail()+"/"+mAuth.getCurrentUser().getEmail()+" report:");
 
         pickMedia.setOnClickListener(new View.OnClickListener() {
             @Override
