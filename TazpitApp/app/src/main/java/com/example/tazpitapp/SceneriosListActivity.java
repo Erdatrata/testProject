@@ -2,6 +2,7 @@ package com.example.tazpitapp;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -140,4 +141,17 @@ public class SceneriosListActivity extends AppCompatActivity {
             }
         }
     }
+    public boolean getStateOfGps(){//return true or false if the gps is working
+        SharedPreferences sharedPreferences = getSharedPreferences(constants.SHARED_PREFS, MODE_PRIVATE);
+        return sharedPreferences.getBoolean(constants.gpsState,false);
+    }
+    public String getlatOfGps(){//get latitude of gps
+        SharedPreferences sharedPreferences = getSharedPreferences(constants.SHARED_PREFS, MODE_PRIVATE);
+        return sharedPreferences.getString(constants.latOfGps,"");
+    }
+    public String getlongOfGps(){//get longtitude of gps
+        SharedPreferences sharedPreferences = getSharedPreferences(constants.SHARED_PREFS, MODE_PRIVATE);
+        return sharedPreferences.getString(constants.longOfGps,"");
+    }
+
 }

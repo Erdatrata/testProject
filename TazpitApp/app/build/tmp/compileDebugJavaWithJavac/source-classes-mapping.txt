@@ -42,6 +42,32 @@ com/example/tazpitapp/SceneriosListActivity.java
  com.example.tazpitapp.SceneriosListActivity$SimpleItemRecyclerViewAdapter
  com.example.tazpitapp.SceneriosListActivity$SimpleItemRecyclerViewAdapter$1
  com.example.tazpitapp.SceneriosListActivity$SimpleItemRecyclerViewAdapter$ViewHolder
+com/example/tazpitapp/backgroundService.java
+ com.example.tazpitapp.backgroundService
+ com.example.tazpitapp.backgroundService$1
+com/example/tazpitapp/BuildConfig.java
+ com.example.tazpitapp.BuildConfig
+com/example/tazpitapp/SetActivity.java
+ com.example.tazpitapp.SetActivity
+ com.example.tazpitapp.SetActivity$1
+ com.example.tazpitapp.SetActivity$2
+ com.example.tazpitapp.SetActivity$3
+ com.example.tazpitapp.SetActivity$4
+ com.example.tazpitapp.SetActivity$5
+ com.example.tazpitapp.SetActivity$6
+ com.example.tazpitapp.SetActivity$7
+ com.example.tazpitapp.SetActivity$8
+com/example/tazpitapp/fillReport.java
+ com.example.tazpitapp.fillReport
+ com.example.tazpitapp.fillReport$1
+ com.example.tazpitapp.fillReport$2
+ com.example.tazpitapp.fillReport$2$1
+ com.example.tazpitapp.fillReport$3
+ com.example.tazpitapp.fillReport$4
+ com.example.tazpitapp.fillReport$4$1
+ com.example.tazpitapp.fillReport$4$2
+com/example/tazpitapp/MainActivity.java
+ com.example.tazpitapp.MainActivity
 com/example/tazpitapp/register.java
  com.example.tazpitapp.register
  com.example.tazpitapp.register$register1
@@ -55,29 +81,3 @@ com/example/tazpitapp/register.java
  com.example.tazpitapp.register$register3$1
  com.example.tazpitapp.register$register3$1$1
  com.example.tazpitapp.register$register3$2
-com/example/tazpitapp/BuildConfig.java
- com.example.tazpitapp.BuildConfig
-com/example/tazpitapp/fillReport.java
- com.example.tazpitapp.fillReport
- com.example.tazpitapp.fillReport$1
- com.example.tazpitapp.fillReport$2
- com.example.tazpitapp.fillReport$2$1
- com.example.tazpitapp.fillReport$3
- com.example.tazpitapp.fillReport$4
- com.example.tazpitapp.fillReport$4$1
- com.example.tazpitapp.fillReport$4$2
-com/example/tazpitapp/backgroundService.java
- com.example.tazpitapp.backgroundService
- com.example.tazpitapp.backgroundService$1
-com/example/tazpitapp/SetActivity.java
- com.example.tazpitapp.SetActivity
- com.example.tazpitapp.SetActivity$1
- com.example.tazpitapp.SetActivity$2
- com.example.tazpitapp.SetActivity$3
- com.example.tazpitapp.SetActivity$4
- com.example.tazpitapp.SetActivity$5
- com.example.tazpitapp.SetActivity$6
- com.example.tazpitapp.SetActivity$7
- com.example.tazpitapp.SetActivity$8
-com/example/tazpitapp/MainActivity.java
- com.example.tazpitapp.MainActivity

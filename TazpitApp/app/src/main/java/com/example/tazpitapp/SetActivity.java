@@ -477,6 +477,7 @@ public class SetActivity extends AppCompatActivity {
     }
 
     private  void startLocationService(){
+        setStateOfGps(true);
         if(!isLocationServiceRunning()){
             Intent intent =new Intent(getApplicationContext(),backgroundService.class);
             intent.setAction(constants.ACTION_START_LOCATION_SERVICE);
@@ -485,12 +486,32 @@ public class SetActivity extends AppCompatActivity {
         }
     }
     private void stopLocationService(){
+        setStateOfGps(false);
         if(isLocationServiceRunning()){
             Intent intent =new Intent(getApplicationContext(),backgroundService.class);
             intent.setAction(constants.ACTION_STOP_LOCATION_SERVICE);
             startService(intent);
             Toast.makeText(this,"Location service stopped",Toast.LENGTH_SHORT).show();
         }
+    }
+    public void setStateOfGps(boolean state){
+        SharedPreferences sharedPreferences = getSharedPreferences(constants.SHARED_PREFS, MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putBoolean(constants.gpsState, state);
+        editor.apply();
+
+    }
+    public boolean getStateOfGps(){//return true or false if the gps is working
+        SharedPreferences sharedPreferences = getSharedPreferences(constants.SHARED_PREFS, MODE_PRIVATE);
+        return sharedPreferences.getBoolean(constants.gpsState,false);
+    }
+    public String getlatOfGps(){//get latitude of gps
+        SharedPreferences sharedPreferences = getSharedPreferences(constants.SHARED_PREFS, MODE_PRIVATE);
+        return sharedPreferences.getString(constants.latOfGps,"");
+    }
+    public String getlongOfGps(){//get longtitude of gps
+        SharedPreferences sharedPreferences = getSharedPreferences(constants.SHARED_PREFS, MODE_PRIVATE);
+        return sharedPreferences.getString(constants.longOfGps,"");
     }
 
 }

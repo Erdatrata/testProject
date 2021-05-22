@@ -7,6 +7,7 @@ import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.IBinder;
@@ -36,6 +37,12 @@ public class backgroundService extends Service {
                 double longitude = locationResult.getLastLocation().getLongitude();
                 Log.d("Location_Update", latitude + "," + longitude);
                 //call funcation here to compare with new scenerios if the distance is right and call the user if  true
+                SharedPreferences sharedPreferences = getSharedPreferences(constants.SHARED_PREFS, MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putString(constants.latOfGps, String.valueOf(latitude));
+                editor.putString(constants.longOfGps, String.valueOf(longitude));
+                editor.apply();
+
             }
         }
 
