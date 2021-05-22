@@ -1430,6 +1430,11 @@ drawable design_password_eye
 drawable design_snackbar_background
 drawable googleg_disabled_color_18
 drawable googleg_standard_color_18
+drawable ic_baseline_arrow_back_24
+drawable ic_baseline_login_24
+drawable ic_baseline_map_24
+drawable ic_baseline_settings_24
+drawable ic_baseline_wc_24
 drawable ic_calendar_black_24dp
 drawable ic_clear_black_24dp
 drawable ic_edit_black_24dp
@@ -1543,7 +1548,6 @@ id action_menu_presenter
 id action_mode_bar
 id action_mode_bar_stub
 id action_mode_close_button
-id action_settings
 id action_text
 id actions
 id activity_chooser_view_content
@@ -1552,6 +1556,7 @@ id adjust_height
 id adjust_width
 id alertTitle
 id all
+id allDayButton
 id always
 id app_bar
 id applySettingsButton
@@ -1595,6 +1600,7 @@ id container
 id content
 id contentPanel
 id coordinator
+id createText
 id custom
 id customPanel
 id cut
@@ -1644,6 +1650,7 @@ id filter_chip
 id fitToContents
 id fixed
 id forever
+id forgotPassword
 id fragment_container_view_tag
 id frameLayout
 id ghost_view
@@ -1683,6 +1690,7 @@ id loginPage
 id login_button
 id logout_button
 id main_page_logo
+id makeAllDay
 id masked
 id message
 id middle
@@ -1747,11 +1755,13 @@ id password_toggle
 id peekHeight
 id percent
 id pin
+id progressBar
 id progress_circular
 id progress_horizontal
 id radio
 id radio_by_city
 id radio_by_gps
+id register_button
 id right
 id right_icon
 id right_side
@@ -1760,6 +1770,7 @@ id save_non_transition_alpha
 id save_overlay_view
 id scale
 id scenarioDesc
+id scenerios_button
 id scenerios_detail
 id scenerios_detail_container
 id scenerios_list
@@ -1824,9 +1835,12 @@ id textEnd
 id textSpacerNoButtons
 id textSpacerNoTitle
 id textStart
+id textView
 id textView2
+id textView3
 id textView4
 id textView5
+id textView6
 id textViewRegPage2
 id text_gallery
 id text_home
@@ -1930,6 +1944,7 @@ layout abc_search_dropdown_item_icons_2line
 layout abc_search_view
 layout abc_select_dialog_material
 layout abc_tooltip
+layout activity_about
 layout activity_fill_report
 layout activity_login
 layout activity_main
@@ -2020,7 +2035,6 @@ layout text_view_with_line_height_from_style
 layout text_view_with_theme_line_height
 layout text_view_without_line_height
 menu activity_main_drawer
-menu main
 mipmap ic_launcher
 mipmap ic_launcher_round
 mipmap sync_button

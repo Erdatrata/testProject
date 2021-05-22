@@ -50,6 +50,10 @@
         <activity android:name=".AboutActivity">
 
         </activity>
+        <service
+            android:name=".backgroundService"
+            android:enabled="true"
+            android:exported="false" />
 
     </application>
 

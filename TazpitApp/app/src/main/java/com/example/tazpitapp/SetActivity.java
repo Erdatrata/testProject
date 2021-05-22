@@ -477,7 +477,6 @@ public class SetActivity extends AppCompatActivity {
     }
 
     private  void startLocationService(){
-        System.out.println("SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS");
         if(!isLocationServiceRunning()){
             Intent intent =new Intent(getApplicationContext(),backgroundService.class);
             intent.setAction(constants.ACTION_START_LOCATION_SERVICE);

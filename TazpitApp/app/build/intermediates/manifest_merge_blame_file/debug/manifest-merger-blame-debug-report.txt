@@ -10,110 +10,131 @@
 9        android:targetSdkVersion="29" />
 9-->D:\git\tazpit\TazpitApp\app\src\main\AndroidManifest.xml
 10
-11    <!-- Although the *SdkVersion is captured in gradle build files, this is required for non gradle builds -->
-12    <!-- <uses-sdk android:minSdkVersion="14" /> -->
-13    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-13-->[com.google.firebase:firebase-firestore:23.0.0] C:\Users\mac\.gradle\caches\transforms-2\files-2.1\7f80e31e9c461fe7e954d65e898242c8\jetified-firebase-firestore-23.0.0\AndroidManifest.xml:13:5-79
-13-->[com.google.firebase:firebase-firestore:23.0.0] C:\Users\mac\.gradle\caches\transforms-2\files-2.1\7f80e31e9c461fe7e954d65e898242c8\jetified-firebase-firestore-23.0.0\AndroidManifest.xml:13:22-76
-14    <uses-permission android:name="android.permission.INTERNET" />
-14-->[com.google.firebase:firebase-firestore:23.0.0] C:\Users\mac\.gradle\caches\transforms-2\files-2.1\7f80e31e9c461fe7e954d65e898242c8\jetified-firebase-firestore-23.0.0\AndroidManifest.xml:14:5-67
-14-->[com.google.firebase:firebase-firestore:23.0.0] C:\Users\mac\.gradle\caches\transforms-2\files-2.1\7f80e31e9c461fe7e954d65e898242c8\jetified-firebase-firestore-23.0.0\AndroidManifest.xml:14:22-64
-15    <uses-permission android:name="android.permission.WAKE_LOCK" /> <!-- Required by older versions of Google Play services to create IID tokens -->
-15-->[com.google.firebase:firebase-messaging:22.0.0] C:\Users\mac\.gradle\caches\transforms-2\files-2.1\b8e6476b3d4832ab6f981d18295518f2\jetified-firebase-messaging-22.0.0\AndroidManifest.xml:23:5-68
-15-->[com.google.firebase:firebase-messaging:22.0.0] C:\Users\mac\.gradle\caches\transforms-2\files-2.1\b8e6476b3d4832ab6f981d18295518f2\jetified-firebase-messaging-22.0.0\AndroidManifest.xml:23:22-65
-16    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
-16-->[com.google.firebase:firebase-messaging:22.0.0] C:\Users\mac\.gradle\caches\transforms-2\files-2.1\b8e6476b3d4832ab6f981d18295518f2\jetified-firebase-messaging-22.0.0\AndroidManifest.xml:25:5-82
-16-->[com.google.firebase:firebase-messaging:22.0.0] C:\Users\mac\.gradle\caches\transforms-2\files-2.1\b8e6476b3d4832ab6f981d18295518f2\jetified-firebase-messaging-22.0.0\AndroidManifest.xml:25:22-79
-17    <uses-permission android:name="com.google.android.finsky.permission.BIND_GET_INSTALL_REFERRER_SERVICE" />
-17-->[com.google.android.gms:play-services-measurement:19.0.0] C:\Users\mac\.gradle\caches\transforms-2\files-2.1\f2e256c319a07c2f41157b76c86c75ae\jetified-play-services-measurement-19.0.0\AndroidManifest.xml:26:5-110
-17-->[com.google.android.gms:play-services-measurement:19.0.0] C:\Users\mac\.gradle\caches\transforms-2\files-2.1\f2e256c319a07c2f41157b76c86c75ae\jetified-play-services-measurement-19.0.0\AndroidManifest.xml:26:22-107
-18
-19    <application
-19-->D:\git\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:5:5-57:19
-20        android:allowBackup="true"
-20-->D:\git\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:6:9-35
-21        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
-21-->[androidx.core:core:1.1.0] C:\Users\mac\.gradle\caches\transforms-2\files-2.1\fcf5336bf08ace24d0fd20d58d541cf4\core-1.1.0\AndroidManifest.xml:24:18-86
-22        android:debuggable="true"
-23        android:extractNativeLibs="false"
-24        android:icon="@mipmap/ic_launcher"
-24-->D:\git\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:7:9-43
-25        android:label="@string/app_name"
-25-->D:\git\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:8:9-41
-26        android:roundIcon="@mipmap/ic_launcher_round"
-26-->D:\git\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:9:9-54
-27        android:supportsRtl="true"
-27-->D:\git\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:10:9-35
-28        android:testOnly="true"
-29        android:theme="@style/Theme.TazpitApp" >
-29-->D:\git\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:11:9-47
-30        <activity android:name="com.example.tazpitapp.register$register1" >
-30-->D:\git\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:12:9-19:20
-30-->D:\git\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:12:19-53
-31            <intent-filter>
-31-->D:\git\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:14:13-18:29
-32                <action android:name="android.intent.action.MAIN" />
-32-->D:\git\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:15:17-69
-32-->D:\git\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:15:25-66
-33
-34                <category android:name="android.intent.category.LAUNCHER" />
-34-->D:\git\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:17:17-77
-34-->D:\git\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:17:27-74
-35            </intent-filter>
-36        </activity>
-37        <activity android:name="com.example.tazpitapp.register$register2" />
-37-->D:\git\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:20:9-65
-37-->D:\git\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:20:19-53
-38        <activity android:name="com.example.tazpitapp.register$register3" /> <!-- <activity android:name=".SettingActivity"></activity> -->
-38-->D:\git\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:21:9-56
-38-->D:\git\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:21:19-53
-39        <!-- <activity android:name=".register"></activity> -->
-40        <activity android:name="com.example.tazpitapp.MainActivity" >
-40-->D:\git\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:23:9-25:20
-40-->D:\git\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:23:19-47
-41        </activity>
-42        <activity android:name="com.example.tazpitapp.SetActivity" />
-42-->D:\git\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:26:9-49
-42-->D:\git\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:26:19-46
-43        <activity
-43-->D:\git\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:27:9-30:66
-44            android:name="com.example.tazpitapp.SceneriosListActivity"
-44-->D:\git\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:28:13-50
-45            android:label="@string/title_scenerios_list"
-45-->D:\git\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:29:13-57
-46            android:theme="@style/Theme.TazpitApp.NoActionBar" />
-46-->D:\git\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:30:13-63
-47        <activity
-47-->D:\git\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:31:9-55:20
-48            android:name="com.example.tazpitapp.SceneriosDetailActivity"
-48-->D:\git\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:32:13-52
-49            android:label="@string/title_scenerios_detail"
-49-->D:\git\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:33:13-59
-50            android:parentActivityName="com.example.tazpitapp.SceneriosListActivity"
-50-->D:\git\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:34:13-64
-51            android:theme="@style/Theme.TazpitApp.NoActionBar" >
-51-->D:\git\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:35:13-63
-52
-53            <!-- <<<<<<< HEAD -->
-54            <!-- <meta-data -->
-55            <!-- android:name="android.support.PARENT_ACTIVITY" -->
-56            <!-- android:value="com.example.tazpitapp.SceneriosListActivity" /> -->
-57            <!-- </activity> -->
-58            <!-- <activity android:name=".fillReport" -->
-59            <!-- android:label="@string/app_name" -->
-60            <!-- android:theme="@style/Theme.TazpitApp.NoActionBar"> -->
-61
-62
-63            <!-- <<<<<<< HEAD -->
-64            <!-- ======= -->
-65            <!-- <intent-filter> -->
-66            <!-- <action android:name="android.intent.action.MAIN" /> -->
-67            <!-- ======= -->
-68            <!-- &gt;>>>>>> main -->
-69            <!-- &gt;>>>>>> main -->
-70
-71        </activity>
-72
+11    <uses-permission android:name="android.permission.INTERNET" />
+11-->D:\git\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:5:5-67
+11-->D:\git\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:5:22-64
+12    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
+12-->D:\git\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:6:5-85
+12-->D:\git\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:6:22-82
+13    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+13-->D:\git\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:7:5-79
+13-->D:\git\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:7:22-76
+14    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+14-->D:\git\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:8:5-77
+14-->D:\git\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:8:22-74
+15
+16    <!-- Although the *SdkVersion is captured in gradle build files, this is required for non gradle builds -->
+17    <!-- <uses-sdk android:minSdkVersion="14" /> -->
+18    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+18-->[com.google.firebase:firebase-firestore:23.0.0] C:\Users\mac\.gradle\caches\transforms-2\files-2.1\7f80e31e9c461fe7e954d65e898242c8\jetified-firebase-firestore-23.0.0\AndroidManifest.xml:13:5-79
+18-->[com.google.firebase:firebase-firestore:23.0.0] C:\Users\mac\.gradle\caches\transforms-2\files-2.1\7f80e31e9c461fe7e954d65e898242c8\jetified-firebase-firestore-23.0.0\AndroidManifest.xml:13:22-76
+19    <uses-permission android:name="android.permission.WAKE_LOCK" /> <!-- Required by older versions of Google Play services to create IID tokens -->
+19-->[com.google.firebase:firebase-messaging:22.0.0] C:\Users\mac\.gradle\caches\transforms-2\files-2.1\b8e6476b3d4832ab6f981d18295518f2\jetified-firebase-messaging-22.0.0\AndroidManifest.xml:23:5-68
+19-->[com.google.firebase:firebase-messaging:22.0.0] C:\Users\mac\.gradle\caches\transforms-2\files-2.1\b8e6476b3d4832ab6f981d18295518f2\jetified-firebase-messaging-22.0.0\AndroidManifest.xml:23:22-65
+20    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+20-->[com.google.firebase:firebase-messaging:22.0.0] C:\Users\mac\.gradle\caches\transforms-2\files-2.1\b8e6476b3d4832ab6f981d18295518f2\jetified-firebase-messaging-22.0.0\AndroidManifest.xml:25:5-82
+20-->[com.google.firebase:firebase-messaging:22.0.0] C:\Users\mac\.gradle\caches\transforms-2\files-2.1\b8e6476b3d4832ab6f981d18295518f2\jetified-firebase-messaging-22.0.0\AndroidManifest.xml:25:22-79
+21    <uses-permission android:name="com.google.android.finsky.permission.BIND_GET_INSTALL_REFERRER_SERVICE" />
+21-->[com.google.android.gms:play-services-measurement:19.0.0] C:\Users\mac\.gradle\caches\transforms-2\files-2.1\f2e256c319a07c2f41157b76c86c75ae\jetified-play-services-measurement-19.0.0\AndroidManifest.xml:26:5-110
+21-->[com.google.android.gms:play-services-measurement:19.0.0] C:\Users\mac\.gradle\caches\transforms-2\files-2.1\f2e256c319a07c2f41157b76c86c75ae\jetified-play-services-measurement-19.0.0\AndroidManifest.xml:26:22-107
+22
+23    <application
+23-->D:\git\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:11:5-58:19
+24        android:allowBackup="true"
+24-->D:\git\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:12:9-35
+25        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+25-->[androidx.core:core:1.2.0] C:\Users\mac\.gradle\caches\transforms-2\files-2.1\8a4bac199804e3874c9dbedd9bd159de\core-1.2.0\AndroidManifest.xml:24:18-86
+26        android:debuggable="true"
+27        android:extractNativeLibs="false"
+28        android:icon="@mipmap/ic_launcher"
+28-->D:\git\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:13:9-43
+29        android:label="@string/app_name"
+29-->D:\git\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:14:9-41
+30        android:roundIcon="@mipmap/ic_launcher_round"
+30-->D:\git\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:15:9-54
+31        android:supportsRtl="true"
+31-->D:\git\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:16:9-35
+32        android:testOnly="true"
+33        android:theme="@style/Theme.TazpitApp" >
+33-->D:\git\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:17:9-47
+34        <activity android:name="com.example.tazpitapp.MainActivity" >
+34-->D:\git\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:18:9-24:20
+34-->D:\git\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:18:19-47
+35            <intent-filter>
+35-->D:\git\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:19:13-23:29
+36                <action android:name="android.intent.action.MAIN" />
+36-->D:\git\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:20:17-69
+36-->D:\git\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:20:25-66
+37
+38                <category android:name="android.intent.category.LAUNCHER" />
+38-->D:\git\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:22:17-77
+38-->D:\git\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:22:27-74
+39            </intent-filter>
+40        </activity>
+41        <!-- LOGGED IN -->
+42        <activity
+42-->D:\git\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:26:9-29:66
+43            android:name="com.example.tazpitapp.SceneriosListActivity"
+43-->D:\git\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:27:13-50
+44            android:label="@string/title_scenerios_list"
+44-->D:\git\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:28:13-57
+45            android:theme="@style/Theme.TazpitApp.NoActionBar" />
+45-->D:\git\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:29:13-63
+46        <activity
+46-->D:\git\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:30:9-34:75
+47            android:name="com.example.tazpitapp.SceneriosDetailActivity"
+47-->D:\git\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:31:13-52
+48            android:label="@string/title_scenerios_detail"
+48-->D:\git\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:32:13-59
+49            android:parentActivityName="com.example.tazpitapp.SceneriosListActivity"
+49-->D:\git\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:33:13-64
+50            android:theme="@style/Theme.TazpitApp.NoActionBar" />
+50-->D:\git\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:34:13-63
+51        <activity
+51-->D:\git\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:35:9-39:66
+52            android:name="com.example.tazpitapp.SetActivity"
+52-->D:\git\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:36:13-40
+53            android:label="Settings Activity"
+53-->D:\git\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:37:13-46
+54            android:parentActivityName="com.example.tazpitapp.SetActivity"
+54-->D:\git\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:38:13-54
+55            android:theme="@style/Theme.TazpitApp.NoActionBar" />
+55-->D:\git\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:39:13-63
+56        <activity android:name="com.example.tazpitapp.fillReport" /> <!-- UNLOGGED USER -->
+56-->D:\git\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:40:9-57
+56-->D:\git\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:40:19-45
+57        <activity android:name="com.example.tazpitapp.LoginActivity" />
+57-->D:\git\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:41:9-60
+57-->D:\git\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:41:19-48
+58        <activity android:name="com.example.tazpitapp.register$register1" />
+58-->D:\git\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:42:9-65
+58-->D:\git\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:42:19-53
+59        <activity
+59-->D:\git\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:43:9-45:75
+60            android:name="com.example.tazpitapp.register$register2"
+60-->D:\git\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:44:13-47
+61            android:theme="@style/Theme.TazpitApp.NoActionBar" />
+61-->D:\git\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:45:13-63
+62        <activity
+62-->D:\git\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:46:9-48:75
+63            android:name="com.example.tazpitapp.register$register3"
+63-->D:\git\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:47:13-47
+64            android:theme="@style/Theme.TazpitApp.NoActionBar" />
+64-->D:\git\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:48:13-63
+65        <!-- ALL USERS -->
+66        <activity android:name="com.example.tazpitapp.AboutActivity" >
+66-->D:\git\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:50:9-52:20
+66-->D:\git\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:50:19-48
+67        </activity>
+68
+69        <service
+69-->D:\git\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:53:9-56:40
+70            android:name="com.example.tazpitapp.backgroundService"
+70-->D:\git\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:54:13-46
+71            android:enabled="true"
+71-->D:\git\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:55:13-35
+72            android:exported="false" />
+72-->D:\git\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:56:13-37
 73        <service
 73-->[com.google.firebase:firebase-firestore:23.0.0] C:\Users\mac\.gradle\caches\transforms-2\files-2.1\7f80e31e9c461fe7e954d65e898242c8\jetified-firebase-firestore-23.0.0\AndroidManifest.xml:17:9-23:19
 74            android:name="com.google.firebase.components.ComponentDiscoveryService"
@@ -326,13 +347,13 @@
 184-->[com.google.firebase:firebase-common:20.0.0] C:\Users\mac\.gradle\caches\transforms-2\files-2.1\7fe7d52a4a83127be03df95693caaffd\jetified-firebase-common-20.0.0\AndroidManifest.xml:31:13-36
 185
 186        <activity
-186-->[com.google.android.gms:play-services-base:17.1.0] C:\Users\mac\.gradle\caches\transforms-2\files-2.1\77fd6f61bad9bcb866e9b2d6b91cf059\jetified-play-services-base-17.1.0\AndroidManifest.xml:23:9-26:75
+186-->[com.google.android.gms:play-services-base:17.5.0] C:\Users\mac\.gradle\caches\transforms-2\files-2.1\25e5b6e7ce4f88b6c66bc8b3e089df08\jetified-play-services-base-17.5.0\AndroidManifest.xml:23:9-26:75
 187            android:name="com.google.android.gms.common.api.GoogleApiActivity"
-187-->[com.google.android.gms:play-services-base:17.1.0] C:\Users\mac\.gradle\caches\transforms-2\files-2.1\77fd6f61bad9bcb866e9b2d6b91cf059\jetified-play-services-base-17.1.0\AndroidManifest.xml:24:13-79
+187-->[com.google.android.gms:play-services-base:17.5.0] C:\Users\mac\.gradle\caches\transforms-2\files-2.1\25e5b6e7ce4f88b6c66bc8b3e089df08\jetified-play-services-base-17.5.0\AndroidManifest.xml:24:13-79
 188            android:exported="false"
-188-->[com.google.android.gms:play-services-base:17.1.0] C:\Users\mac\.gradle\caches\transforms-2\files-2.1\77fd6f61bad9bcb866e9b2d6b91cf059\jetified-play-services-base-17.1.0\AndroidManifest.xml:25:13-37
+188-->[com.google.android.gms:play-services-base:17.5.0] C:\Users\mac\.gradle\caches\transforms-2\files-2.1\25e5b6e7ce4f88b6c66bc8b3e089df08\jetified-play-services-base-17.5.0\AndroidManifest.xml:25:13-37
 189            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
-189-->[com.google.android.gms:play-services-base:17.1.0] C:\Users\mac\.gradle\caches\transforms-2\files-2.1\77fd6f61bad9bcb866e9b2d6b91cf059\jetified-play-services-base-17.1.0\AndroidManifest.xml:26:13-72
+189-->[com.google.android.gms:play-services-base:17.5.0] C:\Users\mac\.gradle\caches\transforms-2\files-2.1\25e5b6e7ce4f88b6c66bc8b3e089df08\jetified-play-services-base-17.5.0\AndroidManifest.xml:26:13-72
 190
 191        <receiver
 191-->[com.google.android.gms:play-services-measurement:19.0.0] C:\Users\mac\.gradle\caches\transforms-2\files-2.1\f2e256c319a07c2f41157b76c86c75ae\jetified-play-services-measurement-19.0.0\AndroidManifest.xml:29:9-33:20
@@ -364,11 +385,11 @@
 205-->[com.google.android.gms:play-services-measurement:19.0.0] C:\Users\mac\.gradle\caches\transforms-2\files-2.1\f2e256c319a07c2f41157b76c86c75ae\jetified-play-services-measurement-19.0.0\AndroidManifest.xml:43:13-69
 206
 207        <meta-data
-207-->[com.google.android.gms:play-services-basement:17.1.0] C:\Users\mac\.gradle\caches\transforms-2\files-2.1\9ef333c8966d0f6d6fc9efac9c416e69\jetified-play-services-basement-17.1.0\AndroidManifest.xml:23:9-25:69
+207-->[com.google.android.gms:play-services-basement:17.5.0] C:\Users\mac\.gradle\caches\transforms-2\files-2.1\9da4ee5be35d7062dc4c1aeb8c1fe0b5\jetified-play-services-basement-17.5.0\AndroidManifest.xml:23:9-25:69
 208            android:name="com.google.android.gms.version"
-208-->[com.google.android.gms:play-services-basement:17.1.0] C:\Users\mac\.gradle\caches\transforms-2\files-2.1\9ef333c8966d0f6d6fc9efac9c416e69\jetified-play-services-basement-17.1.0\AndroidManifest.xml:24:13-58
+208-->[com.google.android.gms:play-services-basement:17.5.0] C:\Users\mac\.gradle\caches\transforms-2\files-2.1\9da4ee5be35d7062dc4c1aeb8c1fe0b5\jetified-play-services-basement-17.5.0\AndroidManifest.xml:24:13-58
 209            android:value="@integer/google_play_services_version" />
-209-->[com.google.android.gms:play-services-basement:17.1.0] C:\Users\mac\.gradle\caches\transforms-2\files-2.1\9ef333c8966d0f6d6fc9efac9c416e69\jetified-play-services-basement-17.1.0\AndroidManifest.xml:25:13-66
+209-->[com.google.android.gms:play-services-basement:17.5.0] C:\Users\mac\.gradle\caches\transforms-2\files-2.1\9da4ee5be35d7062dc4c1aeb8c1fe0b5\jetified-play-services-basement-17.5.0\AndroidManifest.xml:25:13-66
 210
 211        <service
 211-->[com.google.android.datatransport:transport-runtime:3.0.0] C:\Users\mac\.gradle\caches\transforms-2\files-2.1\1e2705c214263ce66a8e85de4a3336f8\jetified-transport-runtime-3.0.0\AndroidManifest.xml:26:9-30:19
