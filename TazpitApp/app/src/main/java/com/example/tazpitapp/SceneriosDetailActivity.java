@@ -77,6 +77,7 @@ public class  SceneriosDetailActivity extends AppCompatActivity implements View.
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 Intent intent = new Intent(SceneriosDetailActivity.this,fillReport.class);
+                intent.putExtra("pressed scenario", pressed_scenario);
                 startActivity(intent);
             }
         });
