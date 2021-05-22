@@ -14,6 +14,7 @@ import android.os.IBinder;
 import android.os.Looper;
 import android.util.Log;
 
+import androidx.annotation.MainThread;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
@@ -36,6 +37,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 import org.jetbrains.annotations.NotNull;
 
 public class backgroundService extends Service {
+    final int sec=1000;
 
     private LocationCallback locationcallback = new LocationCallback() {
         @Override
@@ -51,17 +53,16 @@ public class backgroundService extends Service {
                 editor.putString(constants.latOfGps, String.valueOf(latitude));
                 editor.putString(constants.longOfGps, String.valueOf(longitude));
                 editor.apply();
-                try {
-                    Thread.sleep(10*1000);
-                    AlertIfInRange();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+                AlertIfInRange();
+
+
+
 
             }
         }
 
         private void AlertIfInRange() {
+
             System.out.println("Tset");
             FirebaseFirestore.getInstance() .collection("Scenarios").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                 @Override
@@ -172,9 +173,9 @@ public class backgroundService extends Service {
             }
         }
         LocationRequest locationRequest = new LocationRequest();
-        locationRequest.setInterval(4000);
-        locationRequest.setFastestInterval(2000);
-        locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+        locationRequest.setInterval(60000);
+        locationRequest.setFastestInterval(5000);
+        locationRequest.setPriority(LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY);
 
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             // TODO: Consider calling

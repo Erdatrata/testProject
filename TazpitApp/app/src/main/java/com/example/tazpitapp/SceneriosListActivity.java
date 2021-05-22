@@ -82,6 +82,14 @@ public class SceneriosListActivity extends AppCompatActivity {
         assert recyclerView != null;
         setupRecyclerView((RecyclerView) recyclerView);
     }
+//    @Override
+//    public  void onResume() {
+//        super.onResume();
+//        System.out.println("testsettset");
+//        View recyclerView = findViewById(R.id.scenerios_list);
+//        assert recyclerView != null;
+//        setupRecyclerView((RecyclerView) recyclerView);
+//    }
 
     private void setupRecyclerView(@NonNull RecyclerView recyclerView) {
         recyclerView.setAdapter(new SimpleItemRecyclerViewAdapter(this, DummyContent.ITEMS, mTwoPane));

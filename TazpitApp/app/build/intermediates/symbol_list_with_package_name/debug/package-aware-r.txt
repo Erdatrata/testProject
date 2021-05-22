@@ -1631,6 +1631,7 @@ id edit_query
 id end
 id enterAlways
 id enterAlwaysCollapsed
+id eventType
 id exitUntilCollapsed
 id expand_activities_button
 id expanded_menu

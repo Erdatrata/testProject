@@ -1630,6 +1630,7 @@ int id edit_query 0x7f090093
 int id end 0x7f090094
 int id enterAlways 0x7f090095
 int id enterAlwaysCollapsed 0x7f090096
+int id eventType 0x7f090192
 int id exitUntilCollapsed 0x7f090097
 int id expand_activities_button 0x7f090098
 int id expanded_menu 0x7f090099

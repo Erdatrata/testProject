@@ -342,6 +342,8 @@ class register {
                 @Override
                 public void onClick(View v) {
                     Register(mailSTR,passwordSTR,fNameSTR,LNameSTR,citySTR,phoneNumberSTR);
+                    Intent intent = new Intent(v.getContext(), MainActivity.class);
+                    startActivity(intent);
                 }
             });
         }
