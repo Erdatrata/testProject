@@ -153,5 +153,12 @@ public class SceneriosListActivity extends AppCompatActivity {
         SharedPreferences sharedPreferences = getSharedPreferences(constants.SHARED_PREFS, MODE_PRIVATE);
         return sharedPreferences.getString(constants.longOfGps,"");
     }
+    //       try {//must be try and catch,  lat and long for the array in size of 1 , then get into tv_address the address
+    //                List<Address> addresses = geocoder.getFromLocation(location.getLatitude(), location.getLongitude(), 1);
+    //                tv_addressInString=addresses.get(0).getAddressLine(0);
+    //                tv_address.setText(tv_addressInString);
+    //            } catch (Exception e) {
+    //                tv_address.setText("Unale to get address");
+    //            }
 
 }
