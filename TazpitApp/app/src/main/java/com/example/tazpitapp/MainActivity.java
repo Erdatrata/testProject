@@ -61,7 +61,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
         mDrawerLayout.addDrawerListener(aToggle);
         aToggle.syncState();
-        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+//        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
         RecyclerView.LayoutManager layoutManager = new GridLayoutManager(this, 2);
 
         if(FirebaseAuth.getInstance().getCurrentUser() != null){

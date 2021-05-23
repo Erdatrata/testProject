@@ -12,7 +12,20 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        
+
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="35dp"
+            android:layout_marginEnd="35dp"
+            android:foreground="@drawable/ic_baseline_menu_24"
+            
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_baseline_menu_24" />
+
         <ImageView
             android:id="@+id/sync_button"
             android:contentDescription="refreshing_news"
@@ -52,19 +65,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
-
-
-
-<!--<<<<<<< HEAD-->
-<!--        <com.google.android.material.navigation.NavigationView-->
-<!--        android:id="@+id/nav_view"-->
-<!--        android:layout_width="225dp"-->
-<!--        android:layout_height="match_parent"-->
-<!--        android:layout_gravity="start"-->
-<!--        android:fitsSystemWindows="true"-->
-<!--        app:headerLayout="@layout/nav_header_main"-->
-<!--        app:menu="@menu/activity_main_drawer" />-->
-<!--=======-->
         <com.google.android.material.navigation.NavigationView
         android:id="@+id/nav_view"
         android:layout_width="225dp"
@@ -73,5 +73,5 @@
         android:fitsSystemWindows="true"
         app:headerLayout="@layout/nav_header_main"
         app:menu="@menu/activity_main_drawer" />
-<!--&gt;>>>>>> main-->
+
 </androidx.drawerlayout.widget.DrawerLayout>
