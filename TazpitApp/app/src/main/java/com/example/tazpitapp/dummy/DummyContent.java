@@ -1,5 +1,15 @@
 package com.example.tazpitapp.dummy;
 
+import android.util.Log;
+
+import androidx.annotation.NonNull;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -24,23 +34,47 @@ public class DummyContent {
     public static final Map<String, DummyItem> ITEM_MAP = new HashMap<String, DummyItem>();
 
     private static final int COUNT = 25;
-
+    private static List <String> list = new ArrayList<>();
     static {
         // Add some sample items.
-        for (int i = 1; i <= COUNT; i++) {
-            addItem(createDummyItem(i));
-        }
+
+        Task<QuerySnapshot> docRef;
+        docRef = FirebaseFirestore.getInstance() .collection("Scenarios").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+
+                if (task.isSuccessful()) {
+                    int i=0;
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        list.add(document.getId());
+                        addItem(createDummyItem(i,list.get(i)));
+                        i++;
+                    }
+                    Log.d("document=", list.toString());
+                } else {
+                    Log.d("Document","No data");
+
+                }
+            }
+        });
+//        Log.d("size_arr=",list);
+
     }
 
     private static void addItem(DummyItem item) {
         ITEMS.add(item);
+        System.out.println(item.content);
+        System.out.println(item.id);
+        System.out.println(item.details);
+
         ITEM_MAP.put(item.id, item);
     }
+    //list=sacrio 1
 
-    private static DummyItem createDummyItem(int position) {
-        return new DummyItem(String.valueOf(position), "Item " + position, makeDetails(position));
+    private static DummyItem createDummyItem(int position,String list) {
+
+        return new DummyItem(String.valueOf(position),list,makeDetails(position));
     }
-
     private static String makeDetails(int position) {
         StringBuilder builder = new StringBuilder();
         builder.append("Details about Item: ").append(position);
@@ -69,4 +103,5 @@ public class DummyContent {
             return content;
         }
     }
+
 }

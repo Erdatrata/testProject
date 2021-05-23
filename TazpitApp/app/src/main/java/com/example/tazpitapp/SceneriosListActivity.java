@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.appcompat.widget.Toolbar;
 
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
@@ -19,6 +20,10 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.tazpitapp.dummy.DummyContent;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.GeoPoint;
 
 import java.util.List;
 
@@ -37,12 +42,21 @@ public class SceneriosListActivity extends AppCompatActivity {
      * device.
      */
     private boolean mTwoPane;
+    private static boolean gpsState;
+    private static String getlatofgps;
+    private static String getlongofgps;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scenerios_list);
 
+
+        gpsState=getStateOfGps();
+        if(gpsState){
+            getlatofgps=getlatOfGps();
+            getlongofgps=getlongOfGps();
+        }
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         toolbar.setTitle(getTitle());
@@ -68,6 +82,14 @@ public class SceneriosListActivity extends AppCompatActivity {
         assert recyclerView != null;
         setupRecyclerView((RecyclerView) recyclerView);
     }
+//    @Override
+//    public  void onResume() {
+//        super.onResume();
+//        System.out.println("testsettset");
+//        View recyclerView = findViewById(R.id.scenerios_list);
+//        assert recyclerView != null;
+//        setupRecyclerView((RecyclerView) recyclerView);
+//    }
 
     private void setupRecyclerView(@NonNull RecyclerView recyclerView) {
         recyclerView.setAdapter(new SimpleItemRecyclerViewAdapter(this, DummyContent.ITEMS, mTwoPane));
@@ -95,6 +117,7 @@ public class SceneriosListActivity extends AppCompatActivity {
                     Context context = view.getContext();
                     Intent intent = new Intent(context, SceneriosDetailActivity.class);
                     intent.putExtra(SceneriosDetailFragment.ARG_ITEM_ID, item.id);
+                    intent.putExtra(SceneriosDetailFragment.ARG_ITEM_CONTENT, item.content);
 
                     context.startActivity(intent);
                 }
@@ -118,11 +141,21 @@ public class SceneriosListActivity extends AppCompatActivity {
 
         @Override
         public void onBindViewHolder(final ViewHolder holder, int position) {
-            holder.mIdView.setText(mValues.get(position).id);
-            holder.mContentView.setText(mValues.get(position).content);
 
-            holder.itemView.setTag(mValues.get(position));
-            holder.itemView.setOnClickListener(mOnClickListener);
+            DocumentReference mDocRef= FirebaseFirestore.getInstance().document("Scenarios/"+mValues.get(position).content);
+            mDocRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                @Override
+                public void onSuccess(DocumentSnapshot documentSnapshot) {
+                    holder.mIdView.setText(mValues.get(position).id);
+
+                    holder.mContentView.setText(mValues.get(position).content+"-Range-"+Range((GeoPoint)documentSnapshot.getData().get("מיקום")));
+
+                    holder.itemView.setTag(mValues.get(position));
+                    holder.itemView.setOnClickListener(mOnClickListener);
+                }
+            });
+
+
         }
 
         @Override
@@ -141,15 +174,15 @@ public class SceneriosListActivity extends AppCompatActivity {
             }
         }
     }
-    public boolean getStateOfGps(){//return true or false if the gps is working
+    public  boolean getStateOfGps(){//return true or false if the gps is working
         SharedPreferences sharedPreferences = getSharedPreferences(constants.SHARED_PREFS, MODE_PRIVATE);
         return sharedPreferences.getBoolean(constants.gpsState,false);
     }
-    public String getlatOfGps(){//get latitude of gps
+    public  String getlatOfGps(){//get latitude of gps
         SharedPreferences sharedPreferences = getSharedPreferences(constants.SHARED_PREFS, MODE_PRIVATE);
         return sharedPreferences.getString(constants.latOfGps,"");
     }
-    public String getlongOfGps(){//get longtitude of gps
+    public  String getlongOfGps(){//get longtitude of gps
         SharedPreferences sharedPreferences = getSharedPreferences(constants.SHARED_PREFS, MODE_PRIVATE);
         return sharedPreferences.getString(constants.longOfGps,"");
     }
@@ -160,5 +193,21 @@ public class SceneriosListActivity extends AppCompatActivity {
     //            } catch (Exception e) {
     //                tv_address.setText("Unale to get address");
     //            }
+    public static String Range(GeoPoint gpsLocation) {
+        String re="";
+        if(gpsState){
+            double latCurrent=Double.parseDouble(getlatofgps);
+            double lonCurrent=Double.parseDouble(getlongofgps);
+            double latScenerio=gpsLocation.getLatitude();
+            double lonScenerio=gpsLocation.getLongitude();
+
+            double result=Math.pow(Math.pow((111*(latCurrent-latScenerio)),2.0)+Math.pow((111*(lonCurrent-lonScenerio)),2.0),0.5);
+            System.out.println(result);
+            return String.valueOf(result);
+
+        }
+        return re;
+    }
+
 
 }
