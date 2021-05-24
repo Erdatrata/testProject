@@ -261,7 +261,7 @@ class register {
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_register2);
-            back=(Button) findViewById(R.id.backPage2Reg);
+//            back=(Button) findViewById(R.id.backPage2Reg);
             next=(Button) findViewById(R.id.nextPage2Reg);
             textshow=(TextView)findViewById(R.id.textViewRegPage2);
             Aggre=(CheckBox)findViewById(R.id.page2RegAggre);
@@ -284,6 +284,9 @@ class register {
                     if(Aggre.isChecked()) {
                         Intent intent = new Intent(v.getContext(), register3.class);
                         startActivity(intent);
+                    } else {
+                        Toast.makeText(register2.this, "אנא אשרו את הסכמתכם לחוזה על מנת להירשם"
+                                , Toast.LENGTH_SHORT).show();
                     }
                 }
             });

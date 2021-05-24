@@ -208,7 +208,7 @@ public class SetActivity extends AppCompatActivity {
                 Toast.makeText(this, "ההרשאה התקבלה",
                         Toast.LENGTH_SHORT).show();
                 if(!RequestPermissionCall())
-                    startLocationService();
+//                    startLocationService();
                 editor.putString("location_temp","GPS");
             } else {
                 Toast.makeText(this, "ההרשאה נדחתה, אנא אשרו אותה במידה ותרצו להשתמש בתכונה",
