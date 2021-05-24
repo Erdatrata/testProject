@@ -1,14 +1,20 @@
 package com.example.tazpitapp;
 
 import android.Manifest;
+import android.app.Activity;
+import android.app.ActivityManager;
+import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.location.Address;
+import android.location.Geocoder;
 import android.os.Build;
 import android.os.IBinder;
 import android.os.Looper;
@@ -27,6 +33,10 @@ import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -35,6 +45,10 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import org.jetbrains.annotations.NotNull;
+
+import java.io.IOException;
+import java.util.List;
+import java.util.Map;
 
 public class backgroundService extends Service {
     final int sec=1000;
@@ -63,24 +77,30 @@ public class backgroundService extends Service {
 
         private void AlertIfInRange() {
 
-            System.out.println("Tset");
+            System.out.println("Check if in range ");
             FirebaseFirestore.getInstance() .collection("Scenarios").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                 @Override
                 public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                    System.out.println("Tset2");
+
                     if (task.isSuccessful()) {
                         for (QueryDocumentSnapshot document : task.getResult()) {
-                            System.out.println("Tset3");
+
                             System.out.println(document.getId());
                             DocumentReference mDocRef= FirebaseFirestore.getInstance().document("Scenarios/"+document.getId());
                             mDocRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                                 @Override
                                 public void onSuccess(DocumentSnapshot documentSnapshot) {
-                                    System.out.println("Tset4");
-                                    double Range=Double.parseDouble(Range((GeoPoint)documentSnapshot.getData().get("מיקום")));
-                                    if(Range<10){
-                                        System.out.println(document.getId()+" IS in range of "+Range);
+
+                                    double Range= 0;
+                                    try {
+                                        Range = Double.parseDouble(Range((GeoPoint)documentSnapshot.getData().get("מיקום")));
+                                        if(Range<10){
+                                            CreateNotification(Range,document);
+                                            System.out.println(document.getId()+" IS in range of "+Range);
+                                        }
+                                    } catch (IOException e) {
                                     }
+
 
                                 }
                             });
@@ -93,15 +113,20 @@ public class backgroundService extends Service {
         }
 
     };
+
+    private void CreateNotification(double range, QueryDocumentSnapshot documentSnapshot) {
+
+    }
+
     public  boolean getStateOfGps(){//return true or false if the gps is working
         SharedPreferences sharedPreferences = getSharedPreferences(constants.SHARED_PREFS, MODE_PRIVATE);
         return sharedPreferences.getBoolean(constants.gpsState,false);
     }
-    public  String getlatOfGps(){//get latitude of gps
+    public  String getlatOfGps(){//get latitude of curret location
         SharedPreferences sharedPreferences = getSharedPreferences(constants.SHARED_PREFS, MODE_PRIVATE);
         return sharedPreferences.getString(constants.latOfGps,"");
     }
-    public  String getlongOfGps(){//get longtitude of gps
+    public  String getlongOfGps(){//get longtitude of curret location
         SharedPreferences sharedPreferences = getSharedPreferences(constants.SHARED_PREFS, MODE_PRIVATE);
         return sharedPreferences.getString(constants.longOfGps,"");
     }
@@ -112,19 +137,33 @@ public class backgroundService extends Service {
     //            } catch (Exception e) {
     //                tv_address.setText("Unale to get address");
     //            }
-    public  String Range(GeoPoint gpsLocation) {
+    public  String Range(GeoPoint gpsLocation) throws IOException {
         String re="";
-        if(getStateOfGps()){
-            double latCurrent=Double.parseDouble(getlatOfGps());
-            double lonCurrent=Double.parseDouble(getlongOfGps());
+
+            double latCurrent=0;
+            double lonCurrent=0;
+            if(getStateOfGps()){
+                latCurrent=Double.parseDouble(getlatOfGps());
+                lonCurrent=Double.parseDouble(getlongOfGps());
+
+            }
+            else{
+                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                final FirebaseDatabase database = FirebaseDatabase.getInstance();
+                DatabaseReference ref = database.getReference("Users/"+ user.getUid()+"/City");
+
+                    Geocoder gc=new Geocoder(this);
+                    List<Address> ads = gc.getFromLocationName((String) ref.get().getResult().getValue(),1);
+
+                    latCurrent=ads.get(0).getLatitude();
+                    lonCurrent=ads.get(0).getLongitude();
+
+
+            }
             double latScenerio=gpsLocation.getLatitude();
             double lonScenerio=gpsLocation.getLongitude();
-
             double result=Math.pow(Math.pow((111*(latCurrent-latScenerio)),2.0)+Math.pow((111*(lonCurrent-lonScenerio)),2.0),0.5);
             return String.valueOf(result);
-
-        }
-        return re;
     }
 
     @Nullable
