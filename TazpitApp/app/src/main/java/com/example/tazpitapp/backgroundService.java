@@ -141,7 +141,8 @@ public class backgroundService extends Service {
                 .setContentIntent(pendingIntent)
                 .setAutoCancel(true);
 
-        Intent resultIntent = new Intent(this, SceneriosListActivity.class);
+        Intent resultIntent = new Intent(this, SceneriosDetailActivity.class);
+        resultIntent.putExtra(SceneriosDetailFragment.ARG_ITEM_CONTENT,id);
 // Create the TaskStackBuilder and add the intent, which inflates the back stack
         TaskStackBuilder stackBuilder = TaskStackBuilder.create(this);
         stackBuilder.addNextIntentWithParentStack(resultIntent);

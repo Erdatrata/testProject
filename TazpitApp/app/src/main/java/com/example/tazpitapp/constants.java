@@ -17,5 +17,4 @@ public class constants {
     public static final String gpsState="gpsstate";
     public static final String longOfGps = "longofgps";
 
-
 }
