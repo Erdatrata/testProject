@@ -3,6 +3,7 @@ package com.example.tazpitapp;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -40,6 +41,8 @@ import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.sql.Struct;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -51,15 +54,17 @@ public class fillReport extends AppCompatActivity {
     Button submit;
     ImageButton pickMedia;
     CheckBox credit;
-    Bitmap bm;
-    String returnUrl="";
+   // Bitmap bm;
+    ArrayList<Bitmap> bm = new ArrayList<Bitmap>();
+   // String returnUrl="";
     public static final String TITLE_KEY = "title";
     public static final String DESCRIPTION_KEY = "description";
     private FirebaseStorage storage = FirebaseStorage.getInstance();
     private DocumentReference mDocRef;
     private FirebaseAuth mAuth;
     Map<String, Object> dataToSave = new HashMap<String, Object>();
-    private static final int SELECT_PHOTO = 1;
+    ArrayList<Uri> imagesFromURL = new ArrayList<Uri>();
+    private static final int SELECT_PHOTO = 100;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,9 +83,10 @@ public class fillReport extends AppCompatActivity {
         pickMedia.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
-                photoPickerIntent.setType("*/*");
-                startActivityForResult(photoPickerIntent, SELECT_PHOTO);
+                Intent intent = new Intent(Intent.ACTION_PICK);
+                intent.setType("image/*");
+                intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
+                startActivityForResult(Intent.createChooser(intent, "Select Picture"), SELECT_PHOTO); //SELECT_PICTURES is simply a global int used to check the calling intent in onActivityResult
             }
         });
 
@@ -92,28 +98,37 @@ public class fillReport extends AppCompatActivity {
                 else {
                     String getTitle = title.getText().toString();
                     String getDescription = description.getText().toString();
-
-                    //==============================================================
-
                     //uploading the image to storage firebase===============================
-                    ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-                    bm.compress(Bitmap.CompressFormat.PNG, 100, outputStream);
-                    byte[] data = outputStream.toByteArray();
-                    String path = "firememes/" + mAuth.getCurrentUser().getEmail() + "/" + UUID.randomUUID() + ".png";
-                    StorageReference firememeRef = storage.getReference(path);
-                    StorageMetadata metadata = new StorageMetadata.Builder().setCustomMetadata("caption", "the photo").build();
-                    UploadTask uploadTask = firememeRef.putBytes(data, metadata);
+                    for(int i=0; i<bm.size(); i++) {
+                        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+                        bm.get(i).compress(Bitmap.CompressFormat.PNG, 100, outputStream);
+                        byte[] dataMedia = outputStream.toByteArray();
+                        String path = "firememes/" + mAuth.getCurrentUser().getEmail() + "/" + UUID.randomUUID() + ".png";
+                        StorageReference firememeRef = storage.getReference(path);
+                        StorageMetadata metadata = new StorageMetadata.Builder().setCustomMetadata("caption", "the photo").build();
+                        UploadTask uploadTask = firememeRef.putBytes(dataMedia, metadata);
 
-                    uploadTask.addOnCompleteListener(fillReport.this, new OnCompleteListener<UploadTask.TaskSnapshot>() {
-                        @Override
-                        public void onComplete(@NonNull @NotNull Task<UploadTask.TaskSnapshot> task) {
-                            if(task.isSuccessful()) {
-                                Log.i("MA", "upload image task to storage completed");
+                        int finalI = i;
+
+                        uploadTask.addOnCompleteListener(fillReport.this, new OnCompleteListener<UploadTask.TaskSnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull @NotNull Task<UploadTask.TaskSnapshot> task) {
+                                if (task.isSuccessful()) {
+                                    Log.i("MA", "upload image num " + finalI + "task to storage completed");
+                                    uploadReportFirestore(uploadTask, firememeRef, finalI,getDescription,getTitle);
+                                }
+                                else{
+                                    Log.d("image fail", "failed upload image");
+                                }
                             }
-                        }
-                    });
+                        });
 
-                    uploadReportToFireStore(uploadTask, firememeRef, getDescription, getTitle);
+
+                    }
+
+
+
+
                 }
             }
         });
@@ -123,17 +138,30 @@ public class fillReport extends AppCompatActivity {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == SELECT_PHOTO) {
-            Log.d("after pick media", "succced pick media");
-            Uri imgUri = data.getData();
-            try {
-                bm = MediaStore.Images.Media.getBitmap(getContentResolver(), imgUri);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+        if(requestCode == SELECT_PHOTO) {
+            if(resultCode == Activity.RESULT_OK) {
+                if(data.getClipData() != null) {
+                    int count = data.getClipData().getItemCount(); //evaluate the count before the for loop --- otherwise, the count is evaluated every loop.
+                    Uri imageUri;
 
+                    for(int i = 0; i < count; i++) {
+                        imageUri = data.getClipData().getItemAt(i).getUri();
+                        imagesFromURL.add(imageUri);
+                        try {
+                            bm.add(MediaStore.Images.Media.getBitmap(getContentResolver(), imageUri)) ;
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+
+                    }
+                }
+            } else if(data.getData() != null) {
+                String imagePath = data.getData().getPath();
+                //do something with the image (save it to some directory or whatever you need to do with it here)
+            }
         }
     }
+
 
     public boolean itemClicked(View v) {
         //code to check if this checkbox is checked!
@@ -145,7 +173,7 @@ public class fillReport extends AppCompatActivity {
         return indc;
     }
 
-    public void uploadReportToFireStore(UploadTask uploadTask,StorageReference firememeRef,String getDescription, String getTitle) {
+    public void uploadReportFirestore(UploadTask uploadTask,StorageReference firememeRef, int numPhoto,String getDescription,String getTitle) {
         Task<Uri> getDownloadUriTask = uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
        @Override
           public Task<Uri> then(@NonNull @NotNull Task<UploadTask.TaskSnapshot> task) throws Exception {
@@ -153,6 +181,7 @@ public class fillReport extends AppCompatActivity {
              throw task.getException();
                }
                 return firememeRef.getDownloadUrl();
+          //Getting media url to store it in firestore
                       }
                     }
         );
@@ -160,34 +189,39 @@ public class fillReport extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull @NotNull Task<Uri> task) {
                 if (task.isSuccessful()) {
-                    if (itemClicked(credit) == true)
-                        dataToSave.put("credit", true);
-                    else
-                        dataToSave.put("credit", false);
-                    dataToSave.put(DESCRIPTION_KEY, getDescription);
-                    dataToSave.put(TITLE_KEY, getTitle);
                     Uri downloadUri = task.getResult();
-                    returnUrl+=downloadUri.toString();
+                  String returnUrl=downloadUri.toString();
                     Log.d("downloaduri", returnUrl);
-                    dataToSave.put("media url", returnUrl);
-                    mDocRef.set(dataToSave).addOnSuccessListener(new OnSuccessListener<Void>() {
-                        @Override
-                        public void onSuccess(Void unused) {
-                            Log.d("InspiritingQuote", "DocumentSnapshot successfully written!");
-                            Toast.makeText(getApplicationContext(), "העלאת האירוע בוצעה בהצלחה", Toast.LENGTH_LONG).show();
-                            Intent intent = new Intent(fillReport.this, MainActivity.class);
-                            startActivity(intent);
+                    if(numPhoto== bm.size()-1){
+                        if (itemClicked(credit) == true)
+                            dataToSave.put("credit", true);
+                        else
+                            dataToSave.put("credit", false);
+                        dataToSave.put(DESCRIPTION_KEY, getDescription);
+                        dataToSave.put(TITLE_KEY, getTitle);
+                        dataToSave.put("media url "+numPhoto, returnUrl);
+                        mDocRef.set(dataToSave).addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void unused) {
+                                Log.d("InspiritingQuote", "DocumentSnapshot successfully written!");
+                                Toast.makeText(getApplicationContext(), "העלאת האירוע בוצעה בהצלחה", Toast.LENGTH_LONG).show();
+                                Intent intent = new Intent(fillReport.this, MainActivity.class);
+                                startActivity(intent);
 
-                        }
-                    }).addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull @NotNull Exception e) {
-                            Log.w("InspiritingQuote", "Error writing document", e);
-                        }
-                    });
-
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull @NotNull Exception e) {
+                                Log.w("InspiritingQuote", "Error writing document", e);
+                            }
+                        });
+                    }
+                    else
+                        dataToSave.put("media url "+numPhoto, returnUrl);
 
                 }
+                else
+    Log.d("failed to upload report","failed upload report");
             }
         });
 
