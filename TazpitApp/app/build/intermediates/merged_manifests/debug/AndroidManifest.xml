@@ -42,6 +42,7 @@
         <activity
             android:name="com.example.tazpitapp.SceneriosListActivity"
             android:label="@string/title_scenerios_list"
+            android:parentActivityName="com.example.tazpitapp.MainActivity"
             android:theme="@style/Theme.TazpitApp.NoActionBar" />
         <activity
             android:name="com.example.tazpitapp.SceneriosDetailActivity"
