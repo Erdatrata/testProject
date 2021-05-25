@@ -41,6 +41,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URLConnection;
 import java.sql.Struct;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -55,7 +56,7 @@ public class fillReport extends AppCompatActivity {
     ImageButton pickMedia;
     CheckBox credit;
    // Bitmap bm;
-    ArrayList<Bitmap> bm = new ArrayList<Bitmap>();
+   // ArrayList<Bitmap> bm = new ArrayList<Bitmap>();
    // String returnUrl="";
     public static final String TITLE_KEY = "title";
     public static final String DESCRIPTION_KEY = "description";
@@ -63,7 +64,7 @@ public class fillReport extends AppCompatActivity {
     private DocumentReference mDocRef;
     private FirebaseAuth mAuth;
     Map<String, Object> dataToSave = new HashMap<String, Object>();
-    ArrayList<Uri> imagesFromURL = new ArrayList<Uri>();
+    ArrayList<Uri> mediaHolder = new ArrayList<Uri>();
     private static final int SELECT_PHOTO = 100;
 
     @Override
@@ -84,7 +85,7 @@ public class fillReport extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(Intent.ACTION_PICK);
-                intent.setType("image/*");
+                intent.setType("*/*");
                 intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
                 startActivityForResult(Intent.createChooser(intent, "Select Picture"), SELECT_PHOTO); //SELECT_PICTURES is simply a global int used to check the calling intent in onActivityResult
             }
@@ -93,20 +94,16 @@ public class fillReport extends AppCompatActivity {
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (TextUtils.isEmpty(title.getText()) || TextUtils.isEmpty(description.getText()) || bm == null)
+                if (TextUtils.isEmpty(title.getText()) || TextUtils.isEmpty(description.getText()) || mediaHolder == null)
                     Toast.makeText(getApplicationContext(), "כל השדות הינם חובה", Toast.LENGTH_LONG).show();
                 else {
                     String getTitle = title.getText().toString();
                     String getDescription = description.getText().toString();
                     //uploading the media to storage firebase===============================
-                    for(int i=0; i<bm.size(); i++) {
-                        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-                        bm.get(i).compress(Bitmap.CompressFormat.PNG, 100, outputStream);
-                        byte[] dataMedia = outputStream.toByteArray();
-                        String path = "firememes/" + mAuth.getCurrentUser().getEmail() + "/" + UUID.randomUUID() + ".png";
+                    for(int i=0; i<mediaHolder.size(); i++) {
+                        String path = scenarioPressed+"/" + mAuth.getCurrentUser().getEmail() + "/" + UUID.randomUUID();
                         StorageReference firememeRef = storage.getReference(path);
-                        StorageMetadata metadata = new StorageMetadata.Builder().setCustomMetadata("caption", "the photo").build();
-                        UploadTask uploadTask = firememeRef.putBytes(dataMedia, metadata);
+                        UploadTask uploadTask = firememeRef.putFile(mediaHolder.get(i));
 
                         int finalI = i;
 
@@ -143,12 +140,13 @@ public class fillReport extends AppCompatActivity {
                     //in the loop we add to arraylist of Bitmap the media. loop runs on size of amount of media that picked
                     for(int i = 0; i < count; i++) {
                         imageUri = data.getClipData().getItemAt(i).getUri();
-                        imagesFromURL.add(imageUri);
-                        try {
-                            bm.add(MediaStore.Images.Media.getBitmap(getContentResolver(), imageUri)) ;
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
+                        mediaHolder.add(imageUri);
+//                        try {
+//                            System.out.println("the media is: "+imageUri.toString());
+//                            bm.add(MediaStore.Images.Media.getBitmap(getContentResolver(), imageUri)) ;
+//                        } catch (IOException e) {
+//                            e.printStackTrace();
+//                        }
 
                     }
                 }
@@ -169,6 +167,14 @@ public class fillReport extends AppCompatActivity {
         }
         return indc;
     }
+    public static boolean isImageFile(String path) {
+        String mimeType = URLConnection.guessContentTypeFromName(path);
+        return mimeType != null && mimeType.startsWith("image"); }
+
+    public static boolean isVideoFile(String path) {
+        String mimeType = URLConnection.guessContentTypeFromName(path);
+        return mimeType != null && mimeType.startsWith("video");}
+
     //this function pushes media, title, descript and credit to a virable that saves the
     //conetnt we will have in the firebase firestore. when the loop of the media ends we push the virable to firebase
     //and upload the report.
@@ -191,7 +197,7 @@ public class fillReport extends AppCompatActivity {
                     Uri downloadUri = task.getResult();
                   String returnUrl=downloadUri.toString();
                     Log.d("downloaduri", returnUrl);
-                    if(numPhoto== bm.size()-1){
+                    if(numPhoto== mediaHolder.size()-1){
                         if (itemClicked(credit) == true)
                             dataToSave.put("credit", true);
                         else
