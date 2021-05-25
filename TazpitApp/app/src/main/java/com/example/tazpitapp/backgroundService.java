@@ -8,6 +8,7 @@ import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
+import android.app.TaskStackBuilder;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -25,6 +26,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 
 import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationRequest;
@@ -57,7 +59,7 @@ public class backgroundService extends Service {
         @Override
         public void onLocationResult(@NonNull @NotNull LocationResult locationResult) {
             super.onLocationResult(locationResult);
-            if (locationResult != null && locationResult.getLastLocation() != null) {
+            if (locationResult != null && locationResult.getLastLocation() != null&&FirebaseAuth.getInstance().getCurrentUser()!=null) {
                 double latitude = locationResult.getLastLocation().getLatitude();
                 double longitude = locationResult.getLastLocation().getLongitude();
                 Log.d("Location_Update", latitude + "," + longitude);
@@ -93,10 +95,12 @@ public class backgroundService extends Service {
 
                                     double Range= 0;
                                     try {
+                                        System.out.println("calulation range");
                                         Range = Double.parseDouble(Range((GeoPoint)documentSnapshot.getData().get("מיקום")));
                                         if(Range<10){
-                                            CreateNotification(Range,document);
                                             System.out.println(document.getId()+" IS in range of "+Range);
+                                            Notification(document.getId(),Range);
+
                                         }
                                     } catch (IOException e) {
                                     }
@@ -114,8 +118,61 @@ public class backgroundService extends Service {
 
     };
 
-    private void CreateNotification(double range, QueryDocumentSnapshot documentSnapshot) {
+    private static final String CHANNEL_ID = "12341234" ;
 
+    private void Notification(String id, double range) {
+        createNotificationChannel();
+        sendNotfication(id,range);
+
+    }
+
+    private void sendNotfication(String id, double range) {
+// Create an explicit intent for an Activity in your app
+        Intent intent = new Intent(this, MainActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, 0);
+
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, CHANNEL_ID)
+                .setSmallIcon(R.drawable.ic_baseline_map_24)
+                .setContentTitle(id+" is close")
+                .setContentText("Is Range is :"+(int)(range*1000)+" meters from u\nclick to open list")
+                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                // Set the intent that will fire when the user taps the notification
+                .setContentIntent(pendingIntent)
+                .setAutoCancel(true);
+
+        Intent resultIntent = new Intent(this, SceneriosDetailActivity.class);
+        resultIntent.putExtra(SceneriosDetailFragment.ARG_ITEM_CONTENT,id);
+// Create the TaskStackBuilder and add the intent, which inflates the back stack
+        TaskStackBuilder stackBuilder = TaskStackBuilder.create(this);
+        stackBuilder.addNextIntentWithParentStack(resultIntent);
+// Get the PendingIntent containing the entire back stack
+        PendingIntent resultPendingIntent =
+                stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
+
+        builder.setContentIntent(resultPendingIntent);
+
+        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
+
+// notificationId is a unique int for each notification that you must define
+        notificationManager.notify(132214142, builder.build());
+
+
+    }
+    private void createNotificationChannel() {
+        // Create the NotificationChannel, but only on API 26+ because
+        // the NotificationChannel class is new and not in the support library
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            CharSequence name = "getString(R.string.channel_name)";
+            String description = "getString(R.string.channel_description";
+            int importance = NotificationManager.IMPORTANCE_DEFAULT;
+            NotificationChannel channel = new NotificationChannel(CHANNEL_ID, name, importance);
+            channel.setDescription(description);
+            // Register the channel with the system; you can't change the importance
+            // or other notification behaviors after this
+            NotificationManager notificationManager = getSystemService(NotificationManager.class);
+            notificationManager.createNotificationChannel(channel);
+        }
     }
 
     public  boolean getStateOfGps(){//return true or false if the gps is working
@@ -148,15 +205,7 @@ public class backgroundService extends Service {
 
             }
             else{
-                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-                final FirebaseDatabase database = FirebaseDatabase.getInstance();
-                DatabaseReference ref = database.getReference("Users/"+ user.getUid()+"/City");
-
-                    Geocoder gc=new Geocoder(this);
-                    List<Address> ads = gc.getFromLocationName((String) ref.get().getResult().getValue(),1);
-
-                    latCurrent=ads.get(0).getLatitude();
-                    lonCurrent=ads.get(0).getLongitude();
+            return "";
 
 
             }
@@ -259,3 +308,12 @@ public class backgroundService extends Service {
 
 
 
+//    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+//    final FirebaseDatabase database = FirebaseDatabase.getInstance();
+//    DatabaseReference ref = database.getReference("Users/"+ user.getUid()+"/City");
+//
+//    Geocoder gc=new Geocoder(this);
+//    List<Address> ads = gc.getFromLocationName((String) ref.get().getResult().getValue(),1);
+//
+//                    latCurrent=ads.get(0).getLatitude();
+//                            lonCurrent=ads.get(0).getLongitude();

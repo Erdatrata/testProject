@@ -42,9 +42,9 @@ public class SceneriosListActivity extends AppCompatActivity {
      * device.
      */
     private boolean mTwoPane;
-    private static boolean gpsState;
-    private static String getlatofgps;
-    private static String getlongofgps;
+    private static boolean gpsState; //gps on off
+    private static String getlatofgps;//lat of gps
+    private static String getlongofgps; //long of gps
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,7 +53,7 @@ public class SceneriosListActivity extends AppCompatActivity {
 
 
         gpsState=getStateOfGps();
-        if(gpsState){
+        if(gpsState){ //get lat and long
             getlatofgps=getlatOfGps();
             getlongofgps=getlongOfGps();
         }
@@ -82,14 +82,6 @@ public class SceneriosListActivity extends AppCompatActivity {
         assert recyclerView != null;
         setupRecyclerView((RecyclerView) recyclerView);
     }
-//    @Override
-//    public  void onResume() {
-//        super.onResume();
-//        System.out.println("testsettset");
-//        View recyclerView = findViewById(R.id.scenerios_list);
-//        assert recyclerView != null;
-//        setupRecyclerView((RecyclerView) recyclerView);
-//    }
 
     private void setupRecyclerView(@NonNull RecyclerView recyclerView) {
         recyclerView.setAdapter(new SimpleItemRecyclerViewAdapter(this, DummyContent.ITEMS, mTwoPane));
@@ -99,7 +91,7 @@ public class SceneriosListActivity extends AppCompatActivity {
             extends RecyclerView.Adapter<SimpleItemRecyclerViewAdapter.ViewHolder> {
 
         private final SceneriosListActivity mParentActivity;
-        private final List<DummyContent.DummyItem> mValues;
+        private final List<DummyContent.DummyItem> mValues; //items of the list showing
         private final boolean mTwoPane;
         private final View.OnClickListener mOnClickListener = new View.OnClickListener() {
             @Override
@@ -113,10 +105,10 @@ public class SceneriosListActivity extends AppCompatActivity {
                     mParentActivity.getSupportFragmentManager().beginTransaction()
                             .replace(R.id.scenerios_detail_container, fragment)
                             .commit();
-                } else {
+                } else {//clicking on item send intent
                     Context context = view.getContext();
                     Intent intent = new Intent(context, SceneriosDetailActivity.class);
-                    intent.putExtra(SceneriosDetailFragment.ARG_ITEM_ID, item.id);
+                    intent.putExtra(SceneriosDetailFragment.ARG_ITEM_ID, item.id); //sent trow intent the id[number in list] ,and content [name of scenerio]
                     intent.putExtra(SceneriosDetailFragment.ARG_ITEM_CONTENT, item.content);
 
                     context.startActivity(intent);
@@ -146,9 +138,10 @@ public class SceneriosListActivity extends AppCompatActivity {
             mDocRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                 @Override
                 public void onSuccess(DocumentSnapshot documentSnapshot) {
+
                     holder.mIdView.setText(mValues.get(position).id);
 
-                    holder.mContentView.setText(mValues.get(position).content+"-Range-"+Range((GeoPoint)documentSnapshot.getData().get("מיקום")));
+                    holder.mContentView.setText(mValues.get(position).content+"-Range-"+Range((GeoPoint)documentSnapshot.getData().get("מיקום")));//add range with the name of the sceneriro
 
                     holder.itemView.setTag(mValues.get(position));
                     holder.itemView.setOnClickListener(mOnClickListener);

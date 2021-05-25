@@ -31,29 +31,22 @@ com/example/tazpitapp/LoginActivity.java
  com.example.tazpitapp.LoginActivity$3$1$1
  com.example.tazpitapp.LoginActivity$3$1$2
  com.example.tazpitapp.LoginActivity$3$2
-com/example/tazpitapp/SceneriosDetailFragment.java
- com.example.tazpitapp.SceneriosDetailFragment
+com/example/tazpitapp/register.java
+ com.example.tazpitapp.register
+ com.example.tazpitapp.register$register1
+ com.example.tazpitapp.register$register1$1
+ com.example.tazpitapp.register$register1$2
+ com.example.tazpitapp.register$register1$3
+ com.example.tazpitapp.register$register2
+ com.example.tazpitapp.register$register2$1
+ com.example.tazpitapp.register$register2$2
+ com.example.tazpitapp.register$register3
+ com.example.tazpitapp.register$register3$1
+ com.example.tazpitapp.register$register3$1$1
+ com.example.tazpitapp.register$register3$2
 com/example/tazpitapp/ui/gallery/GalleryFragment.java
  com.example.tazpitapp.ui.gallery.GalleryFragment
  com.example.tazpitapp.ui.gallery.GalleryFragment$1
-com/example/tazpitapp/dummy/DummyContent.java
- com.example.tazpitapp.dummy.DummyContent
- com.example.tazpitapp.dummy.DummyContent$1
- com.example.tazpitapp.dummy.DummyContent$DummyItem
-com/example/tazpitapp/SceneriosListActivity.java
- com.example.tazpitapp.SceneriosListActivity
- com.example.tazpitapp.SceneriosListActivity$1
- com.example.tazpitapp.SceneriosListActivity$SimpleItemRecyclerViewAdapter
- com.example.tazpitapp.SceneriosListActivity$SimpleItemRecyclerViewAdapter$1
- com.example.tazpitapp.SceneriosListActivity$SimpleItemRecyclerViewAdapter$2
- com.example.tazpitapp.SceneriosListActivity$SimpleItemRecyclerViewAdapter$ViewHolder
-com/example/tazpitapp/backgroundService.java
- com.example.tazpitapp.backgroundService
- com.example.tazpitapp.backgroundService$1
- com.example.tazpitapp.backgroundService$1$1
- com.example.tazpitapp.backgroundService$1$1$1
-com/example/tazpitapp/BuildConfig.java
- com.example.tazpitapp.BuildConfig
 com/example/tazpitapp/SetActivity.java
  com.example.tazpitapp.SetActivity
  com.example.tazpitapp.SetActivity$1
@@ -73,18 +66,27 @@ com/example/tazpitapp/fillReport.java
  com.example.tazpitapp.fillReport$4
  com.example.tazpitapp.fillReport$4$1
  com.example.tazpitapp.fillReport$4$2
+com/example/tazpitapp/backgroundService.java
+ com.example.tazpitapp.backgroundService
+ com.example.tazpitapp.backgroundService$1
+ com.example.tazpitapp.backgroundService$1$1
+ com.example.tazpitapp.backgroundService$1$1$1
+com/example/tazpitapp/BuildConfig.java
+ com.example.tazpitapp.BuildConfig
+com/example/tazpitapp/Range.java
+ com.example.tazpitapp.Range
+com/example/tazpitapp/SceneriosDetailFragment.java
+ com.example.tazpitapp.SceneriosDetailFragment
+com/example/tazpitapp/dummy/DummyContent.java
+ com.example.tazpitapp.dummy.DummyContent
+ com.example.tazpitapp.dummy.DummyContent$1
+ com.example.tazpitapp.dummy.DummyContent$DummyItem
+com/example/tazpitapp/SceneriosListActivity.java
+ com.example.tazpitapp.SceneriosListActivity
+ com.example.tazpitapp.SceneriosListActivity$1
+ com.example.tazpitapp.SceneriosListActivity$SimpleItemRecyclerViewAdapter
+ com.example.tazpitapp.SceneriosListActivity$SimpleItemRecyclerViewAdapter$1
+ com.example.tazpitapp.SceneriosListActivity$SimpleItemRecyclerViewAdapter$2
+ com.example.tazpitapp.SceneriosListActivity$SimpleItemRecyclerViewAdapter$ViewHolder
 com/example/tazpitapp/MainActivity.java
  com.example.tazpitapp.MainActivity
-com/example/tazpitapp/register.java
- com.example.tazpitapp.register
- com.example.tazpitapp.register$register1
- com.example.tazpitapp.register$register1$1
- com.example.tazpitapp.register$register1$2
- com.example.tazpitapp.register$register1$3
- com.example.tazpitapp.register$register2
- com.example.tazpitapp.register$register2$1
- com.example.tazpitapp.register$register2$2
- com.example.tazpitapp.register$register3
- com.example.tazpitapp.register$register3$1
- com.example.tazpitapp.register$register3$1$1
- com.example.tazpitapp.register$register3$2

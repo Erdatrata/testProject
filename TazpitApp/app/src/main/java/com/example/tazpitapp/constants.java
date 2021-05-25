@@ -26,5 +26,4 @@ public class constants {
     //dayTime dt = gson.fromJson(value, dayTime.class);
 
 
-
 }

@@ -22,6 +22,7 @@
         <activity
             android:name=".SceneriosListActivity"
             android:label="@string/title_scenerios_list"
+            android:parentActivityName=".MainActivity"
             android:theme="@style/Theme.TazpitApp.NoActionBar" />
         <activity
             android:name=".SceneriosDetailActivity"
