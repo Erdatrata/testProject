@@ -37,20 +37,11 @@
     <list default="true" id="de1d0e9e-3953-470a-afa4-3dcf848e88ac" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/incremental/mergeDebugResources/compile-file-map.properties" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/incremental/mergeDebugResources/compile-file-map.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/build/intermediates/incremental/packageDebug/tmp/debug/dex-renamer-state.txt" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/incremental/packageDebug/tmp/debug/dex-renamer-state.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/com/example/tazpitapp/SceneriosListActivity$SimpleItemRecyclerViewAdapter$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/com/example/tazpitapp/SceneriosListActivity$SimpleItemRecyclerViewAdapter$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/com/example/tazpitapp/SceneriosListActivity$SimpleItemRecyclerViewAdapter$ViewHolder.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/com/example/tazpitapp/SceneriosListActivity$SimpleItemRecyclerViewAdapter$ViewHolder.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/com/example/tazpitapp/SceneriosListActivity$SimpleItemRecyclerViewAdapter.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/com/example/tazpitapp/SceneriosListActivity$SimpleItemRecyclerViewAdapter.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/com/example/tazpitapp/SceneriosListActivity.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/com/example/tazpitapp/SceneriosListActivity.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/project_dex_archive/debug/out/com/example/tazpitapp/SceneriosListActivity$SimpleItemRecyclerViewAdapter$1.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/project_dex_archive/debug/out/com/example/tazpitapp/SceneriosListActivity$SimpleItemRecyclerViewAdapter$1.dex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/project_dex_archive/debug/out/com/example/tazpitapp/SceneriosListActivity$SimpleItemRecyclerViewAdapter$ViewHolder.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/project_dex_archive/debug/out/com/example/tazpitapp/SceneriosListActivity$SimpleItemRecyclerViewAdapter$ViewHolder.dex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/project_dex_archive/debug/out/com/example/tazpitapp/SceneriosListActivity$SimpleItemRecyclerViewAdapter.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/project_dex_archive/debug/out/com/example/tazpitapp/SceneriosListActivity$SimpleItemRecyclerViewAdapter.dex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/project_dex_archive/debug/out/com/example/tazpitapp/SceneriosListActivity.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/project_dex_archive/debug/out/com/example/tazpitapp/SceneriosListActivity.dex" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/build/outputs/apk/debug/app-debug.apk" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/outputs/apk/debug/app-debug.apk" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/build/tmp/compileDebugJavaWithJavac/source-classes-mapping.txt" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/tmp/compileDebugJavaWithJavac/source-classes-mapping.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/tazpitapp/SceneriosListActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/tazpitapp/SceneriosListActivity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/tazpitapp/backgroundService.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/tazpitapp/backgroundService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/tazpitapp/constants.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/tazpitapp/constants.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -104,6 +95,14 @@
     <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\git\tazpit\TazpitApp\app\src\main\res\layout" />
+      <recent name="D:\git\tazpit\TazpitApp\app\src\main\java\com\example\tazpitapp\ui" />
+      <recent name="D:\git\tazpit\TazpitApp\app" />
+    </key>
+    <key name="android.template.2074587924">
+      <recent name="com.example.tazpitapp" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\git\tazpit\TazpitApp\app" />
       <recent name="D:\git\tazpit\TazpitApp\app\src\main\java\com\example\tazpitapp" />
@@ -111,19 +110,11 @@
       <recent name="C:\Users\natih\Documents\GitHub\tazpit\TazpitApp\app\src\main\res\drawable-v24" />
       <recent name="D:\GIT\tazpit\TazpitApp\app\src\main\res\layout" />
     </key>
-    <key name="android.template.2074587924">
-      <recent name="com.example.tazpitapp" />
-    </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="com.example.tazpitapp" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="com.example.tazpitapp" />
-    </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="D:\git\tazpit\TazpitApp\app\src\main\res\layout" />
-      <recent name="D:\git\tazpit\TazpitApp\app\src\main\java\com\example\tazpitapp\ui" />
-      <recent name="D:\git\tazpit\TazpitApp\app" />
     </key>
     <key name="android.template.1613083290">
       <recent name="com.example.tazpitapp" />
@@ -447,31 +438,31 @@
     <state x="580" y="77" key="FileChooserDialogImpl/0.0.1280.680@0.0.1280.680" timestamp="1621169753827" />
     <state x="488" y="148" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1619269078741" />
     <state x="696" y="93" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1621606142938" />
-    <state width="2517" height="473" key="GridCell.Tab.0.bottom" timestamp="1621877656431">
+    <state width="2517" height="476" key="GridCell.Tab.0.bottom" timestamp="1621975285232">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state width="2517" height="473" key="GridCell.Tab.0.bottom/-2880.812.1920.1040/0.0.2560.1400@0.0.2560.1400" timestamp="1621877656431" />
+    <state width="2517" height="476" key="GridCell.Tab.0.bottom/-2880.812.1920.1040/0.0.2560.1400@0.0.2560.1400" timestamp="1621975285232" />
     <state width="1220" height="82" key="GridCell.Tab.0.bottom/0.0.1280.680@0.0.1280.680" timestamp="1621167603989" />
     <state width="1306" height="176" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1619271223769" />
     <state width="1493" height="624" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1621626630119" />
-    <state width="2517" height="473" key="GridCell.Tab.0.center" timestamp="1621877656431">
+    <state width="2517" height="476" key="GridCell.Tab.0.center" timestamp="1621975285232">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state width="2517" height="473" key="GridCell.Tab.0.center/-2880.812.1920.1040/0.0.2560.1400@0.0.2560.1400" timestamp="1621877656431" />
+    <state width="2517" height="476" key="GridCell.Tab.0.center/-2880.812.1920.1040/0.0.2560.1400@0.0.2560.1400" timestamp="1621975285232" />
     <state width="1220" height="82" key="GridCell.Tab.0.center/0.0.1280.680@0.0.1280.680" timestamp="1621167603989" />
     <state width="1306" height="176" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1619271223769" />
     <state width="1493" height="624" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1621626630119" />
-    <state width="2517" height="473" key="GridCell.Tab.0.left" timestamp="1621877656430">
+    <state width="2517" height="476" key="GridCell.Tab.0.left" timestamp="1621975285231">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state width="2517" height="473" key="GridCell.Tab.0.left/-2880.812.1920.1040/0.0.2560.1400@0.0.2560.1400" timestamp="1621877656430" />
+    <state width="2517" height="476" key="GridCell.Tab.0.left/-2880.812.1920.1040/0.0.2560.1400@0.0.2560.1400" timestamp="1621975285231" />
     <state width="1220" height="82" key="GridCell.Tab.0.left/0.0.1280.680@0.0.1280.680" timestamp="1621167603989" />
     <state width="1306" height="176" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1619271223769" />
     <state width="1493" height="624" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1621626630118" />
-    <state width="2517" height="473" key="GridCell.Tab.0.right" timestamp="1621877656431">
+    <state width="2517" height="476" key="GridCell.Tab.0.right" timestamp="1621975285232">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state width="2517" height="473" key="GridCell.Tab.0.right/-2880.812.1920.1040/0.0.2560.1400@0.0.2560.1400" timestamp="1621877656431" />
+    <state width="2517" height="476" key="GridCell.Tab.0.right/-2880.812.1920.1040/0.0.2560.1400@0.0.2560.1400" timestamp="1621975285232" />
     <state width="1220" height="82" key="GridCell.Tab.0.right/0.0.1280.680@0.0.1280.680" timestamp="1621167603989" />
     <state width="1306" height="176" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1619271223769" />
     <state width="1493" height="624" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1621626630119" />
@@ -556,7 +547,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/example/tazpitapp/fillReport.java</url>
-          <line>69</line>
+          <line>63</line>
           <option name="timeStamp" value="2" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
