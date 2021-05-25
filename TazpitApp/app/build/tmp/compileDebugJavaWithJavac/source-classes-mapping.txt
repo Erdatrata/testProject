@@ -90,3 +90,5 @@ com/example/tazpitapp/register.java
  com.example.tazpitapp.register$register3$1
  com.example.tazpitapp.register$register3$1$1
  com.example.tazpitapp.register$register3$2
+com/example/tazpitapp/SignUp.java
+ com.example.tazpitapp.SignUp

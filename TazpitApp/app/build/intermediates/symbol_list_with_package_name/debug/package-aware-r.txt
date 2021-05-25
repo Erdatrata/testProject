@@ -23,6 +23,7 @@ anim btn_radio_to_off_mtrl_ring_outer_path_animation
 anim btn_radio_to_on_mtrl_dot_group_animation
 anim btn_radio_to_on_mtrl_ring_outer_animation
 anim btn_radio_to_on_mtrl_ring_outer_path_animation
+anim buttom_anim
 anim design_bottom_sheet_slide_in
 anim design_bottom_sheet_slide_out
 anim design_snackbar_in
@@ -41,6 +42,7 @@ anim nav_default_enter_anim
 anim nav_default_exit_anim
 anim nav_default_pop_enter_anim
 anim nav_default_pop_exit_anim
+anim top_anim
 animator design_appbar_state_list_animator
 animator design_fab_hide_motion_spec
 animator design_fab_show_motion_spec
@@ -1479,6 +1481,7 @@ drawable sync_button_background
 drawable test_custom_background
 drawable tooltip_frame_dark
 drawable tooltip_frame_light
+drawable tps_logo_background
 drawable tps_logo_full_background
 id ALT
 id BOTTOM_END
@@ -1563,7 +1566,6 @@ id applySettingsButton
 id async
 id auto
 id back
-id backFromLogin
 id backPage2Reg
 id back_button
 id barrier
@@ -1600,6 +1602,7 @@ id container
 id content
 id contentPanel
 id coordinator
+id coordinatorLayout
 id createText
 id custom
 id customPanel
@@ -1689,6 +1692,9 @@ id logged_user_menu
 id loginButton
 id loginPage
 id login_button
+id logo_Image
+id logo_name
+id logo_text
 id logout_button
 id main_page_logo
 id makeAllDay
@@ -1956,6 +1962,7 @@ layout activity_scenerios_detail
 layout activity_scenerios_list
 layout activity_set
 layout activity_setting
+layout activity_sign_up
 layout app_bar_main
 layout browser_actions_context_menu_page
 layout browser_actions_context_menu_row
