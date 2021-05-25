@@ -77,10 +77,10 @@ public class fillReport extends AppCompatActivity {
         credit = (CheckBox) findViewById(R.id.fill_report_add_credit);
         mAuth = FirebaseAuth.getInstance();
         String scenarioPressed = getIntent().getStringExtra("pressed scenario");
-        //Log.d("preesed scnario", scenarioPressed);
         mDocRef = FirebaseFirestore.getInstance().document("Scenarios/" + scenarioPressed+"/"+mAuth.getCurrentUser().getEmail()+"/"+mAuth.getCurrentUser().getEmail()+" report:");
 
-        pickMedia.setOnClickListener(new View.OnClickListener() {
+        pickMedia.setOnClickListener(new View.OnClickListener() { //when pressing the upload media button we go here
+            //and choose media
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(Intent.ACTION_PICK);
@@ -98,7 +98,7 @@ public class fillReport extends AppCompatActivity {
                 else {
                     String getTitle = title.getText().toString();
                     String getDescription = description.getText().toString();
-                    //uploading the image to storage firebase===============================
+                    //uploading the media to storage firebase===============================
                     for(int i=0; i<bm.size(); i++) {
                         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
                         bm.get(i).compress(Bitmap.CompressFormat.PNG, 100, outputStream);
@@ -126,15 +126,12 @@ public class fillReport extends AppCompatActivity {
 
                     }
 
-
-
-
                 }
             }
         });
 
     }
-
+//this is func that calls automatic by startActivityForResult after choosing media files
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -143,7 +140,7 @@ public class fillReport extends AppCompatActivity {
                 if(data.getClipData() != null) {
                     int count = data.getClipData().getItemCount(); //evaluate the count before the for loop --- otherwise, the count is evaluated every loop.
                     Uri imageUri;
-
+                    //in the loop we add to arraylist of Bitmap the media. loop runs on size of amount of media that picked
                     for(int i = 0; i < count; i++) {
                         imageUri = data.getClipData().getItemAt(i).getUri();
                         imagesFromURL.add(imageUri);
@@ -162,7 +159,7 @@ public class fillReport extends AppCompatActivity {
         }
     }
 
-
+//function that checks if the user wants to get credit about the report he will upload
     public boolean itemClicked(View v) {
         //code to check if this checkbox is checked!
         boolean indc = false;
@@ -172,7 +169,9 @@ public class fillReport extends AppCompatActivity {
         }
         return indc;
     }
-
+    //this function pushes media, title, descript and credit to a virable that saves the
+    //conetnt we will have in the firebase firestore. when the loop of the media ends we push the virable to firebase
+    //and upload the report.
     public void uploadReportFirestore(UploadTask uploadTask,StorageReference firememeRef, int numPhoto,String getDescription,String getTitle) {
         Task<Uri> getDownloadUriTask = uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
        @Override
