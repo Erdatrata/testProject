@@ -11,6 +11,11 @@ public class constants {
 
 
 
+
+
+
+    
+
     //Shared prefences name of each file saved for sharing data
     public static final String SHARED_PREFS = "sharedPrefs";//main folder for Shared prefences
     public static final String latOfGps ="latofgps";

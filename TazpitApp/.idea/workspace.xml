@@ -35,7 +35,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="de1d0e9e-3953-470a-afa4-3dcf848e88ac" name="Default Changelist" comment="">
+<<<<<<< HEAD
       <change beforePath="$PROJECT_DIR$/local.properties" beforeDir="false" afterPath="$PROJECT_DIR$/local.properties" afterDir="false" />
+=======
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/tazpitapp/constants.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/tazpitapp/constants.java" afterDir="false" />
+>>>>>>> main
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -92,6 +97,7 @@
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\git\tazpit\TazpitApp\app\src\main\res\layout" />
+      <recent name="D:\git\tazpit\TazpitApp\app\src\main\res\drawable" />
       <recent name="D:\git\tazpit\TazpitApp\app\src\main\java\com\example\tazpitapp\ui" />
       <recent name="D:\git\tazpit\TazpitApp\app" />
     </key>
@@ -99,11 +105,11 @@
       <recent name="com.example.tazpitapp" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="D:\git\tazpit\TazpitApp\app" />
+      <recent name="D:\git\tazpit\TazpitApp\app\src\main\res\drawable" />
       <recent name="D:\git\tazpit\TazpitApp\app\src\main\java\com\example\tazpitapp" />
+      <recent name="D:\git\tazpit\TazpitApp\app\src\main\res\anim" />
+      <recent name="D:\git\tazpit\TazpitApp\app" />
       <recent name="D:\git\tazpit\TazpitApp\app\src\main\java\com\example\tazpitapp\ui" />
-      <recent name="C:\Users\natih\Documents\GitHub\tazpit\TazpitApp\app\src\main\res\drawable-v24" />
-      <recent name="D:\GIT\tazpit\TazpitApp\app\src\main\res\layout" />
     </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="com.example.tazpitapp" />
@@ -543,7 +549,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/example/tazpitapp/fillReport.java</url>
-          <line>63</line>
+          <line>69</line>
           <option name="timeStamp" value="2" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
