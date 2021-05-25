@@ -4,6 +4,7 @@ import com.google.android.material.navigation.NavigationView;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -41,6 +42,22 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private Toolbar toolbar;
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
+
+    @Override
+    public void onResume()
+    {  // After a pause OR at startup
+        super.onResume();
+
+        NavigationView mNavigationView = (NavigationView) findViewById(R.id.nav_view);
+        if(FirebaseAuth.getInstance().getCurrentUser() != null){
+            mNavigationView.getMenu().setGroupVisible(R.id.logged_user_menu,true);
+            mNavigationView.getMenu().setGroupVisible(R.id.unlogged_user_menu,false);
+        }
+        else{
+            mNavigationView.getMenu().setGroupVisible(R.id.logged_user_menu,false);
+            mNavigationView.getMenu().setGroupVisible(R.id.unlogged_user_menu,true);
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -102,6 +119,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
         if (id == R.id.logout_button) {
             FirebaseAuth.getInstance().signOut();
+            SharedPreferences sharedpreferences = getSharedPreferences(constants.SHARED_PREFS,
+                    Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = sharedpreferences.edit();
+            editor.clear().apply();
             this.recreate();
         }
         return true;

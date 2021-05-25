@@ -1,4 +1,4 @@
-package com.example.tazpitapp.dummy;
+package com.example.tazpitapp.assistClasses;
 
 import android.util.Log;
 

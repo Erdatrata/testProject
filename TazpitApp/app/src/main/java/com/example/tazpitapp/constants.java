@@ -11,11 +11,20 @@ public class constants {
 
 
 
-    //Shared prefences name of each file saved for sharing data
-    public static final String SHARED_PREFS = "sharedPrefs";//main folder for Shared prefences
+    //Shared preferences name of each file saved for sharing data
+    public static final String SHARED_PREFS = "sharedPrefs";//main file for shared preferences
+    //GPS VARS
+    public static final String longOfGps = "longofgps";
     public static final String latOfGps ="latofgps";
     public static final String gpsState="gpsstate";
-    public static final String longOfGps = "longofgps";
+    //TIME VARS
+    //to get key of certain day, create a string containing its name like this:
+    //String key = "" +R.id.day_*
+    //for example, to get the timeDay object for saturday, make key like this
+    //String key = ""+R.id.day_saturday
+    //String value = sharedpreferences.getString(key, "DEFAULT");
+    //dayTime dt = gson.fromJson(value, dayTime.class);
+
 
 
 }
