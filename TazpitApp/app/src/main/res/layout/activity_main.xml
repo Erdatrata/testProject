@@ -9,62 +9,71 @@
     tools:openDrawer="start">
 
 
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        
+
+
         <ImageView
-            android:id="@+id/sync_button"
-            android:contentDescription="refreshing_news"
-            app:srcCompat="@mipmap/sync_button_foreground"
-            tools:ignore="HardcodedText"
-
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            android:layout_marginTop="75dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:scaleX="1"
-            android:scaleY="1" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/news_recycle"
-            android:layout_width="323dp"
-            android:layout_height="380dp"
-            android:layout_marginStart="72dp"
-            android:layout_marginTop="156dp"
-
-
-            android:layout_marginBottom="142dp"
+            android:id="@+id/logo_Image"
+            android:layout_width="193dp"
+            android:layout_height="141dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:src="@drawable/tps_logo_background"
+            android:transitionName="logo_image"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.509"
-            app:layout_constraintWidth_default="wrap" />
+            app:layout_constraintVertical_bias="0.0"
+            tools:ignore="DuplicateIds" />
+
+        <TextView
+            android:id="@+id/logo_text"
+            android:layout_width="64dp"
+            android:layout_height="47dp"
+            android:backgroundTint="#2196F3"
+            android:fontFamily="cursive"
+            android:text="TPS"
+            android:textSize="40sp"
+            android:transitionName="logo_text"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.524"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.16" />
+
+        <ImageView
+            android:id="@+id/nav_view_image"
+            android:layout_width="49dp"
+            android:layout_height="37dp"
+            android:layout_marginTop="44dp"
+            android:layout_marginEnd="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_baseline_menu_24" />
+
+        <ImageView
+            android:id="@+id/sync_button"
+            android:layout_width="87dp"
+            android:layout_height="74dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="32dp"
+            android:contentDescription="refreshing_news"
+            android:scaleX="1"
+            android:scaleY="1"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@mipmap/sync_button_foreground"
+            tools:ignore="HardcodedText" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-
-
-    <include
-        layout="@layout/app_bar_main"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
-
-
-
-
-<!--<<<<<<< HEAD-->
-<!--        <com.google.android.material.navigation.NavigationView-->
-<!--        android:id="@+id/nav_view"-->
-<!--        android:layout_width="225dp"-->
-<!--        android:layout_height="match_parent"-->
-<!--        android:layout_gravity="start"-->
-<!--        android:fitsSystemWindows="true"-->
-<!--        app:headerLayout="@layout/nav_header_main"-->
-<!--        app:menu="@menu/activity_main_drawer" />-->
-<!--=======-->
         <com.google.android.material.navigation.NavigationView
         android:id="@+id/nav_view"
         android:layout_width="225dp"
@@ -73,5 +82,5 @@
         android:fitsSystemWindows="true"
         app:headerLayout="@layout/nav_header_main"
         app:menu="@menu/activity_main_drawer" />
-<!--&gt;>>>>>> main-->
+
 </androidx.drawerlayout.widget.DrawerLayout>

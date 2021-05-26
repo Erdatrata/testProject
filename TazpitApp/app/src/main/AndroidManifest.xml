@@ -16,11 +16,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TazpitApp">
         <activity android:name=".MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <!-- LOGGED IN -->
         <activity
@@ -43,7 +39,13 @@
         <activity android:name=".register$register1"></activity>
         <activity
             android:name=".register$register2"
-            android:theme="@style/Theme.TazpitApp.NoActionBar"></activity>
+            android:theme="@style/Theme.TazpitApp.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".register$register3"
             android:theme="@style/Theme.TazpitApp.NoActionBar"></activity>

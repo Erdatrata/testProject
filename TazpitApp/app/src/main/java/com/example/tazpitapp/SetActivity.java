@@ -14,8 +14,8 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
-import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RadioButton;
@@ -23,12 +23,21 @@ import android.widget.RadioGroup;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+
+import com.example.tazpitapp.assistClasses.constants;
 import com.example.tazpitapp.assistClasses.dayTime;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.gson.Gson;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
 
 public class SetActivity extends AppCompatActivity {
     //----------global variables--------------------------
@@ -102,7 +111,7 @@ public class SetActivity extends AppCompatActivity {
                 daysButton5, daysButton6, daysButton7};
 
         //sharedPrefs
-        sharedpreferences = getSharedPreferences("SharedPreferences",
+        sharedpreferences = getSharedPreferences(constants.SHARED_PREFS,
                 Context.MODE_PRIVATE);
         editor = sharedpreferences.edit();
         gson = new Gson();
@@ -208,7 +217,7 @@ public class SetActivity extends AppCompatActivity {
                 Toast.makeText(this, "ההרשאה התקבלה",
                         Toast.LENGTH_SHORT).show();
                 if(!RequestPermissionCall())
-                    startLocationService();
+//                    startLocationService();
                 editor.putString("location_temp","GPS");
             } else {
                 Toast.makeText(this, "ההרשאה נדחתה, אנא אשרו אותה במידה ותרצו להשתמש בתכונה",
@@ -418,12 +427,16 @@ public class SetActivity extends AppCompatActivity {
             //unsave unsaved
             unsaved = false;
         }
+        Map<String, String> docData = new HashMap<>();
         //put the dayTimes back into the sp
         for (Button v : daysArr) {
             String idd = "" + v.getId();
             String tidd = "temp_" + idd;
             String toPut = sharedpreferences.getString(tidd, null);
+            //put in sp locally
             editor.putString(idd, toPut);
+            //put in hashmap for sending to server
+            docData.put(constants.id2name(v.getId()),toPut);
         }
 
         //put gps-city into locationPref
@@ -441,7 +454,33 @@ public class SetActivity extends AppCompatActivity {
         editor.apply();
         //make sure to call the background service and tell them of a change of hours
 
+
         //send data to server
+        FirebaseAuth userIdentifier=FirebaseAuth.getInstance();
+        String UID = userIdentifier.getCurrentUser().getUid();
+
+        DocumentReference DRF = FirebaseFirestore.getInstance().document("Users/"+UID);
+        docData.put("location",sharedpreferences.getString("location","default"));
+
+
+
+        //send
+        DRF.set(docData).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void unused) {
+                Log.d("Setting succ", "Setting update success");
+                Toast.makeText(getApplicationContext(), "העלאת האירוע בוצעה בהצלחה", Toast.LENGTH_LONG).show();
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull @NotNull Exception e) {
+                Log.w("Setting fail", "Error writing settings", e);
+            }
+        });
+
+
+
+
     }
 
     private boolean RequestPermissionCall(){//true if needed false if permmison alridy given

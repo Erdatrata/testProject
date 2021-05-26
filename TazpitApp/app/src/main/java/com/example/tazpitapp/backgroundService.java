@@ -1,33 +1,27 @@
 package com.example.tazpitapp;
 
 import android.Manifest;
-import android.app.Activity;
-import android.app.ActivityManager;
-import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
 import android.app.TaskStackBuilder;
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
-import android.location.Address;
-import android.location.Geocoder;
 import android.os.Build;
 import android.os.IBinder;
 import android.os.Looper;
 import android.util.Log;
 
-import androidx.annotation.MainThread;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 
+import com.example.tazpitapp.assistClasses.constants;
 import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationResult;
@@ -36,9 +30,6 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -49,8 +40,6 @@ import com.google.firebase.firestore.QuerySnapshot;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
-import java.util.List;
-import java.util.Map;
 
 public class backgroundService extends Service {
     final int sec=1000;
@@ -277,7 +266,7 @@ public class backgroundService extends Service {
         }
         LocationServices.getFusedLocationProviderClient(this)
                 .requestLocationUpdates(locationRequest, locationcallback, Looper.getMainLooper());
-        startForeground(com.example.tazpitapp.constants.LOCATION_SERVICE_ID,builder.build());
+        startForeground(constants.LOCATION_SERVICE_ID,builder.build());
 
 
     }
@@ -292,10 +281,10 @@ public class backgroundService extends Service {
         if(intent!= null){
             String action =intent.getAction();
             if(action!=null){
-                if(action.equals(com.example.tazpitapp.constants.ACTION_START_LOCATION_SERVICE)){
+                if(action.equals(constants.ACTION_START_LOCATION_SERVICE)){
                     startLocationService();
                 }
-                else if(action.equals(com.example.tazpitapp.constants.ACTION_STOP_LOCATION_SERVICE)){
+                else if(action.equals(constants.ACTION_STOP_LOCATION_SERVICE)){
                     stopLocationService();
 
                 }

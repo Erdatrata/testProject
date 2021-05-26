@@ -88,3 +88,5 @@ lint/tmp/
 # Android Profiling
 *.hprof
 TazpitApp/app/src/main/res/mipmap-anydpi-v26/tps_logo.xml
+
+TazpitApp/app/src/main/res/layout/activity_login.xml

@@ -1,38 +1,30 @@
 package com.example.tazpitapp;
+import com.example.tazpitapp.assistClasses.constants;
 import com.google.android.material.navigation.NavigationView;
 
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.Menu;
-import android.widget.Button;
-import android.widget.Toast;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
-import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 
-import org.jetbrains.annotations.NotNull;
-
-import androidx.annotation.NonNull;
 import androidx.core.view.GravityCompat;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-import androidx.navigation.ui.AppBarConfiguration;
-import androidx.navigation.ui.NavigationUI;
 import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import android.content.SharedPreferences;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity<imageView> extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     public static final String SHARED_PREFS = "sharedPrefs";
 
 
@@ -41,10 +33,28 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private Toolbar toolbar;
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
+    public ImageView nav_view_image;
+    @Override
+    public void onResume()
+    {  // After a pause OR at startup
+        super.onResume();
+        NavigationView mNavigationView = (NavigationView) findViewById(R.id.nav_view);
+        if(FirebaseAuth.getInstance().getCurrentUser() != null){
+            mNavigationView.getMenu().setGroupVisible(R.id.logged_user_menu,true);
+            mNavigationView.getMenu().setGroupVisible(R.id.unlogged_user_menu,false);
+        }
+        else{
+            mNavigationView.getMenu().setGroupVisible(R.id.logged_user_menu,false);
+            mNavigationView.getMenu().setGroupVisible(R.id.unlogged_user_menu,true);
+        }
+    }
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        nav_view_image = (ImageView)findViewById(R.id.nav_view_image);
         try
         {
             this.getSupportActionBar().hide();
@@ -61,7 +71,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
         mDrawerLayout.addDrawerListener(aToggle);
         aToggle.syncState();
-        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+//        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
         RecyclerView.LayoutManager layoutManager = new GridLayoutManager(this, 2);
 
         if(FirebaseAuth.getInstance().getCurrentUser() != null){
@@ -73,7 +83,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             mNavigationView.getMenu().setGroupVisible(R.id.unlogged_user_menu,true);
 
         }
+        final DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        ImageView menuIcon = (ImageView) findViewById(R.id.nav_view_image);
+        menuIcon.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                drawer.openDrawer(Gravity.RIGHT);
+            }
+        });
     }
+
 
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
@@ -102,6 +121,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
         if (id == R.id.logout_button) {
             FirebaseAuth.getInstance().signOut();
+            SharedPreferences sharedpreferences = getSharedPreferences(constants.SHARED_PREFS,
+                    Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = sharedpreferences.edit();
+            editor.clear().apply();
             this.recreate();
         }
         return true;
