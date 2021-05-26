@@ -28,6 +28,7 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
@@ -79,7 +80,7 @@ public class fillReport extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         String scenarioPressed = getIntent().getStringExtra("pressed scenario");
         mDocRef = FirebaseFirestore.getInstance().document("Scenarios/" + scenarioPressed+"/"+"filled/"+mAuth.getCurrentUser().getUid() +" report:");
-
+        DocumentReference deleteUserFromAccept=FirebaseFirestore.getInstance().document("Scenarios/"+scenarioPressed);
         pickMedia.setOnClickListener(new View.OnClickListener() { //when pressing the upload media button we go here
             //and choose media
             @Override
@@ -112,7 +113,7 @@ public class fillReport extends AppCompatActivity {
                             public void onComplete(@NonNull @NotNull Task<UploadTask.TaskSnapshot> task) {
                                 if (task.isSuccessful()) {
                                     Log.i("MA", "upload image num " + finalI + "task to storage completed");
-                                    uploadReportFirestore(uploadTask, firememeRef, finalI,getDescription,getTitle);
+                                    uploadReportFirestore(uploadTask, firememeRef, finalI,getDescription,getTitle,deleteUserFromAccept, mAuth.getCurrentUser());
                                 }
                                 else{
                                     Log.d("image fail", "failed upload image");
@@ -178,7 +179,7 @@ public class fillReport extends AppCompatActivity {
     //this function pushes media, title, descript and credit to a virable that saves the
     //conetnt we will have in the firebase firestore. when the loop of the media ends we push the virable to firebase
     //and upload the report.
-    public void uploadReportFirestore(UploadTask uploadTask,StorageReference firememeRef, int numPhoto,String getDescription,String getTitle) {
+    public void uploadReportFirestore(UploadTask uploadTask,StorageReference firememeRef, int numPhoto,String getDescription,String getTitle, DocumentReference docRef,FirebaseUser user) {
         Task<Uri> getDownloadUriTask = uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
        @Override
           public Task<Uri> then(@NonNull @NotNull Task<UploadTask.TaskSnapshot> task) throws Exception {
@@ -210,6 +211,7 @@ public class fillReport extends AppCompatActivity {
                             public void onSuccess(Void unused) {
                                 Log.d("InspiritingQuote", "DocumentSnapshot successfully written!");
                                 Toast.makeText(getApplicationContext(), "העלאת האירוע בוצעה בהצלחה", Toast.LENGTH_LONG).show();
+                                removeUserFromAccept( docRef,  user);
                                 Intent intent = new Intent(fillReport.this, MainActivity.class);
                                 startActivity(intent);
 
@@ -231,5 +233,23 @@ public class fillReport extends AppCompatActivity {
         });
 
     }
+    private void removeUserFromAccept(  DocumentReference docRef, FirebaseUser user){
+        docRef.collection("accepted").document(user.getUid())
+                .delete()
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Log.d("test55", "DocumentSnapshot successfully deleted!");
+
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w("test56", "Error deleting document", e);
+                    }
+                });
+    }
+
 
 }
