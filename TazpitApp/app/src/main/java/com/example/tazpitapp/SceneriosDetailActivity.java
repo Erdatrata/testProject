@@ -20,8 +20,9 @@ package com.example.tazpitapp;
         import com.google.firebase.firestore.DocumentSnapshot;
         import com.google.firebase.firestore.FirebaseFirestore;
         import com.google.firebase.firestore.QueryDocumentSnapshot;
+        import com.google.firebase.firestore.QuerySnapshot;
 
-public class  SceneriosDetailActivity extends AppCompatActivity implements View.OnClickListener {
+public class  SceneriosDetailActivity extends AppCompatActivity {
 
     private FirebaseUser user;
     String pressed_scenario = "";
@@ -29,19 +30,23 @@ public class  SceneriosDetailActivity extends AppCompatActivity implements View.
     TextView city_of_event;
     TextView gps_event;
     public Button button_sign_event;
+    public Button btnScenarioCancel;
+    public Button btnScenarioFillReport;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scenerios_detail);
         user = FirebaseAuth.getInstance().getCurrentUser();
         button_sign_event = (Button)findViewById(R.id.buttonScenario);
+        btnScenarioCancel = (Button)findViewById(R.id.buttonScenarioCancel);
+        btnScenarioFillReport = (Button)findViewById(R.id.buttonScenarioFillReport);
         type_of_event = (TextView)findViewById(R.id.eventType);
         city_of_event = (TextView)findViewById(R.id.cityGetScenario);
         gps_event = (TextView)findViewById(R.id.gpsLink);
-        button_sign_event.setOnClickListener(this);
         System.out.println(getIntent().getStringExtra("item_id"));
         System.out.println(getIntent().getStringExtra("item_content"));
         pressed_scenario = getIntent().getStringExtra(SceneriosDetailFragment.ARG_ITEM_CONTENT);
+        is_user_is_accepted();
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         DocumentReference docRef = db.collection("Scenarios").document(pressed_scenario);
@@ -65,30 +70,38 @@ public class  SceneriosDetailActivity extends AppCompatActivity implements View.
                 }
             }
         });
-        
-    }
-    @Override
-    public void onClick(View v) {
+//        btnScenarioFillReport.setOnClickListener(new View.OnClickListener(){
+//            @Override
+//            public void onClick(View v)
+//            {
+//
+//            }
+//            });
 
-        final AlertDialog.Builder passwordResetDialog = new AlertDialog.Builder(v.getContext());
-        passwordResetDialog.setTitle("מילוי דוח ?");
-        passwordResetDialog.setMessage("האם אתה רוצה למלא דוח על האירוע?");
-        passwordResetDialog.setPositiveButton("מלא דוח", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                Intent intent = new Intent(SceneriosDetailActivity.this,fillReport.class);
-                intent.putExtra("pressed scenario", pressed_scenario);
-                startActivity(intent);
-            }
-        });
-        passwordResetDialog.setNegativeButton("בטל הרשמה", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                // close the dialog
-                return;
-            }
-        });
-        passwordResetDialog.create().show();
+    }
+
+    private boolean is_user_is_accepted()
+    {
+        boolean[] temp = {false};
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        DocumentReference docRef = db.collection("Scenarios").document(pressed_scenario);
+        docRef.collection("accepted").get()
+            .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                    if (task.isSuccessful()) {
+                        for (QueryDocumentSnapshot document : task.getResult()) {
+                            Log.d("natigabi", document.getId().toString());
+                        }
+                        temp[0] = true;
+                    }
+                    else {
+                        Log.d("natigabi", "Error getting documents: ", task.getException());
+                    }
+                }
+            });
+
+        return temp[0];
     }
 
 }
