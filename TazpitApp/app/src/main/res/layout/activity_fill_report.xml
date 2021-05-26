@@ -101,8 +101,6 @@
         android:layout_marginTop="56dp"
         android:text="שלח"
         android:textSize="20dp"
-        app:backgroundTint="@color/mycyan"
-
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.551"
         app:layout_constraintStart_toStartOf="parent"
