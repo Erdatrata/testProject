@@ -5,20 +5,26 @@ import com.google.android.material.navigation.NavigationView;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.MenuItem;
 
 import com.google.firebase.auth.FirebaseAuth;
 
+import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import android.content.SharedPreferences;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity<imageView> extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     public static final String SHARED_PREFS = "sharedPrefs";
 
 
@@ -27,12 +33,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private Toolbar toolbar;
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
-
+    public ImageView nav_view_image;
     @Override
     public void onResume()
     {  // After a pause OR at startup
         super.onResume();
-
         NavigationView mNavigationView = (NavigationView) findViewById(R.id.nav_view);
         if(FirebaseAuth.getInstance().getCurrentUser() != null){
             mNavigationView.getMenu().setGroupVisible(R.id.logged_user_menu,true);
@@ -44,9 +49,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
     }
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        nav_view_image = (ImageView)findViewById(R.id.nav_view_image);
         try
         {
             this.getSupportActionBar().hide();
@@ -75,7 +83,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             mNavigationView.getMenu().setGroupVisible(R.id.unlogged_user_menu,true);
 
         }
+        final DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        ImageView menuIcon = (ImageView) findViewById(R.id.nav_view_image);
+        menuIcon.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                drawer.openDrawer(Gravity.RIGHT);
+            }
+        });
     }
+
 
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
