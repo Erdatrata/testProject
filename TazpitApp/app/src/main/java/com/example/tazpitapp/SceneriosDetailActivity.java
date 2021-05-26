@@ -13,6 +13,8 @@ package com.example.tazpitapp;
         import android.widget.TextView;
 
         import com.google.android.gms.tasks.OnCompleteListener;
+        import com.google.android.gms.tasks.OnFailureListener;
+        import com.google.android.gms.tasks.OnSuccessListener;
         import com.google.android.gms.tasks.Task;
         import com.google.firebase.auth.FirebaseAuth;
         import com.google.firebase.auth.FirebaseUser;
@@ -22,9 +24,12 @@ package com.example.tazpitapp;
         import com.google.firebase.firestore.QueryDocumentSnapshot;
         import com.google.firebase.firestore.QuerySnapshot;
 
+        import java.util.HashMap;
+        import java.util.Map;
+
 public class  SceneriosDetailActivity extends AppCompatActivity {
 
-    private FirebaseUser user;
+   // private FirebaseUser user;
     String pressed_scenario = "";
     TextView type_of_event;
     TextView city_of_event;
@@ -37,7 +42,6 @@ public class  SceneriosDetailActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scenerios_detail);
-        user = FirebaseAuth.getInstance().getCurrentUser();
         button_sign_event = (Button)findViewById(R.id.buttonScenario);
         btnScenarioCancel = (Button)findViewById(R.id.buttonScenarioCancel);
         btnScenarioFillReport = (Button)findViewById(R.id.buttonScenarioFillReport);
@@ -47,59 +51,52 @@ public class  SceneriosDetailActivity extends AppCompatActivity {
         button_sign_event.setVisibility(View.INVISIBLE);
            btnScenarioCancel.setVisibility(View.INVISIBLE);
          btnScenarioFillReport.setVisibility(View.INVISIBLE);
-        System.out.println(getIntent().getStringExtra("item_id"));
-        System.out.println(getIntent().getStringExtra("item_content"));
         pressed_scenario = getIntent().getStringExtra(SceneriosDetailFragment.ARG_ITEM_CONTENT);
-        is_user_is_accepted();
-//       if(is_user_is_accepted(userAccept)==true){
-//           button_sign_event.setVisibility(View.INVISIBLE);
-//           btnScenarioCancel.setVisibility(View.VISIBLE);
-//           btnScenarioFillReport.setVisibility(View.VISIBLE);
-//       }
-//       else{
-//           button_sign_event.setVisibility(View.VISIBLE);
-//           btnScenarioCancel.setVisibility(View.INVISIBLE);
-//           btnScenarioFillReport.setVisibility(View.INVISIBLE);
-//       }
-
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-        DocumentReference docRef = db.collection("Scenarios").document(pressed_scenario);
-        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                if (task.isSuccessful()) {
-
-                    DocumentSnapshot document = task.getResult();
-                    document.get("עיר").toString();
-                    type_of_event.setText(document.get("סוג האירוע").toString());
-                     city_of_event.setText(document.get("עיר").toString());
-                    // gps_event.setText(document.get("מיקום").toString());
-                    if (document.exists()) {
-                        Log.d("nati_test", "DocumentSnapshot data: " + document.getData());
-                    } else {
-                        Log.d("nati_test", "No such document");
-                    }
-                } else {
-                    Log.d("nati_test", "get failed with ", task.getException());
-                }
-            }
-        });
-//        btnScenarioFillReport.setOnClickListener(new View.OnClickListener(){
-//            @Override
-//            public void onClick(View v)
-//            {
-//
-//            }
-//            });
-
-    }
-
-    private void is_user_is_accepted()
-    {
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-        DocumentReference docRef = db.collection("Scenarios").document(pressed_scenario);
+        DocumentReference docRef =db.collection("Scenarios").document(pressed_scenario);
+        is_user_is_accepted(docRef, user); //checks if user accepted before the Event
+        showTheScenarioDetail(docRef); //decides which buttons to show according whether the user is signed as accepted or not
+        button_sign_event.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //pushing the user id under accepted in the scenario
+                Map<String, Object> data = new HashMap<>();
+                data.put("isSigned", true);
+                docRef.collection("accepted").document(user.getUid()).set(data);
+                finish();
+                startActivity(getIntent());
+            }
+        });
+        btnScenarioCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //remove the user id from the accepted in the scenario
+               removeUserFromAccept(docRef, user);
+
+            }
+        });
+        btnScenarioFillReport.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //user decides to fill report and we take him to fill report activity
+                String data = getIntent().getStringExtra(SceneriosDetailFragment.ARG_ITEM_CONTENT);
+                Intent intent = new Intent(SceneriosDetailActivity.this,fillReport.class);
+                intent.putExtra("pressed scenario", data);
+                startActivity(intent);
+
+            }
+        });
+
+
+    }
+
+
+
+    private void is_user_is_accepted(DocumentReference docRef, FirebaseUser user)
+    {
+
         docRef.collection("accepted").get()
             .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                 @Override
@@ -134,5 +131,44 @@ public class  SceneriosDetailActivity extends AppCompatActivity {
             });
 
     }
+private void showTheScenarioDetail(DocumentReference docRef){
+    docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+        @Override
+        public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+            if (task.isSuccessful()) {
 
+                DocumentSnapshot document = task.getResult();
+                document.get("עיר").toString();
+                type_of_event.setText(document.get("סוג האירוע").toString());
+                city_of_event.setText(document.get("עיר").toString());
+                // gps_event.setText(document.get("מיקום").toString());
+                if (document.exists()) {
+                    Log.d("nati_test", "DocumentSnapshot data: " + document.getData());
+                } else {
+                    Log.d("nati_test", "No such document");
+                }
+            } else {
+                Log.d("nati_test", "get failed with ", task.getException());
+            }
+        }
+    });
+}
+private void removeUserFromAccept(  DocumentReference docRef, FirebaseUser user){
+    docRef.collection("accepted").document(user.getUid())
+            .delete()
+            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                @Override
+                public void onSuccess(Void aVoid) {
+                    Log.d("test55", "DocumentSnapshot successfully deleted!");
+                    finish();
+                    startActivity(getIntent());
+                }
+            })
+            .addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Log.w("test56", "Error deleting document", e);
+                }
+            });
+}
 }
