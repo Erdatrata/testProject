@@ -1,4 +1,4 @@
-package com.example.tazpitapp;
+package com.example.tazpitapp.assistClasses;
 
 public class constants {
 

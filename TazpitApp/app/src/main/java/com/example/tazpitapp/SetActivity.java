@@ -14,7 +14,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
-import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -25,6 +24,7 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 
+import com.example.tazpitapp.assistClasses.constants;
 import com.example.tazpitapp.assistClasses.dayTime;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -475,6 +475,34 @@ public class SetActivity extends AppCompatActivity {
 
 
 
+    }
+
+    private static int name2id(String id){
+        int toReturn=0;
+        switch(id){
+            case "sunday":
+                toReturn=R.id.day_sunday;
+                break;
+            case "monday":
+                toReturn=R.id.day_monday;
+                break;
+            case "tuesday":
+                toReturn=R.id.day_tuesday;
+                break;
+            case "wednesday":
+                toReturn=R.id.day_wednesday;
+                break;
+            case "thursday":
+                toReturn=R.id.day_thursday;
+                break;
+            case "friday":
+                toReturn=R.id.day_friday;
+                break;
+            case "saturday":
+                toReturn=R.id.day_saturday;
+                break;
+        }
+        return toReturn;
     }
 
     private boolean RequestPermissionCall(){//true if needed false if permmison alridy given
