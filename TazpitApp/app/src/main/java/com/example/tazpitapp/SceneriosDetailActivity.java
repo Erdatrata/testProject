@@ -32,6 +32,7 @@ public class  SceneriosDetailActivity extends AppCompatActivity {
     public Button button_sign_event;
     public Button btnScenarioCancel;
     public Button btnScenarioFillReport;
+    public boolean userAccept=false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,10 +44,23 @@ public class  SceneriosDetailActivity extends AppCompatActivity {
         type_of_event = (TextView)findViewById(R.id.eventType);
         city_of_event = (TextView)findViewById(R.id.cityGetScenario);
         gps_event = (TextView)findViewById(R.id.gpsLink);
+        button_sign_event.setVisibility(View.INVISIBLE);
+           btnScenarioCancel.setVisibility(View.INVISIBLE);
+         btnScenarioFillReport.setVisibility(View.INVISIBLE);
         System.out.println(getIntent().getStringExtra("item_id"));
         System.out.println(getIntent().getStringExtra("item_content"));
         pressed_scenario = getIntent().getStringExtra(SceneriosDetailFragment.ARG_ITEM_CONTENT);
         is_user_is_accepted();
+//       if(is_user_is_accepted(userAccept)==true){
+//           button_sign_event.setVisibility(View.INVISIBLE);
+//           btnScenarioCancel.setVisibility(View.VISIBLE);
+//           btnScenarioFillReport.setVisibility(View.VISIBLE);
+//       }
+//       else{
+//           button_sign_event.setVisibility(View.VISIBLE);
+//           btnScenarioCancel.setVisibility(View.INVISIBLE);
+//           btnScenarioFillReport.setVisibility(View.INVISIBLE);
+//       }
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         DocumentReference docRef = db.collection("Scenarios").document(pressed_scenario);
@@ -80,9 +94,10 @@ public class  SceneriosDetailActivity extends AppCompatActivity {
 
     }
 
-    private boolean is_user_is_accepted()
+    private void is_user_is_accepted()
     {
-        boolean[] temp = {false};
+
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         DocumentReference docRef = db.collection("Scenarios").document(pressed_scenario);
         docRef.collection("accepted").get()
@@ -90,10 +105,27 @@ public class  SceneriosDetailActivity extends AppCompatActivity {
                 @Override
                 public void onComplete(@NonNull Task<QuerySnapshot> task) {
                     if (task.isSuccessful()) {
+                        int indicator=0;
                         for (QueryDocumentSnapshot document : task.getResult()) {
-                            Log.d("natigabi", document.getId().toString());
+                            if(user.getUid().toString().equals(document.getId().toString())) {
+                                indicator=1;
+                                Log.d("natigabi2", "hatamaaaaaa");
+
+
+
+                            }
                         }
-                        temp[0] = true;
+                        if(indicator==1){
+                            button_sign_event.setVisibility(View.INVISIBLE);
+                            btnScenarioCancel.setVisibility(View.VISIBLE);
+                            btnScenarioFillReport.setVisibility(View.VISIBLE);
+                        }
+                        if(indicator==0){
+                            button_sign_event.setVisibility(View.VISIBLE);
+                            btnScenarioCancel.setVisibility(View.INVISIBLE);
+                            btnScenarioFillReport.setVisibility(View.INVISIBLE);
+                        }
+
                     }
                     else {
                         Log.d("natigabi", "Error getting documents: ", task.getException());
@@ -101,7 +133,6 @@ public class  SceneriosDetailActivity extends AppCompatActivity {
                 }
             });
 
-        return temp[0];
     }
 
 }
