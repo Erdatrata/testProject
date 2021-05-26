@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import android.text.TextUtils;
 import android.util.Log;
 import android.util.Patterns;
+import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -59,6 +60,7 @@ public class LoginActivity extends AppCompatActivity {
             Toast.makeText(this, "אתם כבר מחוברים!", Toast.LENGTH_SHORT).show();
             finish();
         }
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_login);
 
 
@@ -202,6 +204,5 @@ public class LoginActivity extends AppCompatActivity {
         });
 
     }
-
 }
 

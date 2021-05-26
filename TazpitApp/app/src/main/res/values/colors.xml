@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="mycyan">#77B4BC</color>
+    <color name="tps_color">#2196F3</color>
     <color name="purple">#BAF8CDF8</color>
     <color name="purpleSec">#B0CFC0CF</color>
     <color name="purple_500">#FF6200EE</color>

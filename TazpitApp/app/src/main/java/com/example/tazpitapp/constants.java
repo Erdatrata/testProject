@@ -11,12 +11,14 @@ public class constants {
 
 
 
+
     //Shared preferences name of each file saved for sharing data
     public static final String SHARED_PREFS = "sharedPrefs";//main file for shared preferences
     //GPS VARS
     public static final String longOfGps = "longofgps";
     public static final String latOfGps ="latofgps";
     public static final String gpsState="gpsstate";
+    
     //TIME VARS
     //to get key of certain day, create a string containing its name like this:
     //String key = "" +R.id.day_*

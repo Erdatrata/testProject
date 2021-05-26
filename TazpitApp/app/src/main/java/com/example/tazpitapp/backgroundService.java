@@ -196,7 +196,7 @@ public class backgroundService extends Service {
     //            }
     public  String Range(GeoPoint gpsLocation) throws IOException {
         String re="";
-
+            if(gpsLocation==null){throw new IOException("");}
             double latCurrent=0;
             double lonCurrent=0;
             if(getStateOfGps()){
