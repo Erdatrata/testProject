@@ -81,14 +81,14 @@ public class  SceneriosDetailActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //user decides to fill report and we take him to fill report activity
-                String data = getIntent().getStringExtra(SceneriosDetailFragment.ARG_ITEM_ID);
+                String data = getIntent().getStringExtra(SceneriosDetailFragment.ARG_ITEM_CONTENT);
                 Intent intent = new Intent(SceneriosDetailActivity.this,fillReport.class);
                 intent.putExtra("pressed scenario", data);
                 startActivity(intent);
 
             }
         });
-        
+
 
     }
 

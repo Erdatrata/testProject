@@ -78,7 +78,7 @@ public class fillReport extends AppCompatActivity {
         credit = (CheckBox) findViewById(R.id.fill_report_add_credit);
         mAuth = FirebaseAuth.getInstance();
         String scenarioPressed = getIntent().getStringExtra("pressed scenario");
-        mDocRef = FirebaseFirestore.getInstance().document("Scenarios/" + scenarioPressed+"/"+mAuth.getCurrentUser().getEmail()+"/"+mAuth.getCurrentUser().getEmail()+" report:");
+        mDocRef = FirebaseFirestore.getInstance().document("Scenarios/" + scenarioPressed+"/"+"filled/"+mAuth.getCurrentUser().getUid() +" report:");
 
         pickMedia.setOnClickListener(new View.OnClickListener() { //when pressing the upload media button we go here
             //and choose media
