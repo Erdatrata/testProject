@@ -51,21 +51,19 @@ public class  SceneriosDetailActivity extends AppCompatActivity {
         button_sign_event.setVisibility(View.INVISIBLE);
            btnScenarioCancel.setVisibility(View.INVISIBLE);
          btnScenarioFillReport.setVisibility(View.INVISIBLE);
-       // System.out.println(getIntent().getStringExtra("item_id"));
-       // System.out.println(getIntent().getStringExtra("item_content"));
         pressed_scenario = getIntent().getStringExtra(SceneriosDetailFragment.ARG_ITEM_CONTENT);
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         DocumentReference docRef =db.collection("Scenarios").document(pressed_scenario);
-        is_user_is_accepted(docRef, user);
-        showTheScenarioDetail(docRef);
+        is_user_is_accepted(docRef, user); //checks if user accepted before the Event
+        showTheScenarioDetail(docRef); //decides which buttons to show according whether the user is signed as accepted or not
         button_sign_event.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //pushing the user id under accepted in the scenario
                 Map<String, Object> data = new HashMap<>();
                 data.put("isSigned", true);
-
                 docRef.collection("accepted").document(user.getUid()).set(data);
                 finish();
                 startActivity(getIntent());
@@ -74,6 +72,7 @@ public class  SceneriosDetailActivity extends AppCompatActivity {
         btnScenarioCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //remove the user id from the accepted in the scenario
                removeUserFromAccept(docRef, user);
 
             }
@@ -81,6 +80,7 @@ public class  SceneriosDetailActivity extends AppCompatActivity {
         btnScenarioFillReport.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //user decides to fill report and we take him to fill report activity
                 String data = getIntent().getStringExtra(SceneriosDetailFragment.ARG_ITEM_ID);
                 Intent intent = new Intent(SceneriosDetailActivity.this,fillReport.class);
                 intent.putExtra("pressed scenario", data);
@@ -88,14 +88,7 @@ public class  SceneriosDetailActivity extends AppCompatActivity {
 
             }
         });
-
-//        btnScenarioFillReport.setOnClickListener(new View.OnClickListener(){
-//            @Override
-//            public void onClick(View v)
-//            {
-//
-//            }
-//            });
+        
 
     }
 
