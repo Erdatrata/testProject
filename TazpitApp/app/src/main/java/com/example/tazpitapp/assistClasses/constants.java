@@ -1,5 +1,7 @@
 package com.example.tazpitapp.assistClasses;
 
+import com.example.tazpitapp.R;
+
 public class constants {
 
     //gps id and location state
@@ -26,6 +28,68 @@ public class constants {
     //String key = ""+R.id.day_saturday
     //String value = sharedpreferences.getString(key, "DEFAULT");
     //dayTime dt = gson.fromJson(value, dayTime.class);
+
+    //function meant for translating the name
+    // value from the server into the proper sharedprefs key
+    public static int name2id(String id){
+        int toReturn=0;
+        switch(id){
+            case "sunday":
+                toReturn= R.id.day_sunday;
+                break;
+            case "monday":
+                toReturn=R.id.day_monday;
+                break;
+            case "tuesday":
+                toReturn=R.id.day_tuesday;
+                break;
+            case "wednesday":
+                toReturn=R.id.day_wednesday;
+                break;
+            case "thursday":
+                toReturn=R.id.day_thursday;
+                break;
+            case "friday":
+                toReturn=R.id.day_friday;
+                break;
+            case "saturday":
+                toReturn=R.id.day_saturday;
+                break;
+        }
+        return toReturn;
+    }
+
+    //function meant for translating the sharedprefs key
+    // value from the device into the proper server key
+    public static String id2name(int id){
+        String toReturn="";
+        switch(id){
+            case R.id.day_sunday:
+                toReturn= "sunday";
+                break;
+            case R.id.day_monday:
+                toReturn="monday";
+                break;
+            case R.id.day_tuesday:
+                toReturn="tuesday";
+                break;
+            case R.id.day_wednesday:
+                toReturn="wednesday";
+                break;
+            case R.id.day_thursday:
+                toReturn="thursday";
+                break;
+            case R.id.day_friday:
+                toReturn="friday";
+                break;
+            case R.id.day_saturday:
+                toReturn="saturday";
+                break;
+        }
+        return toReturn;
+    }
+
+
 
 
 }

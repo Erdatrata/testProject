@@ -427,12 +427,16 @@ public class SetActivity extends AppCompatActivity {
             //unsave unsaved
             unsaved = false;
         }
+        Map<String, String> docData = new HashMap<>();
         //put the dayTimes back into the sp
         for (Button v : daysArr) {
             String idd = "" + v.getId();
             String tidd = "temp_" + idd;
             String toPut = sharedpreferences.getString(tidd, null);
+            //put in sp locally
             editor.putString(idd, toPut);
+            //put in hashmap for sending to server
+            docData.put(constants.id2name(v.getId()),toPut);
         }
 
         //put gps-city into locationPref
@@ -456,14 +460,16 @@ public class SetActivity extends AppCompatActivity {
         String UID = userIdentifier.getCurrentUser().getUid();
 
         DocumentReference DRF = FirebaseFirestore.getInstance().document("Users/"+UID);
-        Map<String, String> docData = new HashMap<>();
         docData.put("location",sharedpreferences.getString("location","default"));
+
+
+
+        //send
         DRF.set(docData).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void unused) {
                 Log.d("Setting succ", "Setting update success");
                 Toast.makeText(getApplicationContext(), "העלאת האירוע בוצעה בהצלחה", Toast.LENGTH_LONG).show();
-
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
@@ -475,34 +481,6 @@ public class SetActivity extends AppCompatActivity {
 
 
 
-    }
-
-    private static int name2id(String id){
-        int toReturn=0;
-        switch(id){
-            case "sunday":
-                toReturn=R.id.day_sunday;
-                break;
-            case "monday":
-                toReturn=R.id.day_monday;
-                break;
-            case "tuesday":
-                toReturn=R.id.day_tuesday;
-                break;
-            case "wednesday":
-                toReturn=R.id.day_wednesday;
-                break;
-            case "thursday":
-                toReturn=R.id.day_thursday;
-                break;
-            case "friday":
-                toReturn=R.id.day_friday;
-                break;
-            case "saturday":
-                toReturn=R.id.day_saturday;
-                break;
-        }
-        return toReturn;
     }
 
     private boolean RequestPermissionCall(){//true if needed false if permmison alridy given
