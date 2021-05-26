@@ -21,16 +21,9 @@ com/example/tazpitapp/AboutActivity.java
  com.example.tazpitapp.AboutActivity
 com/example/tazpitapp/constants.java
  com.example.tazpitapp.constants
-com/example/tazpitapp/LoginActivity.java
- com.example.tazpitapp.LoginActivity
- com.example.tazpitapp.LoginActivity$1
- com.example.tazpitapp.LoginActivity$1$1
- com.example.tazpitapp.LoginActivity$2
- com.example.tazpitapp.LoginActivity$3
- com.example.tazpitapp.LoginActivity$3$1
- com.example.tazpitapp.LoginActivity$3$1$1
- com.example.tazpitapp.LoginActivity$3$1$2
- com.example.tazpitapp.LoginActivity$3$2
+com/example/tazpitapp/SignUp.java
+ com.example.tazpitapp.SignUp
+ com.example.tazpitapp.SignUp$1
 com/example/tazpitapp/Range.java
  com.example.tazpitapp.Range
 com/example/tazpitapp/SceneriosDetailFragment.java
@@ -82,7 +75,6 @@ com/example/tazpitapp/register.java
  com.example.tazpitapp.register$register1
  com.example.tazpitapp.register$register1$1
  com.example.tazpitapp.register$register1$2
- com.example.tazpitapp.register$register1$3
  com.example.tazpitapp.register$register2
  com.example.tazpitapp.register$register2$1
  com.example.tazpitapp.register$register2$2
@@ -90,5 +82,13 @@ com/example/tazpitapp/register.java
  com.example.tazpitapp.register$register3$1
  com.example.tazpitapp.register$register3$1$1
  com.example.tazpitapp.register$register3$2
-com/example/tazpitapp/SignUp.java
- com.example.tazpitapp.SignUp
+com/example/tazpitapp/LoginActivity.java
+ com.example.tazpitapp.LoginActivity
+ com.example.tazpitapp.LoginActivity$1
+ com.example.tazpitapp.LoginActivity$1$1
+ com.example.tazpitapp.LoginActivity$2
+ com.example.tazpitapp.LoginActivity$3
+ com.example.tazpitapp.LoginActivity$3$1
+ com.example.tazpitapp.LoginActivity$3$1$1
+ com.example.tazpitapp.LoginActivity$3$1$2
+ com.example.tazpitapp.LoginActivity$3$2

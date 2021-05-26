@@ -1,8 +1,10 @@
 package com.example.tazpitapp;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.method.PasswordTransformationMethod;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
@@ -42,6 +44,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -63,14 +66,22 @@ class register {
 
         //Edit test on front of the activity
         private static FirebaseAuth mAuth;//create auth file
-        private EditText email;
-        private EditText FName;
-        private EditText LName;
-        private EditText city;
-        private EditText phone;
-        private EditText password1;
-        private EditText password2;
-
+        private TextInputLayout email;
+        private TextInputLayout FName;
+        private TextInputLayout LName;
+        private AutoCompleteTextView city;
+        private  TextInputLayout phone;
+        private  TextInputLayout  password1;
+        private TextInputLayout password2;
+        private  static  final  Pattern PASSWORD_PATTERN=
+                Pattern.compile("^" +
+                        "(?=.*[0-9])" +
+                        "(?=.*[a-z])" +
+                        "(?=.*[A-Z])" +
+                        "(?=.*[!@#$%^&+=])" +
+                        "(?=\\S+$)" +
+                        ".{7,}" +
+                        "$");
 
         private Button back;
         private Button next;
@@ -82,7 +93,7 @@ class register {
 
         }
         private boolean cheakPassword(){//call 2 funcation plus minimum of 8
-            String password=password1.getText().toString();
+            String password=password1.getEditText().getText().toString();
 
             if(password.length()<8||!ContainSpecial(password)||!noUpper(password)){return false;}
             return true;}
@@ -101,26 +112,26 @@ class register {
         }
 
         private boolean checkEqualPassword(){
-            if(password1.getText().toString().equals(password2.getText().toString())){return true;}return false;
+            if(password1.getEditText().getText().toString().equals(password2.getEditText().getText().toString())){return true;}return false;
 
 
 
         }
         private boolean Integritycheck(){//check all fileds have context
-            String mail=email.getText().toString();
-            String password=password1.getText().toString();
-            String passwordAgain=password2.getText().toString();
+            String mail=email.getEditText().getText().toString();
+            String password=password1.getEditText().getText().toString();
+            String passwordAgain=password2.getEditText().getText().toString();
             String city=this.city.getText().toString();
-            String fname=FName.getText().toString();
-            String Lname=this.LName.getText().toString();
-            String phone=this.phone.getText().toString();
+            String fname=FName.getEditText().getText().toString();
+            String Lname=this.LName.getEditText().getText().toString();
+            String phone=this.phone.getEditText().getText().toString();
             if(mail.length()<1||password.length()<1||passwordAgain.length()<1||city.length()<1||fname.length()<1||Lname.length()<1||phone.length()<1){return false;}return true;
         }
         //    private boolean checkMailWithDB(){}
 //    private boolean cheakCity(){}
         private boolean checkMailIntegrity(){//check if it has @
 
-            String mail=email.getText().toString();
+            String mail=email.getEditText().getText().toString();
             if(mail.contains("@")==false){return false;}
             return true;
         }
@@ -136,59 +147,72 @@ class register {
 
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
+            try
+            {
+                this.getSupportActionBar().hide();
+            }
+            catch (NullPointerException e){}
             setContentView(R.layout.register);
             mAuth = FirebaseAuth.getInstance();
             til_city=(TextInputLayout)findViewById((R.id.til_city));
-            act_city=(AutoCompleteTextView)findViewById((R.id.act_city));
+            act_city= (AutoCompleteTextView) findViewById((R.id.act_city));
             get_json();
             arrayAdapter_city=new ArrayAdapter<>(getApplicationContext(),R.layout.support_simple_spinner_dropdown_item,ArrList);
             act_city.setAdapter(arrayAdapter_city);
             act_city.setThreshold(1);
 
-            email = (EditText) findViewById(R.id.Email);
-            city = (EditText) findViewById(R.id.act_city);
-            FName = (EditText) findViewById(R.id.FirstName);
-            LName = (EditText) findViewById(R.id.LastName);
-            password1 = (EditText) findViewById(R.id.Password);
-            password2 = (EditText) findViewById(R.id.passwordAgain);
-            phone = (EditText) findViewById(R.id.PhoneNumber);
+            email = (TextInputLayout ) findViewById(R.id.Email);
+            city = (AutoCompleteTextView) findViewById(R.id.act_city);
+            FName = (TextInputLayout) findViewById(R.id.FirstName);
+            LName = (TextInputLayout) findViewById(R.id.LastName);
+            password1 = (TextInputLayout) findViewById(R.id.Password);
+            password2 = (TextInputLayout) findViewById(R.id.passwordAgain);
+            phone = (TextInputLayout) findViewById(R.id.PhoneNumber);
 
-            back = (Button) findViewById(R.id.back);
+          // back =  (Button)findViewById(R.id.back);
             next = (Button) findViewById(R.id.next);
-
-            back.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-
-                }
-            });
+//
+//            back.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View view) {
+//
+//                }
+//            });
 
             next.setOnClickListener(new View.OnClickListener() {
+                @SuppressLint("WrongConstant")
                 @Override
                 public void onClick(View view) {
                     if(!Integritycheck()||!checkMailIntegrity()||!cheakPassword()||!checkEqualPassword()){
                         String msg="";
-                        if(!Integritycheck()){msg=msg+"some fields are empty\n";}
-                        if(!checkMailIntegrity()){msg=msg+"mail need @\n";}
+                        if(!Integritycheck()){msg=msg+"יש לך שדות ריקות \n";
+                       
+                        }
+                        if (!Patterns.EMAIL_ADDRESS.matcher( email.getEditText().getText().toString()).matches()) {//if the email is proper
+                           msg=msg+"איימל לא תקינה\n";
+
+                        }
                         //if(!mailInUse()){msg=msg+"mail in use";}
-                        if(!cheakPassword()){msg=msg+"password mush contain symbols and upper letters\n";}
-                        if(!checkEqualPassword()){msg=msg+"passwords are not equal";}
+                        if(!PASSWORD_PATTERN.matcher(password1.getEditText().getText().toString()).matches()){//if the password is proper
+                            msg=msg+"סיסמה לא תקינה\n";
+
+                        }
+                        if(!checkEqualPassword()){msg=msg+"סיסמאות לא תואמות\n";
+
+                        }
 
                         Toast.makeText(view.getContext(), msg, 5000 ).show();
 
                     }
                     else{
-                        mailSTR=email.getText().toString();
-                        passwordSTR=password1.getText().toString();
-                        fNameSTR=FName.getText().toString();
-                        LNameSTR=LName.getText().toString();
+                        mailSTR=email.getEditText().getText().toString();
+                        passwordSTR=password1.getEditText().getText().toString();
+                        fNameSTR=FName.getEditText().getText().toString();
+                        LNameSTR=LName.getEditText().getText().toString();
                         citySTR=city.getText().toString();
-                        phoneNumberSTR=phone.getText().toString();
-
+                        phoneNumberSTR=phone.getEditText().getText().toString();
                         Intent intent = new Intent(view.getContext(), register2.class);
                         startActivity(intent);
-
-
 
                     }
                 }
@@ -197,7 +221,7 @@ class register {
 
         }
         private boolean mailInUse() {
-            String mail=email.getText().toString();
+            String mail=email.getEditText().getText().toString();
             final boolean[] re = {false};
             Object object=new Object();
 
