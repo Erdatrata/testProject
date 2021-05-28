@@ -106,7 +106,7 @@ public class LoginActivity extends AppCompatActivity {
 //                            startActivity(new Intent(getApplicationContext(),MainActivity.class));
 
                             //clear old sp once more
-//                            FirebaseAuth.getInstance().signOut();
+                            FirebaseAuth.getInstance().signOut();
                             SharedPreferences sharedpreferences = getSharedPreferences(constants.SHARED_PREFS,
                                     Context.MODE_PRIVATE);
                             SharedPreferences.Editor editor = sharedpreferences.edit();
@@ -124,12 +124,6 @@ public class LoginActivity extends AppCompatActivity {
                                         System.out.println(document);
                                         String loc = document.get("location").toString();
                                         System.out.println("location "+loc);
-                                        for(int g: constants.daysID){
-                                            String day = constants.id2name(g);
-                                            String idd = ""+g;
-                                            String toStore = document.get(day).toString();
-                                            editor.putString(idd,toStore);
-                                        }
 //                                        type_of_event.setText(document.get("סוג האירוע").toString());
 //                                        city_of_event.setText(document.get("עיר").toString());
 //                                        // gps_event.setText(document.get("מיקום").toString());

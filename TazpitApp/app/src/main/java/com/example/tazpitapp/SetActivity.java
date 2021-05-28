@@ -84,12 +84,14 @@ public class SetActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        try{
+        try
+        {
             this.getSupportActionBar().hide();
         }
         catch (NullPointerException e){}
 
         setContentView(R.layout.activity_set);
+
 
         //set all the buttons for the settings activity
         //location settings
@@ -128,7 +130,7 @@ public class SetActivity extends AppCompatActivity {
             dayTime dtDEF = new dayTime(0, 0, 0, 1);//default for first time
             String dtDEFSTR = gson.toJson(dtDEF);
             for (Button v : daysArr) {
-                String idd = constants.id2name(v.getId());
+                String idd = "" + v.getId();
                 String tidd = "temp_" + idd;
                 String dt = sharedpreferences.getString(idd, dtDEFSTR);
                 editor.putString(tidd, dt);
@@ -183,6 +185,7 @@ public class SetActivity extends AppCompatActivity {
             day.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
                     changeDay(v);
+//                    Toast.makeText(SetActivity.this, ""+v.getId(), Toast.LENGTH_SHORT).show();
                 }
             });
         }
@@ -192,6 +195,7 @@ public class SetActivity extends AppCompatActivity {
             b.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
                     popTimePicker(v);
+//                    Toast.makeText(SetActivity.this, ""+v.getId(), Toast.LENGTH_SHORT).show();
                 }
             });
         }
@@ -200,7 +204,7 @@ public class SetActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(rightNow==null){
-                    Toast.makeText(SetActivity.this, R.string.set_toast_plsChooseDay
+                    Toast.makeText(SetActivity.this, "אנא בחרו באחד הימים בכפתורים מימין"
                             , Toast.LENGTH_SHORT).show();
                     return;
                 }
@@ -237,13 +241,13 @@ public class SetActivity extends AppCompatActivity {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if(requestCode == 105){//if checking for gps permission
             if(grantResults[0]==PackageManager.PERMISSION_GRANTED){
-                Toast.makeText(this, R.string.set_toast_gpsGranted,
+                Toast.makeText(this, "ההרשאה התקבלה",
                         Toast.LENGTH_SHORT).show();
                 if(!RequestPermissionCall())
 //                    startLocationService();
-                    editor.putString("location_temp","GPS");
+                editor.putString("location_temp","GPS");
             } else {
-                Toast.makeText(this, R.string.set_toast_gpsDenied,
+                Toast.makeText(this, "ההרשאה נדחתה, אנא אשרו אותה במידה ותרצו להשתמש בתכונה",
                         Toast.LENGTH_LONG).show();
                 editor.putString("location_temp","city");
                 cityButton.setChecked(true);
@@ -258,7 +262,7 @@ public class SetActivity extends AppCompatActivity {
                 startLocationService();
             }
             else{
-                Toast.makeText(this, R.string.set_toast_gpsDenied, Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Permission denied!", Toast.LENGTH_SHORT).show();
             }
         }
     }
@@ -269,9 +273,9 @@ public class SetActivity extends AppCompatActivity {
         RadioButton checkedButton = (RadioButton) group.findViewById
                 (locationRadioGroup.getCheckedRadioButtonId());
 
-//        String toString = "לפי מיקום GPS";
+        String toString = "לפי מיקום GPS";
         if (checkedButton.getId() != gpsButton.getId()) {
-//            toString = "לפי עיר";
+            toString = "לפי עיר";
             stopLocationService();
         } else {
             //open dialogue requesting user authorization to use gps location
@@ -279,39 +283,50 @@ public class SetActivity extends AppCompatActivity {
                     != PackageManager.PERMISSION_GRANTED){
 
 
-                new AlertDialog.Builder(SetActivity.this)
-                        .setTitle(R.string.set_alert_title)
-                        .setMessage(R.string.set_alert_message)
-                        .setPositiveButton(R.string.set_alert_accept, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
+            new AlertDialog.Builder(SetActivity.this)
+                    .setTitle("צורך בקבלת אישור מיקום")
+                    .setMessage("על מנת שנוכל ליידע אותך על אירועים באיזור," +
+                            " אנא אשרו לנו לקבל את מיקומכם.")
+                    .setPositiveButton("למעבר לאישור", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            //Prompt the user once explanation has been shown
+//                            if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+                                //if phone version is M or greater
                                 if(getApplicationContext().checkSelfPermission(Manifest.permission.ACCESS_BACKGROUND_LOCATION)
                                         == PackageManager.PERMISSION_GRANTED){
-                                    Toast.makeText(SetActivity.this, R.string.set_toast_gpsGranted,
+                                    Toast.makeText(SetActivity.this, "שימוש במיקום אושר",
                                             Toast.LENGTH_SHORT).show();
                                     if(!RequestPermissionCall())
                                         startLocationService();
                                 } else {
                                     requestPermissions(new String[]
-                                            {Manifest.permission.ACCESS_BACKGROUND_LOCATION},105);
+                                        {Manifest.permission.ACCESS_BACKGROUND_LOCATION},105);
                                 }
-                            }
-                        }).setNeutralButton(R.string.set_alert_deny, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        //in case user didn't want to authorize us location
-                        cityButton.setChecked(true);
-                        gpsButton.setChecked(!true);
-                    }
-                }).setCancelable(false)
-                        .create()
-                        .show();
-            }
-            else {
-                if(!RequestPermissionCall())
-                    startLocationService();
-            }}
-//        Toast.makeText(SetActivity.this,"בדיקת מיקום: "+ toString, Toast.LENGTH_SHORT).show();
+
+
+//                            } else {
+//                                Toast.makeText(SetActivity.this, "שימוש במיקום אושר",
+//                                        Toast.LENGTH_SHORT).show();
+//                                editor.putString("location_temp","GPS");
+//                            }
+                        }
+                    }).setNeutralButton("ביטול", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    //in case user didn't want to authorize us location
+                    cityButton.setChecked(true);
+                    gpsButton.setChecked(!true);
+                }
+            }).setCancelable(false)
+                    .create()
+                    .show();
+        }
+        else {
+            if(!RequestPermissionCall())
+                startLocationService();
+        }}
+        Toast.makeText(SetActivity.this,"בדיקת מיקום: "+ toString, Toast.LENGTH_SHORT).show();
         editor.commit();
     }
 
@@ -325,10 +340,10 @@ public class SetActivity extends AppCompatActivity {
             unsaved = false;
         }
         rightNow = (Button) v;
-        String tidd = "temp_"+constants.id2name(v.getId());
+        String idd = "temp_" + v.getId();
 
         dayTime dtDEF = new dayTime(0, 0, 0, 1);//default for first time
-        String dtGetString = sharedpreferences.getString(tidd, "DEFAULT");
+        String dtGetString = sharedpreferences.getString(idd, "DEFAULT");
         dayTime dtGET;
 
         if (!dtGetString.equals("DEFAULT"))
@@ -346,12 +361,21 @@ public class SetActivity extends AppCompatActivity {
         ((Button) findViewById(R.id.timePickerSettingsTo)).setText(
                 String.format(Locale.getDefault(), "%02d:%02d", hoursEnd, minutesEnd));
 
+
+        //how to store gson back
+//        toToast="Time:\t"+dtGET+", delte:\t"+dtGET.calcDelta();
+//        Toast.makeText(getApplicationContext(), toToast, Toast.LENGTH_SHORT).show();
+//        //add 1 hour to time
+//        dtGET.setHourEnd(dtGET.getHourEnd()+1);
+//        dtGetString=gson.toJson(dtGET);
+//        editor.putString("time",dtGetString);
+//        editor.commit();
     }
 
     //function to call and set the timer hours
     public void popTimePicker(View v) {
         if (rightNow == null) {
-            Toast.makeText(this, R.string.set_toast_plsChooseDay, Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "אנא בחרו באחד הימים בכפתורים מימין ", Toast.LENGTH_LONG).show();
             return;
         }
         if (v.getId() == R.id.timePickerSettingsFrom) {
@@ -375,7 +399,7 @@ public class SetActivity extends AppCompatActivity {
                     //check for time correctness here (time should be chronological)
                     if (hourOfDay > hoursEnd || ((hourOfDay == hoursEnd) && (minutes >= minutesEnd))) {
                         Toast.makeText(SetActivity.this,
-                                R.string.set_toast_cantSetStartLater, Toast.LENGTH_LONG).show();
+                                "לא ניתן לכוון זמן התחלה מאוחר מזמן סיום", Toast.LENGTH_LONG).show();
                         return;
                     }
                     hourStart = hourOfDay;
@@ -385,7 +409,7 @@ public class SetActivity extends AppCompatActivity {
                     //check for time correctness here also
                     if (hourOfDay < hourStart || ((hourOfDay == hourStart) && (minutes <= minuteStart))) {
                         Toast.makeText(SetActivity.this,
-                                R.string.set_toast_cantSetEndFirst, Toast.LENGTH_LONG).show();
+                                "לא ניתן לכוון זמן סיום מוקדם מזמן התחלה", Toast.LENGTH_LONG).show();
                         return;
                     }
                     hoursEnd = hourOfDay;
@@ -409,7 +433,7 @@ public class SetActivity extends AppCompatActivity {
     //saves number into a temp in sp
     public static void saveTemp() {
         String dtKey = "";
-        String temp = "temp_"+(constants.id2name((rightNow).getId()));
+        String temp = tempName((rightNow).getId());
 
         dayTime toPut = new dayTime(hourStart, minuteStart, hoursEnd, minutesEnd);
         String stringified = gson.toJson(toPut);
@@ -433,7 +457,7 @@ public class SetActivity extends AppCompatActivity {
         Map<String, String> docData = new HashMap<>();
         //put the dayTimes back into the sp
         for (Button v : daysArr) {
-            String idd = constants.id2name(v.getId());
+            String idd = "" + v.getId();
             String tidd = "temp_" + idd;
             String toPut = sharedpreferences.getString(tidd, null);
             //put in sp locally
@@ -472,7 +496,7 @@ public class SetActivity extends AppCompatActivity {
             @Override
             public void onSuccess(Void unused) {
                 Log.d("Setting succ", "Setting update success");
-                Toast.makeText(getApplicationContext(), R.string.set_toast_success, Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "העלאת האירוע בוצעה בהצלחה", Toast.LENGTH_LONG).show();
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
