@@ -46,9 +46,9 @@
 
         <RadioButton
             android:id="@+id/radio_by_gps"
-            android:layout_width="wrap_content"
+            android:layout_width="145dp"
             android:layout_height="wrap_content"
-            android:layout_gravity="start"
+            android:layout_gravity="left"
             android:layout_marginTop="25dp"
             android:layout_marginEnd="113dp"
             android:buttonTint="@color/tps_color_blue"
@@ -63,7 +63,7 @@
 
         <RadioButton
             android:id="@+id/radio_by_city"
-            android:layout_width="wrap_content"
+            android:layout_width="135dp"
             android:layout_height="wrap_content"
             android:layout_gravity="start"
             android:layout_marginTop="-48dp"
@@ -297,3 +297,4 @@
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+

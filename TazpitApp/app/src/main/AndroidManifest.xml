@@ -39,7 +39,9 @@
             android:parentActivityName=".SetActivity"
             android:theme="@style/Theme.TazpitApp.NoActionBar" />
         <activity android:name=".fillReport"></activity> <!-- UNLOGGED USER -->
-        <activity android:name=".LoginActivity"></activity>
+        <activity android:name=".LoginActivity">
+
+        </activity>
         <activity android:name=".register$register1"></activity>
         <activity
             android:name=".register$register2"

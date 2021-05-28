@@ -939,7 +939,6 @@ color mtrl_textinput_disabled_color
 color mtrl_textinput_filled_box_default_background_color
 color mtrl_textinput_focused_box_stroke_color
 color mtrl_textinput_hovered_box_stroke_color
-color mycyan
 color notification_action_color_filter
 color notification_icon_bg_color
 color primary_dark_material_dark
@@ -950,8 +949,6 @@ color primary_text_default_material_dark
 color primary_text_default_material_light
 color primary_text_disabled_material_dark
 color primary_text_disabled_material_light
-color purple
-color purpleSec
 color purple_500
 color purple_700
 color ripple_material_dark
@@ -972,6 +969,8 @@ color test_mtrl_calendar_day
 color test_mtrl_calendar_day_selected
 color tooltip_background_dark
 color tooltip_background_light
+color tps_color_blue
+color tps_color_gray
 color white
 dimen abc_action_bar_content_inset_material
 dimen abc_action_bar_content_inset_with_nav
@@ -1436,6 +1435,7 @@ drawable ic_baseline_arrow_back_24
 drawable ic_baseline_arrow_forward_24
 drawable ic_baseline_login_24
 drawable ic_baseline_map_24
+drawable ic_baseline_menu_24
 drawable ic_baseline_settings_24
 drawable ic_baseline_wc_24
 drawable ic_calendar_black_24dp
@@ -1566,7 +1566,6 @@ id app_bar
 id applySettingsButton
 id async
 id auto
-id backPage2Reg
 id back_button
 id barrier
 id beginning
@@ -1579,6 +1578,8 @@ id browser_actions_menu_items
 id browser_actions_menu_view
 id buttonPanel
 id buttonScenario
+id buttonScenarioCancel
+id buttonScenarioFillReport
 id cancel_button
 id center
 id center_horizontal
@@ -1623,7 +1624,6 @@ id design_menu_item_action_area
 id design_menu_item_action_area_stub
 id design_menu_item_text
 id design_navigation_view
-id detail_toolbar
 id dialog_button
 id dimensions
 id direct
@@ -1663,6 +1663,8 @@ id gone
 id gpsLink
 id group_divider
 id groups
+id guideline3
+id guideline4
 id hideable
 id home
 id homeAsUp
@@ -1735,9 +1737,9 @@ id nav_host_fragment
 id nav_host_fragment_container
 id nav_slideshow
 id nav_view
+id nav_view_image
 id navigation_header_container
 id never
-id news_recycle
 id next
 id nextPage2Reg
 id noScroll
@@ -1767,6 +1769,7 @@ id radio
 id radio_by_city
 id radio_by_gps
 id register_button
+id registrationContractLayout
 id right
 id right_icon
 id right_side
@@ -1774,7 +1777,7 @@ id rounded
 id save_non_transition_alpha
 id save_overlay_view
 id scale
-id scenarioDesc
+id sceneio_activity
 id scenerios_button
 id scenerios_detail
 id scenerios_detail_container
@@ -1843,7 +1846,6 @@ id textStart
 id textView
 id textView2
 id textView3
-id textView4
 id textView5
 id textView6
 id textViewRegPage2
@@ -1865,7 +1867,6 @@ id titleDividerNoCustom
 id titleScenario
 id title_template
 id toolbar
-id toolbar_layout
 id top
 id topPanel
 id touch_outside
