@@ -20,6 +20,8 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.Continuation;
@@ -31,6 +33,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.OnProgressListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageMetadata;
 import com.google.firebase.storage.StorageReference;
@@ -44,6 +47,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.URLConnection;
 import java.sql.Struct;
+import java.text.BreakIterator;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -56,6 +60,7 @@ public class fillReport extends AppCompatActivity {
     Button submit;
     ImageButton pickMedia;
     CheckBox credit;
+    ProgressBar progressBar;
    // Bitmap bm;
    // ArrayList<Bitmap> bm = new ArrayList<Bitmap>();
    // String returnUrl="";
@@ -67,6 +72,7 @@ public class fillReport extends AppCompatActivity {
     Map<String, Object> dataToSave = new HashMap<String, Object>();
     ArrayList<Uri> mediaHolder = new ArrayList<Uri>();
     private static final int SELECT_PHOTO = 100;
+   TextView progressTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,9 +80,11 @@ public class fillReport extends AppCompatActivity {
         setContentView(R.layout.activity_fill_report);
         title = (EditText) findViewById(R.id.fill_report_title);
         description = (EditText) findViewById(R.id.fill_report_description);
+        progressBar=(ProgressBar) findViewById(R.id.progressBar);
         submit = (Button) findViewById(R.id.fill_report_send_button);
         pickMedia = (ImageButton) findViewById(R.id.fill_report_upload_button);
         credit = (CheckBox) findViewById(R.id.fill_report_add_credit);
+        progressTextView=(TextView) findViewById(R.id.progressTextView);
         mAuth = FirebaseAuth.getInstance();
         String scenarioPressed = getIntent().getStringExtra("pressed scenario");
         mDocRef = FirebaseFirestore.getInstance().document("Scenarios/" + scenarioPressed+"/"+"filled/"+mAuth.getCurrentUser().getUid() +" report:");
@@ -119,6 +127,12 @@ public class fillReport extends AppCompatActivity {
                                     Log.d("image fail", "failed upload image");
                                 }
                             }
+                            //setting progressbar on each media that uploads to firebase
+                        }).addOnProgressListener((com.google.firebase.storage.OnProgressListener<? super UploadTask.TaskSnapshot>) taskSnapshot -> {
+                            double progress = (100.0 * taskSnapshot.getBytesTransferred()) / taskSnapshot.getTotalByteCount();
+                            progressBar.setProgress((int) progress);
+                            String progressString = ((int) progress) + " % העלאת הדוח בתהליכים";
+                            progressTextView.setText(progressString);
                         });
 
 
