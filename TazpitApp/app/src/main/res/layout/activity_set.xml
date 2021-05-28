@@ -9,12 +9,12 @@
 
     <RadioGroup
         android:id="@+id/locationRadioGroup"
-        android:layout_width="242dp"
-        android:layout_height="80dp"
+        android:layout_width="238dp"
+        android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:layout_marginTop="4dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintHorizontal_bias="0.52"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/choose_text">
 
@@ -41,7 +41,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="start"
-
             android:layout_marginTop="-48dp"
             android:layout_marginEnd="30dp"
             android:layoutDirection="rtl"
@@ -103,28 +102,39 @@
 
     </RadioGroup>
 
-    <ImageView
-        android:id="@+id/logo_Image"
-        android:layout_width="189dp"
-        android:layout_height="102dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:src="@drawable/tps_logo_background"
-        android:transitionName="logo_image"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+    <!--    <TextView-->
+    <!--        android:id="@+id/textView3"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:text="לפי מיקום GPS"-->
+    <!--        tools:layout_editor_absoluteX="162dp"-->
+    <!--        tools:layout_editor_absoluteY="53dp" />-->
+
+    <!--    <TextView-->
+    <!--        android:id="@+id/textView"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:text="לפי עיר"-->
+    <!--        tools:layout_editor_absoluteX="184dp"-->
+    <!--        tools:layout_editor_absoluteY="72dp" />-->
+
+
+    <!--    <TextView-->
+    <!--        android:id="@+id/TimeViewSettings"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:text="TextView"-->
+    <!--        tools:layout_editor_absoluteX="103dp"-->
+    <!--        tools:layout_editor_absoluteY="117dp" />-->
 
     <TextView
         android:id="@+id/choose_text"
+
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="120dp"
-        android:text="בחר עדיפות לקבלת אירוע:"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="116dp"
+        android:layout_marginTop="20dp"
+        android:text="@string/set_element_dayPrefExp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -136,10 +146,8 @@
         android:layout_marginEnd="32dp"
         android:backgroundTint="@color/tps_color_blue"
         android:text="א'"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.399" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/day_monday"
@@ -148,10 +156,8 @@
         android:layout_marginTop="10dp"
         android:layout_marginEnd="32dp"
         android:text="ב'"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/day_sunday"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toBottomOf="@+id/day_sunday" />
 
     <Button
         android:id="@+id/day_wednesday"
@@ -180,10 +186,8 @@
         android:layout_marginTop="10dp"
         android:layout_marginEnd="32dp"
         android:text="ה'"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/day_wednesday"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toBottomOf="@+id/day_wednesday" />
 
     <TextView
         android:id="@+id/textView6"
@@ -222,12 +226,8 @@
         android:layout_marginStart="96dp"
         android:layout_marginTop="36dp"
         android:text="XX:XX"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.445"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView5"
-        app:layout_constraintVertical_bias="0.033" />
+        app:layout_constraintTop_toBottomOf="@+id/textView5" />
 
     <Button
         android:id="@+id/timePickerSettingsTo"
@@ -236,12 +236,8 @@
         android:layout_marginStart="96dp"
         android:layout_marginTop="52dp"
         android:text="XX:XX"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.445"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/timePickerSettingsFrom"
-        app:layout_constraintVertical_bias="0.184" />
+        app:layout_constraintTop_toBottomOf="@+id/timePickerSettingsFrom" />
 
     <TextView
         android:id="@+id/textView3"
