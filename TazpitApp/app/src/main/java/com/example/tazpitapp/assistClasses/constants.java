@@ -22,15 +22,8 @@ public class constants {
     public static final String gpsState="gpsstate";
     
     //TIME VARS
-    //to get key of certain day, create a string containing its name like this:
-    //String key = "" +R.id.day_*
-    //for example, to get the timeDay object for saturday, make key like this
-    //String key = ""+R.id.day_saturday
-    //String value = sharedpreferences.getString(key, "DEFAULT");
-    //dayTime dt = gson.fromJson(value, dayTime.class);
 
-    //function meant for translating the name
-    // value from the server into the proper sharedprefs key
+
     public static int[] daysID = {
             R.id.day_sunday,
             R.id.day_monday,
@@ -49,6 +42,7 @@ public class constants {
             "friday",
             "saturday"
     };
+
     public static int name2id(String id){
         int toReturn=0;
         switch(id){
@@ -77,8 +71,8 @@ public class constants {
         return toReturn;
     }
 
-    //function meant for translating the sharedprefs key
-    // value from the device into the proper server key
+    //function meant for translating the id
+    // from the views into the proper sharedprefs key
     public static String id2name(int id){
         String toReturn="";
         switch(id){
