@@ -1,16 +1,10 @@
 <resources>
-<!--    ACTIVITY DESCRIPTORS-->
-    <string name="app_name">תצפית</string>
-
+    <string name="app_name">TazpitApp</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="nav_header_title">Android Studio</string>
     <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="nav_header_desc">Navigation header</string>
-    <string name="title_scenerios_list">רשימת האירועים</string>
-    <string name="title_scenerios_detail">פרטי אירוע</string>
-<!--    HOME PAGE   -->
-    <string name="menu_home">עמוד הבית</string>
-    <string name="navigation_drawer_open">פתח את התפריט הצדדי</string>
-    <string name="navigation_drawer_close">סגור את התפריט הצדדי</string>
     <string name="action_settings">Settings</string>
 
 

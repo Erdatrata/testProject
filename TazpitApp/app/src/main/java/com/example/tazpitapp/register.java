@@ -213,6 +213,7 @@ class register {
                         phoneNumberSTR=phone.getEditText().getText().toString();
                         Intent intent = new Intent(view.getContext(), register2.class);
                         startActivity(intent);
+
                     }
                 }
 
