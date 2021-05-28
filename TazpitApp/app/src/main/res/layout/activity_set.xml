@@ -13,7 +13,7 @@
         android:layout_height="22dp"
         android:layout_marginEnd="21dp"
         android:gravity="center"
-        android:text="יום"
+        android:text="@string/set_element_dayColSet"
         app:layout_constraintBottom_toTopOf="@+id/day_sunday"
         app:layout_constraintEnd_toEndOf="parent" />
 
@@ -23,7 +23,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:gravity="right"
-        android:text="עד שעה"
+        android:text="@string/set_element_toHSet"
         app:layout_constraintBottom_toTopOf="@+id/timePickerSettingsTo"
         app:layout_constraintStart_toEndOf="@+id/allDayButton" />
 
@@ -33,15 +33,14 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="120dp"
         android:layout_marginTop="5dp"
-        android:text="כל היום"
+        android:text="@string/set_element_allDayButton"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/timePickerSettingsFrom" />
 
     <RadioGroup
         android:id="@+id/locationRadioGroup"
         android:layout_width="238dp"
-
-        android:layout_height="104dp"
+        android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:layout_marginTop="4dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -58,9 +57,7 @@
             android:layout_marginTop="25dp"
             android:layout_marginEnd="113dp"
             android:layoutDirection="rtl"
-
-
-            android:text="לפי מיקום"
+            android:text="@string/set_element_radio_by_gps"
             app:layout_constraintBottom_toTopOf="@+id/textView5"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/choose_text"
@@ -71,16 +68,28 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="start"
-
             android:layout_marginTop="-48dp"
             android:layout_marginEnd="30dp"
             android:layoutDirection="rtl"
-
-            android:text="לפי עיר"
+            android:text="@string/set_element_radio_by_city"
             app:layout_constraintBottom_toTopOf="@+id/textView5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/choose_text"
             app:layout_constraintVertical_bias="0.313" />
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/set_element_rangeExp"
+            android:gravity="center"
+            android:layout_marginTop="10dp"
+            />
+
+        <SeekBar
+            android:id="@+id/gpsRangeBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
     </RadioGroup>
 
@@ -111,11 +120,12 @@
 
     <TextView
         android:id="@+id/choose_text"
+
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="116dp"
         android:layout_marginTop="20dp"
-        android:text="בחר עדיפות לקבלת אירוע:"
+        android:text="@string/set_element_dayPrefExp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -174,7 +184,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:text="בחר שעות וימי פעילות רצויים:"
+        android:text="@string/set_element_choose_text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
@@ -216,7 +226,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="124dp"
         android:layout_marginTop="40dp"
-        android:text="החל"
+        android:text="@string/set_element_applySettingsButton"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/timePickerSettingsTo" />
 
@@ -235,7 +245,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="232dp"
-        android:text="משעה"
+        android:text="@string/set_element_fromHSet"
         app:layout_constraintBottom_toTopOf="@+id/timePickerSettingsFrom"
         app:layout_constraintStart_toStartOf="parent" />
 
