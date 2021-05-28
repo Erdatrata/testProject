@@ -1,11 +1,18 @@
 package com.example.tazpitapp.assistClasses;
 
 import android.util.Log;
+import android.view.View;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 
+
+import com.example.tazpitapp.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -32,27 +39,36 @@ public class DummyContent {
      * A map of sample (dummy) items, by ID.
      */
     public static final Map<String, DummyItem> ITEM_MAP = new HashMap<String, DummyItem>();
-
+    public static View _newRootView;
+    public static  R R;
     private static final int COUNT = 25;
     private static List <String> list = new ArrayList<>();
+    private static final DocumentReference db =null;
+
     static {
-        // Add some sample items.
+        // Add some sample items.null
+
+
 
         Task<QuerySnapshot> docRef;
         docRef = FirebaseFirestore.getInstance() .collection("Scenarios").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
-
+                Log.d("onComplet","in1");
                 if (task.isSuccessful()) {
+                    Log.d("onComplet","in2");
                     int i=0;
                     for (QueryDocumentSnapshot document : task.getResult()) {
                         list.add(document.getId());
+                        Log.d("document_id=",document.getId());
                         addItem(createDummyItem(i,list.get(i)));
                         i++;
                     }
+            //        ((TextView) _newRootView.findViewById(R.id.scenerios_detail)).setText("test");
+                    Log.d("onComplet","in3");
                     Log.d("document=", list.toString());
                 } else {
-                    Log.d("Document","No data");
+                    Log.d("onComplet","No data");
 
                 }
             }
@@ -68,6 +84,7 @@ public class DummyContent {
         System.out.println(item.details);
 
         ITEM_MAP.put(item.id, item);
+        return;
     }
     //list=sacrio 1
 

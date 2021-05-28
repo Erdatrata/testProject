@@ -11,21 +11,30 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.appcompat.widget.Toolbar;
 
 import com.example.tazpitapp.assistClasses.constants;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.tazpitapp.assistClasses.DummyContent;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.GeoPoint;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -46,15 +55,32 @@ public class SceneriosListActivity extends AppCompatActivity {
     private static boolean gpsState; //gps on off
     private static String getlatofgps;//lat of gps
     private static String getlongofgps; //long of gps
+    private  static  int bit=0;
+    static boolean isInit = true;
+    static boolean isInit1 = true;
+    private  List <String> list = new ArrayList<>();
+   CollectionReference itemRef;
+    Button login;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scenerios_list);
+        FirebaseFirestore firestoreRootRef = FirebaseFirestore.getInstance();
+        itemRef = firestoreRootRef.collection("Scenarios");
+        readData(new FirestoreCallback() {
+            @Override
+            public void onCallback(List<String> list) {
+                View recyclerView = findViewById(R.id.scenerios_list);
+                assert recyclerView != null;
+                setupRecyclerView((RecyclerView) recyclerView);
+            }
+        });
 
-
-        gpsState=getStateOfGps();
-        if(gpsState){ //get lat and long
+        gpsState=getStateOfGps();//start_Scen12
+        if(gpsState){
+            //get lat and long
+            Log.d("onComplet","start_Scen_indx1");
             getlatofgps=getlatOfGps();
             getlongofgps=getlongOfGps();
         }
@@ -66,6 +92,7 @@ public class SceneriosListActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Log.d("onComplet","start_Scen01");
                 Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
@@ -76,16 +103,37 @@ public class SceneriosListActivity extends AppCompatActivity {
             // large-screen layouts (res/values-w900dp).
             // If this view is present, then the
             // activity should be in two-pane mode.
+            Log.d("onComplet","start_Scen_indx2");
             mTwoPane = true;
         }
+        Log.d("onComplet","start_Scen+indx="+DummyContent.ITEMS);
+        Log.d("onComplet","start_Scen0");
 
-        View recyclerView = findViewById(R.id.scenerios_list);
-        assert recyclerView != null;
-        setupRecyclerView((RecyclerView) recyclerView);
     }
-
+        private  void readData( FirestoreCallback firestoreCallback){
+        itemRef.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    for (DocumentSnapshot document : task.getResult()) {
+                        list.add(document.getId());
+                    }
+                    firestoreCallback.onCallback(list);
+                }
+                else{
+                    Log.d("onComplet","inside onComplete () ERRORR");
+                }
+            }
+        });
+    }
+    private  interface  FirestoreCallback{
+        void onCallback(List<String>list);
+    }
     private void setupRecyclerView(@NonNull RecyclerView recyclerView) {
+        Log.d("onComplet","start_Scen110="+DummyContent.ITEMS);
+
         recyclerView.setAdapter(new SimpleItemRecyclerViewAdapter(this, DummyContent.ITEMS, mTwoPane));
+
     }
 
     public static class SimpleItemRecyclerViewAdapter
@@ -95,10 +143,13 @@ public class SceneriosListActivity extends AppCompatActivity {
         private final List<DummyContent.DummyItem> mValues; //items of the list showing
         private final boolean mTwoPane;
         private final View.OnClickListener mOnClickListener = new View.OnClickListener() {
+
             @Override
             public void onClick(View view) {
+                Log.d("onComplet","start_Scen1");
                 DummyContent.DummyItem item = (DummyContent.DummyItem) view.getTag();
                 if (mTwoPane) {
+                    Log.d("onComplet","start_Scen2");
                     Bundle arguments = new Bundle();
                     arguments.putString(SceneriosDetailFragment.ARG_ITEM_ID, item.id);
                     SceneriosDetailFragment fragment = new SceneriosDetailFragment();
@@ -107,6 +158,7 @@ public class SceneriosListActivity extends AppCompatActivity {
                             .replace(R.id.scenerios_detail_container, fragment)
                             .commit();
                 } else {//clicking on item send intent
+                    Log.d("onComplet","start_Scen3");
                     Context context = view.getContext();
                     Intent intent = new Intent(context, SceneriosDetailActivity.class);
                     intent.putExtra(SceneriosDetailFragment.ARG_ITEM_ID, item.id); //sent trow intent the id[number in list] ,and content [name of scenerio]
@@ -120,6 +172,7 @@ public class SceneriosListActivity extends AppCompatActivity {
         SimpleItemRecyclerViewAdapter(SceneriosListActivity parent,
                                       List<DummyContent.DummyItem> items,
                                       boolean twoPane) {
+            Log.d("onComplet","start_Scen4");
             mValues = items;
             mParentActivity = parent;
             mTwoPane = twoPane;
@@ -127,6 +180,7 @@ public class SceneriosListActivity extends AppCompatActivity {
 
         @Override
         public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+            Log.d("onComplet","start_Scen5");
             View view = LayoutInflater.from(parent.getContext())
                     .inflate(R.layout.scenerios_list_content, parent, false);
             return new ViewHolder(view);
@@ -134,12 +188,13 @@ public class SceneriosListActivity extends AppCompatActivity {
 
         @Override
         public void onBindViewHolder(final ViewHolder holder, int position) {
+            Log.d("onComplet","start_Scen6");
 
             DocumentReference mDocRef= FirebaseFirestore.getInstance().document("Scenarios/"+mValues.get(position).content);
             mDocRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                 @Override
                 public void onSuccess(DocumentSnapshot documentSnapshot) {
-
+                    Log.d("onComplet","start_Scen6_0="+mValues.get(position));
                     holder.mIdView.setText(mValues.get(position).id);
 
                     holder.mContentView.setText(mValues.get(position).content+"-Range-"+Range((GeoPoint)documentSnapshot.getData().get("מיקום")));//add range with the name of the sceneriro
@@ -154,6 +209,7 @@ public class SceneriosListActivity extends AppCompatActivity {
 
         @Override
         public int getItemCount() {
+            Log.d("onComplet","start_Scen7");
             return mValues.size();
         }
 
@@ -169,14 +225,17 @@ public class SceneriosListActivity extends AppCompatActivity {
         }
     }
     public  boolean getStateOfGps(){//return true or false if the gps is working
+        Log.d("onComplet","start_Scen12");
         SharedPreferences sharedPreferences = getSharedPreferences(constants.SHARED_PREFS, MODE_PRIVATE);
         return sharedPreferences.getBoolean(constants.gpsState,false);
     }
     public  String getlatOfGps(){//get latitude of gps
+        Log.d("onComplet","start_Scen13");
         SharedPreferences sharedPreferences = getSharedPreferences(constants.SHARED_PREFS, MODE_PRIVATE);
         return sharedPreferences.getString(constants.latOfGps,"");
     }
     public  String getlongOfGps(){//get longtitude of gps
+        Log.d("onComplet","start_Scen14");
         SharedPreferences sharedPreferences = getSharedPreferences(constants.SHARED_PREFS, MODE_PRIVATE);
         return sharedPreferences.getString(constants.longOfGps,"");
     }
@@ -188,6 +247,7 @@ public class SceneriosListActivity extends AppCompatActivity {
     //                tv_address.setText("Unale to get address");
     //            }
     public static String Range(GeoPoint gpsLocation) {
+        Log.d("onComplet","start_Scen15");
         String re="";
         if(gpsState){
             double latCurrent=Double.parseDouble(getlatofgps);
@@ -195,13 +255,16 @@ public class SceneriosListActivity extends AppCompatActivity {
             double latScenerio=gpsLocation.getLatitude();
             double lonScenerio=gpsLocation.getLongitude();
 
+
             double result=Math.pow(Math.pow((111*(latCurrent-latScenerio)),2.0)+Math.pow((111*(lonCurrent-lonScenerio)),2.0),0.5);
+            Log.d("onComplet","start_Scen15="+result);
             System.out.println(result);
             return String.valueOf(result);
 
         }
+
         return re;
     }
 
-
 }
+

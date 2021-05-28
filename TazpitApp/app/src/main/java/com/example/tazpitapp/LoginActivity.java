@@ -2,10 +2,7 @@ package com.example.tazpitapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Context;
-import android.content.SharedPreferences;
 import android.text.TextUtils;
-import android.util.Log;
 import android.util.Patterns;
 import android.view.WindowManager;
 import android.widget.EditText;
@@ -21,17 +18,18 @@ import android.widget.Toast;
 import android.content.DialogInterface;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.tazpitapp.assistClasses.constants;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.auth.FirebaseUser;
+
+import java.time.Instant;
+import java.util.ArrayList;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -96,58 +94,21 @@ public class LoginActivity extends AppCompatActivity {
                 }
                 progressBar.setVisibility(View.VISIBLE);//show the progressbar
                 FAuth.signInWithEmailAndPassword(emailInput,passwordnput).addOnCompleteListener(new
-                                            OnCompleteListener<AuthResult>() {//if the user exists
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if(task.isSuccessful()){//if response success than do
-                            Toast.makeText(LoginActivity.this, "ההתחבור הצליחה",
-                                    Toast.LENGTH_SHORT).show();
+                                                                                                        OnCompleteListener<AuthResult>() {//if the user exists
+                                                                                                            @Override
+                                                                                                            public void onComplete(@NonNull Task<AuthResult> task) {
+                                                                                                                if(task.isSuccessful()){//if response success than do
+                                                                                                                    Toast.makeText(LoginActivity.this, "ההתחבור הצליחה",
+                                                                                                                            Toast.LENGTH_SHORT).show();
 
-//                            startActivity(new Intent(getApplicationContext(),MainActivity.class));
-
-                            //clear old sp once more
-                            FirebaseAuth.getInstance().signOut();
-                            SharedPreferences sharedpreferences = getSharedPreferences(constants.SHARED_PREFS,
-                                    Context.MODE_PRIVATE);
-                            SharedPreferences.Editor editor = sharedpreferences.edit();
-                            editor.clear().apply();
-
-                            //download settings from server
-                            FirebaseFirestore db = FirebaseFirestore.getInstance();
-                            DocumentReference docRef = db.collection("Users").
-                            document(FirebaseAuth.getInstance().getCurrentUser().getUid());
-                            docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                                @Override
-                                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                                    if (task.isSuccessful()) {
-                                        DocumentSnapshot document = task.getResult();
-                                        System.out.println(document);
-                                        String loc = document.get("location").toString();
-                                        System.out.println("location "+loc);
-//                                        type_of_event.setText(document.get("סוג האירוע").toString());
-//                                        city_of_event.setText(document.get("עיר").toString());
-//                                        // gps_event.setText(document.get("מיקום").toString());
-                                        if (document.exists()) {
-                                            Log.d("gabi_test", "Settings updated " + document.getData());
-                                        } else {
-                                            Log.d("gabi_test", "Settings not found");
-                                        }
-                                    } else {
-                                        Log.d("gabi_test", "settings failed with ", task.getException());
-                                    }
-
-                            //return to main
-                                     finish();
-
-//                            startActivity(getIntent());
-                        }});
-                        } else {//if the response is filed
-                            Toast.makeText(LoginActivity.this, "שגיאה: " +
-                                    task.getException().getMessage(), Toast.LENGTH_SHORT).show();
-                            progressBar.setVisibility(View.GONE);
-                        }
-                    }
-                });
+                                                                                                                    startActivity(new Intent(getApplicationContext(),MainActivity.class));
+                                                                                                                }else {//if the response is filed
+                                                                                                                    Toast.makeText(LoginActivity.this, "שגיאה: " +
+                                                                                                                            task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                                                                                                                    progressBar.setVisibility(View.GONE);
+                                                                                                                }
+                                                                                                            }
+                                                                                                        });
 
             }
         });

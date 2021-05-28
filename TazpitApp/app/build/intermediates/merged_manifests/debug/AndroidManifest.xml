@@ -55,11 +55,13 @@
             android:parentActivityName="com.example.tazpitapp.SetActivity"
             android:theme="@style/Theme.TazpitApp.NoActionBar" />
         <activity android:name="com.example.tazpitapp.fillReport" /> <!-- UNLOGGED USER -->
-        <activity android:name="com.example.tazpitapp.LoginActivity" />
+        <activity android:name="com.example.tazpitapp.LoginActivity" >
+        </activity>
         <activity android:name="com.example.tazpitapp.register$register1" />
         <activity
             android:name="com.example.tazpitapp.register$register2"
-            android:theme="@style/Theme.TazpitApp.NoActionBar" />
+            android:theme="@style/Theme.TazpitApp.NoActionBar" >
+        </activity>
         <activity
             android:name="com.example.tazpitapp.register$register3"
             android:theme="@style/Theme.TazpitApp.NoActionBar" />
