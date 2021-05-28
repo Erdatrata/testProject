@@ -113,7 +113,7 @@
         android:id="@+id/forgotPassword"
         android:layout_width="99dp"
         android:layout_height="20dp"
-        android:layout_marginBottom="192dp"
+        android:layout_marginBottom="216dp"
         android:text="שכחתי סיסמה?"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

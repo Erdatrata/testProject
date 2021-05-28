@@ -31,6 +31,24 @@ public class constants {
 
     //function meant for translating the name
     // value from the server into the proper sharedprefs key
+    public static int[] daysID = {
+            R.id.day_sunday,
+            R.id.day_monday,
+            R.id.day_tuesday,
+            R.id.day_wednesday,
+            R.id.day_thursday,
+            R.id.day_friday,
+            R.id.day_saturday
+    };
+    public static String[] daysNames = {
+            "sunday",
+            "monday",
+            "tuesday",
+            "wednesday",
+            "thursday",
+            "friday",
+            "saturday"
+    };
     public static int name2id(String id){
         int toReturn=0;
         switch(id){

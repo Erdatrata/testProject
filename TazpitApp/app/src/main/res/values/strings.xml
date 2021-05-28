@@ -1,16 +1,73 @@
 <resources>
-    <string name="app_name">TazpitApp</string>
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
+<!--    ACTIVITY DESCRIPTORS-->
+    <string name="app_name">תצפית</string>
+
     <string name="nav_header_title">Android Studio</string>
     <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="nav_header_desc">Navigation header</string>
+    <string name="title_scenerios_list">רשימת האירועים</string>
+    <string name="title_scenerios_detail">פרטי אירוע</string>
+<!--    HOME PAGE   -->
+    <string name="menu_home">עמוד הבית</string>
+    <string name="navigation_drawer_open">פתח את התפריט הצדדי</string>
+    <string name="navigation_drawer_close">סגור את התפריט הצדדי</string>
     <string name="action_settings">Settings</string>
 
-    <string name="menu_home">Home</string>
-    <string name="menu_gallery">Gallery</string>
-    <string name="menu_slideshow">Slideshow</string>
-    <string name="title_scenerios_list">Scenarios</string>
-    <string name="title_scenerios_detail">Scenerios Detail</string>
-    <string name="back">back</string>
+
+
+
+    <!--    logged in       -->
+    <string name="scenerios_button">אירועים</string>
+    <string name="settings_button">הגדרות</string>
+    <string name="logout_button">התנקתקות</string>
+    <!--    unlogged in     -->
+    <string name="login_button">התחברות</string>
+    <string name="register_button">הרשמו</string>
+
+<!--  SETTINGS PAGE  -->
+    <!--    Page elements    -->
+    <string name="set_element_dayPrefExp">בחר עדיפות לקבלת אירוע:</string>
+    <string name="set_element_radio_by_gps">לפי מיקום</string>
+    <string name="set_element_radio_by_city">לפי עיר</string>
+    <string name="set_element_choose_text">בחר שעות וימי פעילות רצויים:</string>
+    <string name="set_element_applySettingsButton">החל</string>
+    <string name="set_element_fromHSet">משעה</string>
+    <string name="set_element_toHSet">עד שעה</string>
+    <string name="set_element_dayColSet">יום</string>
+    <string name="set_element_allDayButton">כל היום</string>
+    <string name="set_element_rangeExp">טווח אירועים מקסימלי:</string>
+
+
+    <!--    Messages and debugs    -->
+    <string name="set_toast_gpsGranted">ההרשאה התקבלה</string>
+    <string name="set_toast_gpsDenied">ההרשאה נדחתה, אנא אשרו אותה במידה ותרצו להשתמש בתכונה</string>
+    <string name="set_alert_title">צורך בקבלת אישור מיקום</string>
+    <string name="set_alert_message">
+        על מנת שנוכל ליידע אותך על אירועים באיזור, אנא אשרו לנו לקבל את מיקומכם.
+    </string>
+    <string name="set_alert_accept">למעבר לאישור</string>
+    <string name="set_alert_deny">ביטול</string>
+    <string name="set_toast_plsChooseDay">אנא בחרו באחד הימים בכפתורים מימין</string>
+    <string name="set_toast_cantSetStartLater">לא ניתן לכוון זמן התחלה מאוחר מזמן סיום</string>
+    <string name="set_toast_cantSetEndFirst">לא ניתן לכוון זמן סיום מוקדם מזמן התחלה</string>
+    <string name="set_toast_success">שינוי הההגדרות בוצע בהצלחה</string>
+
+
+
+
+
+<!--    LOGIN PAGE  -->
+
+
+<!--    REGISTER    -->
+
+<!--    SCENARIO    -->
+
+
+<!--    SCENARIO DETAILS    -->
+
+
+
+
+
 </resources>

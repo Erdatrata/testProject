@@ -110,6 +110,56 @@ public class LoginActivity extends AppCompatActivity {
                                                                                                             }
                                                                                                         });
 
+                            //clear old sp once more
+//                            FirebaseAuth.getInstance().signOut();
+                            SharedPreferences sharedpreferences = getSharedPreferences(constants.SHARED_PREFS,
+                                    Context.MODE_PRIVATE);
+                            SharedPreferences.Editor editor = sharedpreferences.edit();
+                            editor.clear().apply();
+
+                            //download settings from server
+                            FirebaseFirestore db = FirebaseFirestore.getInstance();
+                            DocumentReference docRef = db.collection("Users").
+                            document(FirebaseAuth.getInstance().getCurrentUser().getUid());
+                            docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                @Override
+                                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                    if (task.isSuccessful()) {
+                                        DocumentSnapshot document = task.getResult();
+                                        System.out.println(document);
+                                        String loc = document.get("location").toString();
+                                        System.out.println("location "+loc);
+                                        for(int g: constants.daysID){
+                                            String day = constants.id2name(g);
+                                            String idd = ""+g;
+                                            String toStore = document.get(day).toString();
+                                            editor.putString(idd,toStore);
+                                        }
+//                                        type_of_event.setText(document.get("סוג האירוע").toString());
+//                                        city_of_event.setText(document.get("עיר").toString());
+//                                        // gps_event.setText(document.get("מיקום").toString());
+                                        if (document.exists()) {
+                                            Log.d("gabi_test", "Settings updated " + document.getData());
+                                        } else {
+                                            Log.d("gabi_test", "Settings not found");
+                                        }
+                                    } else {
+                                        Log.d("gabi_test", "settings failed with ", task.getException());
+                                    }
+
+                            //return to main
+                                     finish();
+
+//                            startActivity(getIntent());
+                        }});
+                        } else {//if the response is filed
+                            Toast.makeText(LoginActivity.this, "שגיאה: " +
+                                    task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                            progressBar.setVisibility(View.GONE);
+                        }
+                    }
+                });
+
             }
         });
         mCreateBtn.setOnClickListener(new View.OnClickListener() {// if the button "הרשמה כאן"

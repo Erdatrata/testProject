@@ -46,7 +46,6 @@
         <activity
             android:name=".register$register2"
             android:theme="@style/Theme.TazpitApp.NoActionBar">
-
         </activity>
         <activity
             android:name=".register$register3"
