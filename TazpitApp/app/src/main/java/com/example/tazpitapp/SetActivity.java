@@ -91,6 +91,12 @@ public class SetActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_set);
 
+        //sharedPrefs
+        sharedpreferences = getSharedPreferences(constants.SHARED_PREFS,
+                Context.MODE_PRIVATE);
+        editor = sharedpreferences.edit();
+        gson = new Gson();
+
         //set all the buttons for the settings activity
         //location settings
         locationRadioGroup = findViewById(R.id.locationRadioGroup);
@@ -98,7 +104,7 @@ public class SetActivity extends AppCompatActivity {
         cityButton = findViewById(R.id.radio_by_city);
         seekBar=findViewById(R.id.gpsRangeBar);
         rangeCont=findViewById(R.id.rangeContainer);
-        range=0.5;
+        range=Double.parseDouble(""+sharedpreferences.getFloat("range",(float)0.5));
 
         //day settings
         daysButton1 = findViewById(R.id.day_sunday);
@@ -117,11 +123,6 @@ public class SetActivity extends AppCompatActivity {
         Button[] daysArr = {daysButton1, daysButton2, daysButton3, daysButton4,
                 daysButton5, daysButton6, daysButton7};
 
-        //sharedPrefs
-        sharedpreferences = getSharedPreferences(constants.SHARED_PREFS,
-                Context.MODE_PRIVATE);
-        editor = sharedpreferences.edit();
-        gson = new Gson();
 
         {
             //loading temps from mains
@@ -143,7 +144,9 @@ public class SetActivity extends AppCompatActivity {
                     cityButton.setChecked(true);
                 }
             }
-
+            rangeCont.setText(range+"km");
+            double progress = (100*range-50)/9.5;
+            seekBar.setProgress((int) (progress));
         }
 
 
@@ -166,13 +169,12 @@ public class SetActivity extends AppCompatActivity {
                 rangeCont.setText(toPut+"km");
             }
 
-            @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
+            @Override public void onStartTrackingTouch(SeekBar seekBar) {
 
             }
 
-            @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
+            @Override public void onStopTrackingTouch(SeekBar seekBar) {
+//                int j = 0;
 //                Toast.makeText(SetActivity.this, range+"km", Toast.LENGTH_SHORT).show();
             }
         });
@@ -443,7 +445,7 @@ public class SetActivity extends AppCompatActivity {
         }
 
         //put gps-city into locationPref
-        editor.putString("location",sharedpreferences.getString("location_temp",null));
+//        editor.putString("location",sharedpreferences.getString("location_temp",null));
 
         String gpsSet="DEFAULT";
         if(gpsButton.isChecked())
@@ -451,6 +453,7 @@ public class SetActivity extends AppCompatActivity {
         else if(cityButton.isChecked())
             gpsSet="city";
         editor.putString("location",gpsSet);
+        editor.putFloat("range",(float)range);
 
 
         //finally, apply all edited
@@ -464,6 +467,7 @@ public class SetActivity extends AppCompatActivity {
 
         DocumentReference DRF = FirebaseFirestore.getInstance().document("Users/"+UID);
         docData.put("location",sharedpreferences.getString("location","default"));
+        docData.put("maxRange",""+range);
 
 
 
