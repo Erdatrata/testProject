@@ -20,6 +20,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.SeekBar;
+import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
@@ -46,6 +48,9 @@ public class SetActivity extends AppCompatActivity {
     private RadioGroup locationRadioGroup;
     private RadioButton gpsButton;
     private RadioButton cityButton;
+    private SeekBar seekBar;
+    private double range;
+    private TextView rangeCont;
 
     //the buttons for choosing between different days and timepicker
     private Button daysButton1;//SUN
@@ -91,6 +96,10 @@ public class SetActivity extends AppCompatActivity {
         locationRadioGroup = findViewById(R.id.locationRadioGroup);
         gpsButton = findViewById(R.id.radio_by_gps);
         cityButton = findViewById(R.id.radio_by_city);
+        seekBar=findViewById(R.id.gpsRangeBar);
+        rangeCont=findViewById(R.id.rangeContainer);
+        range=0.5;
+
         //day settings
         daysButton1 = findViewById(R.id.day_sunday);
         daysButton2 = findViewById(R.id.day_monday);
@@ -147,6 +156,24 @@ public class SetActivity extends AppCompatActivity {
                 locationSettingChecker(group, checkedId);
                 editor.commit();
                 System.out.println(sharedpreferences.getString("location_temp","CAT"));
+            }
+        });
+        seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                range = 0.5 + (9.5)*(((double) progress)/100);
+                String toPut = String.format("%-1.2f",range);
+                rangeCont.setText(toPut+"km");
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+//                Toast.makeText(SetActivity.this, range+"km", Toast.LENGTH_SHORT).show();
             }
         });
 

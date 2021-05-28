@@ -35,7 +35,7 @@
     <string name="set_element_toHSet">עד שעה</string>
     <string name="set_element_dayColSet">יום</string>
     <string name="set_element_allDayButton">כל היום</string>
-    <string name="set_element_rangeExp">טווח אירועים מקסימלי</string>
+    <string name="set_element_rangeExp">טווח אירועים מקסימלי:</string>
 
 
     <!--    Messages and debugs    -->
