@@ -44,7 +44,51 @@ import java.io.IOException;
 
 public class backgroundService extends Service {
     final int sec=1000;
+    boolean StopCity=false;
 
+    private void AlertIfInRange() {
+
+        System.out.println("Check if in range ");
+        FirebaseFirestore.getInstance() .collection("Scenarios").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+
+                if (task.isSuccessful()) {
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+
+                        System.out.println(document.getId());
+                        DocumentReference mDocRef= FirebaseFirestore.getInstance().document("Scenarios/"+document.getId());
+                        mDocRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                            @Override
+                            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                                if(!getStateOfGps()){
+//                                    Object town=documentSnapshot.getData().get("עיר");
+//                                    if(!inTown(town)){Notification(document.getId(), town);}
+                                }
+                                else{
+                                    double Range = 0;
+                                    try {
+                                        System.out.println("calulation range");
+                                        Range = Double.parseDouble(Range((GeoPoint) documentSnapshot.getData().get("מיקום")));
+                                        if (Range < 10) {
+                                            System.out.println(document.getId() + " IS in range of " + Range);
+                                            Notification(document.getId(), Range);
+
+                                        }
+                                    } catch (IOException e) {
+                                    }
+                                }
+
+
+                            }
+                        });
+                    }
+
+                }
+            }
+        });
+
+    }
     private LocationCallback locationcallback = new LocationCallback() {
         @Override
         public void onLocationResult(@NonNull @NotNull LocationResult locationResult) {
@@ -67,49 +111,7 @@ public class backgroundService extends Service {
             }
         }
 
-        private void AlertIfInRange() {
 
-            System.out.println("Check if in range ");
-            FirebaseFirestore.getInstance() .collection("Scenarios").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                @Override
-                public void onComplete(@NonNull Task<QuerySnapshot> task) {
-
-                    if (task.isSuccessful()) {
-                        for (QueryDocumentSnapshot document : task.getResult()) {
-
-                            System.out.println(document.getId());
-                            DocumentReference mDocRef= FirebaseFirestore.getInstance().document("Scenarios/"+document.getId());
-                            mDocRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-                                @Override
-                                public void onSuccess(DocumentSnapshot documentSnapshot) {
-                                    if(!getStateOfGps()){
-                                            Object town=documentSnapshot.getData().get("עיר");
-                                        if(inTown(town)){Notification(document.getId(), town);}
-                                    }
-                                    else{
-                                        double Range = 0;
-                                        try {
-                                            System.out.println("calulation range");
-                                            Range = Double.parseDouble(Range((GeoPoint) documentSnapshot.getData().get("מיקום")));
-                                            if (Range < 10) {
-                                                System.out.println(document.getId() + " IS in range of " + Range);
-                                                Notification(document.getId(), Range);
-
-                                            }
-                                        } catch (IOException e) {
-                                        }
-                                    }
-
-
-                                }
-                            });
-                        }
-
-                    }
-                }
-            });
-
-        }
 
     };
 
@@ -118,7 +120,10 @@ public class backgroundService extends Service {
         String UID = userIdentifier.getCurrentUser().getUid();
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference ref=database.getReference("Users/"+UID+"/"+"City");
-        if(ref.get().getResult().getValue().equals(town)){return true;}return false;
+        Object userTown=ref.get().getResult().getValue();
+        if(userTown.equals(town)){
+            System.out.println(town);System.out.println(userTown);
+            return true;}System.out.println(town);System.out.println(userTown);return false;
 
     }
 
@@ -134,7 +139,7 @@ public class backgroundService extends Service {
         String context="";
         String title="";
         if(getStateOfGps()){title=" is close";
-            context="Is Range is :"+(int)((int)location*1000)+" meters from u\nclick to open list";
+            context="Is Range is :"+(double)((double)location*1000)+" meters from u\nclick to open list";
         }
         else{
             title=" is in your town";
@@ -250,7 +255,7 @@ public class backgroundService extends Service {
                 channlId
         );
         builder.setSmallIcon(R.mipmap.ic_launcher);
-        builder.setContentTitle("Location Service");
+        builder.setContentTitle("Location From City");
         builder.setDefaults(NotificationCompat.DEFAULT_ALL);
         builder.setContentText("Running");
         builder.setContentIntent(pendingIntent);
@@ -294,27 +299,50 @@ public class backgroundService extends Service {
 
     }
     private  void stopLocationService(){
+
         LocationServices.getFusedLocationProviderClient(this)
                 .removeLocationUpdates(locationcallback);
-
-    stopForeground(true);
-    stopSelf();
+        stopForeground(true);
+        stopSelf();
 }
     public int onStartCommand(Intent intent,int flags,int startId){
         if(intent!= null){
             String action =intent.getAction();
             if(action!=null){
                 if(action.equals(constants.ACTION_START_LOCATION_SERVICE)){
+//                    StopCity=true;
                     startLocationService();
                 }
                 else if(action.equals(constants.ACTION_STOP_LOCATION_SERVICE)){
+//                    StopCity=false;
                     stopLocationService();
+//                    if(!StopCity){StartCity();}
+
+
+
 
                 }
 
             }
         }
         return super.onStartCommand(intent,flags,startId);
+    }
+
+    private void StartCity() {
+//
+//        AlertIfInRange();
+//        String channlId = "location_notification_channel";
+//        NotificationCompat.Builder builder = new NotificationCompat.Builder(
+//                getApplicationContext(),
+//                channlId
+//        );
+//        builder.setSmallIcon(R.mipmap.ic_launcher);
+//        builder.setContentTitle("Location From City");
+//        builder.setDefaults(NotificationCompat.DEFAULT_ALL);
+//        builder.setContentText("Running");
+//        builder.setContentIntent(pendingIntent);
+//        builder.setAutoCancel(false);
+//        builder.setPriority(NotificationCompat.PRIORITY_MAX);
     }
 }
 
