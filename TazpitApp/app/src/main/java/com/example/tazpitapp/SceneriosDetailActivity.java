@@ -1,39 +1,42 @@
 
 package com.example.tazpitapp;
-        import androidx.annotation.NonNull;
-        import androidx.appcompat.app.AlertDialog;
-        import androidx.appcompat.app.AppCompatActivity;
 
-        import android.content.DialogInterface;
-        import android.util.Log;
-        import android.widget.Button;
-        import android.content.Intent;
-        import android.view.View;
-        import android.os.Bundle;
-        import android.widget.TextView;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.net.Uri;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
 
-        import com.google.android.gms.tasks.OnCompleteListener;
-        import com.google.android.gms.tasks.OnFailureListener;
-        import com.google.android.gms.tasks.OnSuccessListener;
-        import com.google.android.gms.tasks.Task;
-        import com.google.firebase.auth.FirebaseAuth;
-        import com.google.firebase.auth.FirebaseUser;
-        import com.google.firebase.firestore.DocumentReference;
-        import com.google.firebase.firestore.DocumentSnapshot;
-        import com.google.firebase.firestore.FirebaseFirestore;
-        import com.google.firebase.firestore.QueryDocumentSnapshot;
-        import com.google.firebase.firestore.QuerySnapshot;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
 
-        import java.util.HashMap;
-        import java.util.Map;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.GeoPoint;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class  SceneriosDetailActivity extends AppCompatActivity {
 
    // private FirebaseUser user;
     String pressed_scenario = "";
-    TextView type_of_event;
+    Button type_of_event;
     TextView city_of_event;
-    TextView gps_event;
+    Button gps_event;
     public Button button_sign_event;
     public Button btnScenarioCancel;
     public Button btnScenarioFillReport;
@@ -45,9 +48,9 @@ public class  SceneriosDetailActivity extends AppCompatActivity {
         button_sign_event = (Button)findViewById(R.id.buttonScenario);
         btnScenarioCancel = (Button)findViewById(R.id.buttonScenarioCancel);
         btnScenarioFillReport = (Button)findViewById(R.id.buttonScenarioFillReport);
-        type_of_event = (TextView)findViewById(R.id.eventType);
+        type_of_event = (Button)findViewById(R.id.eventType);
         city_of_event = (TextView)findViewById(R.id.cityGetScenario);
-        gps_event = (TextView)findViewById(R.id.gpsLink);
+        gps_event = (Button)findViewById(R.id.gpsLink);
         button_sign_event.setVisibility(View.INVISIBLE);
            btnScenarioCancel.setVisibility(View.INVISIBLE);
          btnScenarioFillReport.setVisibility(View.INVISIBLE);
@@ -58,6 +61,7 @@ public class  SceneriosDetailActivity extends AppCompatActivity {
         DocumentReference docRef =db.collection("Scenarios").document(pressed_scenario);
         is_user_is_accepted(docRef, user); //checks if user accepted before the Event
         showTheScenarioDetail(docRef); //decides which buttons to show according whether the user is signed as accepted or not
+        //when user will click it he will be added in list of users that accepted the event
         button_sign_event.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -69,6 +73,7 @@ public class  SceneriosDetailActivity extends AppCompatActivity {
                 startActivity(getIntent());
             }
         });
+        //if user decides to cancel, we will remove him from the server under accepted
         btnScenarioCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -77,6 +82,7 @@ public class  SceneriosDetailActivity extends AppCompatActivity {
 
             }
         });
+        //the user will fill report from that point
         btnScenarioFillReport.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -108,8 +114,6 @@ public class  SceneriosDetailActivity extends AppCompatActivity {
                                 indicator=1;
                                 Log.d("natigabi2", "hatamaaaaaa");
 
-
-
                             }
                         }
                         if(indicator==1){
@@ -138,10 +142,41 @@ private void showTheScenarioDetail(DocumentReference docRef){
             if (task.isSuccessful()) {
 
                 DocumentSnapshot document = task.getResult();
-                document.get("עיר").toString();
-                type_of_event.setText(document.get("סוג האירוע").toString());
-                city_of_event.setText(document.get("עיר").toString());
-                // gps_event.setText(document.get("מיקום").toString());
+                //the user will click on "לפרטים נוספים" to see information about the event and will see alert
+                type_of_event.setOnClickListener(new View.OnClickListener()
+                {
+                    @Override
+                    public void onClick(View v)
+                    {
+                        AlertDialog alertDialog = new AlertDialog.Builder(SceneriosDetailActivity.this).create();
+                        alertDialog.setTitle("סוג האירוע");
+                        alertDialog.setMessage(document.get("סוג האירוע").toString());
+                        alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "הבנתי",
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        dialog.dismiss();
+                                    }
+                                });
+                        alertDialog.show();
+                    }
+                });
+                //presenting the city of the event
+                city_of_event.setText("עיר האירוע: "+document.get("עיר").toString());
+                //by clicking on "לחץ למיקום" the user can see the location in apps like waze\google maps\moovit...
+                gps_event.setOnClickListener(new View.OnClickListener()
+                {
+                    @Override
+                    public void onClick(View v)
+                    {
+                        GeoPoint geoPoint = document.getGeoPoint("מיקום");
+                        String uri = "geo:" + geoPoint.getLatitude() + ","
+                                +geoPoint.getLongitude() + "?q=" + geoPoint.getLatitude()
+                                + "," + geoPoint.getLongitude();
+                        startActivity(new Intent(android.content.Intent.ACTION_VIEW,
+                                Uri.parse(uri)));
+                    }
+                });
+
                 if (document.exists()) {
                     Log.d("nati_test", "DocumentSnapshot data: " + document.getData());
                 } else {
