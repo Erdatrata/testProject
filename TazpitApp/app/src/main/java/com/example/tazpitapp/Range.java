@@ -7,7 +7,6 @@ import android.os.IBinder;
 
 import androidx.annotation.Nullable;
 
-import com.example.tazpitapp.assistClasses.constants;
 import com.google.firebase.firestore.GeoPoint;
 
 public class Range extends Service {

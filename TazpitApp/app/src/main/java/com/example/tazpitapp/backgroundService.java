@@ -21,7 +21,6 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 
-import com.example.tazpitapp.assistClasses.constants;
 import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationResult;
@@ -30,6 +29,8 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -81,17 +82,22 @@ public class backgroundService extends Service {
                             mDocRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                                 @Override
                                 public void onSuccess(DocumentSnapshot documentSnapshot) {
+                                    if(!getStateOfGps()){
+                                            Object town=documentSnapshot.getData().get("עיר");
+                                        if(inTown(town)){Notification(document.getId(), town);}
+                                    }
+                                    else{
+                                        double Range = 0;
+                                        try {
+                                            System.out.println("calulation range");
+                                            Range = Double.parseDouble(Range((GeoPoint) documentSnapshot.getData().get("מיקום")));
+                                            if (Range < 10) {
+                                                System.out.println(document.getId() + " IS in range of " + Range);
+                                                Notification(document.getId(), Range);
 
-                                    double Range= 0;
-                                    try {
-                                        System.out.println("calulation range");
-                                        Range = Double.parseDouble(Range((GeoPoint)documentSnapshot.getData().get("מיקום")));
-                                        if(Range<10){
-                                            System.out.println(document.getId()+" IS in range of "+Range);
-                                            Notification(document.getId(),Range);
-
+                                            }
+                                        } catch (IOException e) {
                                         }
-                                    } catch (IOException e) {
                                     }
 
 
@@ -107,15 +113,32 @@ public class backgroundService extends Service {
 
     };
 
+    private boolean inTown(Object town) {
+        FirebaseAuth userIdentifier=FirebaseAuth.getInstance();
+        String UID = userIdentifier.getCurrentUser().getUid();
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference ref=database.getReference("Users/"+UID+"/"+"City");
+        if(ref.get().getResult().getValue().equals(town)){return true;}return false;
+
+    }
+
     private static final String CHANNEL_ID = "12341234" ;
 
-    private void Notification(String id, double range) {
+    private void Notification(String id, Object range) {
         createNotificationChannel();
         sendNotfication(id,range);
 
     }
 
-    private void sendNotfication(String id, double range) {
+    private void sendNotfication(String id, Object location) {
+        String context="";
+        String title="";
+        if(getStateOfGps()){title=" is close";
+            context="Is Range is :"+(int)((int)location*1000)+" meters from u\nclick to open list";
+        }
+        else{
+            title=" is in your town";
+        }
 // Create an explicit intent for an Activity in your app
         Intent intent = new Intent(this, MainActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
@@ -123,8 +146,8 @@ public class backgroundService extends Service {
 
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this, CHANNEL_ID)
                 .setSmallIcon(R.drawable.ic_baseline_map_24)
-                .setContentTitle(id+" is close")
-                .setContentText("Is Range is :"+(int)(range*1000)+" meters from u\nclick to open list")
+                .setContentTitle(id+title)
+                .setContentText(context)
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT)
                 // Set the intent that will fire when the user taps the notification
                 .setContentIntent(pendingIntent)

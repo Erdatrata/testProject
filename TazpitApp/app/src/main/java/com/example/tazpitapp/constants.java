@@ -1,6 +1,4 @@
-package com.example.tazpitapp.assistClasses;
-
-import com.example.tazpitapp.R;
+package com.example.tazpitapp;
 
 public class constants {
 
