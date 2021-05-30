@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.method.PasswordTransformationMethod;
+import android.text.method.ScrollingMovementMethod;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -287,6 +288,7 @@ class register {
 //            back=(Button) findViewById(R.id.backPage2Reg);
             next=(Button) findViewById(R.id.nextPage2Reg);
             textshow=(TextView)findViewById(R.id.textViewRegPage2);
+            textshow.setMovementMethod(new ScrollingMovementMethod());
             Aggre=(CheckBox)findViewById(R.id.page2RegAggre);
 
             //create file named mDocRef ,get instance from contact/contack ~ path to doc
