@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="match_parent"
-    android:background="#fff"
-    android:orientation="vertical"
+       android:orientation="vertical"
 
     android:padding="20dp"
     tools:context=".register$register1">
@@ -171,7 +170,6 @@
             android:id="@+id/act_city"
             android:layout_width="376dp"
             android:layout_height="77dp"
-            android:background="#fff"
             android:hint="עיר"
             android:padding="20dp"
             android:textSize="30sp"
