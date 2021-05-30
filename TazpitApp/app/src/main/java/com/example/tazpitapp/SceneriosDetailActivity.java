@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -34,7 +35,7 @@ public class  SceneriosDetailActivity extends AppCompatActivity {
 
    // private FirebaseUser user;
     String pressed_scenario = "";
-    Button type_of_event;
+    TextView type_of_event;
     TextView city_of_event;
     Button gps_event;
     public Button button_sign_event;
@@ -48,7 +49,7 @@ public class  SceneriosDetailActivity extends AppCompatActivity {
         button_sign_event = (Button)findViewById(R.id.buttonScenario);
         btnScenarioCancel = (Button)findViewById(R.id.buttonScenarioCancel);
         btnScenarioFillReport = (Button)findViewById(R.id.buttonScenarioFillReport);
-        type_of_event = (Button)findViewById(R.id.eventType);
+        type_of_event = (TextView)findViewById(R.id.eventType);
         city_of_event = (TextView)findViewById(R.id.cityGetScenario);
         gps_event = (Button)findViewById(R.id.gpsLink);
         button_sign_event.setVisibility(View.INVISIBLE);
@@ -143,23 +144,8 @@ private void showTheScenarioDetail(DocumentReference docRef){
 
                 DocumentSnapshot document = task.getResult();
                 //the user will click on "לפרטים נוספים" to see information about the event and will see alert
-                type_of_event.setOnClickListener(new View.OnClickListener()
-                {
-                    @Override
-                    public void onClick(View v)
-                    {
-                        AlertDialog alertDialog = new AlertDialog.Builder(SceneriosDetailActivity.this).create();
-                        alertDialog.setTitle("סוג האירוע");
-                        alertDialog.setMessage(document.get("סוג האירוע").toString());
-                        alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "הבנתי",
-                                new DialogInterface.OnClickListener() {
-                                    public void onClick(DialogInterface dialog, int which) {
-                                        dialog.dismiss();
-                                    }
-                                });
-                        alertDialog.show();
-                    }
-                });
+            type_of_event.setText("פרטים נוספים: "+document.get("סוג האירוע").toString());
+                type_of_event.setMovementMethod(new ScrollingMovementMethod());
                 //presenting the city of the event
                 city_of_event.setText("עיר האירוע: "+document.get("עיר").toString());
                 //by clicking on "לחץ למיקום" the user can see the location in apps like waze\google maps\moovit...
