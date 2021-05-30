@@ -95,64 +95,62 @@ public class LoginActivity extends AppCompatActivity {
                 }
                 progressBar.setVisibility(View.VISIBLE);//show the progressbar
                 FAuth.signInWithEmailAndPassword(emailInput,passwordnput).addOnCompleteListener(new
-                                                                                                        OnCompleteListener<AuthResult>() {//if the user exists
-                                                                                                            @Override
-                                                                                                            public void onComplete(@NonNull Task<AuthResult> task) {
-                                                                                                                if(task.isSuccessful()){//if response success than do
-                                                                                                                    Toast.makeText(LoginActivity.this, "ההתחבור הצליחה",
-                                                                                                                            Toast.LENGTH_SHORT).show();
+                OnCompleteListener<AuthResult>() {//if the user exists
+                @Override
+                public void onComplete(@NonNull Task<AuthResult> task) {
+                if(task.isSuccessful()){//if response success than do
+                Toast.makeText(LoginActivity.this, "ההתחבור הצליחה",
+                    Toast.LENGTH_SHORT).show();
 
-//                            startActivity(new Intent(getApplicationContext(),MainActivity.class));
+                //                            startActivity(new Intent(getApplicationContext(),MainActivity.class));
 
-                                                                                                                    //clear old sp once more
-//                            FirebaseAuth.getInstance().signOut();
-                                                                                                                    SharedPreferences sharedpreferences = getSharedPreferences(constants.SHARED_PREFS,
-                                                                                                                            Context.MODE_PRIVATE);
-                                                                                                                    SharedPreferences.Editor editor = sharedpreferences.edit();
-                                                                                                                    editor.clear().apply();
+                //clear old sp once more
+                //                            FirebaseAuth.getInstance().signOut();
+                SharedPreferences sharedpreferences = getSharedPreferences(constants.SHARED_PREFS,
+                    Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedpreferences.edit();
+                editor.clear().apply();
 
-                                                                                                                    //download settings from server
-                                                                                                                    FirebaseFirestore db = FirebaseFirestore.getInstance();
-                                                                                                                    DocumentReference docRef = db.collection("Users").
-                                                                                                                            document(FirebaseAuth.getInstance().getCurrentUser().getUid());
-                                                                                                                    docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                                                                                                                        @Override
-                                                                                                                        public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                                                                                                                            if (task.isSuccessful()) {
-                                                                                                                                DocumentSnapshot document = task.getResult();
-                                                                                                                                System.out.println(document);
-                                                                                                                                String loc = document.get("location").toString();
-                                                                                                                                System.out.println("location "+loc);
-                                                                                                                                for(int g: constants.daysID){
-                                                                                                                                    String day = constants.id2name(g);
-                                                                                                                                    String idd = ""+g;
-                                                                                                                                    String toStore = document.get(day).toString();
-                                                                                                                                    editor.putString(idd,toStore);
-                                                                                                                                }
-//                                        type_of_event.setText(document.get("סוג האירוע").toString());
-//                                        city_of_event.setText(document.get("עיר").toString());
-//                                        // gps_event.setText(document.get("מיקום").toString());
-                                                                                                                                if (document.exists()) {
-                                                                                                                                    Log.d("gabi_test", "Settings updated " + document.getData());
-                                                                                                                                } else {
-                                                                                                                                    Log.d("gabi_test", "Settings not found");
-                                                                                                                                }
-                                                                                                                            } else {
-                                                                                                                                Log.d("gabi_test", "settings failed with ", task.getException());
-                                                                                                                            }
+                //download settings from server
+                FirebaseFirestore db = FirebaseFirestore.getInstance();
+                DocumentReference docRef = db.collection("Users").
+                    document(FirebaseAuth.getInstance().getCurrentUser().getUid());
+                docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                    if (task.isSuccessful()) {
+                        DocumentSnapshot document = task.getResult();
+                        System.out.println(document);
+                        String loc = document.get("location").toString();
+                        editor.putString("location",loc);
+                        editor.putFloat("range",Float.parseFloat(document.get("range").toString()));
+//                        System.out.println("location "+loc);
+                        for(String d: constants.daysNames){
+                            String toStore = document.get(d).toString();
+                            editor.putString(d,toStore);
+                        }
+                        if (document.exists()) {
+                            Log.d("gabi_test", "Settings updated " + document.getData());
+                            editor.apply();;
+                        } else {
+                            Log.d("gabi_test", "Settings not found");
+                            }
+                        } else {
+                                Log.d("gabi_test", "settings failed with ", task.getException());
+                        }
 
-                                                                                                                            //return to main
-                                                                                                                            finish();
+                            //return to main
+                            finish();
 
 //                            startActivity(getIntent());
-                                                                                                                        }});
-                                                                                                                } else {//if the response is filed
-                                                                                                                    Toast.makeText(LoginActivity.this, "שגיאה: " +
-                                                                                                                            task.getException().getMessage(), Toast.LENGTH_SHORT).show();
-                                                                                                                    progressBar.setVisibility(View.GONE);
-                                                                                                                }
-                                                                                                            }
-                                                                                                        });
+                        }});
+                } else {//if the response is filed
+                    Toast.makeText(LoginActivity.this, "שגיאה: " +
+                            task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                    progressBar.setVisibility(View.GONE);
+                }
+            }
+        });
 
             }
         });

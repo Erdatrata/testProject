@@ -63,7 +63,6 @@ public class SetActivity extends AppCompatActivity {
     private static Button rightNow = null;
 
     //apply settings button
-    private Button applyButton;
     private static int hour = 0;
     private static int minute = 0;
     private static int hourStart = 0;
@@ -75,9 +74,11 @@ public class SetActivity extends AppCompatActivity {
     private static SharedPreferences.Editor editor;
     private static Gson gson;
     private static boolean unsaved;
-
+    private static Map<String, String> docData;
 
     //----------global variables END----------------------
+    //----------global functions--------------------------
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -85,7 +86,6 @@ public class SetActivity extends AppCompatActivity {
             this.getSupportActionBar().hide();
         }
         catch (NullPointerException e){}
-
         setContentView(R.layout.activity_set);
 
         //sharedPrefs
@@ -93,6 +93,7 @@ public class SetActivity extends AppCompatActivity {
                 Context.MODE_PRIVATE);
         editor = sharedpreferences.edit();
         gson = new Gson();
+        docData = new HashMap<>();
 
         //set all the buttons for the settings activity
         //location settings
@@ -115,38 +116,22 @@ public class SetActivity extends AppCompatActivity {
         //timepicker & apply
         timePickerFrom = findViewById(R.id.timePickerSettingsFrom);
         timePickerTo = findViewById(R.id.timePickerSettingsTo);
-        applyButton = findViewById(R.id.applySettingsButton);
         rightNow = null;
         Button[] daysArr = {daysButton1, daysButton2, daysButton3, daysButton4,
                 daysButton5, daysButton6, daysButton7};
 
-
-        {
-            //loading temps from mains
-            dayTime dtDEF = new dayTime(0, 0, 0, 1);//default for first time
-            String dtDEFSTR = gson.toJson(dtDEF);
-            for (Button v : daysArr) {
-                String idd = constants.id2name(v.getId());
-                String tidd = "temp_" + idd;
-                String dt = sharedpreferences.getString(idd, dtDEFSTR);
-                editor.putString(tidd, dt);
+        //load location selection
+        String gpsPref = sharedpreferences.getString("location","DEFAULT");
+        if(!gpsPref.equals("DEFAULT")){
+            if(gpsPref.equals("GPS")){
+                gpsButton.setChecked(true);
+            } else {
+                cityButton.setChecked(true);
             }
-            editor.apply();
-            //load location selection
-            String gpsPref = sharedpreferences.getString("location","DEFAULT");
-            if(!gpsPref.equals("DEFAULT")){
-                if(gpsPref.equals("GPS")){
-                    gpsButton.setChecked(true);
-                } else {
-                    cityButton.setChecked(true);
-                }
-            }
-            rangeCont.setText(range+"km");
-            double progress = (100*range-50)/9.5;
-            seekBar.setProgress((int) (progress));
         }
-
-
+        rangeCont.setText(range+"km");
+        double progress = (100*range-50)/9.5;
+        seekBar.setProgress((int) (progress));
         //setting event listeners
 
         //for location radio group
@@ -155,7 +140,13 @@ public class SetActivity extends AppCompatActivity {
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 locationSettingChecker(group, checkedId);
                 editor.commit();
-                System.out.println(sharedpreferences.getString("location_temp","CAT"));
+                String toChange="";
+                if(cityButton.isChecked())
+                    toChange="city";
+                else
+                    toChange="GPS";
+                editor.putString("location",toChange).apply();
+                docData.put("location",toChange);
             }
         });
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
@@ -163,21 +154,16 @@ public class SetActivity extends AppCompatActivity {
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 range = 0.5 + (9.5)*(((double) progress)/100);
                 String toPut = String.format("%-1.2f",range);
-                rangeCont.setText(toPut+"km");
-            }
+                rangeCont.setText(toPut+"km");}
 
-            @Override public void onStartTrackingTouch(SeekBar seekBar) {
-
-            }
-
+            @Override public void onStartTrackingTouch(SeekBar seekBar) {}
             @Override public void onStopTrackingTouch(SeekBar seekBar) {
-//                int j = 0;
-//                Toast.makeText(SetActivity.this, range+"km", Toast.LENGTH_SHORT).show();
+                editor.putFloat("range",(float) range).apply();
+                docData.put("range",""+range);
             }
         });
 
         //for day listeners
-
         for (Button day : daysArr) {
             day.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
@@ -210,24 +196,60 @@ public class SetActivity extends AppCompatActivity {
                 editor.putString(tidd,toPut).commit();
                 hourStart=0;hoursEnd=23;
                 minuteStart=0;minutesEnd=59;
-
-
                 timePickerFrom.setText("00:00");
                 timePickerTo.setText("23:59");
-
-
+                saveTemp();
             }
         });
+    }
 
-        //for apply button
-        applyButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                applyButtonFunction(daysArr);
-            }
-        });
+    @Override
+    public void onStop(){
+        super.onStop();
+        saveToServer();
+    }
 
+    @Override
+    public void onPause(){
+        super.onPause();
+        saveToServer();
+    }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        saveToServer();
+    }
+
+    private void saveToServer(){
+        if (unsaved)
+            saveTemp();
+        FirebaseAuth userIdentifier=FirebaseAuth.getInstance();
+        String UID = userIdentifier.getCurrentUser().getUid();
+
+        DocumentReference DRF = FirebaseFirestore.getInstance().document("Users/"+UID);
+        final boolean[] success = {true};
+        final Exception[] failToRet = new Exception[1];
+        for(Map.Entry<String,String> entry: docData.entrySet()){
+            String key = entry.getKey();
+            String val = entry.getValue();
+            DRF.update(key,val).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull @NotNull Exception e) {
+                    success[0] = false;
+                    failToRet[0]=e;
+                }
+            });
+            if(!success[0])
+                break;
+        }
+
+        if(success[0]){
+            Log.d("EVJA", "Setting update success");
+            Toast.makeText(getApplicationContext(), R.string.set_toast_success, Toast.LENGTH_LONG).show();
+        } else {
+            Log.w("EVJA", "Error writing settings", failToRet[0]);
+        }
     }
 
     @Override
@@ -324,7 +346,7 @@ public class SetActivity extends AppCompatActivity {
             unsaved = false;
         }
         rightNow = (Button) v;
-        String tidd = "temp_"+constants.id2name(v.getId());
+        String tidd = constants.id2name(v.getId());
 
         dayTime dtDEF = new dayTime(0, 0, 0, 1);//default for first time
         String dtGetString = sharedpreferences.getString(tidd, "DEFAULT");
@@ -405,87 +427,21 @@ public class SetActivity extends AppCompatActivity {
         timePickerDialog.show();
     }
 
-    //saves number into a temp in sp
-    public static void saveTemp() {
-        String dtKey = "";
-        String temp = "temp_"+(constants.id2name((rightNow).getId()));
-
+    //saves days into the sp and datadoc
+    public void saveTemp() {
+        String idd = constants.id2name((rightNow).getId());//day's name
+        //create the string to put in sp and send to server
         dayTime toPut = new dayTime(hourStart, minuteStart, hoursEnd, minutesEnd);
         String stringified = gson.toJson(toPut);
-        editor.putString(temp, stringified);
-        editor.apply();
+        //saving to sp
+        editor.putString(idd, stringified).apply();
+        //write to sendDoc
+        docData.put(idd,stringified);
     }
 
-    public static String tempName(int cur) {
-        return "temp_" + cur;
-    }
-
-    //to be used if apply button pressed
-    public void applyButtonFunction(Button[] daysArr) {
-        //if unsaved, save it first
-        if (unsaved) {
-            //take hours from both start and end, put into new dayTime
-            saveTemp();
-            //unsave unsaved
-            unsaved = false;
-        }
-        Map<String, String> docData = new HashMap<>();
-        //put the dayTimes back into the sp
-        for (Button v : daysArr) {
-            String idd = constants.id2name(v.getId());
-            String tidd = "temp_" + idd;
-            String toPut = sharedpreferences.getString(tidd, null);
-            //put in sp locally
-            editor.putString(idd, toPut);
-            //put in hashmap for sending to server
-            docData.put(constants.id2name(v.getId()),toPut);
-        }
-
-        //put gps-city into locationPref
-//        editor.putString("location",sharedpreferences.getString("location_temp",null));
-
-        String gpsSet="DEFAULT";
-        if(gpsButton.isChecked())
-            gpsSet="GPS";
-        else if(cityButton.isChecked())
-            gpsSet="city";
-        editor.putString("location",gpsSet);
-        editor.putFloat("range",(float)range);
-
-
-        //finally, apply all edited
-        editor.apply();
-        //make sure to call the background service and tell them of a change of hours
-
-
-        //send data to server
-        FirebaseAuth userIdentifier=FirebaseAuth.getInstance();
-        String UID = userIdentifier.getCurrentUser().getUid();
-
-        DocumentReference DRF = FirebaseFirestore.getInstance().document("Users/"+UID);
-        docData.put("location",sharedpreferences.getString("location","default"));
-        docData.put("maxRange",""+range);
-
-
-
-        //send
-        DRF.set(docData).addOnSuccessListener(new OnSuccessListener<Void>() {
-            @Override
-            public void onSuccess(Void unused) {
-                Log.d("Setting succ", "Setting update success");
-                Toast.makeText(getApplicationContext(), R.string.set_toast_success, Toast.LENGTH_LONG).show();
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull @NotNull Exception e) {
-                Log.w("Setting fail", "Error writing settings", e);
-            }
-        });
-
-
-
-
-    }
+    /**********************************
+     *         GPS FUNCTIONS          *
+     **********************************/
 
     private boolean RequestPermissionCall(){//true if needed false if permmison alridy given
         if(ContextCompat.checkSelfPermission(
@@ -500,8 +456,6 @@ public class SetActivity extends AppCompatActivity {
         }
         return false;
     }
-
-
     private boolean isLocationServiceRunning(){
         ActivityManager activityManager=
                 (ActivityManager)getSystemService(Context.ACTIVITY_SERVICE);
@@ -518,7 +472,6 @@ public class SetActivity extends AppCompatActivity {
         }
         return false;
     }
-
     private  void startLocationService(){
         setStateOfGps(true);
         if(!isLocationServiceRunning()){
@@ -556,5 +509,5 @@ public class SetActivity extends AppCompatActivity {
         SharedPreferences sharedPreferences = getSharedPreferences(constants.SHARED_PREFS, MODE_PRIVATE);
         return sharedPreferences.getString(constants.longOfGps,"");
     }
-
+//----------global functions END----------------------
 }
