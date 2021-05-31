@@ -13,8 +13,8 @@
 
     <ImageView
         android:id="@+id/logo_Image"
-        android:layout_width="221dp"
-        android:layout_height="142dp"
+        android:layout_width="287dp"
+        android:layout_height="203dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
@@ -22,109 +22,121 @@
         android:transitionName="logo_image"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/guideline4"
-        app:layout_constraintHorizontal_bias="0.575"
+        app:layout_constraintHorizontal_bias="0.515"
         app:layout_constraintStart_toStartOf="@+id/guideline3"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.12" />
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/cityGetScenario"
-        android:layout_width="331dp"
-        android:layout_height="36dp"
+        android:layout_width="316dp"
+        android:layout_height="41dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
+        android:fontFamily="cursive"
         android:text="עיר"
-        android:textSize="25sp"
+        android:textSize="23sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/guideline4"
-        app:layout_constraintHorizontal_bias="0.954"
+        app:layout_constraintHorizontal_bias="0.513"
         app:layout_constraintStart_toStartOf="@+id/guideline3"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.343" />
+        app:layout_constraintVertical_bias="0.294" />
 
     <TextView
         android:id="@+id/eventType"
-        android:layout_width="332dp"
-        android:layout_height="97dp"
+        android:layout_width="315dp"
+        android:layout_height="201dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:layout_marginTop="16dp"
+        android:fontFamily="cursive"
         android:scrollbars="vertical"
         android:text="פרטים נוספים:"
-        android:textSize="25sp"
+        android:textSize="23sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/guideline4"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="@+id/guideline3"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.441" />
+        app:layout_constraintVertical_bias="0.443" />
 
     <Button
         android:id="@+id/gpsLink"
-        android:layout_width="306dp"
+        android:layout_width="293dp"
         android:layout_height="56dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
+        android:fontFamily="sans-serif-black"
         android:text="כוון אותי לאירוע"
-        android:textSize="25sp"
+        android:textSize="21sp"
+        app:cornerRadius="30dp"
         app:layout_constraintBottom_toTopOf="@+id/buttonScenario"
         app:layout_constraintEnd_toStartOf="@+id/guideline4"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.504"
         app:layout_constraintStart_toStartOf="@+id/guideline3"
         app:layout_constraintTop_toBottomOf="@+id/eventType"
-        app:layout_constraintVertical_bias="0.625" />
+        app:layout_constraintVertical_bias="0.0" />
 
     <Button
         android:id="@+id/buttonScenario"
-        android:layout_width="155dp"
-        android:layout_height="wrap_content"
+        android:layout_width="293dp"
+        android:layout_height="56dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:backgroundTint="@color/tps_color_blue"
+        android:fontFamily="sans-serif-black"
         android:text="הרשם לאירוע"
+        android:textSize="21sp"
+        app:cornerRadius="30dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/guideline4"
-        app:layout_constraintHorizontal_bias="0.505"
+        app:layout_constraintHorizontal_bias="0.492"
         app:layout_constraintStart_toStartOf="@+id/guideline3"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.737" />
+        app:layout_constraintVertical_bias="0.738" />
 
     <Button
         android:id="@+id/buttonScenarioCancel"
-        android:layout_width="155dp"
-        android:layout_height="wrap_content"
+        android:layout_width="166dp"
+        android:layout_height="54dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:layout_marginStart="28dp"
         android:backgroundTint="@color/tps_color_blue"
+        android:fontFamily="sans-serif-black"
         android:text="בטל רישום"
+        android:textSize="21sp"
+        app:cornerRadius="30dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/buttonScenarioFillReport"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.737" />
+        app:layout_constraintVertical_bias="0.74" />
 
     <Button
         android:id="@+id/buttonScenarioFillReport"
-        android:layout_width="155dp"
-        android:layout_height="wrap_content"
+        android:layout_width="166dp"
+        android:layout_height="54dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="8dp"
+        android:layout_marginStart="212dp"
         android:backgroundTint="@color/tps_color_blue"
+        android:fontFamily="sans-serif-black"
         android:text="מלא דוח"
+        android:textSize="21sp"
+        app:cornerRadius="30dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/guideline3"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.737" />
+        app:layout_constraintVertical_bias="0.74" />
 
     <Space
             android:layout_width="wrap_content"
