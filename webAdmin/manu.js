@@ -25,6 +25,9 @@ function sendToDataBaseNewEvent() {
     let des=document.querySelector('#des').value;
     let city =document.querySelector('#city').value;
     let importent=document.querySelector('#importentEvent').value;
+    if(importent==undefined||city==undefined||des==undefined||locationGps==undefined||ScenerioName==undefined||
+        importent==""||city==""||des==""||locationGps==""||ScenerioName==""
+    ){return;}
     locationGps=locationGps.replace('(','');
     locationGps=locationGps.replace(')','');
     locationGps=locationGps.replace(' ','');
@@ -112,7 +115,8 @@ function ListEvent() {
 }
 
 function logoff() {
-    return undefined;
+    firebase.auth().signOut();
+    window.open("./main.html");
 }
 
 function addButtonToEvent() {
@@ -151,9 +155,9 @@ document.addEventListener("DOMContentLoaded", () => {
         $("#data").html(ListEvent());
 
     });
-    $("#logoff").click(function(){
-        $("#data").html(logoff());
 
-    });
+    document.getElementById("logoff").addEventListener("click", logoff);
+
+
 });
 
