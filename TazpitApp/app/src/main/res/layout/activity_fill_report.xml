@@ -6,21 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".fillReport">
 
-    <ImageView
-        android:id="@+id/back_button"
-        android:layout_width="160dp"
-        android:layout_height="30dp"
-        android:layout_marginStart="300dp"
-        android:rotationX="0"
-        android:rotationY="-180"
-        android:tint="@color/black"
-        app:layout_constraintBottom_toTopOf="@+id/fill_report_title"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.363"
-        app:srcCompat="@drawable/abc_vector_test" />
+
 
     <EditText
         android:id="@+id/fill_report_title"
