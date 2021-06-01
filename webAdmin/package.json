@@ -1,0 +1,7 @@
+{
+  "name": "webAdmin",
+  "version": "1.0.0",
+  "dependencies": {
+    "firebase": "^8.6.3"
+  }
+}
