@@ -9,7 +9,116 @@
 // Add the Firebase products that you want to use
 
 
+function refreshListOfS() {
+    $("#ListOfS").remove();
+    $("#data").html(ListEvent());
+    ListEventFun();
 
+}
+
+function ListEventFun(){
+    let ref=db.collection('Scenarios');
+
+    ref.get().then((querySnapshot) => {
+
+        //querySnapshot is "iteratable" itself
+        querySnapshot.forEach((userDoc) => {
+            let id=userDoc.id.replace(/\s+/g,'');
+            var task= $("<div class='task' id="+id+"></div>").text(userDoc.id);
+
+            var del = $("<i class='fas fa-toolbox'></i>").click(function(){
+                var p = $(this).parent();
+                p.fadeOut(function(){
+
+                    //get into Scenerio
+                    p.remove();
+                });
+            });
+
+            var check = $("<i class='fas fa-check'></i>").click(function(){
+                var p = $(this).parent();
+                p.fadeOut(function(){
+
+                    //set as complete
+                    $(".comp").append(p);
+                    p.fadeIn();
+                });
+                $(this).remove();
+            });
+
+            task.append(del,check);
+            $(".notcomp").append(task);
+            //to clear the input
+
+
+
+
+            //userDoc contains all metadata of Firestore object, such as reference and id
+            console.log(userDoc.id)
+
+            //If you want to get doc data
+            var userDocData = userDoc.data()
+            console.dir(userDocData)
+
+        })});
+
+
+    $(".txtb").on("keyup",function(e){
+
+
+        //look for
+
+
+        // //13  means enter button
+        if(e.keyCode == 13 && $(".txtb").val() != "") {
+
+            let lookFor = $(".txtb").val();
+            let list = document.getElementById("notcomp",).getElementsByTagName("*");
+            for (var i = 0; i < list.length; i++) {
+                if (!list[i].id.startsWith(lookFor)&&list[i].id!="") {
+                    document.getElementById(list[i].id).remove();
+                    i=i-1;
+                }
+            }
+
+
+        }
+
+
+        {
+        //     var task = $("<div class='task'></div>").text($(".txtb").val());
+        //     var del = $("<i class='fas fa-trash-alt'></i>").click(function(){
+        //         var p = $(this).parent();
+        //         p.fadeOut(function(){
+        //             p.remove();
+        //         });
+        //     });
+        //
+        //     var check = $("<i class='fas fa-check'></i>").click(function(){
+        //         var p = $(this).parent();
+        //         p.fadeOut(function(){
+        //             $(".comp").append(p);
+        //             p.fadeIn();
+        //         });
+        //         $(this).remove();
+        //     });
+        //
+        //     task.append(del,check);
+        //     $(".notcomp").append(task);
+        //     //to clear the input
+        //     $(".txtb").val("");
+         }
+    });
+    document.getElementById("btn btn-cancel").addEventListener("click",removeListOfS);
+    document.getElementById("refForListS").addEventListener("click",refreshListOfS);
+
+
+}
+function removeListOfS(){
+    document.getElementById("ListOfS").remove();
+
+
+}
 function removeNewEvent(){
     document.getElementById("newEventLoaded").remove();
 
@@ -40,9 +149,10 @@ function sendToDataBaseNewEvent() {
     docRef.set({
 
         "מיקום": new firebase.firestore.GeoPoint(Number(latitude), Number(longitude)),
-        "סוג אירוע": des,
+        "סוג האירוע": des,
         "עיר": city,
-        "דחיפות": Boolean(importent)
+        "דחיפות": Boolean(importent),
+        "timeCreated":new Date()
 
     }).then(function (){
         console.log("status saved");
@@ -111,7 +221,57 @@ function newUsers() {
 }
 
 function ListEvent() {
-    return undefined;
+    let re="  <div id=\"ListOfS\">\n" +
+        "    <div class=\"container\">\n" +
+        "      <input type=\"text\" class=\"txtb\" placeholder=\"Add a task\">\n" +
+        "      <div class=\"notcomp\" id='notcomp'>\n" +
+        "        <h3>Not Completed</h3>\n" +
+        "\n" +
+        "\n" +
+        "\n" +
+        "      </div>\n" +
+        "\n" +
+        "      <div class=\"comp\">\n" +
+        "        <h3>Completed</h3>\n" +
+        "      </div>\n" +
+        "<button class=\"refForListS\" id=\"refForListS\">רענן</button>\n" +
+        "<button class=\"cancelForListS\" id=\"btn btn-cancel\">בטל</button>\n"+"<style>\n" +
+
+        ".cancelForListS {\n" +
+        "  padding: 15px 32px;\n" +
+        "  text-align: center;\n" +
+        "  text-decoration: none;\n" +
+        "  display: inline-block;\n" +
+        "  font-size: 16px;\n" +
+        "  margin: 4px 2px;\n" +
+        "  cursor: pointer;\n" +"    " +
+        "    border: 1px solid #373739;\n" +
+        "    background: #393a3c;\n" +
+        "    color: #fff;"+"}"+
+
+        ".refForListS {\n" +
+        "  padding: 15px 32px;\n" +
+        "  text-align: center;\n" +
+        "  text-decoration: none;\n" +
+        "  display: inline-block;\n" +
+        "  font-size: 16px;\n" +
+        "  margin: 4px 2px;\n" +
+        "  cursor: pointer;\n" +"    " +
+        "    border: 1px solid #2962ff;\n" +
+        "    background: #2962ff;\n" +
+        "    color: #fff;" +"}"+
+
+
+        "</style>"+
+        "    </div>\n" +
+        "\n" +
+        "    <link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.css\">\n" +
+        "    <script src=\"https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js\"></script>\n" +
+        "    <link rel=\"stylesheet\" href=\"forScenerio.css\">\n" +
+        "  \n" +"" + +
+
+        "  </div>";
+    return re;
 }
 
 function logoff() {
@@ -153,6 +313,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
     $("#ListEvent").click(function(){
         $("#data").html(ListEvent());
+        ListEventFun();
 
     });
 
