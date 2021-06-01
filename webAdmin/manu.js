@@ -25,12 +25,18 @@ function sendToDataBaseNewEvent() {
     let des=document.querySelector('#des').value;
     let city =document.querySelector('#city').value;
     let importent=document.querySelector('#importentEvent').value;
-
-
-    let docRef = db.doc("testingAdmin/"+ScenerioName);
+    locationGps=locationGps.replace('(','');
+    locationGps=locationGps.replace(')','');
+    locationGps=locationGps.replace(' ','');
+    var res = locationGps.split(",");
+    let latitude=res[0];
+    let longitude=res[1];
+    console.log(latitude);
+    console.log(longitude);
+    let docRef = db.doc("Scenarios/"+ScenerioName);
     docRef.set({
 
-        "מיקום": locationGps,
+        "מיקום": new firebase.firestore.GeoPoint(Number(latitude), Number(longitude)),
         "סוג אירוע": des,
         "עיר": city,
         "דחיפות": Boolean(importent)
@@ -128,10 +134,10 @@ document.addEventListener("DOMContentLoaded", () => {
 // Required for side-effects
 
 
-        $("#ListOfV").click(function(){
-            $("#data").html(ListOfV());
+    $("#ListOfV").click(function(){
+        $("#data").html(ListOfV());
 
-        });
+    });
     $("#newEvent").click(function(){
         $("#data").html(newEvent());
         addButtonToEvent();
