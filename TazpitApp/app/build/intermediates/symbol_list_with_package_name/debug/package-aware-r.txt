@@ -1566,7 +1566,6 @@ id always
 id app_bar
 id async
 id auto
-id back_button
 id barrier
 id beginning
 id blocking

@@ -96,10 +96,7 @@ public class  SceneriosDetailActivity extends AppCompatActivity {
             }
         });
 
-
     }
-
-
 
     private void is_user_is_accepted(DocumentReference docRef, FirebaseUser user)
     {

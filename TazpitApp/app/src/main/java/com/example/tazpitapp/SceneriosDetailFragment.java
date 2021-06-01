@@ -45,6 +45,7 @@ public class SceneriosDetailFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Log.d("natigabi2", "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbb");
         if (getArguments().containsKey(ARG_ITEM_ID)) {
             // Load the dummy content specified by the fragment
             // arguments. In a real-world scenario, use a Loader
@@ -61,7 +62,7 @@ public class SceneriosDetailFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
+        Log.d("natigabi2", "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
         View rootView = inflater.inflate(R.layout.scenerios_detail, container, false);
         // Show the dummy content as text in a TextView.
         if (mItem != null) {

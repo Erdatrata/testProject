@@ -94,3 +94,5 @@ TazpitApp/app/src/main/res/layout/activity_login.xml
 TazpitApp/app/src/main/AndroidManifest.xml
 
 TazpitApp/app/src/main/java/com/example/tazpitapp/MainActivity.java
+
+TazpitApp/app/src/main/java/com/example/tazpitapp/assistClasses/DummyContent.java

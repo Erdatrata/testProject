@@ -48,10 +48,17 @@ com/example/tazpitapp/SceneriosDetailFragment.java
 com/example/tazpitapp/ui/gallery/GalleryFragment.java
  com.example.tazpitapp.ui.gallery.GalleryFragment
  com.example.tazpitapp.ui.gallery.GalleryFragment$1
-com/example/tazpitapp/assistClasses/DummyContent.java
- com.example.tazpitapp.assistClasses.DummyContent
- com.example.tazpitapp.assistClasses.DummyContent$1
- com.example.tazpitapp.assistClasses.DummyContent$DummyItem
+com/example/tazpitapp/SceneriosListActivity.java
+ com.example.tazpitapp.SceneriosListActivity
+ com.example.tazpitapp.SceneriosListActivity$1
+ com.example.tazpitapp.SceneriosListActivity$2
+ com.example.tazpitapp.SceneriosListActivity$3
+ com.example.tazpitapp.SceneriosListActivity$FirestoreCallback
+ com.example.tazpitapp.SceneriosListActivity$SimpleItemRecyclerViewAdapter
+ com.example.tazpitapp.SceneriosListActivity$SimpleItemRecyclerViewAdapter$1
+ com.example.tazpitapp.SceneriosListActivity$SimpleItemRecyclerViewAdapter$2
+ com.example.tazpitapp.SceneriosListActivity$SimpleItemRecyclerViewAdapter$2$1
+ com.example.tazpitapp.SceneriosListActivity$SimpleItemRecyclerViewAdapter$ViewHolder
 com/example/tazpitapp/backgroundService.java
  com.example.tazpitapp.backgroundService
  com.example.tazpitapp.backgroundService$1
@@ -83,9 +90,9 @@ com/example/tazpitapp/fillReport.java
  com.example.tazpitapp.fillReport$4$2
  com.example.tazpitapp.fillReport$5
  com.example.tazpitapp.fillReport$6
-com/example/tazpitapp/SignUp.java
- com.example.tazpitapp.SignUp
- com.example.tazpitapp.SignUp$1
+com/example/tazpitapp/MainActivity.java
+ com.example.tazpitapp.MainActivity
+ com.example.tazpitapp.MainActivity$1
 com/example/tazpitapp/register.java
  com.example.tazpitapp.register
  com.example.tazpitapp.register$register1
@@ -99,17 +106,10 @@ com/example/tazpitapp/register.java
  com.example.tazpitapp.register$register3$1$1
  com.example.tazpitapp.register$register3$2
  com.example.tazpitapp.register$register3$2$1
-com/example/tazpitapp/SceneriosListActivity.java
- com.example.tazpitapp.SceneriosListActivity
- com.example.tazpitapp.SceneriosListActivity$1
- com.example.tazpitapp.SceneriosListActivity$2
- com.example.tazpitapp.SceneriosListActivity$3
- com.example.tazpitapp.SceneriosListActivity$FirestoreCallback
- com.example.tazpitapp.SceneriosListActivity$SimpleItemRecyclerViewAdapter
- com.example.tazpitapp.SceneriosListActivity$SimpleItemRecyclerViewAdapter$1
- com.example.tazpitapp.SceneriosListActivity$SimpleItemRecyclerViewAdapter$2
- com.example.tazpitapp.SceneriosListActivity$SimpleItemRecyclerViewAdapter$2$1
- com.example.tazpitapp.SceneriosListActivity$SimpleItemRecyclerViewAdapter$ViewHolder
-com/example/tazpitapp/MainActivity.java
- com.example.tazpitapp.MainActivity
- com.example.tazpitapp.MainActivity$1
+com/example/tazpitapp/SignUp.java
+ com.example.tazpitapp.SignUp
+ com.example.tazpitapp.SignUp$1
+com/example/tazpitapp/assistClasses/DummyContent.java
+ com.example.tazpitapp.assistClasses.DummyContent
+ com.example.tazpitapp.assistClasses.DummyContent$1
+ com.example.tazpitapp.assistClasses.DummyContent$DummyItem
