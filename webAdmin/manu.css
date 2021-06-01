@@ -1,0 +1,241 @@
+nav {
+    margin: 27px auto 0;
+
+    position: relative;
+    width: 590px;
+    height: 50px;
+    background-color: #34495e;
+    border-radius: 8px;
+    font-size: 0;
+}
+nav a {
+    line-height: 50px;
+    height: 100%;
+    font-size: 15px;
+    display: inline-block;
+    position: relative;
+    z-index: 1;
+    text-decoration: none;
+    text-transform: uppercase;
+    text-align: center;
+    color: white;
+    cursor: pointer;
+}
+nav .animation {
+    position: absolute;
+    height: 100%;
+    top: 0;
+    z-index: 0;
+    transition: all .5s ease 0s;
+    border-radius: 8px;
+}
+a:nth-child(1) {
+    width: 100px;
+}
+a:nth-child(2) {
+    width: 110px;
+}
+a:nth-child(3) {
+    width: 100px;
+}
+a:nth-child(4) {
+    width: 160px;
+}
+a:nth-child(5) {
+    width: 120px;
+}
+nav .start-home, a:nth-child(1):hover~.animation {
+    width: 100px;
+    left: 0;
+    background-color: #1abc9c;
+}
+nav .start-about, a:nth-child(2):hover~.animation {
+    width: 110px;
+    left: 100px;
+    background-color: #e74c3c;
+}
+nav .start-blog, a:nth-child(3):hover~.animation {
+    width: 100px;
+    left: 210px;
+    background-color: #3498db;
+}
+nav .start-portefolio, a:nth-child(4):hover~.animation {
+    width: 160px;
+    left: 310px;
+    background-color: #9b59b6;
+}
+nav .start-contact, a:nth-child(5):hover~.animation {
+    width: 120px;
+    left: 470px;
+    background-color: #e67e22;
+}
+
+body {
+    font-size: 12px;
+    font-family: sans-serif;
+    background: #2c3e50;
+}
+h1 {
+    text-align: center;
+    margin: 40px 0 40px;
+    text-align: center;
+    font-size: 30px;
+    color: #ecf0f1;
+    text-shadow: 2px 2px 4px #000000;
+    font-family: 'Cherry Swash', cursive;
+}
+
+p {
+    position: absolute;
+    bottom: 20px;
+    width: 100%;
+    text-align: center;
+    color: #ecf0f1;
+    font-family: 'Cherry Swash',cursive;
+    font-size: 16px;
+}
+
+span {
+    color: #2BD6B4;
+}
+
+
+
+
+
+html,
+
+
+
+
+.input::before {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 300px;
+    background: #0f1041;
+}
+.input-header {
+    position: relative;
+    padding-top: 80px;
+    color: #fff;
+}
+.input-header h1 {
+    padding-bottom: 25px;
+    font-size: 3.25em;
+    font-weight: 100;
+}
+.input-content {
+    position: relative;
+    padding: 44px 55px;
+    background: #fff;
+    z-index: 10;
+}
+.input-content h2 {
+    padding-bottom: 45px;
+    font-size: 1.625em;
+    font-weight: bold;
+    vertical-align: middle;
+}
+.input-content h2 span {
+    display: inline-block;
+    margin-left: 10px;
+    padding: 5px 6px 3px;
+    border: 1px solid #ffca00;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    vertical-align: middle;
+    color: #ffca00;
+}
+.input-content .inputbox {
+    overflow: hidden;
+    position: relative;
+    padding: 15px 0 28px 200px;
+}
+.input-content .inputbox-title {
+    position: absolute;
+    top: 15px;
+    left: 0;
+    width: 200px;
+    height: 30px;
+    color: #666;
+    font-weight: bold;
+    line-height: 30px;
+}
+.input-content .inputbox-content {
+    position: relative;
+    width: 100%;
+}
+.input-content .inputbox-content input {
+    width: 100%;
+    height: 30px;
+    box-sizing: border-box;
+    line-height: 30px;
+    font-size: 14px;
+    border: 0;
+    background: none;
+    border-bottom: 1px solid #ccc;
+    outline: none;
+    border-radius: 0;
+    -webkit-appearance: none;
+}
+.input-content .inputbox-content input:focus ~ label, .input-content .inputbox-content input:valid ~ label {
+    color: #2962ff;
+    transform: translateY(-20px);
+    font-size: 0.825em;
+    cursor: default;
+}
+.input-content .inputbox-content input:focus ~ .underline {
+    width: 100%;
+}
+.input-content .inputbox-content label {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 30px;
+    line-height: 30px;
+    color: #ccc;
+    cursor: text;
+    transition: all 200ms ease-out;
+    z-index: 10;
+}
+.input-content .inputbox-content .underline {
+    content: "";
+    display: block;
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: #2962ff;
+    transition: all 200ms ease-out;
+}
+.input-content .btns {
+    padding: 30px 0 0 200px;
+}
+.input-content .btns .btn {
+    display: inline-block;
+    margin-right: 2px;
+    padding: 10px 25px;
+    background: none;
+    border: 1px solid #c0c0c0;
+    border-radius: 2px;
+    color: #666;
+    font-size: 1.125em;
+    outline: none;
+    transition: all 100ms ease-out;
+}
+.input-content .btns .btn:hover, .input-content .btns .btn:focus {
+    transform: translateY(-3px);
+}
+.input-content .btns .btn-confirm {
+    border: 1px solid #2962ff;
+    background: #2962ff;
+    color: #fff;
+}
+
+
+
