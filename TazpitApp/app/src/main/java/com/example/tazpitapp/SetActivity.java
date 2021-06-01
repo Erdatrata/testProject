@@ -240,6 +240,12 @@ public class SetActivity extends AppCompatActivity {
                     failToRet[0]=e;
                 }
             });
+            /*DRF.set(docData).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull @NotNull Exception e) {
+                    success[0] = false;failToRet[0]=e;
+                }
+            });*/
             if(!success[0])
                 break;
         }

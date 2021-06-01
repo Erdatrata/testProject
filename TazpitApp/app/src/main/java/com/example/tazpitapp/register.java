@@ -1,7 +1,9 @@
 package com.example.tazpitapp;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.method.PasswordTransformationMethod;
 import android.text.method.ScrollingMovementMethod;
@@ -30,6 +32,7 @@ import java.util.regex.Pattern;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputLayout;
@@ -38,9 +41,11 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.SignInMethodQueryResult;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.annotations.NotNull;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.gson.Gson;
 ///////////
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -372,6 +377,42 @@ class register {
                 @Override
                 public void onClick(View v) {
                     Register(mailSTR,passwordSTR,fNameSTR,LNameSTR,citySTR,phoneNumberSTR);
+                    {//adds all new data for newely registered clients
+                        dayTime dtDEF = new dayTime(0, 0, 23, 59);//default for first time
+                        Gson gson = new Gson();
+                        SharedPreferences sp = getSharedPreferences(constants.SHARED_PREFS,
+                                Context.MODE_PRIVATE);
+                        SharedPreferences.Editor editor = sp.edit();
+                        String dayDEF = gson.toJson(dtDEF);
+                        Map<String, String> docData = new HashMap<>();
+                        for(String day: constants.daysNames){
+                            docData.put(day,dayDEF);
+                            editor.putString(day,dayDEF);
+                        }
+                        docData.put("range",""+10.0);
+                        editor.putFloat("range",(float)10.0);
+
+                        docData.put("location","city");
+                        editor.putString("location","city");
+
+                        FirebaseAuth userIdentifier=FirebaseAuth.getInstance();
+                        String UID = userIdentifier.getCurrentUser().getUid();
+                        DocumentReference DRF = FirebaseFirestore.getInstance()
+                                .document("Users/"+UID);
+                        final boolean[] success = {true};
+                        final Exception[] failToRet = new Exception[1];
+                        DRF.set(docData).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull @NotNull Exception e) {
+                                success[0] = false;failToRet[0]=e;
+                            }
+                        });
+                        if(!success[0]){
+                            // show/make log for case of failure
+                        }
+                        editor.apply();
+                    }
+
                     Intent intent = new Intent(v.getContext(), MainActivity.class);
                     startActivity(intent);
                 }
