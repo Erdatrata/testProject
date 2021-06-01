@@ -115,7 +115,7 @@ public class backgroundService extends Service {
 
     };
 
-    private boolean inTown(Object town) {
+    private boolean inTown(Object town) { //town from scenerio.. will return if the user town is the same as the scenerio
         FirebaseAuth userIdentifier=FirebaseAuth.getInstance();
         String UID = userIdentifier.getCurrentUser().getUid();
         FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -309,14 +309,15 @@ public class backgroundService extends Service {
         if(intent!= null){
             String action =intent.getAction();
             if(action!=null){
-                if(action.equals(constants.ACTION_START_LOCATION_SERVICE)){
-//                    StopCity=true;
+                if(action.equals(constants.ACTION_START_LOCATION_SERVICE)){//gps on
+                    StopCity=true;
                     startLocationService();
+                    stopCity();
                 }
-                else if(action.equals(constants.ACTION_STOP_LOCATION_SERVICE)){
-//                    StopCity=false;
+                else if(action.equals(constants.ACTION_STOP_LOCATION_SERVICE)){//gps off
+                    StopCity=false;
                     stopLocationService();
-//                    if(!StopCity){StartCity();}
+                    StartCity();
 
 
 
@@ -328,7 +329,29 @@ public class backgroundService extends Service {
         return super.onStartCommand(intent,flags,startId);
     }
 
+
+
+    private boolean checkTime(){
+
+        return true;
+    }
+    private boolean checkImporent(Object Scenerio){//will check if דחוף Is true
+
+        return true;
+    }
+
+    //inTown(Object town)// will return if the user town is the same as the scenerio
+
+    private void stopCity() {
+
+
+    }
+
     private void StartCity() {
+
+
+
+    }
 //
 //        AlertIfInRange();
 //        String channlId = "location_notification_channel";
@@ -344,7 +367,7 @@ public class backgroundService extends Service {
 //        builder.setAutoCancel(false);
 //        builder.setPriority(NotificationCompat.PRIORITY_MAX);
     }
-}
+
 
 
 
