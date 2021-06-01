@@ -96,7 +96,7 @@ public class fillReport extends AppCompatActivity {
                 Intent intent = new Intent(Intent.ACTION_PICK);
                 intent.setType("*/*");
                 intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
-                startActivityForResult(Intent.createChooser(intent, "Select Picture"), SELECT_PHOTO); //SELECT_PICTURES is simply a global int used to check the calling intent in onActivityResult
+                startActivityForResult(Intent.createChooser(intent, "בחר מדיה"), SELECT_PHOTO); //SELECT_PICTURES is simply a global int used to check the calling intent in onActivityResult
             }
         });
 
@@ -149,13 +149,14 @@ public class fillReport extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode == SELECT_PHOTO) {
             if(resultCode == Activity.RESULT_OK) {
-                if(data.getClipData() != null) {
-                    int count = data.getClipData().getItemCount(); //evaluate the count before the for loop --- otherwise, the count is evaluated every loop.
-                    Uri imageUri;
-                    //in the loop we add to arraylist of Bitmap the media. loop runs on size of amount of media that picked
-                    for(int i = 0; i < count; i++) {
-                        imageUri = data.getClipData().getItemAt(i).getUri();
-                        mediaHolder.add(imageUri);
+                if(data!=null) {
+                    if (data.getClipData() != null) {
+                        int count = data.getClipData().getItemCount(); //evaluate the count before the for loop --- otherwise, the count is evaluated every loop.
+                        Uri imageUri;
+                        //in the loop we add to arraylist of Bitmap the media. loop runs on size of amount of media that picked
+                        for (int i = 0; i < count; i++) {
+                            imageUri = data.getClipData().getItemAt(i).getUri();
+                            mediaHolder.add(imageUri);
 //                        try {
 //                            System.out.println("the media is: "+imageUri.toString());
 //                            bm.add(MediaStore.Images.Media.getBitmap(getContentResolver(), imageUri)) ;
@@ -163,12 +164,14 @@ public class fillReport extends AppCompatActivity {
 //                            e.printStackTrace();
 //                        }
 
+                        }
                     }
                 }
-            } else if(data.getData() != null) {
-                String imagePath = data.getData().getPath();
-                //do something with the image (save it to some directory or whatever you need to do with it here)
             }
+//            else if(data.getData() != null) {
+//                String imagePath = data.getData().getPath();
+//                //do something with the image (save it to some directory or whatever you need to do with it here)
+//            }
         }
     }
 
