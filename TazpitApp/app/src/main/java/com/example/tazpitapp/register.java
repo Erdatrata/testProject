@@ -347,14 +347,52 @@ class register {
                                 dataToSave[0].put("Phone:",phoneNumberSTR);
 
 
-                                FirebaseDatabase.getInstance().getReference("Users")//here we creating users folder in real time data baes , getting uid from user and storing the data in folder named by id
+                                FirebaseDatabase.getInstance().getReference("Users")
+                                        //here we creating users folder in real time data baes , getting uid from user and storing the data in folder named by id
                                         .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
                                         .setValue(dataToSave[0]).addOnCompleteListener(new OnCompleteListener<Void>() {
                                     @Override
                                     public void onComplete(@NonNull Task<Void> task) {
                                         if(task.isSuccessful()){
-                                            Toast.makeText(register.register3.this,"user registerd",Toast.LENGTH_LONG).show();
-                                        }
+                                            Toast.makeText(register.register3.this,
+                                                    R.string.register_toast_success,Toast.LENGTH_LONG).show();
+                                            {//adds all new data for newely registered clients
+                                                dayTime dtDEF = new dayTime(0, 0, 23, 59);//default for first time
+                                                Gson gson = new Gson();
+                                                SharedPreferences sp = getSharedPreferences(constants.SHARED_PREFS,
+                                                        Context.MODE_PRIVATE);
+                                                SharedPreferences.Editor editor = sp.edit();
+                                                String dayDEF = gson.toJson(dtDEF);
+                                                Map<String, String> docData = new HashMap<>();
+                                                for(String day: constants.daysNames){
+                                                    docData.put(day,dayDEF);
+                                                    editor.putString(day,dayDEF);
+                                                }
+                                                docData.put("range",""+10.0);
+                                                editor.putFloat("range",(float)10.0);
+
+                                                docData.put("location","city");
+                                                editor.putString("location","city");
+
+                                                FirebaseAuth userIdentifier=FirebaseAuth.getInstance();
+                                                String UID = userIdentifier.getCurrentUser().getUid();
+                                                DocumentReference DRF = FirebaseFirestore.getInstance()
+                                                        .document("Users/"+UID);
+                                                final boolean[] success = {true};
+                                                final Exception[] failToRet = new Exception[1];
+                                                DRF.set(docData).addOnFailureListener(new OnFailureListener() {
+                                                    @Override
+                                                    public void onFailure(@NonNull @NotNull Exception e) {
+                                                        success[0] = false;failToRet[0]=e;
+                                                    }
+                                                });
+                                                if(!success[0]){
+                                                    // show/make log for case of failure
+                                                }
+                                                editor.apply();
+
+                                            }
+                                            }
                                     }
                                 });
 
@@ -377,43 +415,11 @@ class register {
                 @Override
                 public void onClick(View v) {
                     Register(mailSTR,passwordSTR,fNameSTR,LNameSTR,citySTR,phoneNumberSTR);
-                    {//adds all new data for newely registered clients
-                        dayTime dtDEF = new dayTime(0, 0, 23, 59);//default for first time
-                        Gson gson = new Gson();
-                        SharedPreferences sp = getSharedPreferences(constants.SHARED_PREFS,
-                                Context.MODE_PRIVATE);
-                        SharedPreferences.Editor editor = sp.edit();
-                        String dayDEF = gson.toJson(dtDEF);
-                        Map<String, String> docData = new HashMap<>();
-                        for(String day: constants.daysNames){
-                            docData.put(day,dayDEF);
-                            editor.putString(day,dayDEF);
-                        }
-                        docData.put("range",""+10.0);
-                        editor.putFloat("range",(float)10.0);
-
-                        docData.put("location","city");
-                        editor.putString("location","city");
-
-                        FirebaseAuth userIdentifier=FirebaseAuth.getInstance();
-                        String UID = userIdentifier.getCurrentUser().getUid();
-                        DocumentReference DRF = FirebaseFirestore.getInstance()
-                                .document("Users/"+UID);
-                        final boolean[] success = {true};
-                        final Exception[] failToRet = new Exception[1];
-                        DRF.set(docData).addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull @NotNull Exception e) {
-                                success[0] = false;failToRet[0]=e;
-                            }
-                        });
-                        if(!success[0]){
-                            // show/make log for case of failure
-                        }
-                        editor.apply();
-                    }
-
-                    Intent intent = new Intent(v.getContext(), MainActivity.class);
+                    try {
+                        Thread.sleep(2500);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }Intent intent = new Intent(v.getContext(), MainActivity.class);
                     startActivity(intent);
                 }
             });

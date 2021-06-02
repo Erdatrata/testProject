@@ -1584,7 +1584,6 @@ id center
 id center_horizontal
 id center_vertical
 id chains
-id check_upload_phto
 id checkbox
 id checked
 id chip
@@ -1641,6 +1640,7 @@ id fab
 id fade
 id fill
 id fill_horizontal
+id fill_report
 id fill_report_add_credit
 id fill_report_description
 id fill_report_send_button
@@ -2181,6 +2181,7 @@ string path_password_eye_mask_visible
 string path_password_strike_through
 string project_id
 string register_button
+string register_toast_success
 string scenerios_button
 string search_menu_title
 string set_alert_accept
