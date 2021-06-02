@@ -400,11 +400,11 @@ public class SetActivity extends AppCompatActivity {
                 view.setHour(1);
                 if (v.getId() == R.id.timePickerSettingsFrom) {//for upper textView
                     //check for time correctness here (time should be chronological)
-                    if (hourOfDay > hoursEnd || ((hourOfDay == hoursEnd) && (minutes >= minutesEnd))) {
-                        Toast.makeText(SetActivity.this,
-                                R.string.set_toast_cantSetStartLater, Toast.LENGTH_LONG).show();
-                        return;
-                    }
+//                    if (hourOfDay > hoursEnd || ((hourOfDay == hoursEnd) && (minutes >= minutesEnd))) {
+//                        Toast.makeText(SetActivity.this,
+//                                R.string.set_toast_cantSetStartLater, Toast.LENGTH_LONG).show();
+//                        return;
+//                    }
                     hourStart = hourOfDay;
                     minuteStart = minutes;
                     toPut = String.format(Locale.getDefault(), "%02d:%02d", hourStart, minuteStart);
@@ -426,7 +426,8 @@ public class SetActivity extends AppCompatActivity {
             }
         };
 //        int style= AlertDialog.THEME_HOLO_DARK;
-        int style = R.style.Theme_MaterialComponents_Dialog_Alert;
+        //int style = R.style.Theme_MaterialComponents_Dialog_Alert;
+        int style = AlertDialog.THEME_HOLO_LIGHT;
 
         TimePickerDialog timePickerDialog = new TimePickerDialog(this, style, onTimeSetListener,
                 hour, minute, true);
