@@ -133,7 +133,6 @@ class register {
             String phone=this.phone.getEditText().getText().toString();
             if(mail.length()<1||password.length()<1||passwordAgain.length()<1||city.length()<1||fname.length()<1||Lname.length()<1||phone.length()<1){return false;}return true;
         }
-        //    private boolean checkMailWithDB(){}
 //    private boolean cheakCity(){}
         private boolean checkMailIntegrity(){//check if it has @
 

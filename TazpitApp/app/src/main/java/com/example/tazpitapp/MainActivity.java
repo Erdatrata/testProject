@@ -1,4 +1,5 @@
 package com.example.tazpitapp;
+import android.app.ActivityManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -8,6 +9,7 @@ import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
@@ -44,7 +46,34 @@ public class MainActivity<imageView> extends AppCompatActivity implements Naviga
         }
     }
 
-
+    public  boolean getStateOfGps(){//return true or false if the gps is working
+        SharedPreferences sharedPreferences = getSharedPreferences(constants.SHARED_PREFS, MODE_PRIVATE);
+        return sharedPreferences.getBoolean(constants.gpsState,false);
+    }
+    private boolean isLocationServiceRunning(){
+        ActivityManager activityManager=
+                (ActivityManager)getSystemService(Context.ACTIVITY_SERVICE);
+        if(activityManager!=null){
+            for(ActivityManager.RunningServiceInfo service:
+                    activityManager.getRunningServices(Integer.MAX_VALUE)){
+                if(backgroundService.class.getName().equals(service.service.getClassName())){
+                    if(service.foreground){
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+        return false;
+    }
+    private  void startLocationService(){
+        if(!isLocationServiceRunning()){
+            Intent intent =new Intent(getApplicationContext(),backgroundService.class);
+            intent.setAction(constants.ACTION_START_LOCATION_SERVICE);
+            startService(intent);
+            Toast.makeText(this,"Location service started",Toast.LENGTH_SHORT).show();
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +86,9 @@ public class MainActivity<imageView> extends AppCompatActivity implements Naviga
         catch (NullPointerException e){}
         setContentView(R.layout.activity_main);
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        if(getStateOfGps()){
+            startLocationService();
+        }
 
         aToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         NavigationView mNavigationView = (NavigationView) findViewById(R.id.nav_view);
