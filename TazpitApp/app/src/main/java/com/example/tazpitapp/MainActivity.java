@@ -3,6 +3,7 @@ import android.app.ActivityManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
@@ -154,6 +155,10 @@ public class MainActivity<imageView> extends AppCompatActivity implements Naviga
             SharedPreferences.Editor editor = sharedpreferences.edit();
             editor.clear().apply();
             this.recreate();
+        }
+        if (id == R.id.contact_button) {
+            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://tps.co.il/contact-us/"));
+            startActivity(browserIntent);
         }
         return true;
 

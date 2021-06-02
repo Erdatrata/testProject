@@ -196,6 +196,15 @@ public class SceneriosListActivity extends AppCompatActivity {
                     .inflate(R.layout.scenerios_list_content, parent, false);
             return new ViewHolder(view);
         }
+        @Override
+        public long getItemId(int position){
+            return position;
+        }
+
+        @Override
+        public int getItemViewType(int position) {
+            return position;
+        }
 
         @Override
         public void onBindViewHolder(final ViewHolder holder, int position) {
