@@ -492,6 +492,20 @@ function removeUser(userid) {
      firebase.database().ref('Users/' + userid).remove();
 }
 
+function updatePermission(id) {//last thing to do
+
+
+}
+
+function RegisterUser(id) {
+    firebase.database().ref('Users/' + id).update({
+        volunteer: "true"
+    });
+
+    updatePermission(id);
+
+}
+
 async function createTabFromUserData(userid,newuser) {
     let id = userid.replace(/\s+/g, '');
     let x = await getUser(userid);
@@ -523,7 +537,12 @@ async function createTabFromUserData(userid,newuser) {
     });
         if(newuser==NEWUSER){
             var agree = $("<i class='fas fa-check'></i>").click(function () {
-          //      AggreUser(id);
+                var p = $(this).parent();
+                p.fadeOut(function () {
+                    RegisterUser(id);
+                    //get into Scenerio
+                    p.remove();
+                });
             });
             task.append(delFirst, checkUser,agree);
         }
@@ -534,14 +553,44 @@ async function createTabFromUserData(userid,newuser) {
     //to clear the input
 }
 
+async function isItNewUser(userId) {
+    const snapshot = await firebase.database().ref('Users/' + userId).once('value');
+    let user = (snapshot.val());
+    if(user["volunteer"]==="false"){
+        return true;
+    }
+    else if(user["volunteer"]==="true"){
+        console.log("truetruetruetruetruetruetruetruetruetrue");
+
+        return false;}
+
+    return true;
+}
+
 async function ListVolFun() {
     const snapshot = await firebase.database().ref('Users').once('value', (snapshot) => {
         snapshot.forEach((childSnapshot) => {
-            createTabFromUserData(childSnapshot.key,"");
-            console.log(childSnapshot.key);
+            firebase.database().ref('Users/' + childSnapshot.key).once('value',(snapshot)=>{
+                let user= (snapshot.val());
+                if(user["volunteer"]=="true"){
+                    console.log("1111111111111111111111111111");
+                    createTabFromUserData(childSnapshot.key,"");
+                    console.log(childSnapshot.key);
+                }
+                else{console.log("22222222222222222222");}
+            });
 
-        });});
+        });
 
+});
+    snapshot.forEach((childSnapshot) => {
+        //let isItNew=await isItNewUser(childSnapshot.key);
+        // if(!isItNew){
+        //     console.log("1111111111111111111111111111");
+        //     createTabFromUserData(childSnapshot.key,"");
+        //     console.log(childSnapshot.key);}
+
+    });
     document.getElementById("btn btn-cancel").addEventListener("click",removeListOfS);
     document.getElementById("refForListS").addEventListener("click",function () {
         $("#ListOfS").remove();
@@ -552,8 +601,29 @@ async function ListVolFun() {
 
 }
 
-function ListUsersFun() {
+async function ListUsersFun() {
+    const snapshot = await firebase.database().ref('Users').once('value', (snapshot) => {
+        snapshot.forEach((childSnapshot) => {
+            firebase.database().ref('Users/' + childSnapshot.key).once('value',(snapshot)=>{
+                let user= (snapshot.val());
+                if(user["volunteer"]!="true"){
+                    console.log("1111111111111111111111111111");
+                    createTabFromUserData(childSnapshot.key, NEWUSER);
+                    console.log(childSnapshot.key);
+                }
+                else{console.log("22222222222222222222");}
+            });
 
+
+        });});
+
+    document.getElementById("btn btn-cancel").addEventListener("click",removeListOfS);
+    document.getElementById("refForListS").addEventListener("click",function () {
+        $("#ListOfS").remove();
+        $("#data").html(ListEvent());
+        ListUsersFun();
+    });
+    createEnterFilter();
 }
 
 document.addEventListener("DOMContentLoaded", () => {
