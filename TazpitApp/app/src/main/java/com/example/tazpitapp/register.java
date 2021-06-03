@@ -344,6 +344,7 @@ class register {
                                 dataToSave[0].put("City:",citySTR);
                                 dataToSave[0].put("Email:",mailSTR);
                                 dataToSave[0].put("Phone:",phoneNumberSTR);
+                                dataToSave[0].put("volunteer","false");
 
 
                                 FirebaseDatabase.getInstance().getReference("Users")
