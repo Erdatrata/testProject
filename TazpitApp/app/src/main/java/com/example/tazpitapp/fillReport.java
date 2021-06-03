@@ -87,7 +87,7 @@ public class fillReport extends AppCompatActivity {
         progressTextView=(TextView) findViewById(R.id.progressTextView);
         mAuth = FirebaseAuth.getInstance();
         String scenarioPressed = getIntent().getStringExtra("pressed scenario");
-        mDocRef = FirebaseFirestore.getInstance().document("Scenarios/" + scenarioPressed+"/"+"filled/"+mAuth.getCurrentUser().getUid() +" report:");
+        mDocRef = FirebaseFirestore.getInstance().document("Scenarios/" + scenarioPressed+"/"+"filled/"+mAuth.getCurrentUser().getUid());
         DocumentReference deleteUserFromAccept=FirebaseFirestore.getInstance().document("Scenarios/"+scenarioPressed);
         pickMedia.setOnClickListener(new View.OnClickListener() { //when pressing the upload media button we go here
             //and choose media

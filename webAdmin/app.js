@@ -34,3 +34,28 @@
 //     form.name.value = '';
 //     form.city.value = '';
 // });
+function getTextFrom(from, userDoc) {
+    console.log(userDoc.id);
+    var docRef = db.collection(from).doc(userDoc.id);
+    let re;
+
+    await docRef.get().then((doc) => {
+        if (doc.exists) {
+            re=doc.data();
+            return;
+        } else {
+            // doc.data() will be undefined in this case
+            console.log("No such document!");
+        }
+    }).catch((error) => {
+        console.log("Error getting document:", error);
+    });
+    let str="";
+    for (const e in re) {
+        str=str+e+":"+re[e]+'<br>';
+    }
+
+    return str;
+
+
+}
