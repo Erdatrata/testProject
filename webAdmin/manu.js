@@ -43,8 +43,8 @@ async function getTextFrom(from, userDoc) {
 
 }
 
-async function openText(from,userDoc) {
-    let toFill=await getTextFrom(from,userDoc);
+
+function createModal(toFill) {
     $("#data").append("" +
         "<!-- The Modal -->\n" +
         "<div id=\"myModal\" class=\"modal\">\n" +
@@ -65,7 +65,7 @@ async function openText(from,userDoc) {
 
 // When the user clicks on the button, open the modal
 
-        modal.style.display = "block";
+    modal.style.display = "block";
 
 // When the user clicks on <span> (x), close the modal
     span.onclick = function() {
@@ -80,10 +80,27 @@ async function openText(from,userDoc) {
     }
 }
 
+async function openModalFromFirestore(from,userDoc) {
+    let toFill=await getTextFrom(from,userDoc);
+    createModal(toFill);
+
+}
+
 async function getUser(id) {
     const snapshot = await firebase.database().ref('Users/' + id).once('value');
     let user = (snapshot.val());
     return user["First Name:"]+" "+user["Sec Name:"];
+}
+
+async function openUserInfo(id) {
+    const snapshot = await firebase.database().ref('Users/' + id).once('value');
+    let user = (snapshot.val());
+    let toFill=user["First Name:"]+" "+user["Sec Name:"]+"\n"
+    toFill=toFill+user["Email:"]+"\n";
+    toFill=toFill+user["City:"]+"\n";
+    toFill=toFill+user["Phone:"]+"\n";
+    createModal(toFill);
+
 }
 
 async function createTab(from,userDoc,filled) {
@@ -91,21 +108,25 @@ async function createTab(from,userDoc,filled) {
     let x = await getUser(userDoc.id);
     var task = $("<div class='task' id=" + id + "></div>").text(x);
 
+    var checkUser = $("<i class='fas fa-user'></i>").click(function () {
+            openUserInfo(userDoc.id);
+    });
+
     var del = $("<i class='fas fa-trash-alt'></i>").click(function () {
         var p = $(this).parent();
         p.fadeOut(function () {
-
+            makeOld(from,userDoc.id);
             //get into Scenerio
             p.remove();
         });
     });
     if (filled == FILLED) {
         var open = $("<i class='fas fa-folder-open'></i>").click(function () {
-            openText(from, userDoc);
+            openModalFromFirestore(from, userDoc);
         });
-        task.append(del, open);
+        task.append(del, open,checkUser);
     } else {
-        task.append(del);
+        task.append(del,checkUser);
     }
     $(".notcomp").append(task);
     //to clear the input
@@ -213,6 +234,27 @@ function openAccepted(userDocid) {
     }, false);
 }
 
+function makeOld(path, name) {
+    let ref=db.doc(path);
+    ref.get().then((doc) => {
+        if (doc.exists) {
+            let save=doc.data();
+            let remove =ref.delete().then(() => {
+                console.log("Document successfully deleted!");
+            });
+            db.collection("OldInfo").doc(name).set(save).then(() => {
+                console.log("Document successfully written!");
+            });
+            return remove;
+        } else {
+            // doc.data() will be undefined in this case
+            console.log("No such document!");
+        }
+    }).catch((error) => {
+        console.log("Error getting document:", error);
+    });
+}
+
 function ListEventFun(){
     let ref=db.collection(SCENARIO);
 
@@ -223,14 +265,7 @@ function ListEventFun(){
             let id=userDoc.id.replace(/\s+/g,'');
             var task= $("<div class='task' id="+id+"></div>").text(userDoc.id);
 
-            var del = $("<i class='fas fa-trash-alt'></i>").click(function(){
-                var p = $(this).parent();
-                p.fadeOut(function(){
 
-                    //get into Scenerio
-                    p.remove();
-                });
-            });
             var filled = $("<i class='fas fa-signature'></i>").click(function(){
                 openAccepted(userDoc.id);
             });
@@ -239,6 +274,16 @@ function ListEventFun(){
             });
 
             var check = $("<i class='fas fa-check'></i>").click(function(){
+                var del = $("<i class='fas fa-trash-alt'></i>").click(function(){
+                    var p = $(this).parent();
+                    p.fadeOut(function(){
+                        makeOld(SCENARIO+"/"+userDoc.id,userDoc.id);
+                        //get into Scenerio
+                        p.remove();
+                    });
+                });
+                task.append(del);
+                $(".notcomp").append(task);
                 var p = $(this).parent();
                 p.fadeOut(function(){
 
@@ -249,7 +294,7 @@ function ListEventFun(){
                 $(this).remove();
             });
 
-            task.append(del,check,filled,accepted);
+            task.append(filled,accepted,check);
             $(".notcomp").append(task);
             //to clear the input
 
