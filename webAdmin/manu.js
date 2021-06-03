@@ -112,21 +112,33 @@ async function createTab(from,userDoc,filled) {
             openUserInfo(userDoc.id);
     });
 
-    var del = $("<i class='fas fa-trash-alt'></i>").click(function () {
-        var p = $(this).parent();
-        p.fadeOut(function () {
-            makeOld(from,userDoc.id);
-            //get into Scenerio
-            p.remove();
+    var check = $("<i class='fas fa-check'></i>").click(function(){
+        var del = $("<i class='fas fa-trash-alt'></i>").click(function(){
+            var p = $(this).parent();
+            p.fadeOut(function(){
+                makeOld(from+"/"+userDoc.id,userDoc.id);
+                //get into Scenerio
+                p.remove();
+            });
         });
+        task.append(del);
+        $(".notcomp").append(task);
+        var p = $(this).parent();
+        p.fadeOut(function(){
+
+            //set as complete
+            $(".comp").append(p);
+            p.fadeIn();
+        });
+        $(this).remove();
     });
     if (filled == FILLED) {
         var open = $("<i class='fas fa-folder-open'></i>").click(function () {
             openModalFromFirestore(from, userDoc);
         });
-        task.append(del, open,checkUser);
+        task.append(check, open,checkUser);
     } else {
-        task.append(del,checkUser);
+        task.append(check,checkUser);
     }
     $(".notcomp").append(task);
     //to clear the input
@@ -209,7 +221,7 @@ function refreshFilled(userDocid) {
 function openFilled(userDocid) {
     $("#ListOfS").remove();
     $("#data").html(ListEvent());
-    $("#Completed").remove();
+
     openList(SCENARIO+"/"+userDocid+"/"+FILLED,FILLED);
 
     document.getElementById("btn btn-cancel").addEventListener("click",refreshListOfS);
@@ -226,7 +238,7 @@ function refreshAccepted(userDocid) {
 function openAccepted(userDocid) {
     $("#ListOfS").remove();
     $("#data").html(ListEvent());
-    $("#Completed").remove();
+
     openList(SCENARIO+"/"+userDocid+"/"+ACCEPTED);
     document.getElementById("btn btn-cancel").addEventListener("click",refreshListOfS);
     document.getElementById("refForListS").addEventListener("click", function(){
@@ -240,7 +252,7 @@ function makeOld(path, name) {
         if (doc.exists) {
             let save=doc.data();
             let remove =ref.delete().then(() => {
-                console.log("Document successfully deleted!");
+                console.log(name+",Document successfully deleted!\nin path:"+path);
             });
             db.collection("OldInfo").doc(name).set(save).then(() => {
                 console.log("Document successfully written!");
@@ -248,7 +260,7 @@ function makeOld(path, name) {
             return remove;
         } else {
             // doc.data() will be undefined in this case
-            console.log("No such document!");
+            console.log(name+",No such document! \nin path:"+path);
         }
     }).catch((error) => {
         console.log("Error getting document:", error);
