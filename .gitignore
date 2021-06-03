@@ -408,3 +408,7 @@ TazpitApp/app/build/generated/source/buildConfig/debug/com/example/tazpitapp/Bui
 TazpitApp/.gradle/buildOutputCleanup/outputFiles.bin
 TazpitApp/.gradle/buildOutputCleanup/buildOutputCleanup.lock
 TazpitApp/local.properties
+
+TazpitApp/.idea/modules.xml
+
+TazpitApp/app/src/main/java/com/example/tazpitapp/SceneriosDetailActivity.java

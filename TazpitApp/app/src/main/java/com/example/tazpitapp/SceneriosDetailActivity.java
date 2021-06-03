@@ -101,36 +101,37 @@ public class  SceneriosDetailActivity extends AppCompatActivity {
     private void is_user_is_accepted(DocumentReference docRef, FirebaseUser user)
     {
 
-        docRef.collection("accepted").get()
-            .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                @Override
-                public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                    if (task.isSuccessful()) {
-                        int indicator=0;
-                        for (QueryDocumentSnapshot document : task.getResult()) {
-                            if(user.getUid().toString().equals(document.getId().toString())) {
-                                indicator=1;
-                                Log.d("natigabi2", "hatamaaaaaa");
+         docRef.collection("accepted").get()
+                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                     @Override
+                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                         if (task.isSuccessful()) {
+                             int indicator=0;
+                             for (QueryDocumentSnapshot document : task.getResult()) {
+                                 if(user.getUid().toString().equals(document.getId().toString())) {
+                                     indicator=1;
+                                     Log.d("natigabi2", "hatamaaaaaa");
 
-                            }
-                        }
-                        if(indicator==1){
-                            button_sign_event.setVisibility(View.INVISIBLE);
-                            btnScenarioCancel.setVisibility(View.VISIBLE);
-                            btnScenarioFillReport.setVisibility(View.VISIBLE);
-                        }
-                        if(indicator==0){
-                            button_sign_event.setVisibility(View.VISIBLE);
-                            btnScenarioCancel.setVisibility(View.INVISIBLE);
-                            btnScenarioFillReport.setVisibility(View.INVISIBLE);
-                        }
+                                 }
+                             }
+                             if(indicator==1){
+                                 button_sign_event.setVisibility(View.INVISIBLE);
+                                 btnScenarioCancel.setVisibility(View.VISIBLE);
+                                 btnScenarioFillReport.setVisibility(View.VISIBLE);
+                             }
+                             if(indicator==0){
+                                 button_sign_event.setVisibility(View.VISIBLE);
+                                 btnScenarioCancel.setVisibility(View.INVISIBLE);
+                                 btnScenarioFillReport.setVisibility(View.INVISIBLE);
+                             }
 
-                    }
-                    else {
-                        Log.d("natigabi", "Error getting documents: ", task.getException());
-                    }
-                }
-            });
+                         }
+                         else {
+                             Log.d("natigabi", "Error getting documents: ", task.getException());
+                         }
+                     }
+                 });
+
 
     }
 private void showTheScenarioDetail(DocumentReference docRef){

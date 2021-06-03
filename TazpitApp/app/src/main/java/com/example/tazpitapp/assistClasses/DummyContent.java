@@ -62,7 +62,6 @@ public class DummyContent {
                         addItem(createDummyItem(i,list.get(i)));
                         i++;
                     }
-            //        ((TextView) _newRootView.findViewById(R.id.scenerios_detail)).setText("test");
 
                 } else {
                     Log.d("onComplet","No data");

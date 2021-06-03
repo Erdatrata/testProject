@@ -20,7 +20,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -37,6 +39,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -63,6 +66,7 @@ public class SceneriosListActivity extends AppCompatActivity {
     static boolean isInit1 = true;
     private  List <String> list = new ArrayList<>();
     CollectionReference itemRef;
+
     Button login;
     TextView tv;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -127,6 +131,7 @@ public class SceneriosListActivity extends AppCompatActivity {
                 if (task.isSuccessful()) {
                     for (DocumentSnapshot document : task.getResult()) {
                         list.add(document.getId());
+                        Log.d("output", "i am accepted="+String.valueOf(Range((GeoPoint)document.getData().get("מיקום"))));
                     }
                     firestoreCallback.onCallback(list);
                 }
@@ -148,8 +153,6 @@ public class SceneriosListActivity extends AppCompatActivity {
     public static class SimpleItemRecyclerViewAdapter
             extends RecyclerView.Adapter<SimpleItemRecyclerViewAdapter.ViewHolder> {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-
-
         private final SceneriosListActivity mParentActivity;
         private final List<DummyContent.DummyItem> mValues; //items of the list showing
         private final boolean mTwoPane;
@@ -214,9 +217,6 @@ public class SceneriosListActivity extends AppCompatActivity {
             mDocRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                 @Override
                 public void onSuccess(DocumentSnapshot documentSnapshot) {
-                   // Log.d("onComplet","start_Scen6_0="+mValues.get(position));
-
-                   // Log.d("onComplet","is_user_is_accepted");
                     mDocRef.collection("accepted").get()
                             .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                                 @Override
@@ -224,43 +224,45 @@ public class SceneriosListActivity extends AppCompatActivity {
                                     if (task.isSuccessful()) {
                                         int indicator=0;
                                         for (QueryDocumentSnapshot document : task.getResult()) {
-                                            Log.d("output", "scenerios="+document.getId().toString());
                                             if(user.getUid().toString().equals(document.getId().toString())) {
-                                                Log.d("output", "i am accepted");
-                                                Log.d("output", "scenerios_user="+user.getUid().toString());
-                                                Log.d("output", "scenerios_cur="+mValues.get(position).content);
                                                 holder.mIdView.setText(mValues.get(position).id);
                                                 String str="רשום- "+mValues.get(position).content+"-Range -רשום"+Range((GeoPoint)documentSnapshot.getData().get("מיקום"));
-                                                
                                                 holder.mContentView.setText(str);//add range with the name of the sceneriro
                                                 holder.itemView.setTag(mValues.get(position));
                                                 holder.itemView.setOnClickListener(mOnClickListener);
                                                 break;
                                             }
-
-                                                Log.d("output", "scenerios_cur2="+mValues.get(position).content);
                                                 holder.mIdView.setText(mValues.get(position).id);
-                                                holder.mContentView.setText(mValues.get(position).content+"-Range  -"+Range((GeoPoint)documentSnapshot.getData().get("מיקום")));//add range with the name of the sceneriro
+                                                holder.mContentView.setText(mValues.get(position).content+"-Range  -");//add range with the name of the sceneriro
                                                 holder.itemView.setTag(mValues.get(position));
                                                 holder.itemView.setOnClickListener(mOnClickListener);
-
                                         }
-
                                     }
                                     else {
-
                                         Log.d("output", "Error getting documents: ", task.getException());
                                     }
                                 }
                             });
-
-
+                    return;
                 }
             });
-
-
+            FirebaseFirestore.getInstance() .collection("Scenarios").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                    if (task.isSuccessful()) {
+                        int i=0;
+                        for (QueryDocumentSnapshot document : task.getResult()) {
+                            holder.mIdView.setText(mValues.get(position).id);
+                            holder.mContentView.setText(mValues.get(position).content+"-Range  -"+Range((GeoPoint) document.getData().get("מיקום")));//add range with the name of the sceneriro
+                            holder.itemView.setTag(mValues.get(position));
+                            holder.itemView.setOnClickListener(mOnClickListener);
+                        }
+                    } else {
+                        Log.d("onComplet","No data");
+                    }
+                }
+            });
         }
-
         @Override
         public int getItemCount() {
             Log.d("onComplet","getItemCount7");
