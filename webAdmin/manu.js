@@ -11,6 +11,9 @@
 let SCENARIO='Scenarios';
 let FILLED="filled";
 let ACCEPTED='accepted';
+let NEWUSER="newuser";
+
+
 function refreshListOfS() {
     $("#ListOfS").remove();
     $("#data").html(ListEvent());
@@ -165,52 +168,7 @@ function openList(from,filled) {
 
         })});
 
-    $(".txtb").on("keyup",function(e){
-
-
-        //look for
-
-
-        // //13  means enter button
-        if(e.keyCode == 13 && $(".txtb").val() != "") {
-
-            let lookFor = $(".txtb").val();
-            let list = document.getElementById("notcomp",).getElementsByTagName("*");
-            for (var i = 0; i < list.length; i++) {
-                if (!list[i].id.startsWith(lookFor)&&list[i].id!="") {
-                    document.getElementById(list[i].id).remove();
-                    i=i-1;
-                }
-            }
-
-
-        }
-
-
-        {
-            //     var task = $("<div class='task'></div>").text($(".txtb").val());
-            //     var del = $("<i class='fas fa-trash-alt'></i>").click(function(){
-            //         var p = $(this).parent();
-            //         p.fadeOut(function(){
-            //             p.remove();
-            //         });
-            //     });
-            //
-            //     var check = $("<i class='fas fa-check'></i>").click(function(){
-            //         var p = $(this).parent();
-            //         p.fadeOut(function(){
-            //             $(".comp").append(p);
-            //             p.fadeIn();
-            //         });
-            //         $(this).remove();
-            //     });
-            //
-            //     task.append(del,check);
-            //     $(".notcomp").append(task);
-            //     //to clear the input
-            //     $(".txtb").val("");
-        }
-    });
+    createEnterFilter();
 }
 
 function refreshFilled(userDocid) {
@@ -265,6 +223,34 @@ function makeOld(path, name) {
     }).catch((error) => {
         console.log("Error getting document:", error);
     });
+}
+
+function createEnterFilter() {
+    $(".txtb").on("keyup",function(e){
+
+        //look for
+
+        if(e.keyCode == 13 && $(".txtb").val() != "") {
+
+            let lookFor = $(".txtb").val();
+            let list = document.getElementById("notcomp",).getElementsByTagName("*");
+
+            for (var i = 0; i < list.length; i++) {
+                console.log("---------"+list[i].textContent+"---------");
+                if (!list[i].textContent.startsWith(lookFor)&&list[i].id!="") {
+                    document.getElementById(list[i].id).remove();
+                    i=i-1;
+                }
+            }
+
+
+        }
+
+
+        {
+        }
+    });
+
 }
 
 function ListEventFun(){
@@ -322,53 +308,7 @@ function ListEventFun(){
 
         })});
 
-
-    $(".txtb").on("keyup",function(e){
-
-
-        //look for
-
-
-        // //13  means enter button
-        if(e.keyCode == 13 && $(".txtb").val() != "") {
-
-            let lookFor = $(".txtb").val();
-            let list = document.getElementById("notcomp",).getElementsByTagName("*");
-            for (var i = 0; i < list.length; i++) {
-                if (!list[i].id.startsWith(lookFor)&&list[i].id!="") {
-                    document.getElementById(list[i].id).remove();
-                    i=i-1;
-                }
-            }
-
-
-        }
-
-
-        {
-        //     var task = $("<div class='task'></div>").text($(".txtb").val());
-        //     var del = $("<i class='fas fa-trash-alt'></i>").click(function(){
-        //         var p = $(this).parent();
-        //         p.fadeOut(function(){
-        //             p.remove();
-        //         });
-        //     });
-        //
-        //     var check = $("<i class='fas fa-check'></i>").click(function(){
-        //         var p = $(this).parent();
-        //         p.fadeOut(function(){
-        //             $(".comp").append(p);
-        //             p.fadeIn();
-        //         });
-        //         $(this).remove();
-        //     });
-        //
-        //     task.append(del,check);
-        //     $(".notcomp").append(task);
-        //     //to clear the input
-        //     $(".txtb").val("");
-         }
-    });
+    createEnterFilter();
     document.getElementById("btn btn-cancel").addEventListener("click",removeListOfS);
     document.getElementById("refForListS").addEventListener("click",refreshListOfS);
 
@@ -496,7 +436,7 @@ function ListEvent() {
         "        <h3 id=\"Completed\">Completed</h3>\n" +
         "      </div>\n" +
         "<button class=\"refForListS\" id=\"refForListS\">רענן</button>\n" +
-        "<button class=\"cancelForListS\" id=\"btn btn-cancel\">בטל</button>\n"+"<style>\n" +
+        "<button class=\"cancelForListS\" id=\"btn btn-cancel\">חזור</button>\n"+"<style>\n" +
 
         ".cancelForListS {\n" +
         "  padding: 15px 32px;\n" +
@@ -546,6 +486,69 @@ function addButtonToEvent() {
 
 }
 
+function ListVolFun() {
+
+}
+
+function removeUser(userid) {
+     firebase.database().ref('Users/' + userid).remove();
+}
+
+async function createTabFromUserData(userid,newuser) {
+    let id = userid.replace(/\s+/g, '');
+    let x = await getUser(userid);
+    var task = $("<div class='task' id=" + id + "></div>").text(x);
+
+    var checkUser = $("<i class='fas fa-user'></i>").click(function () {
+        openUserInfo(id);
+    });
+
+    var delFirst = $("<i class='fas fa-user-slash'></i>").click(function () {
+        var delSec = $("<i class='fas fa-trash-alt'></i>").click(function () {
+            var p = $(this).parent();
+            p.fadeOut(function () {
+                removeUser(userid);
+                //get into Scenerio
+                p.remove();
+            });
+        });
+        task.append(delSec);
+        $(".notcomp").append(task);
+        var p = $(this).parent();
+        p.fadeOut(function () {
+
+            //set as complete
+            $(".comp").append(p);
+            p.fadeIn();
+        });
+        $(this).remove();
+    });
+        if(newuser==NEWUSER){
+            var agree = $("<i class='fas fa-check'></i>").click(function () {
+          //      AggreUser(id);
+            });
+            task.append(delFirst, checkUser,agree);
+        }
+        else {
+            task.append(delFirst, checkUser);
+        }
+    $(".notcomp").append(task);
+    //to clear the input
+}
+
+async function ListUsersFun() {
+    const snapshot = await firebase.database().ref('Users').once('value', (snapshot) => {
+        snapshot.forEach((childSnapshot) => {
+            createTabFromUserData(childSnapshot.key,"");
+            console.log(childSnapshot.key);
+
+        });});
+
+
+    createEnterFilter();
+
+}
+
 document.addEventListener("DOMContentLoaded", () => {
     // require("firebase/firestore");
     // firebase.initializeApp({
@@ -560,7 +563,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     $("#ListOfV").click(function(){
-        $("#data").html(ListOfV());
+        $("#data").html(ListEvent());
+        ListVolFun();
+
 
     });
     $("#newEvent").click(function(){
@@ -569,7 +574,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     });
     $("#newUsers").click(function(){
-        $("#data").html(newUsers());
+        $("#data").html(ListEvent());
+        ListUsersFun();
 
     });
     $("#ListEvent").click(function(){
