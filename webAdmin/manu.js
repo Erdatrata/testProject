@@ -486,9 +486,7 @@ function addButtonToEvent() {
 
 }
 
-function ListVolFun() {
 
-}
 
 function removeUser(userid) {
      firebase.database().ref('Users/' + userid).remove();
@@ -536,7 +534,7 @@ async function createTabFromUserData(userid,newuser) {
     //to clear the input
 }
 
-async function ListUsersFun() {
+async function ListVolFun() {
     const snapshot = await firebase.database().ref('Users').once('value', (snapshot) => {
         snapshot.forEach((childSnapshot) => {
             createTabFromUserData(childSnapshot.key,"");
@@ -544,8 +542,17 @@ async function ListUsersFun() {
 
         });});
 
-
+    document.getElementById("btn btn-cancel").addEventListener("click",removeListOfS);
+    document.getElementById("refForListS").addEventListener("click",function () {
+        $("#ListOfS").remove();
+        $("#data").html(ListEvent());
+        ListVolFun();
+    });
     createEnterFilter();
+
+}
+
+function ListUsersFun() {
 
 }
 
