@@ -498,6 +498,7 @@ public class backgroundService extends Service {
                                            System.out.println("userCity is : "+userCity +"\n");
                                            if(userCity.equals(townScenario)) {
                                                if (checkImporent(documentSnapshot) && isItAfterTime(toTimestamp(documentSnapshot.getData().get("timeCreated")), getLastTime())) {
+                                                   setLastTime(toTimestamp(documentSnapshot.getData().get("timeCreated")));
                                                    System.out.println("in city mode check2");
                                                    sendNotfication(documentSnapshot.getId(), 0);
 
