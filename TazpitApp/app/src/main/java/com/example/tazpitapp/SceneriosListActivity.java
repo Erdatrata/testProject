@@ -4,10 +4,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.text.Spannable;
 import android.text.SpannableString;
+import android.text.SpannableStringBuilder;
 import android.text.style.ForegroundColorSpan;
+import android.text.style.StyleSpan;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -243,15 +246,29 @@ public class SceneriosListActivity extends AppCompatActivity {
                                         int indicator=0;
                                         for (QueryDocumentSnapshot document : task.getResult()) {
                                             if(user.getUid().toString().equals(document.getId().toString())) {
+
+
+
                                                 holder.mIdView.setText(mValues.get(position).id);
-                                                String str="רשום- "+mValues.get(position).content+"-Range -רשום"+Range((GeoPoint)documentSnapshot.getData().get("מיקום"));
-                                                holder.mContentView.setText(str);//add range with the name of the sceneriro
+                                                String str=mValues.get(position).content+"-Range-"+Range((GeoPoint)documentSnapshot.getData().get("מיקום"));
+
+                                                Spannable spannable = new SpannableString(str);
+                                                spannable.setSpan(new ForegroundColorSpan(Color.GRAY), 0 ,str.length(),     Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+                                                final SpannableStringBuilder sb = new SpannableStringBuilder(str);
+                                                final StyleSpan bss = new StyleSpan(Typeface.NORMAL); // Span to make text bold
+                                                sb.setSpan(bss, 0, str.length(), Spannable.SPAN_INCLUSIVE_INCLUSIVE); // make first 4 characters Bold
+                                                holder.mContentView.setText(spannable);//add range with the name of the sceneriro
                                                 holder.itemView.setTag(mValues.get(position));
                                                 holder.itemView.setOnClickListener(mOnClickListener);
                                                 break;
                                             }
                                             holder.mIdView.setText(mValues.get(position).id);
-                                            holder.mContentView.setText(mValues.get(position).content+"-Range  -");//add range with the name of the sceneriro
+                                            String str=mValues.get(position).content+"-Range-"+Range((GeoPoint)documentSnapshot.getData().get("מיקום"));
+                                            final SpannableStringBuilder sb = new SpannableStringBuilder(str);
+                                            final StyleSpan iss = new StyleSpan(Typeface.BOLD); //Span to make text italic
+                                            sb.setSpan(iss, 0, str.length(), Spannable.SPAN_INCLUSIVE_INCLUSIVE); // make last 2 characters Italic
+                                            holder.mContentView.setText(sb);//add range with the name of the sceneriro
                                             holder.itemView.setTag(mValues.get(position));
                                             holder.itemView.setOnClickListener(mOnClickListener);
                                         }
@@ -271,7 +288,11 @@ public class SceneriosListActivity extends AppCompatActivity {
                         int i=0;
                         for (QueryDocumentSnapshot document : task.getResult()) {
                             holder.mIdView.setText(mValues.get(position).id);
-                            holder.mContentView.setText(mValues.get(position).content+"-Range  -"+Range((GeoPoint) document.getData().get("מיקום")));//add range with the name of the sceneriro
+                            String str=mValues.get(position).content+"-Range-"+Range((GeoPoint)document.getData().get("מיקום"));
+                            final SpannableStringBuilder sb = new SpannableStringBuilder(str);
+                            final StyleSpan iss = new StyleSpan(Typeface.BOLD); //Span to make text italic
+                            sb.setSpan(iss, 0, str.length(), Spannable.SPAN_INCLUSIVE_INCLUSIVE); // make last 2 characters Italic
+                            holder.mContentView.setText(sb);//add range with the name of the sceneriro
                             holder.itemView.setTag(mValues.get(position));
                             holder.itemView.setOnClickListener(mOnClickListener);
                         }
