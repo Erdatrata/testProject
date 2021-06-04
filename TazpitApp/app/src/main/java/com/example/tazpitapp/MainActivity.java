@@ -91,6 +91,9 @@ public class MainActivity<imageView> extends AppCompatActivity implements Naviga
         if(getStateOfGps()){
             startLocationService();
         }
+        else{
+            stopLocationService();
+        }
 
         aToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         NavigationView mNavigationView = (NavigationView) findViewById(R.id.nav_view);
@@ -185,5 +188,21 @@ public class MainActivity<imageView> extends AppCompatActivity implements Naviga
         SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
         System.out.println(sharedPreferences.getBoolean("logged",false));
         return sharedPreferences.getBoolean("logged",false);
+    }
+    private void stopLocationService(){
+        setStateOfGps(false);
+        if(isLocationServiceRunning()){
+            Intent intent =new Intent(getApplicationContext(),backgroundService.class);
+            intent.setAction(constants.ACTION_STOP_LOCATION_SERVICE);
+            startService(intent);
+            Toast.makeText(this,"Location service stopped",Toast.LENGTH_SHORT).show();
+        }
+    }
+    public void setStateOfGps(boolean state){
+        SharedPreferences sharedPreferences = getSharedPreferences(constants.SHARED_PREFS, MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putBoolean(constants.gpsState, state);
+        editor.apply();
+
     }
 }

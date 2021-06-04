@@ -48,6 +48,8 @@ async function getTextFrom(from, userDoc) {
 
 
 function createModal(toFill) {
+    toFill=toFill.replace('\n','<br/>');
+    toFill=toFill.replace('\\n','<br/>');
     $("#data").append("" +
         "<!-- The Modal -->\n" +
         "<div id=\"myModal\" class=\"modal\">\n" +
@@ -70,15 +72,23 @@ function createModal(toFill) {
 
     modal.style.display = "block";
 
+    let deleteData = function (){
+        let modalBase = $(".modal")[0];
+        let modalParent = modalBase.parentNode;
+        modalParent.removeChild(modalBase);
+    }
+
 // When the user clicks on <span> (x), close the modal
     span.onclick = function() {
         modal.style.display = "none";
+        deleteData();
     }
 
 // When the user clicks anywhere outside of the modal, close it
     window.onclick = function(event) {
         if (event.target == modal) {
             modal.style.display = "none";
+            deleteData();
         }
     }
 }
@@ -573,11 +583,11 @@ async function ListVolFun() {
             firebase.database().ref('Users/' + childSnapshot.key).once('value',(snapshot)=>{
                 let user= (snapshot.val());
                 if(user["volunteer"]=="true"){
-                    console.log("1111111111111111111111111111");
+                    // console.log("1111111111111111111111111111");
                     createTabFromUserData(childSnapshot.key,"");
                     console.log(childSnapshot.key);
                 }
-                else{console.log("22222222222222222222");}
+                // else{console.log("22222222222222222222");}
             });
 
         });
@@ -607,7 +617,7 @@ async function ListUsersFun() {
             firebase.database().ref('Users/' + childSnapshot.key).once('value',(snapshot)=>{
                 let user= (snapshot.val());
                 if(user["volunteer"]!="true"){
-                    console.log("1111111111111111111111111111");
+                    // console.log("1111111111111111111111111111");
                     createTabFromUserData(childSnapshot.key, NEWUSER);
                     console.log(childSnapshot.key);
                 }
