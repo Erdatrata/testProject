@@ -14,7 +14,7 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:theme="@style/Theme.TazpitApp">
-        <activity android:name=".MainActivity">
+        <activity android:name=".SignUp">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -25,7 +25,7 @@
         <activity
             android:name=".SceneriosListActivity"
             android:label="@string/title_scenerios_list"
-            android:parentActivityName=".MainActivity"
+            android:parentActivityName=".SignUp"
             android:theme="@style/Theme.TazpitApp.NoActionBar" />
         <activity
             android:name=".SceneriosDetailActivity"
@@ -50,8 +50,8 @@
             android:name=".register$register3"
             android:theme="@style/Theme.TazpitApp.NoActionBar"></activity>
         <!--ALL USERS        -->
-        <activity android:name=".AboutActivity">
-
+        <activity android:name=".AboutActivity"/>
+        <activity android:name=".MainActivity">
         </activity>
         <service
             android:name=".backgroundService"

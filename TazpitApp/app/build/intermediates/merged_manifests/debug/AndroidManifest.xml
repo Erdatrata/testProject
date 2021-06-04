@@ -30,7 +30,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:testOnly="true"
         android:theme="@style/Theme.TazpitApp" >
-        <activity android:name="com.example.tazpitapp.MainActivity" >
+        <activity android:name="com.example.tazpitapp.SignUp" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -41,7 +41,7 @@
         <activity
             android:name="com.example.tazpitapp.SceneriosListActivity"
             android:label="@string/title_scenerios_list"
-            android:parentActivityName="com.example.tazpitapp.MainActivity"
+            android:parentActivityName="com.example.tazpitapp.SignUp"
             android:theme="@style/Theme.TazpitApp.NoActionBar" />
         <activity
             android:name="com.example.tazpitapp.SceneriosDetailActivity"
@@ -65,7 +65,8 @@
             android:name="com.example.tazpitapp.register$register3"
             android:theme="@style/Theme.TazpitApp.NoActionBar" />
         <!-- ALL USERS -->
-        <activity android:name="com.example.tazpitapp.AboutActivity" >
+        <activity android:name="com.example.tazpitapp.AboutActivity" />
+        <activity android:name="com.example.tazpitapp.MainActivity" >
         </activity>
 
         <service

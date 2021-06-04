@@ -220,10 +220,10 @@ MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.0] C:\Users\א
 		ADDED from C:\GIT\new_tazpit\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:12:9-35
 	android:theme
 		ADDED from C:\GIT\new_tazpit\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:16:9-47
-activity#com.example.tazpitapp.MainActivity
+activity#com.example.tazpitapp.SignUp
 ADDED from C:\GIT\new_tazpit\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:17:9-23:20
 	android:name
-		ADDED from C:\GIT\new_tazpit\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:17:19-47
+		ADDED from C:\GIT\new_tazpit\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:17:19-41
 intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
 ADDED from C:\GIT\new_tazpit\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:18:13-22:29
 action#android.intent.action.MAIN
@@ -237,7 +237,7 @@ ADDED from C:\GIT\new_tazpit\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:2
 activity#com.example.tazpitapp.SceneriosListActivity
 ADDED from C:\GIT\new_tazpit\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:25:9-29:66
 	android:parentActivityName
-		ADDED from C:\GIT\new_tazpit\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:28:13-55
+		ADDED from C:\GIT\new_tazpit\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:28:13-49
 	android:label
 		ADDED from C:\GIT\new_tazpit\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:27:13-57
 	android:theme
@@ -289,9 +289,13 @@ ADDED from C:\GIT\new_tazpit\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:4
 	android:name
 		ADDED from C:\GIT\new_tazpit\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:50:13-47
 activity#com.example.tazpitapp.AboutActivity
-ADDED from C:\GIT\new_tazpit\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:53:9-55:20
+ADDED from C:\GIT\new_tazpit\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:53:9-50
 	android:name
 		ADDED from C:\GIT\new_tazpit\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:53:19-48
+activity#com.example.tazpitapp.MainActivity
+ADDED from C:\GIT\new_tazpit\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:54:9-55:20
+	android:name
+		ADDED from C:\GIT\new_tazpit\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:54:19-47
 service#com.example.tazpitapp.backgroundService
 ADDED from C:\GIT\new_tazpit\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:56:9-59:40
 	android:enabled

@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -37,6 +38,7 @@ public class MainActivity<imageView> extends AppCompatActivity implements Naviga
     public void onResume()
     {  // After a pause OR at startup
         super.onResume();
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
         NavigationView mNavigationView = (NavigationView) findViewById(R.id.nav_view);
         if(FirebaseAuth.getInstance().getCurrentUser() != null){
             mNavigationView.getMenu().setGroupVisible(R.id.logged_user_menu,true);
