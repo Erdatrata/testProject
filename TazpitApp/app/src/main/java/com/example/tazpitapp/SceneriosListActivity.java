@@ -250,10 +250,10 @@ public class SceneriosListActivity extends AppCompatActivity {
                                                 holder.itemView.setOnClickListener(mOnClickListener);
                                                 break;
                                             }
-                                                holder.mIdView.setText(mValues.get(position).id);
-                                                holder.mContentView.setText(mValues.get(position).content+"-Range  -");//add range with the name of the sceneriro
-                                                holder.itemView.setTag(mValues.get(position));
-                                                holder.itemView.setOnClickListener(mOnClickListener);
+                                            holder.mIdView.setText(mValues.get(position).id);
+                                            holder.mContentView.setText(mValues.get(position).content+"-Range  -");//add range with the name of the sceneriro
+                                            holder.itemView.setTag(mValues.get(position));
+                                            holder.itemView.setOnClickListener(mOnClickListener);
                                         }
                                     }
                                     else {
