@@ -8,10 +8,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-<<<<<<< Updated upstream
-=======
+
 import androidx.fragment.app.Fragment;
->>>>>>> Stashed changes
+
 
 /**
  * A fragment representing a single Scenerios detail screen.

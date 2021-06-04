@@ -24,27 +24,15 @@
         app:layout_constraintHorizontal_bias="0.482"
         app:layout_constraintStart_toStartOf="parent" />
 
-
     <ImageView
-        android:layout_width="125dp"
-        android:layout_height="53dp"
+        android:layout_width="134dp"
+        android:layout_height="120dp"
         android:layout_gravity="center"
-        android:layout_margin="5dip"
+        android:layout_margin="10dip"
         android:layout_marginLeft="105dp"
         android:layout_marginBottom="10dp"
         android:paddingLeft="10dip"
-        android:src="@drawable/tps_logo_background" />
-
-    <TextView
-        android:layout_width="84dp"
-        android:layout_height="60dp"
-        android:layout_gravity="center"
-        android:layout_margin="5dip"
-        android:layout_marginLeft="130dp"
-        android:fontFamily="cursive"
-        android:paddingLeft="10dip"
-        android:text="TPS"
-        android:textSize="40sp" />
+        android:src="@drawable/tps_logo_full_foreground" />
 
     <LinearLayout
 
