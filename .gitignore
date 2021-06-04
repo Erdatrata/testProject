@@ -412,3 +412,4 @@ TazpitApp/local.properties
 TazpitApp/.idea/modules.xml
 
 TazpitApp/app/src/main/java/com/example/tazpitapp/SceneriosDetailActivity.java
+TazpitApp/local.properties
