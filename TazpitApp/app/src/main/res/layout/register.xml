@@ -5,6 +5,7 @@
     android:layout_width="wrap_content"
     android:layout_height="match_parent"
        android:orientation="vertical"
+    android:layoutDirection="rtl"
 
     android:padding="20dp"
     tools:context=".register$register1">
@@ -22,7 +23,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.482"
         app:layout_constraintStart_toStartOf="parent" />
-
 
 
     <ImageView

@@ -28,6 +28,7 @@ import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -37,17 +38,19 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.GeoPoint;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.gson.Gson;
 
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
+import java.util.Map;
 
 public class backgroundService extends Service {
     final int sec=1000;
     boolean StopCity=false;
 
     private void AlertIfInRange() {
-
+        if(!checkTimeAndDateIfOn()){return;}
         System.out.println("Check if in range ");
         FirebaseFirestore.getInstance() .collection("Scenarios").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
@@ -68,12 +71,15 @@ public class backgroundService extends Service {
                                 else{
                                     double Range = 0;
                                     try {
-                                        System.out.println("calulation range");
-                                        Range = Double.parseDouble(Range((GeoPoint) documentSnapshot.getData().get("מיקום")));
-                                        if (Range < 10) {
-                                            System.out.println(document.getId() + " IS in range of " + Range);
-                                            Notification(document.getId(), Range);
+                                        if(checkImporent(documentSnapshot)&&isItAfterTime(toTimestamp(documentSnapshot),getLastTime())) {
+                                            System.out.println("calulation range");
+                                            Range = Double.parseDouble(Range((GeoPoint) documentSnapshot.getData().get("מיקום")));
+                                            if (Range < getUserRangeChoice()) {
+                                                setLastTime(toTimestamp(documentSnapshot));
+                                                System.out.println(document.getId() + " IS in range of " + Range);
+                                                Notification(document.getId(), Range);
 
+                                            }
                                         }
                                     } catch (IOException e) {
                                     }
@@ -329,15 +335,45 @@ public class backgroundService extends Service {
         return super.onStartCommand(intent,flags,startId);
     }
 
+    private void setLastTime(Timestamp time){
+        SharedPreferences sharedPreferences = getSharedPreferences(constants.SHARED_PREFS, MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(constants.LastTimeAndDate,new Gson().toJson(time));
+        editor.apply();
 
+    }
+    private Timestamp getLastTime(){
+        SharedPreferences sharedPreferences = getSharedPreferences(constants.SHARED_PREFS, MODE_PRIVATE);
+        String inJson = sharedPreferences.getString(constants.LastTimeAndDate,"default");
+        Gson gson = new Gson();
+        Timestamp today = (Timestamp) (gson.fromJson(inJson,Timestamp.class));
+        return today;
+    }
+    private double getUserRangeChoice(){
+        SharedPreferences sharedPreferences = getSharedPreferences(constants.SHARED_PREFS, MODE_PRIVATE);
+        String inJson = sharedPreferences.getString(constants.rangeChoice,"default");
+        Gson gson = new Gson();
+        double range =(double)gson.fromJson(inJson,float.class);
+        return range;
+    }
+    private boolean isItAfterTime(Timestamp isIt,Timestamp AfterTHisOne){
+        if(isIt.toDate().after(AfterTHisOne.toDate())){return true;}return false;
 
-    private boolean checkTime(){
+    }
+    private Timestamp toTimestamp(DocumentSnapshot documentSnapshot){
+
+            try{return (Timestamp)documentSnapshot.getData().get("timeCreated");}
+            catch (Exception e){
+                e.printStackTrace();
+                throw new RuntimeException("error in toTimeStamp,not an Timestanp type");
+            }
+    }
+        private boolean checkTimeAndDateIfOn(){
 
         return true;
     }
-    private boolean checkImporent(Object Scenerio){//will check if דחוף Is true
-
-        return true;
+    private boolean checkImporent(DocumentSnapshot documentSnapshot){//will check if דחוף Is true
+        return documentSnapshot.getBoolean("דחיפות");
     }
 
     //inTown(Object town)// will return if the user town is the same as the scenerio
