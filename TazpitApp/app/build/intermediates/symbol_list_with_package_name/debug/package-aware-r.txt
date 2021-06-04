@@ -1484,6 +1484,7 @@ drawable tooltip_frame_dark
 drawable tooltip_frame_light
 drawable tps_logo_background
 drawable tps_logo_full_background
+drawable tps_logo_full_foreground
 drawable tps_logoo
 id ALT
 id BOTTOM_END
@@ -1691,7 +1692,6 @@ id list_item
 id locationRadioGroup
 id logged_user_menu
 id loginButton
-id loginPage
 id login_button
 id logo_Image
 id logo_name

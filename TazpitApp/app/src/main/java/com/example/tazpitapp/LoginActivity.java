@@ -24,6 +24,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
@@ -37,7 +38,7 @@ public class LoginActivity extends AppCompatActivity {
     Button login;
     TextView mCreateBtn,forgotTextLink;
     ProgressBar progressBar;
-    EditText EmailAddressInputLogin, PasswordInputLogin;
+    TextInputLayout EmailAddressInputLogin, PasswordInputLogin;
     FirebaseAuth FAuth;
     private  static  final  Pattern PASSWORD_PATTERN=
             Pattern.compile("^" +
@@ -59,8 +60,8 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
 
-        EmailAddressInputLogin = (EditText) findViewById(R.id.EmailAddressInputLogin);
-        PasswordInputLogin = (EditText) findViewById(R.id.PasswordInputLogin);
+        EmailAddressInputLogin = (TextInputLayout) findViewById(R.id.EmailAddressInputLogin);
+        PasswordInputLogin = (TextInputLayout) findViewById(R.id.PasswordInputLogin);
         login = (Button) findViewById(R.id.loginButton);
         mCreateBtn = findViewById(R.id.createText);
         FAuth=FirebaseAuth.getInstance();
@@ -70,8 +71,9 @@ public class LoginActivity extends AppCompatActivity {
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String emailInput=EmailAddressInputLogin.getText().toString().trim();
-                String passwordnput=PasswordInputLogin.getText().toString().trim();
+
+                String emailInput=EmailAddressInputLogin.getEditText().getText().toString();
+                String passwordnput=PasswordInputLogin.getEditText().getText().toString();
 
                 if(TextUtils.isEmpty(emailInput)){//if the field of the email is empty
                     EmailAddressInputLogin.setError("המייל חייב להכיל\"");

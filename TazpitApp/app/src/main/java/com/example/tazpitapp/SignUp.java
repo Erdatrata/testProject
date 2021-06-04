@@ -14,7 +14,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 public class SignUp extends AppCompatActivity {
-    private  static  int SPLASH_SCREEN=5000;
+    private  static  int SPLASH_SCREEN=2000;
   Animation topAnim,bottomAnim;
   ImageView image;
   TextView logo,slogan;
