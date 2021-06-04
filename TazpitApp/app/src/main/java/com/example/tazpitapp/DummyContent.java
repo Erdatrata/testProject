@@ -42,7 +42,7 @@ public class DummyContent {
 
     static {
         // Add some sample items.null
-        
+
         Task<QuerySnapshot> docRef;
         docRef = FirebaseFirestore.getInstance() .collection("Scenarios").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override

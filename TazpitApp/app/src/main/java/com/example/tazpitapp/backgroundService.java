@@ -10,10 +10,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.nfc.Tag;
 import android.os.Build;
+import android.os.Handler;
 import android.os.IBinder;
 import android.os.Looper;
 import android.util.Log;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -39,10 +42,14 @@ import com.google.firebase.firestore.GeoPoint;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.gson.Gson;
+import com.google.type.DateTime;
 
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Map;
 
 public class backgroundService extends Service {
@@ -71,11 +78,11 @@ public class backgroundService extends Service {
                                 else{
                                     double Range = 0;
                                     try {
-                                        if(checkImporent(documentSnapshot)&&isItAfterTime(toTimestamp(documentSnapshot),getLastTime())) {
+                                        if(checkImporent(documentSnapshot)&&isItAfterTime(toTimestamp(documentSnapshot.getData().get("timeCreated")),getLastTime())) {
                                             System.out.println("calulation range");
                                             Range = Double.parseDouble(Range((GeoPoint) documentSnapshot.getData().get("מיקום")));
                                             if (Range < getUserRangeChoice()) {
-                                                setLastTime(toTimestamp(documentSnapshot));
+                                                setLastTime(toTimestamp(documentSnapshot.getData().get("timeCreated")));
                                                 System.out.println(document.getId() + " IS in range of " + Range);
                                                 Notification(document.getId(), Range);
 
@@ -141,7 +148,8 @@ public class backgroundService extends Service {
 
     }
 
-    private void sendNotfication(String id, Object location) {
+    private void sendNotfication(String id, Object location) {//id = scenerio name , location =range from u (only in gps,in city put 0)
+        //after that it will create a notification and show to the user for each case, city or gps
         String context="";
         String title="";
         if(getStateOfGps()){title=" is close";
@@ -284,7 +292,7 @@ public class backgroundService extends Service {
             }
         }
         LocationRequest locationRequest = new LocationRequest();
-        locationRequest.setInterval(60000);
+        locationRequest.setInterval(5000);
         locationRequest.setFastestInterval(5000);
         locationRequest.setPriority(LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY);
 
@@ -318,16 +326,10 @@ public class backgroundService extends Service {
                 if(action.equals(constants.ACTION_START_LOCATION_SERVICE)){//gps on
                     StopCity=true;
                     startLocationService();
-                    stopCity();
                 }
                 else if(action.equals(constants.ACTION_STOP_LOCATION_SERVICE)){//gps off
                     StopCity=false;
                     stopLocationService();
-                    StartCity();
-
-
-
-
                 }
 
             }
@@ -341,51 +343,98 @@ public class backgroundService extends Service {
         editor.putString(constants.LastTimeAndDate,new Gson().toJson(time));
         editor.apply();
 
-    }
+    }//set last time from timestamp in the data
     private Timestamp getLastTime(){
         SharedPreferences sharedPreferences = getSharedPreferences(constants.SHARED_PREFS, MODE_PRIVATE);
         String inJson = sharedPreferences.getString(constants.LastTimeAndDate,"default");
+        if(inJson.equals("default")){return new Timestamp(new Date(0,0,0));}
         Gson gson = new Gson();
         Timestamp today = (Timestamp) (gson.fromJson(inJson,Timestamp.class));
         return today;
-    }
+    }//get last event time he saw
     private double getUserRangeChoice(){
         SharedPreferences sharedPreferences = getSharedPreferences(constants.SHARED_PREFS, MODE_PRIVATE);
-        String inJson = sharedPreferences.getString(constants.rangeChoice,"default");
-        Gson gson = new Gson();
-        double range =(double)gson.fromJson(inJson,float.class);
+        float inJson = sharedPreferences.getFloat(constants.rangeChoice,-1);
+        if(inJson==-1){return 10.00;}
+        double range =(double)inJson;
         return range;
-    }
+    }//get range that the user put in settings
     private boolean isItAfterTime(Timestamp isIt,Timestamp AfterTHisOne){
         if(isIt.toDate().after(AfterTHisOne.toDate())){return true;}return false;
 
-    }
-    private Timestamp toTimestamp(DocumentSnapshot documentSnapshot){
-
-            try{return (Timestamp)documentSnapshot.getData().get("timeCreated");}
+    }//check if isIt More late in date and time then Atter THisOne
+    private Timestamp toTimestamp(Object time){
+            try{return (Timestamp)time;}
             catch (Exception e){
                 e.printStackTrace();
                 throw new RuntimeException("error in toTimeStamp,not an Timestanp type");
             }
-    }
+    }//cast to Timestamp
         private boolean checkTimeAndDateIfOn(){
+            Date date = new Date();
+            int currentHours=date.getHours()+3;
+            int currentMinutes=date.getMinutes();
+            Calendar calendar = Calendar.getInstance();
+            int dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK);
+            if(currentHours>23){currentHours=currentHours-24;
+                dayOfWeek=dayOfWeek+1;
+                if(dayOfWeek>7){dayOfWeek=dayOfWeek-7;}
+            }
+            dayTime daytime = null;
 
-        return true;
-    }
+            for(int i=1;i<=7;i++){
+                if(dayOfWeek==i) {
+                    daytime = getDayTime(constants.daysNames[i-1]);
+
+                }
+                Log.d("time in settings",((String)(i+" "))+getDayTime(constants.daysNames[i-1]).getHourStart()+"->"+getDayTime(constants.daysNames[i-1]).getHourEnd()+",Current time is:"+currentHours+":"+currentMinutes+",day of week is: "+dayOfWeek);
+            }
+
+            if(daytime.getHourStart()<=currentHours&&currentHours<=daytime.getHourEnd()){
+                if(daytime.getHourStart()==currentHours&&daytime.getMinuteStart()>currentHours){return false;}
+                if(daytime.getHourEnd()==currentHours&&daytime.getMinuteEnd()<currentHours){return false;}
+                return true;
+            }
+            return false;
+
+    }//check if its in the time and day that the user placed in settings
+
+    private dayTime getDayTime(String daysName) {
+        SharedPreferences sharedPreferences = getSharedPreferences(constants.SHARED_PREFS, MODE_PRIVATE);
+        String inJson = sharedPreferences.getString(daysName,"default");
+        return ((dayTime) new Gson().fromJson(inJson,dayTime.class));
+
+    }//get dayTime Object from string name of shared--only used in checktimeanddateifon,irrelevant in other places
+
     private boolean checkImporent(DocumentSnapshot documentSnapshot){//will check if דחוף Is true
         return documentSnapshot.getBoolean("דחיפות");
-    }
+    }//get the document(that was alridy given from firebase) and check if inside the importent is on
 
     //inTown(Object town)// will return if the user town is the same as the scenerio
 
-    private void stopCity() {
 
+    public Context context = this;
+    public Handler handler = null;
+    public static Runnable runnable = null;
+    public void onCreate() {
+        Toast.makeText(this, "Service created!", Toast.LENGTH_LONG).show();
 
+        handler = new Handler();
+        runnable = new Runnable() {
+            public void run() {
+                if(!StopCity) {
+                    AlertifInCity();
+                    Toast.makeText(context, "Service is still running", Toast.LENGTH_LONG).show();
+                    handler.postDelayed(runnable, 10000);
+                }
+            }
+        };
+
+        handler.postDelayed(runnable, 15000);
     }
 
-    private void StartCity() {
-
-
+    private void AlertifInCity() {//Check if its in city, if yes ,do a notification
+            //sendNotfication(String id(name of the secenerio), Object location(location in lan and lon,put 0 if in city))
 
     }
 //
