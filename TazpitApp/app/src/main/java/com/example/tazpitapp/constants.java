@@ -19,6 +19,7 @@ public class constants {
     public static final String latOfGps ="latofgps";
     public static final String gpsState="gpsstate";
     public static final String rangeChoice="range";
+    public static final String LastTimeAndDate="lasttimeanddate";
 
     
     //TIME VARS

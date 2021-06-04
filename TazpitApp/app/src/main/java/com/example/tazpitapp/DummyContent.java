@@ -43,6 +43,7 @@ public class DummyContent {
     static {
         // Add some sample items.null
 
+        
 
 
         Task<QuerySnapshot> docRef;
