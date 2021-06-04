@@ -190,16 +190,16 @@ class register {
                 public void onClick(View view) {
                     if(!Integritycheck()||!checkMailIntegrity()||!cheakPassword()||!checkEqualPassword()){
                         String msg="";
-                        if(!Integritycheck()){msg=msg+"יש לך שדות ריקות \n";
+                        if(!Integritycheck()){msg=msg+"חובה למלא את כל השדות \n";
                        
                         }
                         if (!Patterns.EMAIL_ADDRESS.matcher( email.getEditText().getText().toString()).matches()) {//if the email is proper
-                           msg=msg+"איימל לא תקינה\n";
+                           msg=msg+"אימייל לא תקין\n";
 
                         }
                         //if(!mailInUse()){msg=msg+"mail in use";}
                         if(!PASSWORD_PATTERN.matcher(password1.getEditText().getText().toString()).matches()){//if the password is proper
-                            msg=msg+"סיסמה לא תקינה\n";
+                            msg=msg+"הסיסמה חייבת להכיל אותיות קטנות, גדולות, תווים מיוחדים ומספרים\n";
 
                         }
                         if(!checkEqualPassword()){msg=msg+"סיסמאות לא תואמות\n";

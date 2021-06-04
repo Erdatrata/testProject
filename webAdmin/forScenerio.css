@@ -67,8 +67,13 @@ h3{
   padding: 20px;
   border: 1px solid #888;
   width: 80%;
-
-
+  height: 50%;
+}
+.modal-content p{
+  margin-bottom: 25em;
+  margin-left: 25em;
+  width: fit-content;
+  color:red;
 }
 
 /* The Close Button */
@@ -85,3 +90,4 @@ h3{
   text-decoration: none;
   cursor: pointer;
 }
+
