@@ -133,7 +133,11 @@ class register {
             String phone=this.phone.getEditText().getText().toString();
             if(mail.length()<1||password.length()<1||passwordAgain.length()<1||city.length()<1||fname.length()<1||Lname.length()<1||phone.length()<1){return false;}return true;
         }
-//    private boolean cheakCity(){}
+    private boolean cheakCity(){//compare to json file and look for the name
+
+            return true;
+
+        }
         private boolean checkMailIntegrity(){//check if it has @
 
             String mail=email.getEditText().getText().toString();
@@ -205,7 +209,7 @@ class register {
                         if(!checkEqualPassword()){msg=msg+"סיסמאות לא תואמות\n";
 
                         }
-
+                        if(!cheakCity()){msg=msg+"העיר כתובה באופן שגוי\n";}
                         Toast.makeText(view.getContext(), msg, 5000 ).show();
 
                     }
