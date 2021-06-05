@@ -62,23 +62,27 @@ h3{
 
 /* Modal Content */
 .modal-content {
-  background-color: #fefefe;
+  background-color: #fefefea8;
   margin: auto;
   padding: 20px;
   border: 1px solid #888;
   width: 80%;
-  height: 50%;
+  min-height: 50%;
+  height: fit-content;
+  word-wrap: break-word;
+  word-break: break-all;
 }
 .modal-content p{
-  margin-bottom: 25em;
-  margin-left: 25em;
-  width: fit-content;
+  width:  60%;
   color:red;
+  text-align: left;
+  height: fit-content;
+  top: 100px;
 }
 
 /* The Close Button */
 .close {
-  color: #aaaaaa;
+  color: #000000;
   float: right;
   font-size: 28px;
   font-weight: bold;
