@@ -17,10 +17,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.gms.common.api.ApiException;
@@ -46,6 +48,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static java.util.Collections.list;
+
 /**
  * An activity representing a list of Scenarios. This activity
  * has different presentations for handset and tablet-size devices. On
@@ -70,8 +74,10 @@ public class SceneriosListActivity extends AppCompatActivity {
     List<DummyContent.DummyItem> items_all;
     CollectionReference itemRef;
 
+
     Button login;
     TextView tv;
+
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     CollectionReference document_Ref =db.collection("Scenarios");
     @Override
@@ -79,19 +85,20 @@ public class SceneriosListActivity extends AppCompatActivity {
         super.onResume();
         setContentView(R.layout.activity_scenerios_list);
         Log.d("Restart", "dummy_01="+DummyContent.DummyItem.class);
-
         Log.d("Restart", " onResume1");
+        View recyclerView = findViewById(R.id.scenerios_list);
+        creat_list(recyclerView);
 
-        creat_list();
     }
-//        @Override
-//        protected void onCreate (Bundle savedInstanceState){
-//            super.onCreate(savedInstanceState);
-//            creat_list();
-//        }
+    @Override
 
-    public void  creat_list(){
-        Log.d("Restart", "dummy_02="+DummyContent.ITEMS);
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_scenerios_list);
+    }
+
+    public void  creat_list(View recyclerView){
+
         if (isInit) {
             isInit = false;
             startActivity(new Intent(this, SceneriosListActivity.class));
@@ -105,10 +112,23 @@ public class SceneriosListActivity extends AppCompatActivity {
         readData(new FirestoreCallback() {
             @Override
             public void onCallback(List<String> list) {
-                Log.d("Restart", "dummy2="+DummyContent.ITEMS);
-                View recyclerView = findViewById(R.id.scenerios_list);
-                assert recyclerView != null;
-                setupRecyclerView((RecyclerView) recyclerView);
+                Log.d("Restart", "list="+list);
+                if(list.size()!=DummyContent.ITEMS.size()){
+//                    Toast.makeText(SceneriosListActivity.this, "יש עדכון",
+//                            Toast.LENGTH_SHORT).show();
+                        for(int i=0;i<list.size();i++){
+//                            DummyContent.
+//                            Log.d("Restart", "dummy_new="+DummyContent.ITEMS.get(i));
+//                            Log.d("Restart", "dummy_new="+DummyContent.ITEMS.set(i,));
+                        }
+                             setupRecyclerView((RecyclerView) recyclerView);
+
+                }else{
+
+                    assert recyclerView != null;
+                    setupRecyclerView((RecyclerView) recyclerView);
+                    Log.d("Restart", "dummy2="+DummyContent.ITEMS);
+                }
             }
         });
 
@@ -149,12 +169,16 @@ public class SceneriosListActivity extends AppCompatActivity {
         itemRef.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                int p=0;
                 if (task.isSuccessful()) {
                     for (DocumentSnapshot document : task.getResult()) {
-                        list.add(document.getId());
-                        Log.d("output", "i am accepted="+String.valueOf(document.getId()));
+                   //     items_all(new DummyContent.DummyItem(document.getId(),String.valueOf(document.getId()),document));
+                            list.add(document.getId());
+                        Log.d("output", "i am accepted1="+String.valueOf(document.getId()));
+                        Log.d("output", "i am accepted2="+task);
+                        Log.d("output", "i am accepted3="+document.getData());
                     }
-                    Log.d("Restart", "dummy1="+DummyContent.ITEMS);
+                    Log.d("Restart", "dummy1="+DummyContent.DummyItem.class);
                     firestoreCallback.onCallback(list);
                 }
                 else{
@@ -169,7 +193,11 @@ public class SceneriosListActivity extends AppCompatActivity {
     private void setupRecyclerView(@NonNull RecyclerView recyclerView) {
         Log.d("Restart", "dummy3="+DummyContent.ITEMS);
 
-        recyclerView.setAdapter(new SimpleItemRecyclerViewAdapter(this, DummyContent.ITEMS, mTwoPane));
+        SimpleItemRecyclerViewAdapter adapter = new SimpleItemRecyclerViewAdapter(this, DummyContent.ITEMS, mTwoPane);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setAdapter(adapter);
+
 
     }
     public static class SimpleItemRecyclerViewAdapter
@@ -247,11 +275,8 @@ public class SceneriosListActivity extends AppCompatActivity {
                                         for (QueryDocumentSnapshot document : task.getResult()) {
                                             if(user.getUid().toString().equals(document.getId().toString())) {
 
-
-
                                                 holder.mIdView.setText(mValues.get(position).id);
                                                 String str=mValues.get(position).content+"-Range-"+Range((GeoPoint)documentSnapshot.getData().get("מיקום"));
-
                                                 Spannable spannable = new SpannableString(str);
                                                 spannable.setSpan(new ForegroundColorSpan(Color.GRAY), 0 ,str.length(),     Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 
@@ -304,8 +329,20 @@ public class SceneriosListActivity extends AppCompatActivity {
         }
         @Override
         public int getItemCount() {
-            Log.d("onComplet","getItemCount7");
-            return mValues.size();
+
+            int a ;
+
+            if(mValues != null && !mValues.isEmpty()) {
+
+                a = mValues.size();
+            }
+            else {
+
+                a = 0;
+
+            }
+
+            return a;
         }
 
         class ViewHolder extends RecyclerView.ViewHolder {

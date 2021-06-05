@@ -15,7 +15,7 @@ import android.widget.TextView;
 
 public class SignUp extends AppCompatActivity {
     private  static  int SPLASH_SCREEN=2000;
-  Animation topAnim,bottomAnim;
+  Animation topAnim;
   ImageView image;
   TextView logo,slogan;
     @Override
@@ -29,12 +29,9 @@ public class SignUp extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_sign_up);
         topAnim= AnimationUtils.loadAnimation(this,R.anim.top_anim);
-        bottomAnim=AnimationUtils.loadAnimation(this,R.anim.buttom_anim);
         image=findViewById(R.id.imageView);
-        logo=findViewById(R.id.logo_name);
-
         image.setAnimation(topAnim);
-        logo.setAnimation(bottomAnim);
+
 
         new Handler().postDelayed(new Runnable() {
             @Override

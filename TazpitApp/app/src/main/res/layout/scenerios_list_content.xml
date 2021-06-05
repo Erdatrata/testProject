@@ -17,6 +17,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
         android:fontFamily="casual"
+
         android:foregroundTint="@color/tps_color_gray"
         android:textColor="@color/colorForText"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
