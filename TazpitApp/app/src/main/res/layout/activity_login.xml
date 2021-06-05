@@ -1,95 +1,104 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:layoutDirection="rtl"
-
+    android:orientation="vertical"
     android:padding="20dp"
     tools:context=".LoginActivity">
 
 
     <ImageView
-        android:layout_width="194dp"
-        android:layout_height="183dp"
+        android:layout_width="347dp"
+        android:layout_height="142dp"
         android:layout_gravity="center"
-        android:layout_margin="10dip"
-        android:layout_marginLeft="105dp"
-        android:layout_marginBottom="10dp"
+        android:layout_marginBottom="548dp"
         android:paddingLeft="10dip"
-        android:src="@drawable/tps_logo_full_foreground" />
-
-    <LinearLayout
-
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-    </LinearLayout>
-
+        android:scaleType="centerCrop"
+        android:src="@drawable/tps_logo_full_foreground"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="MissingConstraints" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/EmailAddressInputLogin"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="370dp"
-        android:layout_height="wrap_content"
-        android:hint=" כתובת איימל">
+        android:layout_width="340dp"
+        android:layout_height="81dp"
+        android:layout_marginBottom="456dp"
+        android:hint="כתובת אימייל"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.49"
+        app:layout_constraintStart_toStartOf="parent">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="367dp"
-            android:layout_height="55dp"
-            android:inputType="textEmailAddress" />
+            android:id="@+id/textInputEditText6"
+            android:layout_width="match_parent"
+            android:layout_height="71dp"
+            android:inputType="textEmailAddress"
+            tools:ignore="MissingConstraints" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/PasswordInputLogin"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="367dp"
-        android:layout_height="wrap_content"
-        android:hint="סיסמה"
+        android:layout_width="339dp"
+        android:layout_height="77dp"
+        android:layout_marginBottom="368dp"
+        android:hint="סיסמא"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:passwordToggleEnabled="true">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="367dp"
-            android:layout_height="55dp"
+            android:layout_width="match_parent"
+            android:layout_height="65dp"
             android:inputType="textPassword" />
     </com.google.android.material.textfield.TextInputLayout>
 
-
     <Button
         android:id="@+id/loginButton"
-        android:layout_width="375dp"
-        android:layout_height="62dp"
+        android:layout_width="306dp"
+        android:layout_height="68dp"
         android:layout_gravity="center"
-        android:layout_marginBottom="4dp"
+        android:layout_marginBottom="8dp"
         android:backgroundTint="@color/tps_color_blue"
-        android:text="המשך"
+        android:fontFamily="sans-serif-black"
+        android:text="התחבר"
+        android:textSize="30dp"
+        app:cornerRadius="15dp"
         app:layout_constraintBottom_toTopOf="@+id/createText"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.482"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/createText"
-        android:layout_width="197dp"
-        android:layout_height="34dp"
+        android:layout_width="258dp"
+        android:layout_height="30dp"
         android:layout_gravity="center"
-        android:text="עוד לא נרשמת? הרשמה כאן"
+        android:layout_marginBottom="4dp"
+        android:text="עוד לא נרשמת? להרשמה לחץ כאן"
         app:layout_constraintBottom_toTopOf="@+id/forgotPassword"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.372"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/forgotPassword"
-        android:layout_width="129dp"
-        android:layout_height="54dp"
+        android:layout_width="147dp"
+        android:layout_height="30dp"
         android:layout_gravity="center"
-        android:layout_marginBottom="216dp"
-        android:text="שכחתי סיסמה?"
+        android:layout_marginBottom="200dp"
+        android:text="שכחתי סיסמא"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.408"
         app:layout_constraintStart_toStartOf="parent" />
 
     <ProgressBar
@@ -101,10 +110,10 @@
         android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.786" />
+        app:layout_constraintVertical_bias="0.732" />
 
 
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
