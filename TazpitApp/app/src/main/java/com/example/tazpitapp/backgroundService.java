@@ -61,6 +61,7 @@ import java.util.concurrent.ExecutionException;
 
 public class backgroundService extends Service {
     final int sec=1000;
+    final int TIMETOWAIT=sec*60;
     boolean StopCity=false;
 
     private void AlertIfInRange() {
@@ -320,7 +321,7 @@ public class backgroundService extends Service {
             }
         }
         LocationRequest locationRequest = new LocationRequest();
-        locationRequest.setInterval(5000);
+        locationRequest.setInterval(TIMETOWAIT);
         locationRequest.setFastestInterval(5000);
         locationRequest.setPriority(LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY);
 
@@ -383,7 +384,7 @@ public class backgroundService extends Service {
     }//get last event time he saw
     private double getUserRangeChoice(){
         SharedPreferences sharedPreferences = getSharedPreferences(constants.SHARED_PREFS, MODE_PRIVATE);
-        float inJson = sharedPreferences.getFloat(constants.rangeChoice,-1);
+        float inJson = sharedPreferences.getFloat(constants.rangeChoice,10);
         if(inJson==-1){return 10.00;}
         double range =(double)inJson;
         return range;
@@ -431,7 +432,9 @@ public class backgroundService extends Service {
     private dayTime getDayTime(String daysName) {
         SharedPreferences sharedPreferences = getSharedPreferences(constants.SHARED_PREFS, MODE_PRIVATE);
         String inJson = sharedPreferences.getString(daysName,"default");
-        return ((dayTime) new Gson().fromJson(inJson,dayTime.class));
+        if(!(inJson.equals("default")))
+            return ((dayTime) new Gson().fromJson(inJson,dayTime.class));
+        return new dayTime(0,0,0,1);
 
     }//get dayTime Object from string name of shared--only used in checktimeanddateifon,irrelevant in other places
 
@@ -458,7 +461,7 @@ public class backgroundService extends Service {
                 if(!StopCity&&FirebaseAuth.getInstance().getCurrentUser() != null) {
                     AlertifInCity();
                     Toast.makeText(context, "Service is still running", Toast.LENGTH_LONG).show();
-                    handler.postDelayed(runnable, 10000);
+                    handler.postDelayed(runnable, TIMETOWAIT);
                 }
             }
         };
@@ -489,7 +492,7 @@ public class backgroundService extends Service {
 //                         FirebaseDatabase database = FirebaseDatabase.getInstance();
                       //DatabaseReference ref=FirebaseDatabase.getInstance().getReference("Users").child(UID);
                                 //======================
-                                    DatabaseReference mref = FirebaseDatabase.getInstance().getReference("Users").child(UID).child("City");
+                                    DatabaseReference mref = FirebaseDatabase.getInstance().getReference("Users").child(UID).child("City:");
                                   System.out.println(mref+"\n");
                                     mref.addListenerForSingleValueEvent(new ValueEventListener() {
                                         @Override
