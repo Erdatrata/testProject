@@ -1,140 +1,185 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-       android:orientation="vertical"
-    android:layoutDirection="rtl"
-
-    android:padding="20dp"
-    tools:context=".register$register1">
+    tools:context=".registerrr">
 
 
     <Button
         android:id="@+id/next"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="4dp"
-        android:backgroundTint="#2196F3"
-        android:text="המשך"
+        android:layout_width="227dp"
+        android:layout_height="60dp"
         android:layout_gravity="left"
-        app:layout_constraintBottom_toTopOf="@+id/createText"
+        android:backgroundTint="@color/tps_color_blue"
+        android:fontFamily="sans-serif-black"
+        android:text="המשך"
+        android:textSize="25dp"
+        app:cornerRadius="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.482"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintHorizontal_bias="0.565"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.962" />
 
     <ImageView
-        android:layout_width="134dp"
-        android:layout_height="120dp"
+        android:id="@+id/imageView2"
+        android:layout_width="252dp"
+        android:layout_height="141dp"
         android:layout_gravity="center"
-        android:layout_margin="10dip"
-        android:layout_marginLeft="105dp"
-        android:layout_marginBottom="10dp"
+        android:adjustViewBounds="true"
         android:paddingLeft="10dip"
-        android:src="@drawable/tps_logo_full_foreground" />
-
-    <LinearLayout
-
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-    </LinearLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/FirstName"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="386dp"
-        android:layout_height="73dp"
-        android:hint="שם פרטי">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="367dp"
-            android:layout_height="60dp"
-            android:inputType="text" />
-    </com.google.android.material.textfield.TextInputLayout>
+        android:scaleType="centerCrop"
+        android:src="@drawable/tps_logo_full_foreground"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.027" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/LastName"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="385dp"
-        android:layout_height="70dp"
-        android:hint="שם משפחה">
+        android:layout_width="346dp"
+        android:layout_height="76dp"
+        android:hint="שם משפחה"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.581"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.297"
+        tools:ignore="MissingConstraints">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="367dp"
-            android:layout_height="55dp"
+            android:id="@+id/textInputEditText5"
+            android:layout_width="332dp"
+            android:layout_height="69dp"
             android:inputType="text" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/FirstName"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="346dp"
+        android:layout_height="76dp"
+        android:hint="שם פרטי"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.6"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.181"
+        tools:ignore="MissingConstraints">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/textInputEditText4"
+            android:layout_width="332dp"
+            android:layout_height="69dp"
+            android:inputType="text"
+            tools:ignore="MissingConstraints" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/Email"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="390dp"
-        android:layout_height="73dp"
-        android:hint="איימל">
+        android:layout_width="346dp"
+        android:layout_height="76dp"
+        android:hint="אימייל"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.584"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.413"
+        tools:ignore="MissingConstraints">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="367dp"
-            android:layout_height="55dp"
+            android:id="@+id/textInputEditText3"
+            android:layout_width="332dp"
+            android:layout_height="69dp"
             android:inputType="textEmailAddress" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/Password"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="390dp"
-        android:layout_height="73dp"
-        android:hint="סיסמה"
-        app:passwordToggleEnabled="true">
+        android:layout_width="346dp"
+        android:layout_height="76dp"
+        android:hint="סיסמא"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.584"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.528"
+        app:passwordToggleEnabled="true"
+        tools:ignore="MissingConstraints">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="367dp"
-            android:layout_height="55dp"
+            android:layout_width="332dp"
+            android:layout_height="69dp"
             android:inputType="textPassword" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/passwordAgain"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="390dp"
-        android:layout_height="73dp"
-        android:hint="  אימות סיסמה">
+        android:layout_width="346dp"
+        android:layout_height="76dp"
+        android:hint="אימות סיסמא"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.584"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.644"
+        app:passwordToggleEnabled="true"
+        tools:ignore="MissingConstraints">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="367dp"
-            android:layout_height="55dp"
+            android:id="@+id/textInputEditText2"
+            android:layout_width="335dp"
+            android:layout_height="66dp"
             android:inputType="textPassword" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/PhoneNumber"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="390dp"
-        android:layout_height="73dp"
-        android:hint="  מס פלאפון">
+        android:layout_width="346dp"
+        android:layout_height="76dp"
+        android:hint="מספר טלפון"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.584"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.76"
+        tools:ignore="MissingConstraints">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="367dp"
-            android:layout_height="55dp"
+            android:id="@+id/textInputEditText"
+            android:layout_width="336dp"
+            android:layout_height="69dp"
             android:inputType="number" />
     </com.google.android.material.textfield.TextInputLayout>
-
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/til_city"
         style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
-        android:layout_width="370dp"
-        android:layout_height="66dp"
+        android:layout_width="345dp"
+        android:layout_height="72dp"
 
         android:text="Hello World!"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.575"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.869"><![CDATA[
+        app:layout_constraintVertical_bias="0.871"><![CDATA[
                 app: starIconDrawable="@drawable/ic_baseline_ac_unit_24"
                 >
 
@@ -144,254 +189,17 @@
 
 
 
-
-
-
-
-
-
-
-
-            ]]>
+        ]]>
 
         <AutoCompleteTextView
             android:id="@+id/act_city"
-            android:layout_width="376dp"
-            android:layout_height="77dp"
+            android:layout_width="334dp"
+            android:layout_height="62dp"
             android:hint="עיר"
             android:padding="20dp"
-            android:textSize="30sp"
-            android:textStyle="bold"></AutoCompleteTextView>
-
+            android:textSize="20sp"
+            android:textStyle="normal"></AutoCompleteTextView>
     </com.google.android.material.textfield.TextInputLayout>
 
 
-</LinearLayout>
-
-
-<!--///////////////orginal code-->
-<!--<?xml version="1.0" encoding="utf-8"?>-->
-<!--<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
-<!--    xmlns:app="http://schemas.android.com/apk/res-auto"-->
-<!--    xmlns:tools="http://schemas.android.com/tools"-->
-<!--    android:id="@+id/linearLayout"-->
-<!--    android:layout_width="match_parent"-->
-<!--    android:layout_height="match_parent"-->
-<!--    tools:context=".register$register1">-->
-
-
-<!--    <ImageView-->
-<!--        android:id="@+id/back"-->
-<!--        android:layout_width="93dp"-->
-<!--        android:layout_height="57dp"-->
-<!--        android:background="#fff"-->
-<!--        android:src="@drawable/ic_baseline_arrow_back_24"-->
-<!--        android:text="back"-->
-<!--        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintHorizontal_bias="1.0"-->
-<!--        app:layout_constraintStart_toEndOf="@+id/imageView2"-->
-<!--        app:layout_constraintTop_toTopOf="parent"-->
-<!--        app:layout_constraintVertical_bias="0.011" />-->
-
-<!--    <ImageView-->
-<!--        android:id="@+id/next"-->
-<!--        android:layout_width="93dp"-->
-<!--        android:layout_height="54dp"-->
-<!--        android:background="#fff"-->
-<!--        android:src="@drawable/ic_baseline_arrow_forward_24"-->
-<!--        android:text="next"-->
-<!--        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--        app:layout_constraintEnd_toStartOf="@+id/imageView2"-->
-<!--        app:layout_constraintHorizontal_bias="0.058"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toTopOf="parent"-->
-<!--        app:layout_constraintVertical_bias="0.016" />-->
-
-<!--    <ImageView-->
-<!--        android:id="@+id/imageView2"-->
-<!--        android:layout_width="91dp"-->
-<!--        android:layout_height="66dp"-->
-<!--        android:rotationX="13"-->
-<!--        android:src="@drawable/tps_logo_background"-->
-<!--        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toTopOf="parent"-->
-<!--        app:layout_constraintVertical_bias="0.01" />-->
-
-<!--    <TextView-->
-<!--        android:id="@+id/textView7"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginTop="56dp"-->
-<!--        android:fontFamily="cursive"-->
-<!--        android:text="TPS"-->
-<!--        android:textAppearance="@style/TextAppearance.AppCompat.Medium"-->
-<!--        android:textSize="40sp"-->
-<!--        app:layout_constraintBottom_toTopOf="@+id/textView8"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintHorizontal_bias="0.553"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toTopOf="parent"-->
-<!--        app:layout_constraintVertical_bias="0.0" />-->
-
-<!--    <EditText-->
-<!--        android:id="@+id/FirstName"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginBottom="20dp"-->
-<!--        android:ems="10"-->
-<!--        android:hint="שם פרטי"-->
-<!--        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"-->
-<!--        android:inputType="textPersonName"-->
-<!--        app:layout_constraintBottom_toTopOf="@+id/LastName"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintHorizontal_bias="0.024"-->
-<!--        app:layout_constraintStart_toStartOf="parent" />-->
-
-<!--    <EditText-->
-<!--        android:id="@+id/LastName"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginBottom="8dp"-->
-<!--        android:ems="10"-->
-<!--        android:hint="שם משפחה"-->
-<!--        android:inputType="textPersonName"-->
-<!--        app:layout_constraintBottom_toTopOf="@+id/PhoneNumber"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintHorizontal_bias="0.024"-->
-<!--        app:layout_constraintStart_toStartOf="parent" />-->
-
-<!--    <EditText-->
-<!--        android:id="@+id/Email"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginBottom="20dp"-->
-<!--        android:ems="10"-->
-<!--        android:hint="איימל"-->
-<!--        android:inputType="textPersonName"-->
-<!--        app:layout_constraintBottom_toTopOf="@+id/Password"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintHorizontal_bias="0.024"-->
-<!--        app:layout_constraintStart_toStartOf="parent" />-->
-
-<!--    <EditText-->
-<!--        android:id="@+id/Password"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginBottom="24dp"-->
-<!--        android:ems="10"-->
-<!--        android:hint="                              סיסמה"-->
-<!--        android:inputType="textPassword"-->
-<!--        app:layout_constraintBottom_toTopOf="@+id/passwordAgain"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintHorizontal_bias="0.024"-->
-<!--        app:layout_constraintStart_toStartOf="parent" />-->
-
-<!--    <EditText-->
-<!--        android:id="@+id/passwordAgain"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginBottom="28dp"-->
-<!--        android:ems="10"-->
-<!--        android:hint="                    אימות סיסמה"-->
-<!--        android:inputType="textPassword"-->
-<!--        app:layout_constraintBottom_toTopOf="@+id/til_city"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintHorizontal_bias="0.024"-->
-<!--        app:layout_constraintStart_toStartOf="parent" />-->
-
-<!--    <TextView-->
-<!--        android:id="@+id/textView8"-->
-<!--        android:layout_width="247dp"-->
-<!--        android:layout_height="26dp"-->
-<!--        android:layout_marginBottom="28dp"-->
-<!--        android:fontFamily="cursive"-->
-<!--        android:text="ברוכים הבאים למשפחה"-->
-<!--        android:textSize="18sp"-->
-<!--        app:layout_constraintBottom_toTopOf="@+id/FirstName"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintHorizontal_bias="0.432"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toTopOf="parent"-->
-<!--        app:layout_constraintVertical_bias="0.826" />-->
-
-<!--    <EditText-->
-<!--        android:id="@+id/PhoneNumber"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginBottom="20dp"-->
-<!--        android:ems="10"-->
-<!--        android:hint="מס פלאפון"-->
-<!--        android:inputType="number"-->
-<!--        app:layout_constraintBottom_toTopOf="@+id/Email"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintHorizontal_bias="0.024"-->
-<!--        app:layout_constraintStart_toStartOf="parent" />-->
-
-<!--    <com.google.android.material.textfield.TextInputLayout-->
-<!--        android:id="@+id/til_city"-->
-<!--        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"-->
-<!--        android:layout_width="304dp"-->
-<!--        android:layout_height="66dp"-->
-
-<!--        android:text="Hello World!"-->
-<!--        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintHorizontal_bias="0.0"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toTopOf="parent"-->
-<!--        app:layout_constraintVertical_bias="0.869"><![CDATA[-->
-<!--            app: starIconDrawable="@drawable/ic_baseline_ac_unit_24"-->
-<!--            >-->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!--        ]]>-->
-
-<!--        <AutoCompleteTextView-->
-<!--            android:id="@+id/act_city"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="match_parent"-->
-<!--            android:background="#fff"-->
-<!--            android:hint="עיר"-->
-<!--            android:padding="20dp"-->
-<!--            android:textSize="30sp"-->
-<!--            android:textStyle="bold"></AutoCompleteTextView>-->
-<!--    </com.google.android.material.textfield.TextInputLayout>-->
-
-<!--    <androidx.constraintlayout.widget.Guideline-->
-<!--        android:id="@+id/guideline"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:orientation="vertical"-->
-<!--        app:layout_constraintGuide_begin="16dp" />-->
-
-<!--    <androidx.constraintlayout.widget.Guideline-->
-<!--        android:id="@+id/guideline2"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:orientation="horizontal"-->
-<!--        app:layout_constraintGuide_begin="217dp" />-->
-
-
-<!--</androidx.constraintlayout.widget.ConstraintLayout>-->
+</androidx.constraintlayout.widget.ConstraintLayout>
