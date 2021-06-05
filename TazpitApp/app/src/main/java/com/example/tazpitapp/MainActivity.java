@@ -90,12 +90,12 @@ public class MainActivity<imageView> extends AppCompatActivity implements Naviga
         catch (NullPointerException e){}
         setContentView(R.layout.activity_main);
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        if(getStateOfGps()){
+        if(FirebaseAuth.getInstance().getCurrentUser() != null){if(getStateOfGps()){
             startLocationService();
         }
         else{
             startCityService();
-        }
+        }}else{stopLocationService();}
 
         aToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         NavigationView mNavigationView = (NavigationView) findViewById(R.id.nav_view);

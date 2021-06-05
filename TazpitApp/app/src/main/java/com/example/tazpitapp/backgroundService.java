@@ -358,7 +358,7 @@ public class backgroundService extends Service {
                 else if(action.equals(constants.ACTION_STOP_LOCATION_SERVICE)){//gps off
                     StopCity=false;
                     stopLocationService();
-                    AlertifInCity();
+                  //  AlertifInCity();
                 }
 
             }
@@ -455,7 +455,7 @@ public class backgroundService extends Service {
         handler = new Handler();
         runnable = new Runnable() {
             public void run() {
-                if(!StopCity) {
+                if(!StopCity&&FirebaseAuth.getInstance().getCurrentUser() != null) {
                     AlertifInCity();
                     Toast.makeText(context, "Service is still running", Toast.LENGTH_LONG).show();
                     handler.postDelayed(runnable, 10000);
