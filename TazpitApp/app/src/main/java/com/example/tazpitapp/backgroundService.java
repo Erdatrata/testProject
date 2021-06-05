@@ -29,12 +29,18 @@ import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.gms.tasks.Tasks;
 import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -51,6 +57,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Map;
+import java.util.concurrent.ExecutionException;
 
 public class backgroundService extends Service {
     final int sec=1000;
@@ -118,27 +125,48 @@ public class backgroundService extends Service {
                 editor.apply();
                 AlertIfInRange();
 
-
-
-
             }
         }
-
-
-
     };
 
-    private boolean inTown(Object town) { //town from scenerio.. will return if the user town is the same as the scenerio
-        FirebaseAuth userIdentifier=FirebaseAuth.getInstance();
-        String UID = userIdentifier.getCurrentUser().getUid();
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference ref=database.getReference("Users/"+UID+"/"+"City");
-        Object userTown=ref.get().getResult().getValue();
-        if(userTown.equals(town)){
-            System.out.println(town);System.out.println(userTown);
-            return true;}System.out.println(town);System.out.println(userTown);return false;
-
-    }
+//    private boolean inTown(Object town) { //town from scenerio.. will return if the user town is the same as the scenerio
+//        FirebaseAuth userIdentifier=FirebaseAuth.getInstance();
+//        String UID = userIdentifier.getCurrentUser().getUid();
+//        FirebaseDatabase database = FirebaseDatabase.getInstance();
+//        DatabaseReference ref=database.getReference("Users/"+UID+"/"+"City");
+//       // Tasks.await();
+//       // Object userTown=
+//          Task<FirebaseDatabase>  task=    ref.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+//              private String TAG;
+//
+//              @Override
+//                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+//                        if (task.isSuccessful()) {
+//                            DocumentSnapshot document = task.getResult();
+//                            if (document.exists()) {
+//
+//                            } else {
+//                                Log.d("aadd", "No such document");
+//                            }
+//                        }else {
+//                            Log.d(TAG, "get failed with ", task.getException());
+//                        }
+//                    }
+//                });
+//        Object userTown=null;
+//        try {
+//            Tasks.await(task);
+//            userTown =task.getResult();
+//        } catch (ExecutionException e) {
+//            e.printStackTrace();
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
+//        if(userTown.equals(town)){
+//            System.out.println(town);System.out.println(userTown);
+//            return true;}System.out.println(town);System.out.println(userTown);return false;
+//
+//    }
 
     private static final String CHANNEL_ID = "12341234" ;
 
@@ -164,7 +192,7 @@ public class backgroundService extends Service {
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, 0);
 
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this, CHANNEL_ID)
-                .setSmallIcon(R.drawable.ic_baseline_map_24)
+                .setSmallIcon(R.drawable.tps_logo_background)
                 .setContentTitle(id+title)
                 .setContentText(context)
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT)
@@ -317,7 +345,7 @@ public class backgroundService extends Service {
         LocationServices.getFusedLocationProviderClient(this)
                 .removeLocationUpdates(locationcallback);
         stopForeground(true);
-        stopSelf();
+        //stopSelf();
 }
     public int onStartCommand(Intent intent,int flags,int startId){
         if(intent!= null){
@@ -330,6 +358,7 @@ public class backgroundService extends Service {
                 else if(action.equals(constants.ACTION_STOP_LOCATION_SERVICE)){//gps off
                     StopCity=false;
                     stopLocationService();
+                  //  AlertifInCity();
                 }
 
             }
@@ -418,11 +447,15 @@ public class backgroundService extends Service {
     public static Runnable runnable = null;
     public void onCreate() {
         Toast.makeText(this, "Service created!", Toast.LENGTH_LONG).show();
+        if(!StopCity)
+            System.out.print("Stopsity is not \n");
+        if(StopCity==true)
+            System.out.print("Stopsity is yes \n");
 
         handler = new Handler();
         runnable = new Runnable() {
             public void run() {
-                if(!StopCity) {
+                if(!StopCity&&FirebaseAuth.getInstance().getCurrentUser() != null) {
                     AlertifInCity();
                     Toast.makeText(context, "Service is still running", Toast.LENGTH_LONG).show();
                     handler.postDelayed(runnable, 10000);
@@ -434,7 +467,76 @@ public class backgroundService extends Service {
     }
 
     private void AlertifInCity() {//Check if its in city, if yes ,do a notification
-            //sendNotfication(String id(name of the secenerio), Object location(location in lan and lon,put 0 if in city))
+        if(!checkTimeAndDateIfOn()){return;}
+        System.out.println("Check if in city ");
+        FirebaseFirestore.getInstance() .collection("Scenarios").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+
+                if (task.isSuccessful()) {
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+
+                        System.out.println(document.getId());
+                        DocumentReference mDocRef= FirebaseFirestore.getInstance().document("Scenarios/"+document.getId());
+                        mDocRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                            @Override
+                            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                                if(!getStateOfGps()){
+                                  // Object town=documentSnapshot.getData().get("עיר");
+                                    String townScenario=documentSnapshot.getData().get("עיר").toString();
+                                       FirebaseAuth userIdentifier=FirebaseAuth.getInstance();
+                                 String UID = userIdentifier.getCurrentUser().getUid();
+//                         FirebaseDatabase database = FirebaseDatabase.getInstance();
+                      //DatabaseReference ref=FirebaseDatabase.getInstance().getReference("Users").child(UID);
+                                //======================
+                                    DatabaseReference mref = FirebaseDatabase.getInstance().getReference("Users").child(UID).child("City");
+                                  System.out.println(mref+"\n");
+                                    mref.addListenerForSingleValueEvent(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(DataSnapshot dataSnapshot) {
+                                            String userCity = dataSnapshot.getValue(String.class);
+                                            System.out.println("city of scenario is : "+townScenario +"\n");
+                                           System.out.println("userCity is : "+userCity +"\n");
+                                           if(userCity!=null) {
+                                               if (userCity.equals(townScenario)) {
+                                                   if (checkImporent(documentSnapshot) && isItAfterTime(toTimestamp(documentSnapshot.getData().get("timeCreated")), getLastTime())) {
+                                                       setLastTime(toTimestamp(documentSnapshot.getData().get("timeCreated")));
+                                                       System.out.println("in city mode check2");
+                                                       sendNotfication(documentSnapshot.getId(), 0);
+
+                                                   }
+
+                                               }
+                                           }
+                                        }
+
+                                        @Override
+                                        public void onCancelled(DatabaseError databaseError) {
+
+                                        }
+                                    });
+
+
+                                }
+                                else{
+                                    System.out.println("AlertIfInCity gps is on"); //should not happen
+
+                                }
+
+
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Log.e("error33", "Error requesting connection", e);
+                            }
+                        });;
+                    }
+
+                }
+            }
+        });
+
 
     }
 //

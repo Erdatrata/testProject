@@ -67,7 +67,7 @@ class register {
 
 
 
-    public static class register1 extends AppCompatActivity {
+    public static class register2 extends AppCompatActivity {
 
 
         //Edit test on front of the activity
@@ -133,7 +133,11 @@ class register {
             String phone=this.phone.getEditText().getText().toString();
             if(mail.length()<1||password.length()<1||passwordAgain.length()<1||city.length()<1||fname.length()<1||Lname.length()<1||phone.length()<1){return false;}return true;
         }
-//    private boolean cheakCity(){}
+    private boolean cheakCity(){//compare to json file and look for the name
+
+            return true;
+
+        }
         private boolean checkMailIntegrity(){//check if it has @
 
             String mail=email.getEditText().getText().toString();
@@ -205,7 +209,7 @@ class register {
                         if(!checkEqualPassword()){msg=msg+"סיסמאות לא תואמות\n";
 
                         }
-
+                        if(!cheakCity()){msg=msg+"העיר כתובה באופן שגוי\n";}
                         Toast.makeText(view.getContext(), msg, 5000 ).show();
 
                     }
@@ -216,8 +220,14 @@ class register {
                         LNameSTR=LName.getEditText().getText().toString();
                         citySTR=city.getText().toString();
                         phoneNumberSTR=phone.getEditText().getText().toString();
-                        Intent intent = new Intent(view.getContext(), register2.class);
-                        startActivity(intent);
+                        try {
+                            Register(mailSTR,passwordSTR,fNameSTR,LNameSTR,citySTR,phoneNumberSTR);
+                            Thread.sleep(2500);
+                            Intent intent = new Intent(view.getContext(), MainActivity.class);
+                            startActivity(intent);
+                        } catch (Exception e) {
+                            Toast.makeText(register2.this, "ההרשמה נכשלה", Toast.LENGTH_SHORT).show();
+                        }
                     }
                 }
 
@@ -276,10 +286,93 @@ class register {
                 e.printStackTrace();
             }
         }
+
+        private void Register(String mailSTR, String passwordSTR, String fNameSTR, String lNameSTR, String citySTR, String phoneNumberSTR) throws Exception {
+            //register,first create user , with email and password, if successful , it will create dataToSave object, then send it to real time database
+            mAuth.createUserWithEmailAndPassword(mailSTR,passwordSTR)
+                    .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if(task.isSuccessful()){
+                                final Map<String, Object>[] dataToSave = new Map[]{new HashMap<String, Object>()};
+                                dataToSave[0].put("First Name:",fNameSTR);
+                                dataToSave[0].put("Sec Name:",LNameSTR);
+                                dataToSave[0].put("City:",citySTR);
+                                dataToSave[0].put("Email:",mailSTR);
+                                dataToSave[0].put("Phone:",phoneNumberSTR);
+                                dataToSave[0].put("volunteer","false");
+
+
+                                FirebaseDatabase.getInstance().getReference("Users")
+                                        //here we creating users folder in real time data baes , getting uid from user and storing the data in folder named by id
+                                        .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                        .setValue(dataToSave[0]).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<Void> task) {
+                                        if(task.isSuccessful()){
+                                            Toast.makeText(register.register2.this,
+                                                    R.string.register_toast_success,Toast.LENGTH_LONG).show();
+                                            {//adds all new data for newely registered clients
+                                                dayTime dtDEF = new dayTime(0, 0, 23, 59);//default for first time
+                                                Gson gson = new Gson();
+                                                SharedPreferences sp = getSharedPreferences(constants.SHARED_PREFS,
+                                                        Context.MODE_PRIVATE);
+                                                SharedPreferences.Editor editor = sp.edit();
+                                                String dayDEF = gson.toJson(dtDEF);
+                                                Map<String, String> docData = new HashMap<>();
+                                                for(String day: constants.daysNames){
+                                                    docData.put(day,dayDEF);
+                                                    editor.putString(day,dayDEF);
+                                                }
+                                                docData.put("range",""+10.0);
+                                                editor.putFloat("range",(float)10.0);
+
+                                                docData.put("location","city");
+                                                editor.putString("location","city");
+
+                                                FirebaseAuth userIdentifier=FirebaseAuth.getInstance();
+                                                String UID = userIdentifier.getCurrentUser().getUid();
+                                                DocumentReference DRF = FirebaseFirestore.getInstance()
+                                                        .document("Users/"+UID);
+                                                final boolean[] success = {true};
+                                                final Exception[] failToRet = new Exception[1];
+                                                DRF.set(docData).addOnFailureListener(new OnFailureListener() {
+                                                    @Override
+                                                    public void onFailure(@NonNull @NotNull Exception e) {
+                                                        success[0] = false;failToRet[0]=e;
+                                                    }
+                                                });
+                                                if(!success[0]){
+                                                    // show/make log for case of failure
+                                                }
+                                                editor.apply();
+
+                                            }
+                                        }
+                                    }
+                                });
+
+
+                            }
+
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull @org.jetbrains.annotations.NotNull Exception e) {
+                    try {
+                        throw new Exception("failed to register");
+                    } catch (Exception exception) {
+                        exception.printStackTrace();
+                    }
+                }
+            });
+
+
+        }
     }
 
 
-    public static class  register2 extends AppCompatActivity {
+    public static class  register1 extends AppCompatActivity {
         private DocumentReference mDocRef= FirebaseFirestore.getInstance().document("contact/contact");
         private Button back;
         private Button next;
@@ -311,10 +404,10 @@ class register {
                 @Override
                 public void onClick(View v) {
                     if(Aggre.isChecked()) {
-                        Intent intent = new Intent(v.getContext(), register3.class);
+                        Intent intent = new Intent(v.getContext(), register2.class);
                         startActivity(intent);
                     } else {
-                        Toast.makeText(register2.this, "אנא אשרו את הסכמתכם לחוזה על מנת להירשם"
+                        Toast.makeText(register1.this, "אנא אשרו את הסכמתכם לחוזה על מנת להירשם"
                                 , Toast.LENGTH_SHORT).show();
                     }
                 }
@@ -331,7 +424,7 @@ class register {
     public static class register3 extends AppCompatActivity {
         private static FirebaseAuth mAuth;
         private Button test;
-        private void Register(String mailSTR, String passwordSTR, String fNameSTR, String lNameSTR, String citySTR, String phoneNumberSTR) {
+        private void Register(String mailSTR, String passwordSTR, String fNameSTR, String lNameSTR, String citySTR, String phoneNumberSTR) throws Exception {
             //register,first create user , with email and password, if successful , it will create dataToSave object, then send it to real time database
             mAuth.createUserWithEmailAndPassword(mailSTR,passwordSTR)
                     .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
@@ -400,7 +493,18 @@ class register {
                             }
 
                         }
-                    });
+                    }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull @org.jetbrains.annotations.NotNull Exception e) {
+                    try {
+                        throw new Exception("failed to register");
+                    } catch (Exception exception) {
+                        exception.printStackTrace();
+                    }
+                }
+            });
+
+
         }
 
 
@@ -414,11 +518,13 @@ class register {
             test.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Register(mailSTR,passwordSTR,fNameSTR,LNameSTR,citySTR,phoneNumberSTR);
                     try {
+                        Register(mailSTR,passwordSTR,fNameSTR,LNameSTR,citySTR,phoneNumberSTR);
                         Thread.sleep(2500);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
+                    } catch (Exception e) {
+                        Toast.makeText(register3.this, "ההרשמה נכשלה", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(v.getContext(), register2.class);
+                        startActivity(intent);
                     }Intent intent = new Intent(v.getContext(), MainActivity.class);
                     startActivity(intent);
                 }

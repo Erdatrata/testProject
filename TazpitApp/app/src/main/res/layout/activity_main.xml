@@ -10,43 +10,25 @@
     tools:openDrawer="start">
 
 
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
 
         <ImageView
-            android:id="@+id/logo_Image"
-            android:layout_width="193dp"
-            android:layout_height="141dp"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentBottom="true"
-            android:src="@drawable/tps_logo_background"
-            android:transitionName="logo_image"
+            android:layout_width="296dp"
+            android:layout_height="151dp"
+            android:layout_gravity="center"
+            android:adjustViewBounds="true"
+            android:scaleType="centerCrop"
+            android:src="@drawable/tps_logo_full_foreground"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.495"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.0"
-            tools:ignore="DuplicateIds" />
-
-        <TextView
-            android:id="@+id/logo_text"
-            android:layout_width="64dp"
-            android:layout_height="47dp"
-            android:backgroundTint="#2196F3"
-            android:fontFamily="cursive"
-            android:text="TPS"
-            android:textSize="40sp"
-            android:transitionName="logo_text"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.524"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.16" />
+            app:layout_constraintVertical_bias="0.005"
+            tools:ignore="MissingConstraints" />
 
         <ImageView
             android:id="@+id/nav_view_image"

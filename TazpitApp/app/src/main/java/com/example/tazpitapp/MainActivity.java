@@ -90,12 +90,12 @@ public class MainActivity<imageView> extends AppCompatActivity implements Naviga
         catch (NullPointerException e){}
         setContentView(R.layout.activity_main);
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        if(getStateOfGps()){
+        if(FirebaseAuth.getInstance().getCurrentUser() != null){if(getStateOfGps()){
             startLocationService();
         }
         else{
-            stopLocationService();
-        }
+            startCityService();
+        }}else{stopLocationService();}
 
         aToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         NavigationView mNavigationView = (NavigationView) findViewById(R.id.nav_view);
@@ -205,6 +205,15 @@ public class MainActivity<imageView> extends AppCompatActivity implements Naviga
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putBoolean(constants.gpsState, state);
         editor.apply();
+
+    }
+    public void startCityService(){
+        if(!isLocationServiceRunning()){
+            Intent intent =new Intent(getApplicationContext(),backgroundService.class);
+            startService(intent);
+            Toast.makeText(this,"City service started",Toast.LENGTH_SHORT).show();
+
+        }
 
     }
 }
