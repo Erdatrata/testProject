@@ -431,7 +431,9 @@ public class backgroundService extends Service {
     private dayTime getDayTime(String daysName) {
         SharedPreferences sharedPreferences = getSharedPreferences(constants.SHARED_PREFS, MODE_PRIVATE);
         String inJson = sharedPreferences.getString(daysName,"default");
-        return ((dayTime) new Gson().fromJson(inJson,dayTime.class));
+        if(!inJson.equals("default"))
+            return ((dayTime) new Gson().fromJson(inJson,dayTime.class));
+        return new dayTime(0,0,0,1);
 
     }//get dayTime Object from string name of shared--only used in checktimeanddateifon,irrelevant in other places
 
