@@ -142,7 +142,8 @@ private void showTheScenarioDetail(DocumentReference docRef){
 
                 DocumentSnapshot document = task.getResult();
                 //the user will click on "לפרטים נוספים" to see information about the event and will see alert
-            type_of_event.setText("פרטים נוספים: "+document.get("סוג האירוע").toString());
+                type_of_event.setText("פרטים נוספים: " + document.get("סוג האירוע").toString());
+                //////we need check
                 type_of_event.setMovementMethod(new ScrollingMovementMethod());
                 //presenting the city of the event
                 city_of_event.setText("עיר האירוע: "+document.get("עיר").toString());

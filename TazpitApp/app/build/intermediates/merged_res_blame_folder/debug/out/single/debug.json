@@ -8,6 +8,10 @@
         "source": "C:\\GIT\\new_tazpit\\tazpit\\TazpitApp\\app\\src\\main\\res\\layout\\custom_list_item.xml"
     },
     {
+        "merged": "C:\\GIT\\new_tazpit\\tazpit\\TazpitApp\\app\\build\\intermediates\\res\\merged\\debug\\drawable_tps_logo_full_round.xml.flat",
+        "source": "C:\\GIT\\new_tazpit\\tazpit\\TazpitApp\\app\\src\\main\\res\\drawable\\tps_logo_full_round.xml"
+    },
+    {
         "merged": "C:\\GIT\\new_tazpit\\tazpit\\TazpitApp\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi_sync_button.png.flat",
         "source": "C:\\GIT\\new_tazpit\\tazpit\\TazpitApp\\app\\src\\main\\res\\mipmap-mdpi\\sync_button.png"
     },
