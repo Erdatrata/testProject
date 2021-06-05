@@ -94,7 +94,7 @@ public class MainActivity<imageView> extends AppCompatActivity implements Naviga
             startLocationService();
         }
         else{
-            stopLocationService();
+            startCityService();
         }
 
         aToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -205,6 +205,15 @@ public class MainActivity<imageView> extends AppCompatActivity implements Naviga
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putBoolean(constants.gpsState, state);
         editor.apply();
+
+    }
+    public void startCityService(){
+        if(!isLocationServiceRunning()){
+            Intent intent =new Intent(getApplicationContext(),backgroundService.class);
+            startService(intent);
+            Toast.makeText(this,"City service started",Toast.LENGTH_SHORT).show();
+
+        }
 
     }
 }
