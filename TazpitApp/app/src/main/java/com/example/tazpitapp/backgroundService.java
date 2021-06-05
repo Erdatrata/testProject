@@ -123,7 +123,7 @@ public class backgroundService extends Service {
                 editor.putString(constants.latOfGps, String.valueOf(latitude));
                 editor.putString(constants.longOfGps, String.valueOf(longitude));
                 editor.apply();
-               // AlertIfInRange();
+                AlertIfInRange();
 
             }
         }
@@ -358,7 +358,7 @@ public class backgroundService extends Service {
                 else if(action.equals(constants.ACTION_STOP_LOCATION_SERVICE)){//gps off
                     StopCity=false;
                     stopLocationService();
-                    //AlertifInCity();
+                    AlertifInCity();
                 }
 
             }
