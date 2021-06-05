@@ -496,7 +496,8 @@ public class backgroundService extends Service {
                                         public void onDataChange(DataSnapshot dataSnapshot) {
                                             String userCity = dataSnapshot.getValue(String.class);
                                            System.out.println("userCity is : "+userCity +"\n");
-                                           if(userCity.equals(townScenario)) {
+                                            if(userCity!=null){
+                                                if(userCity.equals(townScenario)) {
                                                if (checkImporent(documentSnapshot) && isItAfterTime(toTimestamp(documentSnapshot.getData().get("timeCreated")), getLastTime())) {
                                                    setLastTime(toTimestamp(documentSnapshot.getData().get("timeCreated")));
                                                    System.out.println("in city mode check2");
@@ -504,7 +505,7 @@ public class backgroundService extends Service {
 
                                                }
 
-                                           }
+                                           }}
                                         }
 
                                         @Override
