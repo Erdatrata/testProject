@@ -866,6 +866,7 @@ int color foreground_material_dark 0x7f060068
 int color foreground_material_light 0x7f060069
 int color highlighted_text_material_dark 0x7f06006a
 int color highlighted_text_material_light 0x7f06006b
+int color ic_launcher_background 0x7f0600d6
 int color material_blue_grey_800 0x7f06006c
 int color material_blue_grey_900 0x7f06006d
 int color material_blue_grey_950 0x7f06006e
@@ -1609,6 +1610,7 @@ int id custom 0x7f090077
 int id customPanel 0x7f090078
 int id cut 0x7f090079
 int id dark 0x7f09007a
+int id dataArticle 0x7f09019d
 int id date_picker_actions 0x7f09007b
 int id day_friday 0x7f09007c
 int id day_monday 0x7f09007d
@@ -1676,6 +1678,7 @@ int id icon_only 0x7f0900ba
 int id id_text 0x7f0900bb
 int id ifRoom 0x7f0900bc
 int id image 0x7f0900bd
+int id imageArticale 0x7f09019e
 int id imageView 0x7f0900be
 int id imageView2 0x7f0900bf
 int id info 0x7f0900c0
@@ -1743,6 +1746,7 @@ int id nav_view 0x7f0900fd
 int id nav_view_image 0x7f0900fe
 int id navigation_header_container 0x7f0900ff
 int id never 0x7f090100
+int id newsRecycle 0x7f09019f
 int id next 0x7f090101
 int id nextPage2Reg 0x7f090102
 int id noScroll 0x7f090103
@@ -1850,6 +1854,7 @@ int id textInputEditText2 0x7f090168
 int id textInputEditText3 0x7f090169
 int id textInputEditText4 0x7f09016a
 int id textInputEditText5 0x7f09016b
+int id textInputEditText6 0x7f0901a0
 int id textSpacerNoButtons 0x7f09016c
 int id textSpacerNoTitle 0x7f09016d
 int id textStart 0x7f09016e
@@ -1871,9 +1876,11 @@ int id textinput_error 0x7f09017d
 int id textinput_helper_text 0x7f09017e
 int id til_city 0x7f09017f
 int id time 0x7f090180
+int id timeArticle 0x7f0901a1
 int id timePickerSettingsFrom 0x7f090181
 int id timePickerSettingsTo 0x7f090182
 int id title 0x7f090183
+int id titleArticle 0x7f0901a2
 int id titleDividerNoCustom 0x7f090184
 int id titleScenario 0x7f090185
 int id title_template 0x7f090186
@@ -1899,6 +1906,7 @@ int id wide 0x7f090199
 int id withText 0x7f09019a
 int id wrap 0x7f09019b
 int id wrap_content 0x7f09019c
+int id writerArticle 0x7f0901a3
 int integer abc_config_activityDefaultDur 0x7f0a0000
 int integer abc_config_activityShortDur 0x7f0a0001
 int integer app_bar_elevation_anim_duration 0x7f0a0002
@@ -2025,6 +2033,7 @@ int layout mtrl_picker_header_title_text 0x7f0c0058
 int layout mtrl_picker_header_toggle 0x7f0c0059
 int layout mtrl_picker_text_input_date 0x7f0c005a
 int layout mtrl_picker_text_input_date_range 0x7f0c005b
+int layout my_row 0x7f0c0077
 int layout nav_header_main 0x7f0c005c
 int layout notification_action 0x7f0c005d
 int layout notification_action_tombstone 0x7f0c005e
@@ -2059,6 +2068,7 @@ int mipmap sync_button 0x7f0e0002
 int mipmap sync_button_foreground 0x7f0e0003
 int mipmap sync_button_round 0x7f0e0004
 int mipmap tpc_app_logo 0x7f0e0005
+int mipmap tps_icon 0x7f0e000e
 int mipmap tps_logo 0x7f0e0006
 int mipmap tps_logo_background 0x7f0e0007
 int mipmap tps_logo_foreground 0x7f0e0008

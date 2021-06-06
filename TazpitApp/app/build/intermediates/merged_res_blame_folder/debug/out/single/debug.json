@@ -44,12 +44,16 @@
         "source": "C:\\GIT\\new_tazpit\\tazpit\\TazpitApp\\app\\src\\main\\res\\mipmap-hdpi\\tps_logo_background.png"
     },
     {
-        "merged": "C:\\GIT\\new_tazpit\\tazpit\\TazpitApp\\app\\build\\intermediates\\res\\merged\\debug\\anim_top_anim.xml.flat",
-        "source": "C:\\GIT\\new_tazpit\\tazpit\\TazpitApp\\app\\src\\main\\res\\anim\\top_anim.xml"
+        "merged": "C:\\GIT\\new_tazpit\\tazpit\\TazpitApp\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi_tps_icon.png.flat",
+        "source": "C:\\GIT\\new_tazpit\\tazpit\\TazpitApp\\app\\src\\main\\res\\mipmap-mdpi\\tps_icon.png"
     },
     {
         "merged": "C:\\GIT\\new_tazpit\\tazpit\\TazpitApp\\app\\build\\intermediates\\res\\merged\\debug\\drawable_ic_baseline_wc_24.xml.flat",
         "source": "C:\\GIT\\new_tazpit\\tazpit\\TazpitApp\\app\\src\\main\\res\\drawable\\ic_baseline_wc_24.xml"
+    },
+    {
+        "merged": "C:\\GIT\\new_tazpit\\tazpit\\TazpitApp\\app\\build\\intermediates\\res\\merged\\debug\\anim_top_anim.xml.flat",
+        "source": "C:\\GIT\\new_tazpit\\tazpit\\TazpitApp\\app\\src\\main\\res\\anim\\top_anim.xml"
     },
     {
         "merged": "C:\\GIT\\new_tazpit\\tazpit\\TazpitApp\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi_ic_launcher.png.flat",
@@ -64,24 +68,28 @@
         "source": "C:\\GIT\\new_tazpit\\tazpit\\TazpitApp\\app\\src\\main\\res\\drawable\\tps_logo_full_foreground.png"
     },
     {
-        "merged": "C:\\GIT\\new_tazpit\\tazpit\\TazpitApp\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xhdpi_tps_logo.png.flat",
-        "source": "C:\\GIT\\new_tazpit\\tazpit\\TazpitApp\\app\\src\\main\\res\\mipmap-xhdpi\\tps_logo.png"
+        "merged": "C:\\GIT\\new_tazpit\\tazpit\\TazpitApp\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-hdpi_tps_logo_round.png.flat",
+        "source": "C:\\GIT\\new_tazpit\\tazpit\\TazpitApp\\app\\src\\main\\res\\mipmap-hdpi\\tps_logo_round.png"
     },
     {
         "merged": "C:\\GIT\\new_tazpit\\tazpit\\TazpitApp\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-anydpi-v26_sync_button.xml.flat",
         "source": "C:\\GIT\\new_tazpit\\tazpit\\TazpitApp\\app\\src\\main\\res\\mipmap-anydpi-v26\\sync_button.xml"
     },
     {
-        "merged": "C:\\GIT\\new_tazpit\\tazpit\\TazpitApp\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-hdpi_tps_logo_round.png.flat",
-        "source": "C:\\GIT\\new_tazpit\\tazpit\\TazpitApp\\app\\src\\main\\res\\mipmap-hdpi\\tps_logo_round.png"
+        "merged": "C:\\GIT\\new_tazpit\\tazpit\\TazpitApp\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xhdpi_tps_logo.png.flat",
+        "source": "C:\\GIT\\new_tazpit\\tazpit\\TazpitApp\\app\\src\\main\\res\\mipmap-xhdpi\\tps_logo.png"
+    },
+    {
+        "merged": "C:\\GIT\\new_tazpit\\tazpit\\TazpitApp\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxhdpi_sync_button_foreground.png.flat",
+        "source": "C:\\GIT\\new_tazpit\\tazpit\\TazpitApp\\app\\src\\main\\res\\mipmap-xxhdpi\\sync_button_foreground.png"
     },
     {
         "merged": "C:\\GIT\\new_tazpit\\tazpit\\TazpitApp\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxhdpi_tps_logo.png.flat",
         "source": "C:\\GIT\\new_tazpit\\tazpit\\TazpitApp\\app\\src\\main\\res\\mipmap-xxhdpi\\tps_logo.png"
     },
     {
-        "merged": "C:\\GIT\\new_tazpit\\tazpit\\TazpitApp\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxhdpi_sync_button_foreground.png.flat",
-        "source": "C:\\GIT\\new_tazpit\\tazpit\\TazpitApp\\app\\src\\main\\res\\mipmap-xxhdpi\\sync_button_foreground.png"
+        "merged": "C:\\GIT\\new_tazpit\\tazpit\\TazpitApp\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxxhdpi_tps_icon.png.flat",
+        "source": "C:\\GIT\\new_tazpit\\tazpit\\TazpitApp\\app\\src\\main\\res\\mipmap-xxxhdpi\\tps_icon.png"
     },
     {
         "merged": "C:\\GIT\\new_tazpit\\tazpit\\TazpitApp\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxhdpi_sync_button_round.png.flat",
@@ -104,12 +112,16 @@
         "source": "C:\\GIT\\new_tazpit\\tazpit\\TazpitApp\\app\\src\\main\\res\\mipmap-xhdpi\\tps_logo_full.png"
     },
     {
-        "merged": "C:\\GIT\\new_tazpit\\tazpit\\TazpitApp\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxxhdpi_tps_logo_full.png.flat",
-        "source": "C:\\GIT\\new_tazpit\\tazpit\\TazpitApp\\app\\src\\main\\res\\mipmap-xxxhdpi\\tps_logo_full.png"
+        "merged": "C:\\GIT\\new_tazpit\\tazpit\\TazpitApp\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxhdpi_tps_icon.png.flat",
+        "source": "C:\\GIT\\new_tazpit\\tazpit\\TazpitApp\\app\\src\\main\\res\\mipmap-xxhdpi\\tps_icon.png"
     },
     {
         "merged": "C:\\GIT\\new_tazpit\\tazpit\\TazpitApp\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxxhdpi_tps_logo_full_foreground.png.flat",
         "source": "C:\\GIT\\new_tazpit\\tazpit\\TazpitApp\\app\\src\\main\\res\\mipmap-xxxhdpi\\tps_logo_full_foreground.png"
+    },
+    {
+        "merged": "C:\\GIT\\new_tazpit\\tazpit\\TazpitApp\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxxhdpi_tps_logo_full.png.flat",
+        "source": "C:\\GIT\\new_tazpit\\tazpit\\TazpitApp\\app\\src\\main\\res\\mipmap-xxxhdpi\\tps_logo_full.png"
     },
     {
         "merged": "C:\\GIT\\new_tazpit\\tazpit\\TazpitApp\\app\\build\\intermediates\\res\\merged\\debug\\layout_activity_set.xml.flat",
@@ -140,12 +152,12 @@
         "source": "C:\\GIT\\new_tazpit\\tazpit\\TazpitApp\\app\\src\\main\\res\\layout\\activity_login.xml"
     },
     {
-        "merged": "C:\\GIT\\new_tazpit\\tazpit\\TazpitApp\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxxhdpi_sync_button_round.png.flat",
-        "source": "C:\\GIT\\new_tazpit\\tazpit\\TazpitApp\\app\\src\\main\\res\\mipmap-xxxhdpi\\sync_button_round.png"
-    },
-    {
         "merged": "C:\\GIT\\new_tazpit\\tazpit\\TazpitApp\\app\\build\\intermediates\\res\\merged\\debug\\layout_activity_fill_report.xml.flat",
         "source": "C:\\GIT\\new_tazpit\\tazpit\\TazpitApp\\app\\src\\main\\res\\layout\\activity_fill_report.xml"
+    },
+    {
+        "merged": "C:\\GIT\\new_tazpit\\tazpit\\TazpitApp\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxxhdpi_sync_button_round.png.flat",
+        "source": "C:\\GIT\\new_tazpit\\tazpit\\TazpitApp\\app\\src\\main\\res\\mipmap-xxxhdpi\\sync_button_round.png"
     },
     {
         "merged": "C:\\GIT\\new_tazpit\\tazpit\\TazpitApp\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi_tps_logo_round.png.flat",
@@ -212,6 +224,10 @@
         "source": "C:\\GIT\\new_tazpit\\tazpit\\TazpitApp\\app\\src\\main\\res\\mipmap-xxxhdpi\\tps_logo_round.png"
     },
     {
+        "merged": "C:\\GIT\\new_tazpit\\tazpit\\TazpitApp\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xhdpi_tps_icon.png.flat",
+        "source": "C:\\GIT\\new_tazpit\\tazpit\\TazpitApp\\app\\src\\main\\res\\mipmap-xhdpi\\tps_icon.png"
+    },
+    {
         "merged": "C:\\GIT\\new_tazpit\\tazpit\\TazpitApp\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxxhdpi_ic_launcher.png.flat",
         "source": "C:\\GIT\\new_tazpit\\tazpit\\TazpitApp\\app\\src\\main\\res\\mipmap-xxxhdpi\\ic_launcher.png"
     },
@@ -238,6 +254,10 @@
     {
         "merged": "C:\\GIT\\new_tazpit\\tazpit\\TazpitApp\\app\\build\\intermediates\\res\\merged\\debug\\drawable_ic_menu_camera.xml.flat",
         "source": "C:\\GIT\\new_tazpit\\tazpit\\TazpitApp\\app\\src\\main\\res\\drawable\\ic_menu_camera.xml"
+    },
+    {
+        "merged": "C:\\GIT\\new_tazpit\\tazpit\\TazpitApp\\app\\build\\intermediates\\res\\merged\\debug\\layout_my_row.xml.flat",
+        "source": "C:\\GIT\\new_tazpit\\tazpit\\TazpitApp\\app\\src\\main\\res\\layout\\my_row.xml"
     },
     {
         "merged": "C:\\GIT\\new_tazpit\\tazpit\\TazpitApp\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi_tps_logo_full_round.png.flat",
@@ -346,6 +366,10 @@
     {
         "merged": "C:\\GIT\\new_tazpit\\tazpit\\TazpitApp\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxhdpi_sync_button.png.flat",
         "source": "C:\\GIT\\new_tazpit\\tazpit\\TazpitApp\\app\\src\\main\\res\\mipmap-xxhdpi\\sync_button.png"
+    },
+    {
+        "merged": "C:\\GIT\\new_tazpit\\tazpit\\TazpitApp\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-hdpi_tps_icon.png.flat",
+        "source": "C:\\GIT\\new_tazpit\\tazpit\\TazpitApp\\app\\src\\main\\res\\mipmap-hdpi\\tps_icon.png"
     },
     {
         "merged": "C:\\GIT\\new_tazpit\\tazpit\\TazpitApp\\app\\build\\intermediates\\res\\merged\\debug\\drawable_sync_button_background.xml.flat",
