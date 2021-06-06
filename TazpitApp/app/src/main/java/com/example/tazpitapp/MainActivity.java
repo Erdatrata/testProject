@@ -3,8 +3,10 @@ import android.app.ActivityManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.MenuItem;
@@ -13,20 +15,39 @@ import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.GeoPoint;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
+
+import org.json.JSONArray;
 
 
 public class MainActivity<imageView> extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     public static final String SHARED_PREFS = "sharedPrefs";
-
+    RecyclerView showNews;
+    String [] title;
+    String [] data;
+    String [] type;
+    String [] date;
+    String [] writer;
+    String [] image;
 
     private DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle aToggle;
@@ -125,6 +146,56 @@ public class MainActivity<imageView> extends AppCompatActivity implements Naviga
                 drawer.openDrawer(Gravity.RIGHT);
             }
         });
+
+         showNews=(RecyclerView) findViewById(R.id.newsRecycle);
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        db.collection("cities")
+                .whereEqualTo("capital", true)
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            title=new String[1];
+                            data=new String[1];
+                            type=new String[1];
+                            date=new String[1];
+                            writer=new String[1];
+                            image=new String[1];
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                              title[0]=document.getId();
+                              data[0]=document.get("data").toString();
+                              type[0]=document.get("type").toString();
+                                date[0]=document.get("date").toString();
+                                writer[0]=document.get("writer").toString();
+                                image[0]=  document.get("image").toString();
+                                System.out.println("check the bla "+title[0]);
+
+
+                                Log.d("SUCCESARTICLE", document.getId() + " => " + document.getData());
+                            }
+
+                        } else {
+                            Log.d("FAILARTICLE", "Error getting documents: ", task.getException());
+                        }
+                    }
+
+                });
+
+//FIREBASE PARTTTTTTTTTTTTTTT
+        String [] title1={"כותרת של כתבה אחת", "כותרת של כתבה שתיים", "כותרת של כתבה שלוש"};
+        String [] data1={"מלא מלל בלה בלה בלה בלהבכשכדשכ דשכ דשכ דשכ דשכ דשכדשכדשכדש כדש דשכ דשכ דשכד שכדשכ דשכשד להבה לבהלבה לבהל ב1", "מלא מלל בלה בלה בלה בלהב להבה לבהלבה לבהל ב12", "מלא מלל בלה בלה בלה בלהב להבה לבהלבה לבהל ב13"};
+        String [] date1={"15151", "6545645", "64565454"};
+        String [] image1={"blablabla"," sadsad ", "sadsadasd"};
+        String [] type1={"הפגנה", "הפגנה2", "הפגנה3"};
+        String [] writer1={"כתב א"," כתב ב", "כתב ג"};
+        MyAdapter myAdapter=new MyAdapter(this, title1,data1,date1,image1,type1,writer1);
+        showNews.setAdapter(myAdapter);
+        showNews.setLayoutManager(new LinearLayoutManager(this));
+
+
+
+
     }
 
 

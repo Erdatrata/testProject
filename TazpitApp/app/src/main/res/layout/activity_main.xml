@@ -55,6 +55,16 @@
             app:srcCompat="@mipmap/sync_button_foreground"
             tools:ignore="HardcodedText" />
 
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/newsRecycle"
+            android:layout_width="404dp"
+            android:layout_height="533dp"
+            android:layout_marginBottom="40dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.493"
+            app:layout_constraintStart_toStartOf="parent" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
         <com.google.android.material.navigation.NavigationView
