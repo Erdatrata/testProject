@@ -31,10 +31,8 @@ public class SignUp extends AppCompatActivity {
         topAnim= AnimationUtils.loadAnimation(this,R.anim.top_anim);
         bottomAnim=AnimationUtils.loadAnimation(this,R.anim.buttom_anim);
         image=findViewById(R.id.imageView);
-        logo=findViewById(R.id.logo_name);
-
         image.setAnimation(topAnim);
-        logo.setAnimation(bottomAnim);
+
 
         new Handler().postDelayed(new Runnable() {
             @Override
