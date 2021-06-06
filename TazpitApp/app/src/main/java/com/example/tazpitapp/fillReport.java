@@ -103,7 +103,7 @@ public class fillReport extends AppCompatActivity {
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (TextUtils.isEmpty(title.getText()) || TextUtils.isEmpty(description.getText()) || mediaHolder == null)
+                if (TextUtils.isEmpty(title.getText()) || TextUtils.isEmpty(description.getText()) || mediaHolder.size() == 0)
                     Toast.makeText(getApplicationContext(), "כל השדות הינם חובה", Toast.LENGTH_LONG).show();
                 else {
                     String getTitle = title.getText().toString();
