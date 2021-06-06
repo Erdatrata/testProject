@@ -101,7 +101,9 @@ public class constants {
         }
         return toReturn;
     }
-
+//belong to fill report
+public static final String TITLE_KEY = "title";
+    public static final String DESCRIPTION_KEY = "description";
 
 
 

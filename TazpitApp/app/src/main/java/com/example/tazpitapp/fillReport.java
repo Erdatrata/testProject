@@ -64,8 +64,8 @@ public class fillReport extends AppCompatActivity {
    // Bitmap bm;
    // ArrayList<Bitmap> bm = new ArrayList<Bitmap>();
    // String returnUrl="";
-    public static final String TITLE_KEY = "title";
-    public static final String DESCRIPTION_KEY = "description";
+
+
     private FirebaseStorage storage = FirebaseStorage.getInstance();
     private DocumentReference mDocRef;
     private FirebaseAuth mAuth;
@@ -220,8 +220,8 @@ public class fillReport extends AppCompatActivity {
                             dataToSave.put("credit", true);
                         else
                             dataToSave.put("credit", false);
-                        dataToSave.put(DESCRIPTION_KEY, getDescription);
-                        dataToSave.put(TITLE_KEY, getTitle);
+                        dataToSave.put(constants.DESCRIPTION_KEY, getDescription);
+                        dataToSave.put(constants.TITLE_KEY, getTitle);
                         dataToSave.put("media url "+numPhoto, returnUrl);
                         mDocRef.set(dataToSave).addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
