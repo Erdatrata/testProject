@@ -9,27 +9,27 @@
 
     <!-- Nested Scroll view -->
     <ScrollView
+        android:id="@+id/registrationContractLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/registrationContractLayout">
+        android:layout_height="704dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginTop="50dp"
             android:layout_marginStart="20dp"
+            android:layout_marginTop="50dp"
             android:layout_marginEnd="20dp"
+            android:orientation="vertical"
 
             >
 
             <TextView
                 android:id="@+id/textViewRegPage2"
                 android:layout_width="match_parent"
-                android:layout_height="400dp"
-                android:text="TextView"
-
+                android:layout_height="515dp"
                 android:scrollbars="vertical"
+
+                android:text="TextView"
                 tools:text="@tools:sample/lorem/random" />
 
             <CheckBox
