@@ -215,7 +215,7 @@ MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.0] C:\Users\א
 	android:roundIcon
 		ADDED from C:\GIT\new_tazpit\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:15:9-54
 	android:icon
-		ADDED from C:\GIT\new_tazpit\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:13:9-43
+		ADDED from C:\GIT\new_tazpit\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:13:9-44
 	android:allowBackup
 		ADDED from C:\GIT\new_tazpit\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:12:9-35
 	android:theme
