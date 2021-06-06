@@ -38,6 +38,9 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import org.json.JSONArray;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class MainActivity<imageView> extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     public static final String SHARED_PREFS = "sharedPrefs";
@@ -149,8 +152,7 @@ public class MainActivity<imageView> extends AppCompatActivity implements Naviga
 
          showNews=(RecyclerView) findViewById(R.id.newsRecycle);
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-        db.collection("cities")
-                .whereEqualTo("capital", true)
+        db.collection("news")
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
@@ -162,19 +164,37 @@ public class MainActivity<imageView> extends AppCompatActivity implements Naviga
                             date=new String[1];
                             writer=new String[1];
                             image=new String[1];
+                            System.out.println("im here $$$");
+                            List<String> titleList = new ArrayList<>();
+                            List<String> dataList = new ArrayList<>();
+                            List<String> typeList = new ArrayList<>();
+                            List<String> dateList = new ArrayList<>();
+                            List<String> writerList = new ArrayList<>();
+                            List<String> imageList = new ArrayList<>();
                             for (QueryDocumentSnapshot document : task.getResult()) {
-                              title[0]=document.getId();
-                              data[0]=document.get("data").toString();
-                              type[0]=document.get("type").toString();
-                                date[0]=document.get("date").toString();
-                                writer[0]=document.get("writer").toString();
-                                image[0]=  document.get("image").toString();
-                                System.out.println("check the bla "+title[0]);
+                              titleList.add(document.getId());
+                              dataList.add(document.get("data").toString());
+                              typeList.add(document.get("type").toString());
+                                dateList.add(document.get("date").toString());
+                                writerList.add(document.get("writer").toString());
+                                imageList.add( document.get("image").toString());
+                                //System.out.println("the image url is: "+image[0]);
+
 
 
                                 Log.d("SUCCESARTICLE", document.getId() + " => " + document.getData());
                             }
+                            title=titleList.toArray(new String[0]);
+                            data=dataList.toArray(new String[0]);
+                            type=typeList.toArray(new String[0]);
+                            date=dateList.toArray(new String[0]);
+                            writer=writerList.toArray(new String[0]);
+                            image=imageList.toArray(new String[0]);
 
+                            //System.out.println("check the bla another " + title[0]);
+                            MyAdapter myAdapter=new MyAdapter(MainActivity.this, title,data,date,image,type,writer);
+                            showNews.setAdapter(myAdapter);
+                            showNews.setLayoutManager(new LinearLayoutManager(MainActivity.this));
                         } else {
                             Log.d("FAILARTICLE", "Error getting documents: ", task.getException());
                         }
@@ -183,15 +203,8 @@ public class MainActivity<imageView> extends AppCompatActivity implements Naviga
                 });
 
 //FIREBASE PARTTTTTTTTTTTTTTT
-        String [] title1={"כותרת של כתבה אחת", "כותרת של כתבה שתיים", "כותרת של כתבה שלוש"};
-        String [] data1={"מלא מלל בלה בלה בלה בלהבכשכדשכ דשכ דשכ דשכ דשכ דשכדשכדשכדש כדש דשכ דשכ דשכד שכדשכ דשכשד להבה לבהלבה לבהל ב1", "מלא מלל בלה בלה בלה בלהב להבה לבהלבה לבהל ב12", "מלא מלל בלה בלה בלה בלהב להבה לבהלבה לבהל ב13"};
-        String [] date1={"15151", "6545645", "64565454"};
-        String [] image1={"blablabla"," sadsad ", "sadsadasd"};
-        String [] type1={"הפגנה", "הפגנה2", "הפגנה3"};
-        String [] writer1={"כתב א"," כתב ב", "כתב ג"};
-        MyAdapter myAdapter=new MyAdapter(this, title1,data1,date1,image1,type1,writer1);
-        showNews.setAdapter(myAdapter);
-        showNews.setLayoutManager(new LinearLayoutManager(this));
+
+
 
 
 
