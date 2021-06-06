@@ -1,7 +1,11 @@
 package com.example.tazpitapp;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.media.Image;
+import android.os.AsyncTask;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +18,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.firebase.Timestamp;
 
 import org.jetbrains.annotations.NotNull;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
 
 public class MyAdapter extends RecyclerView.Adapter <MyAdapter.MyViewHolder>{
 
@@ -52,6 +60,9 @@ public class MyAdapter extends RecyclerView.Adapter <MyAdapter.MyViewHolder>{
         holder.timeItem.setText(date[position]);
         holder.writerItem.setText(writer[position]);
        // holder.myImageItem.setImageResource(imageUrl[position]);
+
+
+
     }
 
     @Override
@@ -72,4 +83,6 @@ public class MyAdapter extends RecyclerView.Adapter <MyAdapter.MyViewHolder>{
             myImageItem=itemView.findViewById(R.id.imageArticale);
         }
     }
+
+
 }
