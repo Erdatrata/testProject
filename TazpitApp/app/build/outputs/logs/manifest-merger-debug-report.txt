@@ -1,9 +1,9 @@
 -- Merging decision tree log ---
 manifest
-ADDED from C:\GIT\new_tazpit\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:2:1-63:12
-INJECTED from C:\GIT\new_tazpit\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:2:1-63:12
-INJECTED from C:\GIT\new_tazpit\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:2:1-63:12
-INJECTED from C:\GIT\new_tazpit\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:2:1-63:12
+ADDED from C:\GIT\new_tazpit\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:2:1-62:12
+INJECTED from C:\GIT\new_tazpit\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:2:1-62:12
+INJECTED from C:\GIT\new_tazpit\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:2:1-62:12
+INJECTED from C:\GIT\new_tazpit\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:2:1-62:12
 MERGED from [androidx.navigation:navigation-ui:2.2.2] C:\Users\ארדט רטה\.gradle\caches\transforms-2\files-2.1\5c3a689940376a11e53cc9f9afb14b2f\navigation-ui-2.2.2\AndroidManifest.xml:17:1-24:12
 MERGED from [com.google.android.material:material:1.1.0] C:\Users\ארדט רטה\.gradle\caches\transforms-2\files-2.1\78a7ea54ebfb041843dbcb0425e1f7db\material-1.1.0\AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.appcompat:appcompat:1.1.0] C:\Users\ארדט רטה\.gradle\caches\transforms-2\files-2.1\a0479976f5ab36cec8c5a89b5b1d2189\appcompat-1.1.0\AndroidManifest.xml:17:1-24:12
@@ -87,20 +87,20 @@ MERGED from [androidx.interpolator:interpolator:1.0.0] C:\Users\ארדט רטה\
 MERGED from [androidx.documentfile:documentfile:1.0.0] C:\Users\ארדט רטה\.gradle\caches\transforms-2\files-2.1\ae41cdfced462e68ae93b82f66a21f69\documentfile-1.0.0\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.print:print:1.0.0] C:\Users\ארדט רטה\.gradle\caches\transforms-2\files-2.1\9a9746a3648e14cd1edbe8994a3697cc\print-1.0.0\AndroidManifest.xml:17:1-22:12
 MERGED from [com.google.firebase:protolite-well-known-types:18.0.0] C:\Users\ארדט רטה\.gradle\caches\transforms-2\files-2.1\6225ddfcbfe0b14b829664b4d6c5d455\jetified-protolite-well-known-types-18.0.0\AndroidManifest.xml:2:1-11:12
-INJECTED from C:\GIT\new_tazpit\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:2:1-63:12
-INJECTED from C:\GIT\new_tazpit\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:2:1-63:12
-INJECTED from C:\GIT\new_tazpit\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:2:1-63:12
+INJECTED from C:\GIT\new_tazpit\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:2:1-62:12
+INJECTED from C:\GIT\new_tazpit\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:2:1-62:12
+INJECTED from C:\GIT\new_tazpit\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:2:1-62:12
 	package
 		ADDED from C:\GIT\new_tazpit\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:3:5-36
 		INJECTED from C:\GIT\new_tazpit\tazpit\TazpitApp\app\src\main\AndroidManifest.xml
 		INJECTED from C:\GIT\new_tazpit\tazpit\TazpitApp\app\src\main\AndroidManifest.xml
 	android:versionName
 		INJECTED from C:\GIT\new_tazpit\tazpit\TazpitApp\app\src\main\AndroidManifest.xml
-		ADDED from C:\GIT\new_tazpit\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:2:1-63:12
+		ADDED from C:\GIT\new_tazpit\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:2:1-62:12
 		INJECTED from C:\GIT\new_tazpit\tazpit\TazpitApp\app\src\main\AndroidManifest.xml
 	android:versionCode
 		INJECTED from C:\GIT\new_tazpit\tazpit\TazpitApp\app\src\main\AndroidManifest.xml
-		ADDED from C:\GIT\new_tazpit\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:2:1-63:12
+		ADDED from C:\GIT\new_tazpit\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:2:1-62:12
 		INJECTED from C:\GIT\new_tazpit\tazpit\TazpitApp\app\src\main\AndroidManifest.xml
 	xmlns:android
 		ADDED from C:\GIT\new_tazpit\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:2:11-69
@@ -143,7 +143,7 @@ ADDED from C:\GIT\new_tazpit\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:8
 	android:name
 		ADDED from C:\GIT\new_tazpit\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:8:22-74
 application
-ADDED from C:\GIT\new_tazpit\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:11:5-61:19
+ADDED from C:\GIT\new_tazpit\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:11:5-60:19
 MERGED from [com.google.android.material:material:1.1.0] C:\Users\ארדט רטה\.gradle\caches\transforms-2\files-2.1\78a7ea54ebfb041843dbcb0425e1f7db\material-1.1.0\AndroidManifest.xml:22:5-20
 MERGED from [com.google.android.material:material:1.1.0] C:\Users\ארדט רטה\.gradle\caches\transforms-2\files-2.1\78a7ea54ebfb041843dbcb0425e1f7db\material-1.1.0\AndroidManifest.xml:22:5-20
 MERGED from [androidx.constraintlayout:constraintlayout:1.1.3] C:\Users\ארדט רטה\.gradle\caches\transforms-2\files-2.1\e2aa038ebd8577a4e4f97171024e3c34\constraintlayout-1.1.3\AndroidManifest.xml:9:5-20
@@ -212,98 +212,96 @@ MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.0] C:\Users\א
 		ADDED from [androidx.core:core:1.2.0] C:\Users\ארדט רטה\.gradle\caches\transforms-2\files-2.1\8a4bac199804e3874c9dbedd9bd159de\core-1.2.0\AndroidManifest.xml:24:18-86
 	android:label
 		ADDED from C:\GIT\new_tazpit\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:14:9-41
-	android:roundIcon
-		ADDED from C:\GIT\new_tazpit\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:15:9-54
 	android:icon
-		ADDED from C:\GIT\new_tazpit\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:13:9-43
+		ADDED from C:\GIT\new_tazpit\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:13:9-40
 	android:allowBackup
 		ADDED from C:\GIT\new_tazpit\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:12:9-35
 	android:theme
-		ADDED from C:\GIT\new_tazpit\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:16:9-47
+		ADDED from C:\GIT\new_tazpit\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:15:9-47
 activity#com.example.tazpitapp.SignUp
-ADDED from C:\GIT\new_tazpit\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:17:9-23:20
+ADDED from C:\GIT\new_tazpit\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:16:9-22:20
 	android:name
-		ADDED from C:\GIT\new_tazpit\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:17:19-41
+		ADDED from C:\GIT\new_tazpit\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:16:19-41
 intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
-ADDED from C:\GIT\new_tazpit\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:18:13-22:29
+ADDED from C:\GIT\new_tazpit\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:17:13-21:29
 action#android.intent.action.MAIN
-ADDED from C:\GIT\new_tazpit\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:19:17-69
+ADDED from C:\GIT\new_tazpit\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:18:17-69
 	android:name
-		ADDED from C:\GIT\new_tazpit\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:19:25-66
+		ADDED from C:\GIT\new_tazpit\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:18:25-66
 category#android.intent.category.LAUNCHER
-ADDED from C:\GIT\new_tazpit\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:21:17-77
+ADDED from C:\GIT\new_tazpit\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:20:17-77
 	android:name
-		ADDED from C:\GIT\new_tazpit\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:21:27-74
+		ADDED from C:\GIT\new_tazpit\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:20:27-74
 activity#com.example.tazpitapp.SceneriosListActivity
-ADDED from C:\GIT\new_tazpit\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:25:9-29:66
+ADDED from C:\GIT\new_tazpit\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:24:9-28:66
 	android:parentActivityName
-		ADDED from C:\GIT\new_tazpit\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:28:13-49
+		ADDED from C:\GIT\new_tazpit\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:27:13-49
 	android:label
-		ADDED from C:\GIT\new_tazpit\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:27:13-57
+		ADDED from C:\GIT\new_tazpit\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:26:13-57
 	android:theme
-		ADDED from C:\GIT\new_tazpit\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:29:13-63
+		ADDED from C:\GIT\new_tazpit\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:28:13-63
 	android:name
-		ADDED from C:\GIT\new_tazpit\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:26:13-50
+		ADDED from C:\GIT\new_tazpit\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:25:13-50
 activity#com.example.tazpitapp.SceneriosDetailActivity
-ADDED from C:\GIT\new_tazpit\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:30:9-34:75
+ADDED from C:\GIT\new_tazpit\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:29:9-33:75
 	android:parentActivityName
-		ADDED from C:\GIT\new_tazpit\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:33:13-64
+		ADDED from C:\GIT\new_tazpit\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:32:13-64
 	android:label
-		ADDED from C:\GIT\new_tazpit\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:32:13-59
+		ADDED from C:\GIT\new_tazpit\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:31:13-59
 	android:theme
-		ADDED from C:\GIT\new_tazpit\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:34:13-63
+		ADDED from C:\GIT\new_tazpit\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:33:13-63
 	android:name
-		ADDED from C:\GIT\new_tazpit\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:31:13-52
+		ADDED from C:\GIT\new_tazpit\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:30:13-52
 activity#com.example.tazpitapp.SetActivity
-ADDED from C:\GIT\new_tazpit\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:35:9-39:66
+ADDED from C:\GIT\new_tazpit\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:34:9-38:66
 	android:parentActivityName
-		ADDED from C:\GIT\new_tazpit\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:38:13-54
+		ADDED from C:\GIT\new_tazpit\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:37:13-54
 	android:label
-		ADDED from C:\GIT\new_tazpit\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:37:13-46
+		ADDED from C:\GIT\new_tazpit\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:36:13-46
 	android:theme
-		ADDED from C:\GIT\new_tazpit\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:39:13-63
+		ADDED from C:\GIT\new_tazpit\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:38:13-63
 	android:name
-		ADDED from C:\GIT\new_tazpit\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:36:13-40
+		ADDED from C:\GIT\new_tazpit\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:35:13-40
 activity#com.example.tazpitapp.fillReport
-ADDED from C:\GIT\new_tazpit\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:40:9-57
+ADDED from C:\GIT\new_tazpit\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:39:9-57
 	android:name
-		ADDED from C:\GIT\new_tazpit\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:40:19-45
+		ADDED from C:\GIT\new_tazpit\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:39:19-45
 activity#com.example.tazpitapp.LoginActivity
-ADDED from C:\GIT\new_tazpit\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:41:9-43:20
+ADDED from C:\GIT\new_tazpit\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:40:9-42:20
 	android:name
-		ADDED from C:\GIT\new_tazpit\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:41:19-48
+		ADDED from C:\GIT\new_tazpit\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:40:19-48
 activity#com.example.tazpitapp.register$register1
-ADDED from C:\GIT\new_tazpit\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:44:9-65
+ADDED from C:\GIT\new_tazpit\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:43:9-65
 	android:name
-		ADDED from C:\GIT\new_tazpit\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:44:19-53
+		ADDED from C:\GIT\new_tazpit\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:43:19-53
 activity#com.example.tazpitapp.register$register2
-ADDED from C:\GIT\new_tazpit\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:45:9-48:20
+ADDED from C:\GIT\new_tazpit\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:44:9-47:20
 	android:theme
-		ADDED from C:\GIT\new_tazpit\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:47:13-63
+		ADDED from C:\GIT\new_tazpit\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:46:13-63
 	android:name
-		ADDED from C:\GIT\new_tazpit\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:46:13-47
+		ADDED from C:\GIT\new_tazpit\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:45:13-47
 activity#com.example.tazpitapp.register$register3
-ADDED from C:\GIT\new_tazpit\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:49:9-51:75
+ADDED from C:\GIT\new_tazpit\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:48:9-50:75
 	android:theme
-		ADDED from C:\GIT\new_tazpit\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:51:13-63
+		ADDED from C:\GIT\new_tazpit\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:50:13-63
 	android:name
-		ADDED from C:\GIT\new_tazpit\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:50:13-47
+		ADDED from C:\GIT\new_tazpit\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:49:13-47
 activity#com.example.tazpitapp.AboutActivity
-ADDED from C:\GIT\new_tazpit\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:53:9-50
+ADDED from C:\GIT\new_tazpit\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:52:9-50
 	android:name
-		ADDED from C:\GIT\new_tazpit\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:53:19-48
+		ADDED from C:\GIT\new_tazpit\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:52:19-48
 activity#com.example.tazpitapp.MainActivity
-ADDED from C:\GIT\new_tazpit\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:54:9-55:20
+ADDED from C:\GIT\new_tazpit\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:53:9-54:20
 	android:name
-		ADDED from C:\GIT\new_tazpit\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:54:19-47
+		ADDED from C:\GIT\new_tazpit\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:53:19-47
 service#com.example.tazpitapp.backgroundService
-ADDED from C:\GIT\new_tazpit\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:56:9-59:40
+ADDED from C:\GIT\new_tazpit\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:55:9-58:40
 	android:enabled
-		ADDED from C:\GIT\new_tazpit\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:58:13-35
+		ADDED from C:\GIT\new_tazpit\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:57:13-35
 	android:exported
-		ADDED from C:\GIT\new_tazpit\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:59:13-37
+		ADDED from C:\GIT\new_tazpit\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:58:13-37
 	android:name
-		ADDED from C:\GIT\new_tazpit\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:57:13-46
+		ADDED from C:\GIT\new_tazpit\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:56:13-46
 uses-sdk
 INJECTED from C:\GIT\new_tazpit\tazpit\TazpitApp\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from C:\GIT\new_tazpit\tazpit\TazpitApp\app\src\main\AndroidManifest.xml

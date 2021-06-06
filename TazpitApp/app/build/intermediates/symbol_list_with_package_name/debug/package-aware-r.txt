@@ -807,6 +807,7 @@ color cardview_light_background
 color cardview_shadow_end_color
 color cardview_shadow_start_color
 color checkbox_themeable_attribute_color
+color colorForText
 color common_google_signin_btn_text_dark
 color common_google_signin_btn_text_dark_default
 color common_google_signin_btn_text_dark_disabled
@@ -866,6 +867,7 @@ color foreground_material_dark
 color foreground_material_light
 color highlighted_text_material_dark
 color highlighted_text_material_light
+color ic_launcher_background
 color material_blue_grey_800
 color material_blue_grey_900
 color material_blue_grey_950
@@ -1609,6 +1611,7 @@ id custom
 id customPanel
 id cut
 id dark
+id dataArticle
 id date_picker_actions
 id day_friday
 id day_monday
@@ -1676,7 +1679,9 @@ id icon_only
 id id_text
 id ifRoom
 id image
+id imageArticale
 id imageView
+id imageView2
 id info
 id invisible
 id italic
@@ -1695,7 +1700,6 @@ id loginButton
 id login_button
 id logo_Image
 id logo_name
-id logo_text
 id logout_button
 id main_page_logo
 id makeAllDay
@@ -1743,6 +1747,7 @@ id nav_view
 id nav_view_image
 id navigation_header_container
 id never
+id newsRecycle
 id next
 id nextPage2Reg
 id noScroll
@@ -1845,6 +1850,12 @@ id test_checkbox_app_button_tint
 id text
 id text2
 id textEnd
+id textInputEditText
+id textInputEditText2
+id textInputEditText3
+id textInputEditText4
+id textInputEditText5
+id textInputEditText6
 id textSpacerNoButtons
 id textSpacerNoTitle
 id textStart
@@ -1866,9 +1877,11 @@ id textinput_error
 id textinput_helper_text
 id til_city
 id time
+id timeArticle
 id timePickerSettingsFrom
 id timePickerSettingsTo
 id title
+id titleArticle
 id titleDividerNoCustom
 id titleScenario
 id title_template
@@ -1894,6 +1907,7 @@ id wide
 id withText
 id wrap
 id wrap_content
+id writerArticle
 integer abc_config_activityDefaultDur
 integer abc_config_activityShortDur
 integer app_bar_elevation_anim_duration
@@ -2020,6 +2034,7 @@ layout mtrl_picker_header_title_text
 layout mtrl_picker_header_toggle
 layout mtrl_picker_text_input_date
 layout mtrl_picker_text_input_date_range
+layout my_row
 layout nav_header_main
 layout notification_action
 layout notification_action_tombstone
@@ -2053,6 +2068,8 @@ mipmap ic_launcher_round
 mipmap sync_button
 mipmap sync_button_foreground
 mipmap sync_button_round
+mipmap tpc_app_logo
+mipmap tps_icon
 mipmap tps_logo
 mipmap tps_logo_background
 mipmap tps_logo_foreground
