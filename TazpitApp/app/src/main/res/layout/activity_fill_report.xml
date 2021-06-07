@@ -92,7 +92,7 @@
         android:id="@+id/fill_report_upload_button"
         android:layout_width="70dp"
         android:layout_height="43dp"
-        android:background="@color/white"
+        android:background="@null"
         android:scaleX="1.22"
         android:scaleY="1.38"
         app:layout_constraintBottom_toBottomOf="parent"

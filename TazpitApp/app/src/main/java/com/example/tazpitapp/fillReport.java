@@ -64,8 +64,8 @@ public class fillReport extends AppCompatActivity {
    // Bitmap bm;
    // ArrayList<Bitmap> bm = new ArrayList<Bitmap>();
    // String returnUrl="";
-    public static final String TITLE_KEY = "title";
-    public static final String DESCRIPTION_KEY = "description";
+
+
     private FirebaseStorage storage = FirebaseStorage.getInstance();
     private DocumentReference mDocRef;
     private FirebaseAuth mAuth;
@@ -103,7 +103,7 @@ public class fillReport extends AppCompatActivity {
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (TextUtils.isEmpty(title.getText()) || TextUtils.isEmpty(description.getText()) || mediaHolder == null)
+                if (TextUtils.isEmpty(title.getText()) || TextUtils.isEmpty(description.getText()) || mediaHolder.size() == 0)
                     Toast.makeText(getApplicationContext(), "כל השדות הינם חובה", Toast.LENGTH_LONG).show();
                 else {
                     String getTitle = title.getText().toString();
@@ -220,8 +220,8 @@ public class fillReport extends AppCompatActivity {
                             dataToSave.put("credit", true);
                         else
                             dataToSave.put("credit", false);
-                        dataToSave.put(DESCRIPTION_KEY, getDescription);
-                        dataToSave.put(TITLE_KEY, getTitle);
+                        dataToSave.put(constants.DESCRIPTION_KEY, getDescription);
+                        dataToSave.put(constants.TITLE_KEY, getTitle);
                         dataToSave.put("media url "+numPhoto, returnUrl);
                         mDocRef.set(dataToSave).addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
