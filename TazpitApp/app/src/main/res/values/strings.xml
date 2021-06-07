@@ -70,7 +70,23 @@
 <!--    SCENARIO DETAILS    -->
 
 
+<!--    ABOUT       -->
+    <!--    ELI       -->
+    <string name="about_eli_name">אלי רווח</string>
+    <string name="about_eli_job">מנהל צוות</string>
 
+    <!--    GABI      -->
+    <string name="about_gab_name">גבריאל גוטקין</string>
+    <string name="about_gab_job">אחראי בדיקות</string>
+    <!--    EVY       -->
+    <string name="about_evy_name">אביתר גולן</string>
+    <string name="about_evy_job">אחראי תכנות</string>
+    <!--    RATTA     -->
+    <string name="about_rat_name">ארדט ראטה</string>
+    <string name="about_rat_job">קשרי לקוחות</string>
+    <!--    NATI      -->
+    <string name="about_nat_name">נתנאל חאזי</string>
+    <string name="about_nat_job">אחראי עיצוב</string>
 
 
 </resources>

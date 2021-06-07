@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".registerrr">
+    tools:context=".register">
 
 
     <Button
@@ -180,26 +180,28 @@
         app:layout_constraintHorizontal_bias="0.575"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.871"><![CDATA[
-                app: starIconDrawable="@drawable/ic_baseline_ac_unit_24"
-                >
+        app:layout_constraintVertical_bias="0.871"
+        app:boxBackgroundColor="@color/transparent"
+        app:hintTextColor="@color/colorForText"
+        tools:ignore="ExtraText"
 
 
+        >
 
-
-
-
-
-        ]]>
-
+        <![CDATA[app: starIconDrawable="@drawable/ic_baseline_ac_unit_24">]]>
         <AutoCompleteTextView
             android:id="@+id/act_city"
             android:layout_width="334dp"
             android:layout_height="62dp"
             android:hint="עיר"
+            android:background="@color/transparent"
             android:padding="20dp"
+            android:textColor="@color/colorForText"
             android:textSize="20sp"
-            android:textStyle="normal"></AutoCompleteTextView>
+            android:textStyle="normal"
+
+
+            />
     </com.google.android.material.textfield.TextInputLayout>
 
 

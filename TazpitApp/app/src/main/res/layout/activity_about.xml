@@ -6,4 +6,342 @@
     android:layout_height="match_parent"
     tools:context=".AboutActivity">
 
+    <ScrollView
+        android:id="@+id/about_scrollView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginEnd="1dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+
+            <TextView
+                android:id="@+id/about_team"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="על הצוות"
+                android:textSize="25sp" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/person_eli"
+                android:layout_width="match_parent"
+                android:layout_height="150dp">
+
+                <ImageView
+                    android:id="@+id/about_eli_image"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/about_eli_name"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:src="@drawable/eli" />
+
+                <TextView
+                    android:id="@+id/about_eli_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginBottom="23dp"
+                    android:text="@string/about_eli_name"
+                    app:layout_constraintBottom_toTopOf="@+id/about_eli_linkedIn"
+                    app:layout_constraintEnd_toStartOf="@+id/about_eli_image"
+                    app:layout_constraintStart_toEndOf="@+id/about_eli_linkedIn"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/about_eli_job"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:layout_marginEnd="20dp"
+                    android:text="@string/about_eli_job"
+                    app:layout_constraintEnd_toStartOf="@+id/about_eli_image"
+                    app:layout_constraintTop_toBottomOf="@+id/about_eli_name" />
+
+                <ImageView
+                    android:id="@+id/about_eli_linkedIn"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_marginBottom="30dp"
+                    android:scaleX="1.4"
+                    android:scaleY="1.4"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/about_eli_name"
+                    app:layout_constraintStart_toEndOf="@+id/about_eli_github"
+                    app:layout_constraintTop_toBottomOf="@+id/about_eli_name"
+                    app:srcCompat="@drawable/linkedin" />
+
+                <ImageView
+                    android:id="@+id/about_eli_github"
+                    android:layout_width="0dp"
+                    android:layout_height="73dp"
+                    android:layout_marginBottom="19dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/about_eli_linkedIn"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:srcCompat="@drawable/github" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/person_gab"
+                android:layout_width="match_parent"
+                android:layout_height="150dp">
+
+                <ImageView
+                    android:id="@+id/about_gab_image"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/about_gab_name"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:src="@drawable/gabi" />
+
+                <TextView
+                    android:id="@+id/about_gab_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginBottom="23dp"
+                    android:text="@string/about_gab_name"
+                    app:layout_constraintBottom_toTopOf="@+id/about_gab_linkedIn"
+                    app:layout_constraintEnd_toStartOf="@+id/about_gab_image"
+                    app:layout_constraintStart_toEndOf="@+id/about_gab_linkedIn"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/about_gab_job"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:layout_marginEnd="20dp"
+                    android:text="@string/about_gab_job"
+                    app:layout_constraintEnd_toStartOf="@+id/about_gab_image"
+                    app:layout_constraintTop_toBottomOf="@+id/about_gab_name" />
+
+                <ImageView
+                    android:id="@+id/about_gab_linkedIn"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_marginBottom="30dp"
+                    android:scaleX="1.4"
+                    android:scaleY="1.4"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/about_gab_name"
+                    app:layout_constraintStart_toEndOf="@+id/about_gab_github"
+                    app:layout_constraintTop_toBottomOf="@+id/about_gab_name"
+                    app:srcCompat="@drawable/linkedin" />
+
+                <ImageView
+                    android:id="@+id/about_gab_github"
+                    android:layout_width="0dp"
+                    android:layout_height="73dp"
+                    android:layout_marginBottom="19dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/about_gab_linkedIn"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:srcCompat="@drawable/github" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/person_evy"
+                android:layout_width="match_parent"
+                android:layout_height="150dp">
+
+                <ImageView
+                    android:id="@+id/about_evy_image"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/about_evy_name"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:src="@drawable/evya" />
+
+                <TextView
+                    android:id="@+id/about_evy_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginBottom="23dp"
+                    android:text="@string/about_evy_name"
+                    app:layout_constraintBottom_toTopOf="@+id/about_evy_linkedIn"
+                    app:layout_constraintEnd_toStartOf="@+id/about_evy_image"
+                    app:layout_constraintStart_toEndOf="@+id/about_evy_linkedIn"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/about_evy_job"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:layout_marginEnd="20dp"
+                    android:text="@string/about_evy_job"
+                    app:layout_constraintEnd_toStartOf="@+id/about_evy_image"
+                    app:layout_constraintTop_toBottomOf="@+id/about_evy_name" />
+
+                <ImageView
+                    android:id="@+id/about_evy_linkedIn"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_marginBottom="30dp"
+                    android:scaleX="1.4"
+                    android:scaleY="1.4"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/about_evy_name"
+                    app:layout_constraintStart_toEndOf="@+id/about_evy_github"
+                    app:layout_constraintTop_toBottomOf="@+id/about_evy_name"
+                    app:srcCompat="@drawable/linkedin" />
+
+                <ImageView
+                    android:id="@+id/about_evy_github"
+                    android:layout_width="0dp"
+                    android:layout_height="73dp"
+                    android:layout_marginBottom="19dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/about_evy_linkedIn"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:srcCompat="@drawable/github" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/person_rat"
+                android:layout_width="match_parent"
+                android:layout_height="150dp">
+
+                <ImageView
+                    android:id="@+id/about_rat_image"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/about_rat_name"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:src="@drawable/rattata" />
+
+                <TextView
+                    android:id="@+id/about_rat_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginBottom="23dp"
+                    android:text="@string/about_rat_name"
+                    app:layout_constraintBottom_toTopOf="@+id/about_rat_linkedIn"
+                    app:layout_constraintEnd_toStartOf="@+id/about_rat_image"
+                    app:layout_constraintStart_toEndOf="@+id/about_rat_linkedIn"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/about_rat_job"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:layout_marginEnd="20dp"
+                    android:text="@string/about_rat_job"
+                    app:layout_constraintEnd_toStartOf="@+id/about_rat_image"
+                    app:layout_constraintTop_toBottomOf="@+id/about_rat_name" />
+
+                <ImageView
+                    android:id="@+id/about_rat_linkedIn"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_marginBottom="30dp"
+                    android:scaleX="1.4"
+                    android:scaleY="1.4"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/about_rat_name"
+                    app:layout_constraintStart_toEndOf="@+id/about_rat_github"
+                    app:layout_constraintTop_toBottomOf="@+id/about_rat_name"
+                    app:srcCompat="@drawable/linkedin" />
+
+                <ImageView
+                    android:id="@+id/about_rat_github"
+                    android:layout_width="0dp"
+                    android:layout_height="73dp"
+                    android:layout_marginBottom="19dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/about_rat_linkedIn"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:srcCompat="@drawable/github" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/person_nat"
+                android:layout_width="match_parent"
+                android:layout_height="150dp">
+
+                <ImageView
+                    android:id="@+id/about_nat_image"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/about_nat_name"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:src="@drawable/nati" />
+
+                <TextView
+                    android:id="@+id/about_nat_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginBottom="23dp"
+                    android:text="@string/about_nat_name"
+                    app:layout_constraintBottom_toTopOf="@+id/about_nat_linkedIn"
+                    app:layout_constraintEnd_toStartOf="@+id/about_nat_image"
+                    app:layout_constraintStart_toEndOf="@+id/about_nat_linkedIn"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/about_nat_job"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:layout_marginEnd="20dp"
+                    android:text="@string/about_nat_job"
+                    app:layout_constraintEnd_toStartOf="@+id/about_nat_image"
+                    app:layout_constraintTop_toBottomOf="@+id/about_nat_name" />
+
+                <ImageView
+                    android:id="@+id/about_nat_linkedIn"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_marginBottom="30dp"
+                    android:scaleX="1.4"
+                    android:scaleY="1.4"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/about_nat_name"
+                    app:layout_constraintStart_toEndOf="@+id/about_nat_github"
+                    app:layout_constraintTop_toBottomOf="@+id/about_nat_name"
+                    app:srcCompat="@drawable/linkedin" />
+
+                <ImageView
+                    android:id="@+id/about_nat_github"
+                    android:layout_width="0dp"
+                    android:layout_height="73dp"
+                    android:layout_marginBottom="19dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/about_nat_linkedIn"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:srcCompat="@drawable/github" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        </LinearLayout>
+    </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>
