@@ -8,7 +8,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="05ef79ce-543a-4b34-9fdd-4deaa8e4d8f2" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/../TazpitApp/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../TazpitApp/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TazpitApp/local.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../TazpitApp/local.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/manu.css" beforeDir="false" afterPath="$PROJECT_DIR$/manu.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/manu.js" beforeDir="false" afterPath="$PROJECT_DIR$/manu.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -64,7 +68,7 @@
       <recent name="D:\git\tazpitNew\webAdmin\login testing" />
     </key>
   </component>
-  <component name="RunManager" selected="JavaScript Debug.map.html">
+  <component name="RunManager" selected="JavaScript Debug.manu.html">
     <configuration name="index.html (1)" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63343/webAdmin/testing/index.html" useBuiltInWebServerPort="true">
       <method v="2" />
     </configuration>
@@ -99,9 +103,9 @@
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="JavaScript Debug.manu.html" />
         <item itemvalue="JavaScript Debug.map.html" />
         <item itemvalue="JavaScript Debug.map2.html" />
-        <item itemvalue="JavaScript Debug.manu.html" />
         <item itemvalue="JavaScript Debug.main.html" />
         <item itemvalue="JavaScript Debug.index.html (1)" />
       </list>
@@ -127,6 +131,7 @@
       <workItem from="1622739840041" duration="621000" />
       <workItem from="1622754179081" duration="5908000" />
       <workItem from="1622968538629" duration="3510000" />
+      <workItem from="1623187793566" duration="3338000" />
     </task>
     <servers />
   </component>
@@ -155,73 +160,72 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/manu.js</url>
-          <line>111</line>
+          <line>122</line>
           <option name="timeStamp" value="39" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/manu.js</url>
-          <line>94</line>
+          <line>105</line>
           <option name="timeStamp" value="50" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/manu.js</url>
-          <line>16</line>
+          <line>27</line>
           <option name="timeStamp" value="52" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/manu.js</url>
-          <line>22</line>
-          <option name="timeStamp" value="53" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/manu.js</url>
-          <line>97</line>
+          <line>108</line>
           <option name="timeStamp" value="55" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/manu.js</url>
-          <line>108</line>
+          <line>119</line>
           <option name="timeStamp" value="56" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/manu.js</url>
-          <line>190</line>
+          <line>201</line>
           <option name="timeStamp" value="57" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/manu.js</url>
-          <line>206</line>
+          <line>217</line>
           <option name="timeStamp" value="58" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/manu.js</url>
-          <line>316</line>
-          <option name="timeStamp" value="60" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/manu.js</url>
-          <line>423</line>
+          <line>442</line>
           <option name="timeStamp" value="61" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/manu.js</url>
-          <line>477</line>
-          <option name="timeStamp" value="62" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/manu.js</url>
-          <line>490</line>
-          <option name="timeStamp" value="63" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/manu.js</url>
-          <line>508</line>
-          <option name="timeStamp" value="64" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/manu.js</url>
-          <line>569</line>
+          <line>588</line>
           <option name="timeStamp" value="65" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/manu.js</url>
+          <line>308</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="83" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/manu.js</url>
+          <line>277</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="89" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/manu.js</url>
+          <line>35</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="90" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/manu.js</url>
+          <line>36</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="91" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
