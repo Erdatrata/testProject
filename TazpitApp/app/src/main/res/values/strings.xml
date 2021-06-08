@@ -94,6 +94,9 @@
     <string name="report_inprocess"> העלאת הדוח בתהליכים</string>
     <string name="succeed_upload_report"> העלאת האירוע בוצעה בהצלחה</string>
 
+    <!--    DETAIL SCENARIO  -->
+    <string name="more_details"> פרטים נוספים: </string>
+    <string name="detail_scenario_city"> עיר </string>
 
 
 </resources>

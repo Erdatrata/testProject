@@ -10,11 +10,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
+
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
+
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
@@ -53,15 +52,15 @@ public class  SceneriosDetailActivity extends AppCompatActivity {
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-        DocumentReference docRef =db.collection("Scenarios").document(pressed_scenario);
+        DocumentReference docRef =db.collection(constants.DOC_REF_SCENARIOS).document(pressed_scenario);
         is_user_is_accepted(docRef, user); //checks if user accepted before the Event
         showTheScenarioDetail(docRef); //decides which buttons to show according whether the user is signed as accepted or not
         //when user will click it he will be added in list of users that accepted the event
         button_sign_event.setOnClickListener(v -> {
             //pushing the user id under accepted in the scenario
             Map<String, Object> data = new HashMap<>();
-            data.put("isSigned", true);
-            docRef.collection("accepted").document(user.getUid()).set(data);
+            data.put(constants.ISSIGEND, true);
+            docRef.collection(constants.DOC_REF_ACCEPTED).document(user.getUid()).set(data);
             finish();
             startActivity(getIntent());
         });
@@ -78,7 +77,7 @@ public class  SceneriosDetailActivity extends AppCompatActivity {
             //user decides to fill report and we take him to fill report activity
             String data = getIntent().getStringExtra(SceneriosDetailFragment.ARG_ITEM_CONTENT);
             Intent intent = new Intent(SceneriosDetailActivity.this,fillReport.class);
-            intent.putExtra("pressed scenario", data);
+            intent.putExtra(constants.PRESSED_SCENARIO, data);
             startActivity(intent);
 
         });
@@ -88,14 +87,14 @@ public class  SceneriosDetailActivity extends AppCompatActivity {
     private void is_user_is_accepted(DocumentReference docRef, FirebaseUser user)
     {
 
-         docRef.collection("accepted").get()
+         docRef.collection(constants.DOC_REF_ACCEPTED).get()
                  .addOnCompleteListener(task -> {
                      if (task.isSuccessful()) {
                          int indicator=0;
                          for (QueryDocumentSnapshot document : task.getResult()) {
                              if(user.getUid().toString().equals(document.getId().toString())) {
                                  indicator=1;
-                                 Log.d("natigabi2", "hatamaaaaaa");
+                                 Log.d("ISSECCSEFUL", "match");
 
                              }
                          }
@@ -112,7 +111,7 @@ public class  SceneriosDetailActivity extends AppCompatActivity {
 
                      }
                      else {
-                         Log.d("natigabi", "Error getting documents: ", task.getException());
+                         Log.d("ISFAILURE", "Error getting documents: ", task.getException());
                      }
                  });
 
@@ -124,14 +123,14 @@ private void showTheScenarioDetail(DocumentReference docRef){
 
             DocumentSnapshot document = task.getResult();
             //the user will click on "לפרטים נוספים" to see information about the event and will see alert
-        type_of_event.setText("פרטים נוספים: "+document.get("סוג האירוע").toString());
+        type_of_event.setText(getResources().getString(R.string.more_details)+document.get(constants.SCENARIO_TYPE_EVENT).toString());
             type_of_event.setMovementMethod(new ScrollingMovementMethod());
             //presenting the city of the event
-            city_of_event.setText("עיר האירוע: "+document.get("עיר").toString());
+            city_of_event.setText("עיר האירוע: "+document.get(getResources().getString(R.string.detail_scenario_city)).toString());
             //by clicking on "לחץ למיקום" the user can see the location in apps like waze\google maps\moovit...
             gps_event.setOnClickListener(v -> {
-                GeoPoint geoPoint = document.getGeoPoint("מיקום");
-                String uri = "geo:" + geoPoint.getLatitude() + ","
+                GeoPoint geoPoint = document.getGeoPoint(constants.SCENARIO_LOCATION);
+                String uri = constants.GEO + geoPoint.getLatitude() + ","
                         +geoPoint.getLongitude() + "?q=" + geoPoint.getLatitude()
                         + "," + geoPoint.getLongitude();
                 startActivity(new Intent(Intent.ACTION_VIEW,
@@ -139,17 +138,17 @@ private void showTheScenarioDetail(DocumentReference docRef){
             });
 
             if (document.exists()) {
-                Log.d("nati_test", "DocumentSnapshot data: " + document.getData());
+                Log.d("document_exists", "DocumentSnapshot data: " + document.getData());
             } else {
-                Log.d("nati_test", "No such document");
+                Log.d("document not exist", "No such document");
             }
         } else {
-            Log.d("nati_test", "get failed with ", task.getException());
+            Log.d("notseccesful", "get failed with ", task.getException());
         }
     });
 }
 private void removeUserFromAccept(  DocumentReference docRef, FirebaseUser user){
-    docRef.collection("accepted").document(user.getUid())
+    docRef.collection(constants.DOC_REF_ACCEPTED).document(user.getUid())
             .delete()
             .addOnSuccessListener(aVoid -> {
                 Log.d("test55", "DocumentSnapshot successfully deleted!");
