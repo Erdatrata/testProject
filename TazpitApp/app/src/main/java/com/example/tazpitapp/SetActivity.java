@@ -102,7 +102,7 @@ public class SetActivity extends AppCompatActivity {
         cityButton = findViewById(R.id.radio_by_city);
         seekBar=findViewById(R.id.gpsRangeBar);
         rangeCont=findViewById(R.id.rangeContainer);
-        range=Double.parseDouble(""+sharedpreferences.getFloat("range",(float)0.5));
+        range=Double.parseDouble(""+sharedpreferences.getFloat(constants.rangeChoice,(float)0.5));
 
         //day settings
         daysButton1 = findViewById(R.id.day_sunday);
@@ -121,9 +121,9 @@ public class SetActivity extends AppCompatActivity {
                 daysButton5, daysButton6, daysButton7};
 
         //load location selection
-        String gpsPref = sharedpreferences.getString("location","DEFAULT");
-        if(!gpsPref.equals("DEFAULT")){
-            if(gpsPref.equals("GPS")){
+        String gpsPref = sharedpreferences.getString(constants.SHARED_PREFS_LOCATION,constants.SHARED_PREFS_DEAFULT);
+        if(!gpsPref.equals(constants.SHARED_PREFS_DEAFULT)){
+            if(gpsPref.equals(constants.SHARED_PREFS_GPS)){
                 gpsButton.setChecked(true);
             } else {
                 cityButton.setChecked(true);
@@ -142,11 +142,11 @@ public class SetActivity extends AppCompatActivity {
                 editor.commit();
                 String toChange="";
                 if(cityButton.isChecked())
-                    toChange="city";
+                    toChange=constants.SET_CITY;
                 else
-                    toChange="GPS";
-                editor.putString("location",toChange).apply();
-                docData.put("location",toChange);
+                    toChange=constants.SET_GPS;
+                editor.putString(constants.SHARED_PREFS_LOCATION,toChange).apply();
+                docData.put(constants.SHARED_PREFS_LOCATION,toChange);
             }
         });
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
@@ -154,12 +154,12 @@ public class SetActivity extends AppCompatActivity {
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 range = 0.5 + (9.5)*(((double) progress)/100);
                 String toPut = String.format("%-1.2f",range);
-                rangeCont.setText(toPut+"km");}
+                rangeCont.setText(toPut+constants.onProgressChanged_KM);}
 
             @Override public void onStartTrackingTouch(SeekBar seekBar) {}
             @Override public void onStopTrackingTouch(SeekBar seekBar) {
-                editor.putFloat("range",(float) range).apply();
-                docData.put("range",""+range);
+                editor.putFloat(constants.rangeChoice,(float) range).apply();
+                docData.put(constants.rangeChoice,""+range);
             }
         });
 
@@ -190,14 +190,14 @@ public class SetActivity extends AppCompatActivity {
                     return;
                 }
                 String idd = ""+rightNow.getId();
-                String tidd = "temp_"+idd;
+                String tidd = constants.AllDayPicker_TEMP+idd;
                 dayTime dt = new dayTime(0, 0, 23, 59);//default for first time
                 String toPut = gson.toJson(dt);
                 editor.putString(tidd,toPut).commit();
                 hourStart=0;hoursEnd=23;
                 minuteStart=0;minutesEnd=59;
-                timePickerFrom.setText("00:00");
-                timePickerTo.setText("23:59");
+                timePickerFrom.setText(R.string.min_time_start);
+                timePickerTo.setText(R.string.max_time_end);
                 saveTemp();
             }
         });
@@ -227,7 +227,7 @@ public class SetActivity extends AppCompatActivity {
         FirebaseAuth userIdentifier=FirebaseAuth.getInstance();
         String UID = userIdentifier.getCurrentUser().getUid();
 
-        DocumentReference DRF = FirebaseFirestore.getInstance().document("Users/"+UID);
+        DocumentReference DRF = FirebaseFirestore.getInstance().document(constants.DOC_REF_USERS+"/"+UID);
         final boolean[] success = {true};
         final Exception[] failToRet = new Exception[1];
         for(Map.Entry<String,String> entry: docData.entrySet()){
@@ -268,11 +268,11 @@ public class SetActivity extends AppCompatActivity {
                         Toast.LENGTH_SHORT).show();
                 if(!RequestPermissionCall())
 //                    startLocationService();
-                    editor.putString("location_temp","GPS");
+                    editor.putString(constants.EDITOR_LOACTIOM_TEMP,constants.SET_GPS);
             } else {
                 Toast.makeText(this, R.string.set_toast_gpsDenied,
                         Toast.LENGTH_LONG).show();
-                editor.putString("location_temp","city");
+                editor.putString(constants.EDITOR_LOACTIOM_TEMP,constants.SET_CITY);
                 cityButton.setChecked(true);
                 gpsButton.setChecked(false);
                 stopLocationService();
@@ -355,10 +355,10 @@ public class SetActivity extends AppCompatActivity {
         String tidd = constants.id2name(v.getId());
 
         dayTime dtDEF = new dayTime(0, 0, 0, 1);//default for first time
-        String dtGetString = sharedpreferences.getString(tidd, "DEFAULT");
+        String dtGetString = sharedpreferences.getString(tidd, constants.SHARED_PREFS_DEAFULT);
         dayTime dtGET;
 
-        if (!dtGetString.equals("DEFAULT"))
+        if (!dtGetString.equals(constants.SHARED_PREFS_DEAFULT))
             dtGET = gson.fromJson(dtGetString, dayTime.class);
         else
             dtGET = dtDEF;
@@ -389,7 +389,6 @@ public class SetActivity extends AppCompatActivity {
             minute = minutesEnd;
         }
         String timeString = ((Button) v).getText().toString();
-        System.out.println("before time picker");
         TimePickerDialog.OnTimeSetListener onTimeSetListener = new TimePickerDialog.OnTimeSetListener() {
 
 
@@ -485,7 +484,7 @@ public class SetActivity extends AppCompatActivity {
             Intent intent =new Intent(getApplicationContext(),backgroundService.class);
             intent.setAction(constants.ACTION_START_LOCATION_SERVICE);
             startService(intent);
-            Toast.makeText(this,"Location service started",Toast.LENGTH_SHORT).show();
+            Toast.makeText(this,R.string.set_toast_location_service_started,Toast.LENGTH_SHORT).show();
         }
     }
     private void stopLocationService(){
@@ -494,7 +493,7 @@ public class SetActivity extends AppCompatActivity {
             Intent intent =new Intent(getApplicationContext(),backgroundService.class);
             intent.setAction(constants.ACTION_STOP_LOCATION_SERVICE);
             startService(intent);
-            Toast.makeText(this,"Location service stopped",Toast.LENGTH_SHORT).show();
+            Toast.makeText(this,R.string.set_toast_location_service_stoped,Toast.LENGTH_SHORT).show();
         }
     }
     public void setStateOfGps(boolean state){
