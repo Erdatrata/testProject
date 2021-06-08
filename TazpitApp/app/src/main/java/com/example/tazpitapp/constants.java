@@ -8,18 +8,41 @@ public class constants {
     public static final String ACTION_STOP_LOCATION_SERVICE="stopLocationService";
 
 
+//SET ACTIVITY
+public static final String SET_CITY= "city";
+    public static final String SET_GPS= "GPS";
+    public static final String onProgressChanged_KM=  "km";
+    public static final String  AllDayPicker_TEMP=  "temp_";
+    public static final String  EDITOR_LOACTIOM_TEMP=   "location_temp";
+
+
+
+
+
+
+
+
 
 
 
 
     //Shared preferences name of each file saved for sharing data
     public static final String SHARED_PREFS = "sharedPrefs";//main file for shared preferences
+    public static final String SHARED_PREFS_LOCATION = "location";
+    public static final String SHARED_PREFS_DEAFULT =   "DEFAULT";
+    public static final String SHARED_PREFS_GPS =     "GPS";
+
+
+
+
     //GPS VARS
     public static final String longOfGps = "longofgps";
     public static final String latOfGps ="latofgps";
     public static final String gpsState="gpsstate";
     public static final String rangeChoice="range";
     public static final String LastTimeAndDate="lasttimeanddate";
+
+
 
     
     //TIME VARS
@@ -113,12 +136,16 @@ public static final String ISSIGEND = "isSigned";
     public static final String GEO = "geo:";
 
 
+
+
     //FIREBASE ROUTING AND ETC
     public static final String DOC_REF_SCENARIOS = "Scenarios"; //where our list of events are(firestore)
     public static final String DOC_REF_FILLED = "filled"; // the users who filled report for the event
     public static final String DOC_REF_ACCEPTED = "accepted"; //the users who signed up for event
     public static final String SCENARIO_TYPE_EVENT = "סוג האירוע" ; //type of the event
     public static final String SCENARIO_LOCATION = "מיקום" ; //type of the event
+    public static final String DOC_REF_USERS = "Users" ; //USERS setting in firebase
+
 
 
 

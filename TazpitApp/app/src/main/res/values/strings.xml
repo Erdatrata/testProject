@@ -36,11 +36,15 @@
     <string name="set_element_dayColSet">יום</string>
     <string name="set_element_allDayButton">כל היום</string>
     <string name="set_element_rangeExp">טווח אירועים מקסימלי:</string>
+    <string name="min_time_start">00:00</string>
+    <string name="max_time_end">23:59</string>
 
 
     <!--    Messages and debugs    -->
     <string name="set_toast_gpsGranted">ההרשאה התקבלה</string>
     <string name="set_toast_gpsDenied">ההרשאה נדחתה, אנא אשרו אותה במידה ותרצו להשתמש בתכונה</string>
+    <string name="set_toast_location_service_started"> שירותי מיקום החלו  </string>
+    <string name="set_toast_location_service_stoped"> שירותי מיקום הופסקו  </string>
     <string name="set_alert_title">צורך בקבלת אישור מיקום</string>
     <string name="set_alert_message">
         על מנת שנוכל ליידע אותך על אירועים באיזור, אנא אשרו לנו לקבל את מיקומכם.
