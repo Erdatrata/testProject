@@ -73,12 +73,7 @@ public class SceneriosListActivity extends AppCompatActivity {
     public void onResume() {
         super.onResume();
         setContentView(R.layout.activity_scenerios_list);
-        for(int i=0;i<list.size();i++){
-            list.remove(i);
-        }
-        for(int i=0;i<ITEMS.size();i++){
-           ITEMS.remove(i);
-        }
+
         View recyclerView = findViewById(R.id.scenerios_list);
         creat_list(recyclerView);
     }
@@ -105,19 +100,7 @@ public class SceneriosListActivity extends AppCompatActivity {
             @Override
             public void onCallback(List<String> list) {
                 Log.d("Restart", "list="+list);
-//                for(int i=0;i<ITEMS.size();i++){
-//                    ITEMS.remove(i);
-//                }
-//                for(int i=0;i<list.size();i++){
-//
-//                    for(int j=i+1;j<list.size();j++){
-//                        if(list.get(i).equals(list.get(j))){
-//                            Log.d("Restart", "list_smae="+ list.get(i));
-//                            list.remove(j);
-//                        }
-//                    }
-//
-//                }
+
                 Log.d("Restart", "list2="+ list);
                 list.isEmpty();
                 Log.d("Restart", "dummy2="+DummyContent.ITEMS);
@@ -138,15 +121,6 @@ public class SceneriosListActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         toolbar.setTitle(getTitle());
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Log.d("onComplet", "onClick_1");
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
         if (findViewById(R.id.scenerios_detail_container) != null) {
             // The detail container view will be present only in the
             // large-screen layouts (res/values-w900dp).
@@ -277,8 +251,9 @@ public class SceneriosListActivity extends AppCompatActivity {
                                             if(user.getUid().toString().equals(document.getId().toString())) {
 
                                                 holder.mIdView.setText(mValues.get(position).id);
-                                                String str=mValues.get(position).content+"-Range-"+Range((GeoPoint)documentSnapshot.getData().get("מיקום"));
 
+                                                String str=mValues.get(position).content+"-Range-"+Range((GeoPoint)documentSnapshot.getData().get("מיקום"));
+                                                Log.d("onComplet","st="+str);
                                                 Spannable spannable = new SpannableString(str);
                                                 spannable.setSpan(new ForegroundColorSpan(Color.GRAY), 0 ,str.length(),     Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 
@@ -287,16 +262,19 @@ public class SceneriosListActivity extends AppCompatActivity {
                                                 sb.setSpan(bss, 0, str.length(), Spannable.SPAN_INCLUSIVE_INCLUSIVE); // make first 4 characters Bold
                                                 holder.mContentView.setText(spannable);//add range with the name of the sceneriro
                                                 holder.itemView.setTag(mValues.get(position));
+                                                Log.d("onComplet","po="+mValues.get(position));
                                                 holder.itemView.setOnClickListener(mOnClickListener);
                                                 break;
                                             }
                                             holder.mIdView.setText(mValues.get(position).id);
                                             String str=mValues.get(position).content+"-Range-"+Range((GeoPoint)documentSnapshot.getData().get("מיקום"));
+                                            Log.d("onComplet","st="+str);
                                             final SpannableStringBuilder sb = new SpannableStringBuilder(str);
                                             final StyleSpan iss = new StyleSpan(Typeface.BOLD); //Span to make text italic
                                             sb.setSpan(iss, 0, str.length(), Spannable.SPAN_INCLUSIVE_INCLUSIVE); // make last 2 characters Italic
                                             holder.mContentView.setText(sb);//add range with the name of the sceneriro
                                             holder.itemView.setTag(mValues.get(position));
+                                            Log.d("onComplet","po="+mValues.get(position));
                                             holder.itemView.setOnClickListener(mOnClickListener);
                                         }
                                     }
@@ -316,11 +294,13 @@ public class SceneriosListActivity extends AppCompatActivity {
                         for (QueryDocumentSnapshot document : task.getResult()) {
                             holder.mIdView.setText(mValues.get(position).id);
                             String str=mValues.get(position).content+"-Range-"+Range((GeoPoint)document.getData().get("מיקום"));
+                            Log.d("onComplet","st="+str);
                             final SpannableStringBuilder sb = new SpannableStringBuilder(str);
                             final StyleSpan iss = new StyleSpan(Typeface.BOLD); //Span to make text italic
                             sb.setSpan(iss, 0, str.length(), Spannable.SPAN_INCLUSIVE_INCLUSIVE); // make last 2 characters Italic
                             holder.mContentView.setText(sb);//add range with the name of the sceneriro
                             holder.itemView.setTag(mValues.get(position));
+                            Log.d("onComplet","po="+mValues.get(position));
                             holder.itemView.setOnClickListener(mOnClickListener);
                         }
                     } else {
