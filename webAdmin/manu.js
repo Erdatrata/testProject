@@ -13,6 +13,17 @@ let FILLED="filled";
 let ACCEPTED='accepted';
 let NEWUSER="newuser";
 
+let acceptInScenerios="will move the scenerio down,and will open the option to delete it (only after the scenerio is done and u want to remove it)";
+let signatureInScenerio="will open the list of members who registerd to this scenerio";
+let filledInScenerio="will show the list of members who filled the scenerio plus what they did";
+let deleteInScenerio="it will be removed from the server";
+let moveReport="will move the report and give the ability to remove it";
+let userInfo="will show the information about the user";
+let deleteUser="will move the user at the bottom with and the option to delete it will open";
+let removeUserFromServer="will delete the user from the server";
+let approveUser="will add the user as a new volonteer";
+let reportInfo="will show the information about the report";
+let showInformationAboutEvent="will show the information about the scenerio";
 
 function refreshListOfS() {
     $("#ListOfS").remove();
@@ -121,12 +132,12 @@ async function createTab(from,userDoc,filled) {
     let x = await getUser(userDoc.id);
     var task = $("<div class='task' id=" + id + "></div>").text(x);
 
-    var checkUser = $("<i class='fas fa-user'></i>").click(function () {
+    var checkUser = $("<i class='fas fa-user tooltip'><span class='tooltiptext'>"+userInfo+"</span></i>").click(function () {
             openUserInfo(userDoc.id);
     });
 
-    var check = $("<i class='fas fa-check'></i>").click(function(){
-        var del = $("<i class='fas fa-trash-alt'></i>").click(function(){
+    var check = $("<i class='fas fa-times tooltip'><span class='tooltiptext'>"+moveReport+"</span></i>").click(function(){
+        var del = $("<i class='fas fa-trash-alt tooltip'><span class='tooltiptext'>"+deleteInScenerio+"</span></i>").click(function(){
             var p = $(this).parent();
             p.fadeOut(function(){
                 makeOld(from+"/"+userDoc.id,userDoc.id);
@@ -146,12 +157,12 @@ async function createTab(from,userDoc,filled) {
         $(this).remove();
     });
     if (filled == FILLED) {
-        var open = $("<i class='fas fa-folder-open'></i>").click(function () {
+        var open = $("<i class='fas fa-folder-open tooltip'><span class='tooltiptext'>"+reportInfo+"</span></i>").click(function () {
             openModalFromFirestore(from, userDoc);
         });
-        task.append(check, open,checkUser);
+        task.append( open,checkUser,check);
     } else {
-        task.append(check,checkUser);
+        task.append(checkUser,check);
     }
     $(".notcomp").append(task);
     //to clear the input
@@ -222,7 +233,7 @@ function makeOld(path, name) {
             let remove =ref.delete().then(() => {
                 console.log(name+",Document successfully deleted!\nin path:"+path);
             });
-            db.collection("OldInfo").doc(name).set(save).then(() => {
+            db.collection("OldInfo").doc(name+"_"+Date.now()).set(save).then(() => {
                 console.log("Document successfully written!");
             });
             return remove;
@@ -263,6 +274,11 @@ function createEnterFilter() {
 
 }
 
+function getInformation(id) {
+    openModalFromFirestore(SCENARIO,id);
+
+}
+
 function ListEventFun(){
     let ref=db.collection(SCENARIO);
 
@@ -274,15 +290,18 @@ function ListEventFun(){
             var task= $("<div class='task' id="+id+"></div>").text(userDoc.id);
 
 
-            var filled = $("<i class='fas fa-signature'></i>").click(function(){
+            var filled = $("<i class='fas fa-signature tooltip'><span class='tooltiptext'>"+filledInScenerio+"</span></i>").click(function(){
                 openAccepted(userDoc.id);
             });
-            var accepted = $("<i class='fas fa-file-signature'></i>").click(function(){
+            var accepted = $("<i class='fas fa-file-signature tooltip'><span class='tooltiptext'>"+signatureInScenerio+"</span></i>").click(function(){
                 openFilled(userDoc.id);
             });
+            var information = $("<i class='fas fa-question tooltip'><span class='tooltiptext'>"+showInformationAboutEvent+"</span></i>").click(function(){
+                getInformation(userDoc);
+            });
 
-            var check = $("<i class='fas fa-check'></i>").click(function(){
-                var del = $("<i class='fas fa-trash-alt'></i>").click(function(){
+            var check = $("<i class='fas fa-times tooltip'><span class='tooltiptext'>"+acceptInScenerios+"</span></i>").click(function(){
+                var del = $("<i class='fas fa-trash-alt tooltip'><span class='tooltiptext'>"+deleteInScenerio+"</span></i>").click(function(){
                     var p = $(this).parent();
                     p.fadeOut(function(){
                         makeOld(SCENARIO+"/"+userDoc.id,userDoc.id);
@@ -302,7 +321,7 @@ function ListEventFun(){
                 $(this).remove();
             });
 
-            task.append(filled,accepted,check);
+            task.append(filled,accepted,information,check);
             $(".notcomp").append(task);
             //to clear the input
 
@@ -521,12 +540,12 @@ async function createTabFromUserData(userid,newuser) {
     let x = await getUser(userid);
     var task = $("<div class='task' id=" + id + "></div>").text(x);
 
-    var checkUser = $("<i class='fas fa-user'></i>").click(function () {
+    var checkUser = $("<i class='fas fa-user tooltip'><span class='tooltiptext'>"+userInfo+"</span></i>").click(function () {
         openUserInfo(id);
     });
 
-    var delFirst = $("<i class='fas fa-user-slash'></i>").click(function () {
-        var delSec = $("<i class='fas fa-trash-alt'></i>").click(function () {
+    var delFirst = $("<i class='fas fa-user-slash tooltip'><span class='tooltiptext'>"+deleteUser+"</span></i>").click(function () {
+        var delSec = $("<i class='fas fa-trash-alt tooltip'><span class='tooltiptext'>"+removeUserFromServer+"</span></i>").click(function () {
             var p = $(this).parent();
             p.fadeOut(function () {
                 removeUser(userid);
@@ -546,7 +565,7 @@ async function createTabFromUserData(userid,newuser) {
         $(this).remove();
     });
         if(newuser==NEWUSER){
-            var agree = $("<i class='fas fa-check'></i>").click(function () {
+            var agree = $("<i class='fas fa-check tooltip'><span class='tooltiptext'>"+approveUser+"</span></i>").click(function () {
                 var p = $(this).parent();
                 p.fadeOut(function () {
                     RegisterUser(id);
@@ -637,17 +656,6 @@ async function ListUsersFun() {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-    // require("firebase/firestore");
-    // firebase.initializeApp({
-    //     apiKey: 'AIzaSyCei2jEltlh-SK_H7Y95-f6IZXOrRKwuCQ',
-    //     authDomain: 'tazpit-testingandprototype.firebaseapp.com',
-    //     projectId: 'tazpit-testingandprototype'
-    // });
-    //
-    // var db = firebase.firestore();
-    // this.db=db;
-// Required for side-effects
-
 
     $("#ListOfV").click(function(){
         $("#data").html(ListEvent());
