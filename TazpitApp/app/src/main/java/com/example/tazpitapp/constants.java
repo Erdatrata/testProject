@@ -104,6 +104,18 @@ public class constants {
 //belong to fill report
 public static final String TITLE_KEY = "title";
     public static final String DESCRIPTION_KEY = "description";
+    public static final String PRESSED_SCENARIO = "pressed scenario";
+    public static final String CREDIT = "credit";
+    public static final String MEDIAURL = "media url";
+
+
+    //FIREBASE ROUTING AND ETC
+    public static final String DOC_REF_SCENARIOS = "Scenarios"; //where our list of events are(firestore)
+    public static final String DOC_REF_FILLED = "filled"; // the users who filled report for the event
+    public static final String DOC_REF_ACCEPTED = "accepted"; //the users who signed up for event
+
+
+
 
 
 

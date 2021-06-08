@@ -60,21 +60,21 @@ public class fillReport extends AppCompatActivity {
         credit = findViewById(R.id.fill_report_add_credit);
         progressTextView= findViewById(R.id.progressTextView);
         mAuth = FirebaseAuth.getInstance();
-        String scenarioPressed = getIntent().getStringExtra("pressed scenario");
-        mDocRef = FirebaseFirestore.getInstance().document("Scenarios/" + scenarioPressed+"/"+"filled/"+mAuth.getCurrentUser().getUid());
-        DocumentReference deleteUserFromAccept=FirebaseFirestore.getInstance().document("Scenarios/"+scenarioPressed);
+        String scenarioPressed = getIntent().getStringExtra(constants.PRESSED_SCENARIO);
+        mDocRef = FirebaseFirestore.getInstance().document(constants.DOC_REF_SCENARIOS+"/" + scenarioPressed+"/"+constants.DOC_REF_FILLED+"/"+mAuth.getCurrentUser().getUid());
+        DocumentReference deleteUserFromAccept=FirebaseFirestore.getInstance().document(constants.DOC_REF_SCENARIOS+"/"+scenarioPressed);
         //when pressing the upload media button we go here
 //and choose media
         pickMedia.setOnClickListener(v -> {
             Intent intent = new Intent(Intent.ACTION_PICK);
             intent.setType("*/*");
             intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
-            startActivityForResult(Intent.createChooser(intent, "בחר מדיה"), SELECT_PHOTO); //SELECT_PICTURES is simply a global int used to check the calling intent in onActivityResult
+            startActivityForResult(Intent.createChooser(intent, getResources().getString(R.string.choose_media)), SELECT_PHOTO); //SELECT_PICTURES is simply a global int used to check the calling intent in onActivityResult
         });
 
         submit.setOnClickListener(v -> {
             if (TextUtils.isEmpty(title.getText()) || TextUtils.isEmpty(description.getText()) || mediaHolder.size() == 0)
-                Toast.makeText(getApplicationContext(), "כל השדות הינם חובה", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), getResources().getString(R.string.all_fields_must), Toast.LENGTH_LONG).show();
             else {
                 String getTitle = title.getText().toString();
                 String getDescription = description.getText().toString();
@@ -98,7 +98,7 @@ public class fillReport extends AppCompatActivity {
                     }).addOnProgressListener((com.google.firebase.storage.OnProgressListener<? super UploadTask.TaskSnapshot>) taskSnapshot -> {
                         double progress = (100.0 * taskSnapshot.getBytesTransferred()) / taskSnapshot.getTotalByteCount();
                         progressBar.setProgress((int) progress);
-                        String progressString = ((int) progress) + " % העלאת הדוח בתהליכים";
+                        String progressString = ((int) progress) + getResources().getString(R.string.report_inprocess);
                         progressTextView.setText(progressString);
                     });
 
@@ -165,15 +165,15 @@ public class fillReport extends AppCompatActivity {
                 Log.d("downloaduri", returnUrl);
                 if(numPhoto== mediaHolder.size()-1){
                     if (itemClicked(credit))
-                        dataToSave.put("credit", true);
+                        dataToSave.put(constants.CREDIT, true);
                     else
-                        dataToSave.put("credit", false);
+                        dataToSave.put(constants.CREDIT, false);
                     dataToSave.put(constants.DESCRIPTION_KEY, getDescription);
                     dataToSave.put(constants.TITLE_KEY, getTitle);
-                    dataToSave.put("media url "+numPhoto, returnUrl);
+                    dataToSave.put(constants.MEDIAURL+numPhoto, returnUrl);
                     mDocRef.set(dataToSave).addOnSuccessListener(unused -> {
                         Log.d("InspiritingQuote", "DocumentSnapshot successfully written!");
-                        Toast.makeText(getApplicationContext(), "העלאת האירוע בוצעה בהצלחה", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), getResources().getString(R.string.succeed_upload_report), Toast.LENGTH_LONG).show();
                         removeUserFromAccept( docRef,  user);
                         Intent intent = new Intent(fillReport.this, MainActivity.class);
                         startActivity(intent);
@@ -181,7 +181,7 @@ public class fillReport extends AppCompatActivity {
                     }).addOnFailureListener(e -> Log.w("InspiritingQuote", "Error writing document", e));
                 }
                 else
-                    dataToSave.put("media url "+numPhoto, returnUrl);
+                    dataToSave.put(constants.MEDIAURL+numPhoto, returnUrl);
 
             }
             else
@@ -190,7 +190,7 @@ Log.d("failed to upload report","failed upload report");
 
     }
     private void removeUserFromAccept(  DocumentReference docRef, FirebaseUser user){
-        docRef.collection("accepted").document(user.getUid())
+        docRef.collection(constants.DOC_REF_ACCEPTED).document(user.getUid())
                 .delete()
                 .addOnSuccessListener(aVoid -> Log.d("test55", "DocumentSnapshot successfully deleted!"))
                 .addOnFailureListener(e -> Log.w("test56", "Error deleting document", e));
