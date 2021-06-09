@@ -76,6 +76,19 @@
     <string name="register_hint_phone">מספר טלפון</string>
     <string name="register_hint_city">עיר</string>
 
+        <!--    ERRORS  -->
+    <string name="register_error_city_exists">העיר לא קיימת במאגר</string>
+    <string name="register_error_city_error">העיר כתובה באופן שגוי</string>
+    <string name="register_error_phone_short">מספר הפלאפון קצר מדי</string>
+    <string name="register_error_fields_missing">חובה למלא את כל השדות </string>
+    <string name="register_error_email_error">אימייל לא תקין</string>
+    <string name="register_error_password_policy">הסיסמה חייבת להכיל אותיות קטנות, גדולות, תווים מיוחדים ומספרים</string>
+    <string name="register_error_password_mismatch">סיסמאות לא תואמות</string>
+    <string name="register_confirm_checkbox">אנא אשרו את הסכמתכם לחוזה על מנת להירשם</string>
+    <string name="register_fail">ההרשמה נכשלה</string>
+
+
+
 
 
     <!--    PAGE 2    -->
@@ -86,6 +99,7 @@
     <!--    PAGE 3    -->
     <string name="register_toast_success">ההרשמה בוצעה בהצלחה</string>
     <string name="register_p3_send">שלח</string>
+
 
 
 <!--    SCENARIO    -->
