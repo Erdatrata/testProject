@@ -1,6 +1,5 @@
 package com.example.tazpitapp;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -8,11 +7,9 @@ import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.util.Patterns;
-import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import org.json.JSONArray;
@@ -30,18 +27,10 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 ///////////////////////////
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputLayout;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.SignInMethodQueryResult;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.annotations.NotNull;
 import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.gson.Gson;
 ///////////
@@ -128,7 +117,6 @@ class register {
         TextInputLayout til_city;
         AutoCompleteTextView act_city;
         ArrayList<String> ArrList = new ArrayList<>();
-        ArrayList<String> arrayList_city;
         ArrayAdapter<String> arrayAdapter_city;
 
         @Override
@@ -158,101 +146,92 @@ class register {
             Button next = findViewById(R.id.next);
 
 
-            next.setOnClickListener(new View.OnClickListener() {
-                @SuppressLint("WrongConstant")
-                @Override
-                public void onClick(View view) {
-                    int city_eixst=0,phone_is_ok=0;
-                    for (int i = 0; i < ArrList.size(); i++) {
-                        if (ArrList.get(i).equals(city.getText().toString())) {
-                            Log.d("onComplet","input="+city);
-                            Log.d("onComplet","input="+ArrList.get(i));
-                            city_eixst=1;
-                            break;
-                        }
-                    }
-                    if( Objects.requireNonNull(phone.getEditText()).getText().toString().length()!=10){
-                        phone_is_ok=1;
-                    }
-                    Log.d("onComplet","input="+ArrList.get(0));
-                    if (Integritycheck() || !checkMailIntegrity() || !checkPassword() || checkEqualPassword() ||city_eixst==0|| phone_is_ok==1) {
-                        String msg = "";
-
-                        if(city_eixst==0){
-                           // getResources().getString(R.string.register_error_email_error)
-
-                            msg = msg + getResources().getString(R.string.register_error_city_exists)+"\n";
-                            msg = msg + getResources().getString(R.string.register_error_city_error)+"\n";
-                        }
-                        if(  phone_is_ok==1){
-                            msg = msg +getResources().getString(R.string.register_error_phone_short)+"\n";
-                        }
-                        if (Integritycheck()) {
-                            msg = msg +getResources().getString(R.string.register_error_fields_missing) +"\n";
-
-                        }
-
-                        if (!Patterns.EMAIL_ADDRESS.matcher(Objects.requireNonNull(email.getEditText()).getText().toString()).matches()) {//if the email is proper
-                            msg = msg + getResources().getString(R.string.register_error_email_error)+"\n";
-
-                        }
-                        //if(!mailInUse()){msg=msg+"mail in use";}
-                        if (PASSWORD_PATTERN.matcher(Objects.requireNonNull(password1.getEditText())
-                                .getText().toString()).matches()) {
-                        } else {//if the password is proper
-                    msg = msg + getResources().getString(R.string.register_error_password_policy)+"\n";
-
-                }
-                        if (checkEqualPassword()) {
-                            msg = msg + getResources().getString(R.string.register_error_password_mismatch)+"\n";
-
-                        }
-                        Toast.makeText(view.getContext(), msg, 5000).show();
-
-                    }
-                    else {
-                        mailSTR = Objects.requireNonNull(email.getEditText()).getText().toString();
-                        passwordSTR = Objects.requireNonNull(password1.getEditText()).getText().toString();
-                        fNameSTR = Objects.requireNonNull(FName.getEditText()).getText().toString();
-                        LNameSTR = Objects.requireNonNull(LName.getEditText()).getText().toString();
-                        citySTR = city.getText().toString();
-                        phoneNumberSTR = phone.getEditText().getText().toString();
-                        try {
-                            Register(mailSTR, passwordSTR, fNameSTR, LNameSTR, citySTR, phoneNumberSTR);
-                            Thread.sleep(2500);
-                            Toast.makeText(register.register2.this, R.string.login_success,
-                                    Toast.LENGTH_SHORT).show();
-                            Intent intent = new Intent(view.getContext(), MainActivity.class);
-                            startActivity(intent);
-                        } catch (Exception e) {
-                            Toast.makeText(register2.this, R.string.register_fail, Toast.LENGTH_SHORT).show();
-                        }
+            next.setOnClickListener(view -> {
+                int city_eixst=0,phone_is_ok=0;
+                for (int i = 0; i < ArrList.size(); i++) {
+                    if (ArrList.get(i).equals(city.getText().toString())) {
+                        Log.d("onComplet","input="+city);
+                        Log.d("onComplet","input="+ArrList.get(i));
+                        city_eixst=1;
+                        break;
                     }
                 }
+                if( Objects.requireNonNull(phone.getEditText()).getText().toString().length()!=10){
+                    phone_is_ok=1;
+                }
+                Log.d("onComplet","input="+ArrList.get(0));
+                if (Integritycheck() || !checkMailIntegrity() || !checkPassword() || checkEqualPassword() ||city_eixst==0|| phone_is_ok==1) {
+                    String msg = "";
 
+                    if(city_eixst==0){
+                       // getResources().getString(R.string.register_error_email_error)
+
+                        msg = msg + getResources().getString(R.string.register_error_city_exists)+"\n";
+                        msg = msg + getResources().getString(R.string.register_error_city_error)+"\n";
+                    }
+                    if(  phone_is_ok==1){
+                        msg = msg +getResources().getString(R.string.register_error_phone_short)+"\n";
+                    }
+                    if (Integritycheck()) {
+                        msg = msg +getResources().getString(R.string.register_error_fields_missing) +"\n";
+
+                    }
+
+                    if (!Patterns.EMAIL_ADDRESS.matcher(Objects.requireNonNull(email.getEditText()).getText().toString()).matches()) {//if the email is proper
+                        msg = msg + getResources().getString(R.string.register_error_email_error)+"\n";
+
+                    }
+                    //if(!mailInUse()){msg=msg+"mail in use";}
+                    if (PASSWORD_PATTERN.matcher(Objects.requireNonNull(password1.getEditText())
+                            .getText().toString()).matches()) {
+                    } else {//if the password is proper
+                msg = msg + getResources().getString(R.string.register_error_password_policy)+"\n";
+
+            }
+                    if (checkEqualPassword()) {
+                        msg = msg + getResources().getString(R.string.register_error_password_mismatch)+"\n";
+
+                    }
+                    Toast.makeText(view.getContext(), msg, Toast.LENGTH_LONG).show();
+
+                }
+                else {
+                    mailSTR = Objects.requireNonNull(email.getEditText()).getText().toString();
+                    passwordSTR = Objects.requireNonNull(password1.getEditText()).getText().toString();
+                    fNameSTR = Objects.requireNonNull(FName.getEditText()).getText().toString();
+                    LNameSTR = Objects.requireNonNull(LName.getEditText()).getText().toString();
+                    citySTR = city.getText().toString();
+                    phoneNumberSTR = phone.getEditText().getText().toString();
+                    try {
+                        Register(mailSTR, passwordSTR, fNameSTR, LNameSTR, citySTR, phoneNumberSTR);
+                        Thread.sleep(2500);
+                        Toast.makeText(register2.this, R.string.login_success,
+                                Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(view.getContext(), MainActivity.class);
+                        startActivity(intent);
+                    } catch (Exception e) {
+                        Toast.makeText(register2.this, R.string.register_fail, Toast.LENGTH_SHORT).show();
+                    }
+                }
             });
 
         }
 
         private boolean mailInUse() {
-            String mail = email.getEditText().getText().toString();
+            String mail = Objects.requireNonNull(email.getEditText()).getText().toString();
             final boolean[] re = {false};
             Object object = new Object();
 
             mAuth.fetchSignInMethodsForEmail(mail)
-                    .addOnCompleteListener(new OnCompleteListener<SignInMethodQueryResult>() {
-                        @Override
-                        public void onComplete(@NonNull Task<SignInMethodQueryResult> task) {
+                    .addOnCompleteListener(task -> {
 
-                            boolean isNewUser = task.getResult().getSignInMethods().isEmpty();
+                        boolean isNewUser = Objects.requireNonNull(task.getResult().getSignInMethods()).isEmpty();
 
-                            if (isNewUser) {
-                                re[0] = true;
-                                System.out.println(true);
-                            }
-                            object.notify();
-
+                        if (isNewUser) {
+                            re[0] = true;
+                            System.out.println(true);
                         }
+                        object.notify();
 
                     });
             synchronized (object) {
@@ -291,27 +270,23 @@ class register {
         private void Register(String mailSTR, String passwordSTR, String fNameSTR, String lNameSTR, String citySTR, String phoneNumberSTR) throws Exception {
             //register,first create user , with email and password, if successful , it will create dataToSave object, then send it to real time database
             mAuth.createUserWithEmailAndPassword(mailSTR, passwordSTR)
-                    .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                        @Override
-                        public void onComplete(@NonNull Task<AuthResult> task) {
-                            if (task.isSuccessful()) {
-                                final Map<String, Object>[] dataToSave = new Map[]{new HashMap<String, Object>()};
-                                dataToSave[0].put(constants.FIRST_NAME, fNameSTR);
-                                dataToSave[0].put(constants.SEC_NAME, LNameSTR);
-                                dataToSave[0].put(constants.CITY, citySTR);
-                                dataToSave[0].put(constants.EMAIL, mailSTR);
-                                dataToSave[0].put(constants.PHONE, phoneNumberSTR);
-                                dataToSave[0].put(constants.VOLUNTEER, "false");
+                    .addOnCompleteListener(task -> {
+                        if (task.isSuccessful()) {
+                            final Map<String, Object>[] dataToSave = new Map[]{new HashMap<String, Object>()};
+                            dataToSave[0].put(constants.FIRST_NAME, fNameSTR);
+                            dataToSave[0].put(constants.SEC_NAME, lNameSTR);
+                            dataToSave[0].put(constants.CITY, citySTR);
+                            dataToSave[0].put(constants.EMAIL, mailSTR);
+                            dataToSave[0].put(constants.PHONE, phoneNumberSTR);
+                            dataToSave[0].put(constants.VOLUNTEER, "false");
 
 
-                                FirebaseDatabase.getInstance().getReference(constants.DOC_REF_USERS)
-                                        //here we creating users folder in real time data baes , getting uid from user and storing the data in folder named by id
-                                        .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                                        .setValue(dataToSave[0]).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                    @Override
-                                    public void onComplete(@NonNull Task<Void> task) {
-                                        if (task.isSuccessful()) {
-                                            Toast.makeText(register.register2.this,
+                            FirebaseDatabase.getInstance().getReference(constants.DOC_REF_USERS)
+                                    //here we creating users folder in real time data baes , getting uid from user and storing the data in folder named by id
+                                    .child(Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid())
+                                    .setValue(dataToSave[0]).addOnCompleteListener(task1 -> {
+                                        if (task1.isSuccessful()) {
+                                            Toast.makeText(register2.this,
                                                     R.string.register_toast_success, Toast.LENGTH_LONG).show();
                                             {//adds all new data for newely registered clients
                                                 dayTime dtDEF = new dayTime(0, 0, 23, 59);//default for first time
@@ -337,12 +312,9 @@ class register {
                                                         .document(constants.DOC_REF_USERS+"/" + UID);
                                                 final boolean[] success = {true};
                                                 final Exception[] failToRet = new Exception[1];
-                                                DRF.set(docData).addOnFailureListener(new OnFailureListener() {
-                                                    @Override
-                                                    public void onFailure(@NonNull @NotNull Exception e) {
-                                                        success[0] = false;
-                                                        failToRet[0] = e;
-                                                    }
+                                                DRF.set(docData).addOnFailureListener(e -> {
+                                                    success[0] = false;
+                                                    failToRet[0] = e;
                                                 });
                                                 if (!success[0]) {
                                                     // show/make log for case of failure
@@ -351,23 +323,18 @@ class register {
 
                                             }
                                         }
-                                    }
-                                });
+                                    });
 
-
-                            }
 
                         }
-                    }).addOnFailureListener(new OnFailureListener() {
-                @Override
-                public void onFailure(@NonNull @org.jetbrains.annotations.NotNull Exception e) {
-                    try {
-                        throw new Exception(constants.FAILED_REGISTER);
-                    } catch (Exception exception) {
-                        exception.printStackTrace();
-                    }
-                }
-            });
+
+                    }).addOnFailureListener(e -> {
+                        try {
+                            throw new Exception(constants.FAILED_REGISTER);
+                        } catch (Exception exception) {
+                            exception.printStackTrace();
+                        }
+                    });
 
 
         }
@@ -376,7 +343,6 @@ class register {
 
     public static class register1 extends AppCompatActivity {
         private final DocumentReference mDocRef = FirebaseFirestore.getInstance().document("contact/contact");
-        private Button back;
         private Button next;
         private TextView textshow;
         private CheckBox Aggre;
@@ -394,25 +360,18 @@ class register {
             //create file named mDocRef ,get instance from contact/contack ~ path to doc
             //call get ,on succeeds will save the data in dataToSave(comes in map file),then show on textView
             final Map<String, Object>[] dataToSave = new Map[]{new HashMap<String, Object>()};
-            mDocRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-
-                @Override
-                public void onSuccess(DocumentSnapshot documentSnapshot) {
-                    dataToSave[0] = documentSnapshot.getData();
-                    String str = dataToSave[0].get(constants.CONTACT).toString();
-                    textshow.setText(str);
-                }
+            mDocRef.get().addOnSuccessListener(documentSnapshot -> {
+                dataToSave[0] = documentSnapshot.getData();
+                String str = Objects.requireNonNull(dataToSave[0]).get(constants.CONTACT).toString();
+                textshow.setText(str);
             });
-            next.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (Aggre.isChecked()) {
-                        Intent intent = new Intent(v.getContext(), register2.class);
-                        startActivity(intent);
-                    } else {
-                        Toast.makeText(register1.this, R.string.register_confirm_checkbox
-                                , Toast.LENGTH_SHORT).show();
-                    }
+            next.setOnClickListener(v -> {
+                if (Aggre.isChecked()) {
+                    Intent intent = new Intent(v.getContext(), register2.class);
+                    startActivity(intent);
+                } else {
+                    Toast.makeText(register1.this, R.string.register_confirm_checkbox
+                            , Toast.LENGTH_SHORT).show();
                 }
             });
 
@@ -426,27 +385,23 @@ class register {
         private void Register(String mailSTR, String passwordSTR, String fNameSTR, String lNameSTR, String citySTR, String phoneNumberSTR) throws Exception {
             //register,first create user , with email and password, if successful , it will create dataToSave object, then send it to real time database
             mAuth.createUserWithEmailAndPassword(mailSTR, passwordSTR)
-                    .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                        @Override
-                        public void onComplete(@NonNull Task<AuthResult> task) {
-                            if (task.isSuccessful()) {
-                                final Map<String, Object>[] dataToSave = new Map[]{new HashMap<String, Object>()};
-                                dataToSave[0].put(constants.FIRST_NAME, fNameSTR);
-                                dataToSave[0].put(constants.SEC_NAME, LNameSTR);
-                                dataToSave[0].put(constants.CITY, citySTR);
-                                dataToSave[0].put(constants.EMAIL, mailSTR);
-                                dataToSave[0].put(constants.PHONE, phoneNumberSTR);
+                    .addOnCompleteListener(task -> {
+                        if (task.isSuccessful()) {
+                            final Map<String, Object>[] dataToSave = new Map[]{new HashMap<String, Object>()};
+                            dataToSave[0].put(constants.FIRST_NAME, fNameSTR);
+                            dataToSave[0].put(constants.SEC_NAME, lNameSTR);
+                            dataToSave[0].put(constants.CITY, citySTR);
+                            dataToSave[0].put(constants.EMAIL, mailSTR);
+                            dataToSave[0].put(constants.PHONE, phoneNumberSTR);
 
 
 
-                                FirebaseDatabase.getInstance().getReference(constants.DOC_REF_USERS)
-                                        //here we creating users folder in real time data baes , getting uid from user and storing the data in folder named by id
-                                        .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                                        .setValue(dataToSave[0]).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                    @Override
-                                    public void onComplete(@NonNull Task<Void> task) {
-                                        if (task.isSuccessful()) {
-                                            Toast.makeText(register.register3.this,
+                            FirebaseDatabase.getInstance().getReference(constants.DOC_REF_USERS)
+                                    //here we creating users folder in real time data baes , getting uid from user and storing the data in folder named by id
+                                    .child(Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid())
+                                    .setValue(dataToSave[0]).addOnCompleteListener(task1 -> {
+                                        if (task1.isSuccessful()) {
+                                            Toast.makeText(register3.this,
                                                     R.string.register_toast_success, Toast.LENGTH_LONG).show();
                                             {//adds all new data for newely registered clients
                                                 dayTime dtDEF = new dayTime(0, 0, 23, 59);//default for first time
@@ -472,12 +427,9 @@ class register {
                                                         .document(constants.DOC_REF_USERS+"/" + UID);
                                                 final boolean[] success = {true};
                                                 final Exception[] failToRet = new Exception[1];
-                                                DRF.set(docData).addOnFailureListener(new OnFailureListener() {
-                                                    @Override
-                                                    public void onFailure(@NonNull @NotNull Exception e) {
-                                                        success[0] = false;
-                                                        failToRet[0] = e;
-                                                    }
+                                                DRF.set(docData).addOnFailureListener(e -> {
+                                                    success[0] = false;
+                                                    failToRet[0] = e;
                                                 });
                                                 if (!success[0]) {
                                                     // show/make log for case of failure
@@ -486,23 +438,18 @@ class register {
 
                                             }
                                         }
-                                    }
-                                });
+                                    });
 
-
-                            }
 
                         }
-                    }).addOnFailureListener(new OnFailureListener() {
-                @Override
-                public void onFailure(@NonNull @org.jetbrains.annotations.NotNull Exception e) {
-                    try {
-                        throw new Exception(constants.FAILED_REGISTER);
-                    } catch (Exception exception) {
-                        exception.printStackTrace();
-                    }
-                }
-            });
+
+                    }).addOnFailureListener(e -> {
+                        try {
+                            throw new Exception(constants.FAILED_REGISTER);
+                        } catch (Exception exception) {
+                            exception.printStackTrace();
+                        }
+                    });
 
 
         }
@@ -514,20 +461,17 @@ class register {
             setContentView(R.layout.activity_register3);
             Button test = findViewById(R.id.testB);
             mAuth = FirebaseAuth.getInstance();
-            test.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    try {
-                        Register(mailSTR, passwordSTR, fNameSTR, LNameSTR, citySTR, phoneNumberSTR);
-                        Thread.sleep(2500);
-                    } catch (Exception e) {
-                        Toast.makeText(register3.this, R.string.register_fail, Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(v.getContext(), register2.class);
-                        startActivity(intent);
-                    }
-                    Intent intent = new Intent(v.getContext(), MainActivity.class);
+            test.setOnClickListener(v -> {
+                try {
+                    Register(mailSTR, passwordSTR, fNameSTR, LNameSTR, citySTR, phoneNumberSTR);
+                    Thread.sleep(2500);
+                } catch (Exception e) {
+                    Toast.makeText(register3.this, R.string.register_fail, Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(v.getContext(), register2.class);
                     startActivity(intent);
                 }
+                Intent intent = new Intent(v.getContext(), MainActivity.class);
+                startActivity(intent);
             });
         }
 
