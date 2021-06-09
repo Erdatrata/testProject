@@ -135,6 +135,18 @@ public static final String TITLE_KEY = "title";
 public static final String ISSIGEND = "isSigned";
     public static final String GEO = "geo:";
 
+    // belong to day time
+    public static final String CONSTRUCTOR_HOUR_PROBLEM= "Hours cannot exceed 23 or fall below 0" ;
+    public static final String CONSTRUCTOR_MINTUES_PROBLEM= "Minutes cannot exceed 59 or fall below 0" ;
+    public static final String END_BEFORE_START=   "End times cannot come before start time" ;
+    public static final String AM=  "AM" ;
+    public static final String PM=  "PM" ;
+    public static final String setHourStartSetMinutesStartErrors= "beginning times cannot come before end times";
+
+
+
+
+
 
 
 
@@ -145,12 +157,6 @@ public static final String ISSIGEND = "isSigned";
     public static final String SCENARIO_TYPE_EVENT = "סוג האירוע" ; //type of the event
     public static final String SCENARIO_LOCATION = "מיקום" ; //type of the event
     public static final String DOC_REF_USERS = "Users" ; //USERS setting in firebase
-
-
-
-
-
-
 
 
 
