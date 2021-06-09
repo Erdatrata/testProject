@@ -46,7 +46,6 @@ public class DummyContent {
                     addItem(createDummyItem(i,list.get(i)));
                     i++;
                 }
-        //        ((TextView) _newRootView.findViewById(R.id.scenerios_detail)).setText("test");
                 Log.d("onComplet","in3");
                 Log.d("document=", list.toString());
             } else {
@@ -54,8 +53,7 @@ public class DummyContent {
 
             }
         });
-//        Log.d("size_arr=",list);
-
+       
     }
 
     private static void addItem(DummyItem item) {
