@@ -399,11 +399,11 @@ public class SetActivity extends AppCompatActivity {
                 view.setHour(1);
                 if (v.getId() == R.id.timePickerSettingsFrom) {//for upper textView
                     //check for time correctness here (time should be chronological)
-//                    if (hourOfDay > hoursEnd || ((hourOfDay == hoursEnd) && (minutes >= minutesEnd))) {
-//                        Toast.makeText(SetActivity.this,
-//                                R.string.set_toast_cantSetStartLater, Toast.LENGTH_LONG).show();
-//                        return;
-//                    }
+                    if (hourOfDay > hoursEnd || ((hourOfDay == hoursEnd) && (minutes >= minutesEnd))) {
+                        Toast.makeText(SetActivity.this,
+                                R.string.set_toast_cantSetStartLater, Toast.LENGTH_LONG).show();
+                        return;
+                    }
                     hourStart = hourOfDay;
                     minuteStart = minutes;
                     toPut = String.format(Locale.getDefault(), "%02d:%02d", hourStart, minuteStart);
