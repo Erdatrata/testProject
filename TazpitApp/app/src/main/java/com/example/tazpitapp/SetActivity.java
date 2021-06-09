@@ -345,7 +345,7 @@ public class SetActivity extends AppCompatActivity {
     //this function will apply all the settings in this page back to the server
     private void changeDay(View v) {
         //if switching between days after changing hours, save into temp
-        if (unsaved) {
+        if (unsaved && rightNow!=null) {
             //take hours from both start and end, put into new dayTime
             saveTemp();
             //unsave unsaved

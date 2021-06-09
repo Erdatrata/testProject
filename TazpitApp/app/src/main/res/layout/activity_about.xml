@@ -4,7 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AboutActivity">
+    tools:context=".AboutActivity"
+    android:layoutDirection="rtl"
+    >
 
     <ScrollView
         android:id="@+id/about_scrollView"
@@ -38,12 +40,12 @@
 
                 <ImageView
                     android:id="@+id/about_eli_image"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_width="100dp"
+                    android:layout_height="150dp"
+                    android:src="@drawable/eli1"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/about_eli_name"
-                    app:layout_constraintTop_toTopOf="parent"
-                    android:src="@drawable/eli" />
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
                     android:id="@+id/about_eli_name"
@@ -100,12 +102,12 @@
 
                 <ImageView
                     android:id="@+id/about_gab_image"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_width="100dp"
+                    android:layout_height="150dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/about_gab_name"
                     app:layout_constraintTop_toTopOf="parent"
-                    android:src="@drawable/gabi" />
+                    android:src="@drawable/gabi1" />
 
                 <TextView
                     android:id="@+id/about_gab_name"
@@ -162,12 +164,12 @@
 
                 <ImageView
                     android:id="@+id/about_evy_image"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_width="100dp"
+                    android:layout_height="150dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/about_evy_name"
                     app:layout_constraintTop_toTopOf="parent"
-                    android:src="@drawable/evya" />
+                    android:src="@drawable/evya1" />
 
                 <TextView
                     android:id="@+id/about_evy_name"
@@ -224,12 +226,12 @@
 
                 <ImageView
                     android:id="@+id/about_rat_image"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_width="100dp"
+                    android:layout_height="150dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/about_rat_name"
                     app:layout_constraintTop_toTopOf="parent"
-                    android:src="@drawable/rattata" />
+                    android:src="@drawable/rattata1" />
 
                 <TextView
                     android:id="@+id/about_rat_name"
@@ -286,12 +288,12 @@
 
                 <ImageView
                     android:id="@+id/about_nat_image"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_width="100dp"
+                    android:layout_height="150dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/about_nat_name"
                     app:layout_constraintTop_toTopOf="parent"
-                    android:src="@drawable/nati" />
+                    android:src="@drawable/nati1" />
 
                 <TextView
                     android:id="@+id/about_nat_name"
