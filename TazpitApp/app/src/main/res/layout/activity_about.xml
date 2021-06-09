@@ -43,7 +43,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/about_eli_name"
                     app:layout_constraintTop_toTopOf="parent"
-                    android:src="@drawable/eli" />
+                    android:src="@drawable/eli1" />
 
                 <TextView
                     android:id="@+id/about_eli_name"
@@ -105,7 +105,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/about_gab_name"
                     app:layout_constraintTop_toTopOf="parent"
-                    android:src="@drawable/gabi" />
+                    android:src="@drawable/gabi1" />
 
                 <TextView
                     android:id="@+id/about_gab_name"
@@ -167,7 +167,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/about_evy_name"
                     app:layout_constraintTop_toTopOf="parent"
-                    android:src="@drawable/evya" />
+                    android:src="@drawable/evya1" />
 
                 <TextView
                     android:id="@+id/about_evy_name"
@@ -229,7 +229,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/about_rat_name"
                     app:layout_constraintTop_toTopOf="parent"
-                    android:src="@drawable/rattata" />
+                    android:src="@drawable/rattata1" />
 
                 <TextView
                     android:id="@+id/about_rat_name"
@@ -291,7 +291,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/about_nat_name"
                     app:layout_constraintTop_toTopOf="parent"
-                    android:src="@drawable/nati" />
+                    android:src="@drawable/nati1" />
 
                 <TextView
                     android:id="@+id/about_nat_name"
