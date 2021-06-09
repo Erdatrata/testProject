@@ -27,7 +27,7 @@ public class AboutActivity extends AppCompatActivity {
                 R.id.about_gab_linkedIn, R.id.about_gab_github,
                 R.id.about_rat_linkedIn, R.id.about_rat_github,
                 R.id.about_nat_linkedIn, R.id.about_nat_github,
-                R.id.about_button
+                R.id.about_button_tazpit
         };
         String[] URLs = {
                 "https://www.linkedin.com/in/eliezer-revach-81410a208/","https://github.com/eliezerRevach",
