@@ -5,7 +5,6 @@ import android.app.ActivityManager;
 import android.app.AlertDialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -17,7 +16,6 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.SeekBar;
 import android.widget.TextView;
-import android.widget.TimePicker;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -25,8 +23,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
+
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -165,41 +162,30 @@ public class SetActivity extends AppCompatActivity {
 
         //for day listeners
         for (Button day : daysArr) {
-            day.setOnClickListener(new View.OnClickListener() {
-                public void onClick(View v) {
-                    changeDay(v);
-                }
-            });
+            day.setOnClickListener(v -> changeDay(v));
         }
         //for timePickers
         Button[] timers = {timePickerFrom, timePickerTo};
         for (Button b : timers) {
-            b.setOnClickListener(new View.OnClickListener() {
-                public void onClick(View v) {
-                    popTimePicker(v);
-                }
-            });
+            b.setOnClickListener(v -> popTimePicker(v));
         }
         //for "all day" button
-        AllDayPicker.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(rightNow==null){
-                    Toast.makeText(SetActivity.this, R.string.set_toast_plsChooseDay
-                            , Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                String idd = ""+rightNow.getId();
-                String tidd = constants.AllDayPicker_TEMP+idd;
-                dayTime dt = new dayTime(0, 0, 23, 59);//default for first time
-                String toPut = gson.toJson(dt);
-                editor.putString(tidd,toPut).commit();
-                hourStart=0;hoursEnd=23;
-                minuteStart=0;minutesEnd=59;
-                timePickerFrom.setText(R.string.min_time_start);
-                timePickerTo.setText(R.string.max_time_end);
-                saveTemp();
+        AllDayPicker.setOnClickListener(v -> {
+            if(rightNow==null){
+                Toast.makeText(SetActivity.this, R.string.set_toast_plsChooseDay
+                        , Toast.LENGTH_SHORT).show();
+                return;
             }
+            String idd = ""+rightNow.getId();
+            String tidd = constants.AllDayPicker_TEMP+idd;
+            dayTime dt = new dayTime(0, 0, 23, 59);//default for first time
+            String toPut = gson.toJson(dt);
+            editor.putString(tidd,toPut).commit();
+            hourStart=0;hoursEnd=23;
+            minuteStart=0;minutesEnd=59;
+            timePickerFrom.setText(R.string.min_time_start);
+            timePickerTo.setText(R.string.max_time_end);
+            saveTemp();
         });
     }
 
@@ -233,12 +219,9 @@ public class SetActivity extends AppCompatActivity {
         for(Map.Entry<String,String> entry: docData.entrySet()){
             String key = entry.getKey();
             String val = entry.getValue();
-            DRF.update(key,val).addOnFailureListener(new OnFailureListener() {
-                @Override
-                public void onFailure(@NonNull @NotNull Exception e) {
-                    success[0] = false;
-                    failToRet[0]=e;
-                }
+            DRF.update(key,val).addOnFailureListener(e -> {
+                success[0] = false;
+                failToRet[0]=e;
             });
             /*DRF.set(docData).addOnFailureListener(new OnFailureListener() {
                 @Override
@@ -309,28 +292,22 @@ public class SetActivity extends AppCompatActivity {
                 new AlertDialog.Builder(SetActivity.this)
                         .setTitle(R.string.set_alert_title)
                         .setMessage(R.string.set_alert_message)
-                        .setPositiveButton(R.string.set_alert_accept, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-                                if(getApplicationContext().checkSelfPermission(Manifest.permission.ACCESS_BACKGROUND_LOCATION)
-                                        == PackageManager.PERMISSION_GRANTED){
-                                    Toast.makeText(SetActivity.this, R.string.set_toast_gpsGranted,
-                                            Toast.LENGTH_SHORT).show();
-                                    if(!RequestPermissionCall())
-                                        startLocationService();
-                                } else {
-                                    requestPermissions(new String[]
-                                            {Manifest.permission.ACCESS_BACKGROUND_LOCATION},105);
-                                }
+                        .setPositiveButton(R.string.set_alert_accept, (dialogInterface, i) -> {
+                            if(getApplicationContext().checkSelfPermission(Manifest.permission.ACCESS_BACKGROUND_LOCATION)
+                                    == PackageManager.PERMISSION_GRANTED){
+                                Toast.makeText(SetActivity.this, R.string.set_toast_gpsGranted,
+                                        Toast.LENGTH_SHORT).show();
+                                if(!RequestPermissionCall())
+                                    startLocationService();
+                            } else {
+                                requestPermissions(new String[]
+                                        {Manifest.permission.ACCESS_BACKGROUND_LOCATION},105);
                             }
-                        }).setNeutralButton(R.string.set_alert_deny, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        //in case user didn't want to authorize us location
-                        cityButton.setChecked(true);
-                        gpsButton.setChecked(!true);
-                    }
-                }).setCancelable(false)
+                        }).setNeutralButton(R.string.set_alert_deny, (dialog, which) -> {
+                            //in case user didn't want to authorize us location
+                            cityButton.setChecked(true);
+                            gpsButton.setChecked(!true);
+                        }).setCancelable(false)
                         .create()
                         .show();
             }
@@ -389,40 +366,35 @@ public class SetActivity extends AppCompatActivity {
             minute = minutesEnd;
         }
         String timeString = ((Button) v).getText().toString();
-        TimePickerDialog.OnTimeSetListener onTimeSetListener = new TimePickerDialog.OnTimeSetListener() {
-
-
-            @Override
-            public void onTimeSet(TimePicker view, int hourOfDay, int minutes) {
-                String toPut = "";
+        TimePickerDialog.OnTimeSetListener onTimeSetListener = (view, hourOfDay, minutes) -> {
+            String toPut = "";
 //                if(v.getId()==)
-                view.setHour(1);
-                if (v.getId() == R.id.timePickerSettingsFrom) {//for upper textView
-                    //check for time correctness here (time should be chronological)
-                    if (hourOfDay > hoursEnd || ((hourOfDay == hoursEnd) && (minutes >= minutesEnd))) {
-                        Toast.makeText(SetActivity.this,
-                                R.string.set_toast_cantSetStartLater, Toast.LENGTH_LONG).show();
-                        return;
-                    }
-                    hourStart = hourOfDay;
-                    minuteStart = minutes;
-                    toPut = String.format(Locale.getDefault(), "%02d:%02d", hourStart, minuteStart);
-                } else {//for lower textView
-                    //check for time correctness here also
-                    if (hourOfDay < hourStart || ((hourOfDay == hourStart) && (minutes <= minuteStart))) {
-                        Toast.makeText(SetActivity.this,
-                                R.string.set_toast_cantSetEndFirst, Toast.LENGTH_LONG).show();
-                        return;
-                    }
-                    hoursEnd = hourOfDay;
-                    minutesEnd = minutes;
-                    toPut = String.format(Locale.getDefault(), "%02d:%02d", hoursEnd, minutesEnd);
+            view.setHour(1);
+            if (v.getId() == R.id.timePickerSettingsFrom) {//for upper textView
+                //check for time correctness here (time should be chronological)
+                if (hourOfDay > hoursEnd || ((hourOfDay == hoursEnd) && (minutes >= minutesEnd))) {
+                    Toast.makeText(SetActivity.this,
+                            R.string.set_toast_cantSetStartLater, Toast.LENGTH_LONG).show();
+                    return;
                 }
-                //if changes were made to time, make sure to let it be known in logic
-                if (((Button) v).getText() != toPut)
-                    unsaved = true;
-                ((Button) v).setText(toPut);
+                hourStart = hourOfDay;
+                minuteStart = minutes;
+                toPut = String.format(Locale.getDefault(), "%02d:%02d", hourStart, minuteStart);
+            } else {//for lower textView
+                //check for time correctness here also
+                if (hourOfDay < hourStart || ((hourOfDay == hourStart) && (minutes <= minuteStart))) {
+                    Toast.makeText(SetActivity.this,
+                            R.string.set_toast_cantSetEndFirst, Toast.LENGTH_LONG).show();
+                    return;
+                }
+                hoursEnd = hourOfDay;
+                minutesEnd = minutes;
+                toPut = String.format(Locale.getDefault(), "%02d:%02d", hoursEnd, minutesEnd);
             }
+            //if changes were made to time, make sure to let it be known in logic
+            if (((Button) v).getText() != toPut)
+                unsaved = true;
+            ((Button) v).setText(toPut);
         };
 //        int style= AlertDialog.THEME_HOLO_DARK;
         //int style = R.style.Theme_MaterialComponents_Dialog_Alert;
