@@ -4,6 +4,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if(firebase.auth().currentUser){
         window.open("./manu.html");
+        window.open('','_self').close()
+
     }
 
 });
@@ -15,6 +17,7 @@ firebase.auth().onAuthStateChanged(function(user) {
 
     if (user) {
         window.open("./manu.html")
+        window.open('','_self').close()
 
     }
 });
@@ -36,6 +39,7 @@ function login(){
     if(firebase.auth().currentUser){
         User=firebase.auth().currentUser;
         window.open("./manu.html");
+        window.open('','_self').close()
     }
 
 }
