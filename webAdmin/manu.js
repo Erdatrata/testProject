@@ -13,17 +13,17 @@ let FILLED="filled";
 let ACCEPTED='accepted';
 let NEWUSER="newuser";
 
-let acceptInScenerios="will move the scenerio down,and will open the option to delete it (only after the scenerio is done and u want to remove it)";
-let signatureInScenerio="will open the list of members who registerd to this scenerio";
-let filledInScenerio="will show the list of members who filled the scenerio plus what they did";
-let deleteInScenerio="it will be removed from the server";
-let moveReport="will move the report and give the ability to remove it";
-let userInfo="will show the information about the user";
-let deleteUser="will move the user at the bottom with and the option to delete it will open";
-let removeUserFromServer="will delete the user from the server";
-let approveUser="will add the user as a new volonteer";
-let reportInfo="will show the information about the report";
-let showInformationAboutEvent="will show the information about the scenerio";
+let acceptInScenerios="Will move the scenerio down,and will open the option to delete it (only after the scenerio is done and u want to remove it)";
+let signatureInScenerio="Will open the list of members who registerd to this scenerio";
+let filledInScenerio="Will show the list of members who filled the scenerio plus what they did";
+let deleteInScenerio="It will be removed from the server";
+let moveReport="Will move the report and give the ability to remove it";
+let userInfo="Will show the information about the user";
+let deleteUser="Will move the user at the bottom with and the option to delete it will open";
+let removeUserFromServer="Will delete the user from the server";
+let approveUser="Will authorize the newely registered user as a volunteer";
+let reportInfo="Will show the information about the report";
+let showInformationAboutEvent="Will show the information about the scenerio";
 
 function refreshListOfS() {
     $("#ListOfS").remove();
@@ -32,7 +32,7 @@ function refreshListOfS() {
 
 }
 async function getTextFrom(from, userDoc) {
-    console.log(userDoc.id);
+  // console.log(userDoc.id);
     var docRef = db.collection(from).doc(userDoc.id);
     let re;
 
@@ -42,33 +42,34 @@ async function getTextFrom(from, userDoc) {
             return;
         } else {
             // doc.data() will be undefined in this case
-            console.log("No such document!");
+          // console.log("No such document!");
         }
     }).catch((error) => {
-        console.log("Error getting document:", error);
+      // console.log("Error getting document:", error);
     });
-    let str="";
-    for (const e in re) {
-        str=str+e+":"+re[e]+'<br>';
-    }
+    // let str="";
+    // for (const e in re) {
+    //     str=str+e+":"+re[e]+'<br>';
+    // }
 
-    return str;
+    // return str;
+    return re;
 
 
 }
 
 
 function createModal(toFill) {
-    toFill=toFill.replace('\n','<br/>');
-    toFill=toFill.replace('\\n','<br/>');
+    // toFill=toFill.replace('\n','<br/>');
+    // toFill=toFill.replace('\\n','<br/>');
     $("#data").append("" +
         "<!-- The Modal -->\n" +
         "<div id=\"myModal\" class=\"modal\">\n" +
         "\n" +
         "  <!-- Modal content -->\n" +
         "  <div class=\"modal-content\">\n" +
-        "    <span class=\"close\">&times;</span>\n" +
-        "    <p>"+toFill+"</p>\n" +
+        "    <span class=\"close\">&times;</span>\n" + //this is the x button
+        "<div class=\"modal-guts\">"+toFill.innerHTML+"</div>\n" + //this is the content itself
         "  </div>\n" +
         "\n" +
         "</div>");
@@ -104,12 +105,126 @@ function createModal(toFill) {
     }
 }
 
-async function openModalFromFirestore(from,userDoc) {
+async function openModalFromFirestore(from,userDoc,type) {
     let toFill=await getTextFrom(from,userDoc);
-    createModal(toFill);
-
+    let toPut=""
+    if(!type)
+        toPut =Prettify(toFill);
+    else
+        toPut =Prettify2(toFill,userDoc)
+    
+    createModal(toPut);
 }
 
+//for prettifying reports
+function Prettify(toFill){
+  // console.log(toFill);
+    
+    let toReturn = document.createElement("div")
+    //title
+    let title = document.createElement("h1")
+    title.innerText=toFill.title
+    toReturn.appendChild(title)
+    //table
+    let table = document.createElement("table")
+    table.style="border=1px solid black"
+    toReturn.appendChild(table)
+    
+    {//description
+        let tr = document.createElement("tr")
+        let descHead = document.createElement("td")
+        descHead.innerText="Description"
+        tr.appendChild(descHead);
+        let desc =  document.createElement("td")
+        desc.innerText=toFill['description']
+        tr.appendChild(desc)
+
+        table.appendChild(tr)
+    }
+    {//Wants credit
+        let tr = document.createElement("tr")
+        let descHead = document.createElement("td")
+        descHead.innerText="Wants credit?"
+        tr.appendChild(descHead);
+        let desc =  document.createElement("td")
+        desc.innerText=(toFill['credit']) ? `Yes` : `No`
+        tr.appendChild(desc)
+        table.appendChild(tr)
+    }
+    {//url data
+        let tr = document.createElement("tr")
+        let descHead = document.createElement("td")
+        descHead.innerText="Media URLs"
+        tr.appendChild(descHead);
+        let desc =  document.createElement("td")
+        {//looper through file media
+            let i=0;
+            while(true){
+                if(!(toFill['media url'+i] || toFill['media url '+i]))
+                    break
+                let anchor = ""
+                if(toFill['media url'+i])
+                    anchor = toFill['media url'+i]
+                else
+                    anchor = toFill['media url '+i]
+                desc.innerHTML+=`<a href="${anchor}" target="_blank">Link ${i+1}</a>`
+
+                if(toFill['media url'+i] || toFill['media url '+i])
+                    desc.innerHTML+="<br/>"
+                else
+                    break
+                i++
+            }
+
+        }
+        tr.appendChild(desc)
+        table.appendChild(tr)
+
+    }
+    
+    
+    
+    
+    
+    return toReturn    
+}
+
+//for prettifying event details
+function Prettify2(toFill,userDoc){
+    let toReturn = document.createElement("div")
+    console.log(toFill)
+
+    let title = document.createElement("h1")
+    title.innerText=userDoc.id
+    toReturn.appendChild(title)
+    //table
+    let table = document.createElement("table")
+    toReturn.appendChild(table)
+    toFill["דחיפות"]=(toFill["דחיפות"] == true) ? "Yes" : "No"
+    let forFilter= ["דחיפות","מיקום","סוג האירוע","עיר","timeCreated"]
+    let forScreen= ["Urgent?","Location","Type of Event","City","Creation Time"]
+    for(let i=0;i<forFilter.length;i++){
+        let tr=document.createElement("tr")
+        let descHead=document.createElement("td")
+        let desc=document.createElement("td")
+
+        descHead.innerText=forScreen[i]
+        if(i!=1)
+            desc.innerText=toFill[forFilter[i]]
+        else
+            desc.innerHTML=`<a href="https://www.latlong.net/c/?lat=${toFill[forFilter[1]]._lat}&long=${toFill[forFilter[1]]._long}" target="_blank">
+            (${toFill[forFilter[1]]._lat},${toFill[forFilter[1]]._long})
+            </a>`
+            // console.log(toFill[forFilter[i]]._lat)
+
+        tr.appendChild(descHead)
+        tr.appendChild(desc)
+        table.appendChild(tr)
+    }
+
+
+    return toReturn;
+}
 async function getUser(id) {
     const snapshot = await firebase.database().ref('Users/' + id).once('value');
     let user = (snapshot.val());
@@ -119,11 +234,33 @@ async function getUser(id) {
 async function openUserInfo(id) {
     const snapshot = await firebase.database().ref('Users/' + id).once('value');
     let user = (snapshot.val());
-    let toFill=user["First Name:"]+" "+user["Sec Name:"]+"\n"
-    toFill=toFill+user["Email:"]+"\n";
-    toFill=toFill+user["City:"]+"\n";
-    toFill=toFill+user["Phone:"]+"\n";
-    createModal(toFill);
+    // console.log(user)
+    // let toFill=user["First Name:"]+" "+user["Sec Name:"]+"\n"
+    // toFill=toFill+user["Email:"]+"\n";
+    // toFill=toFill+user["City:"]+"\n";
+    // toFill=toFill+user["Phone:"]+"\n";
+    let toPut = document.createElement("table")
+    let forFilter= ["First Name:","Sec Name:","Email:","City:","Phone:"]
+    let forScreen= ["First Name","Last Name","Email","City","Phone"]
+    for(let i=0;i<forFilter.length;i++){
+        let tr=document.createElement("tr")
+        let descHead=document.createElement("td")
+        let desc=document.createElement("td")
+
+        descHead.innerText=forScreen[i]
+        desc.innerText=user[forFilter[i]]
+
+        tr.appendChild(descHead)
+        tr.appendChild(desc)
+        toPut.appendChild(tr)
+    }
+  // console.log(toPut)
+    
+    let toReturn = document.createElement("div")
+    toReturn.innerHTML="<h1>&emsp;</h1>"
+    toReturn.appendChild(toPut)
+
+    createModal(toReturn);
 
 }
 
@@ -169,7 +306,7 @@ async function createTab(from,userDoc,filled) {
 
 
     //userDoc contains all metadata of Firestore object, such as reference and id
-    console.log(userDoc.id)
+  // console.log(userDoc.id)
 
     //If you want to get doc data
     var userDocData = userDoc.data()
@@ -231,18 +368,18 @@ function makeOld(path, name) {
         if (doc.exists) {
             let save=doc.data();
             let remove =ref.delete().then(() => {
-                console.log(name+",Document successfully deleted!\nin path:"+path);
+              // console.log(name+",Document successfully deleted!\nin path:"+path);
             });
             db.collection("OldInfo").doc(name+"_"+Date.now()).set(save).then(() => {
-                console.log("Document successfully written!");
+              // console.log("Document successfully written!");
             });
             return remove;
         } else {
             // doc.data() will be undefined in this case
-            console.log(name+",No such document! \nin path:"+path);
+          // console.log(name+",No such document! \nin path:"+path);
         }
     }).catch((error) => {
-        console.log("Error getting document:", error);
+      // console.log("Error getting document:", error);
     });
 }
 
@@ -257,7 +394,7 @@ function createEnterFilter() {
             let list = document.getElementById("notcomp",).getElementsByTagName("*");
 
             for (var i = 0; i < list.length; i++) {
-                console.log("---------"+list[i].textContent+"---------");
+              // console.log("---------"+list[i].textContent+"---------");
                 if (!list[i].textContent.startsWith(lookFor)&&list[i].id!="") {
                     document.getElementById(list[i].id).remove();
                     i=i-1;
@@ -275,7 +412,7 @@ function createEnterFilter() {
 }
 
 function getInformation(id) {
-    openModalFromFirestore(SCENARIO,id);
+    openModalFromFirestore(SCENARIO,id,1);
 
 }
 
@@ -329,7 +466,7 @@ function ListEventFun(){
 
 
             //userDoc contains all metadata of Firestore object, such as reference and id
-            console.log(userDoc.id)
+          // console.log(userDoc.id)
 
             //If you want to get doc data
             var userDocData = userDoc.data()
@@ -372,8 +509,8 @@ function sendToDataBaseNewEvent() {
     var res = locationGps.split(",");
     let latitude=res[0];
     let longitude=res[1];
-    console.log(latitude);
-    console.log(longitude);
+  // console.log(latitude);
+  // console.log(longitude);
     let docRef = db.doc("Scenarios/"+ScenerioName);
     docRef.set({
 
@@ -384,7 +521,7 @@ function sendToDataBaseNewEvent() {
         "timeCreated":new Date()
 
     }).then(function (){
-        console.log("status saved");
+      // console.log("status saved");
         window.alert("was sended");
     }).catch(function (error){
         window.alert("Error : " + error);
@@ -589,7 +726,7 @@ async function isItNewUser(userId) {
         return true;
     }
     else if(user["volunteer"]==="true"){
-        console.log("truetruetruetruetruetruetruetruetruetrue");
+      // console.log("truetruetruetruetruetruetruetruetruetrue");
 
         return false;}
 
@@ -604,7 +741,7 @@ async function ListVolFun() {
                 if(user["volunteer"]=="true"){
                     // console.log("1111111111111111111111111111");
                     createTabFromUserData(childSnapshot.key,"");
-                    console.log(childSnapshot.key);
+                  // console.log(childSnapshot.key);
                 }
                 // else{console.log("22222222222222222222");}
             });
@@ -615,9 +752,9 @@ async function ListVolFun() {
     snapshot.forEach((childSnapshot) => {
         //let isItNew=await isItNewUser(childSnapshot.key);
         // if(!isItNew){
-        //     console.log("1111111111111111111111111111");
+        //   // console.log("1111111111111111111111111111");
         //     createTabFromUserData(childSnapshot.key,"");
-        //     console.log(childSnapshot.key);}
+        //   // console.log(childSnapshot.key);}
 
     });
     document.getElementById("btn btn-cancel").addEventListener("click",removeListOfS);
@@ -638,7 +775,7 @@ async function ListUsersFun() {
                 if(user["volunteer"]!="true"){
                     // console.log("1111111111111111111111111111");
                     createTabFromUserData(childSnapshot.key, NEWUSER);
-                    console.log(childSnapshot.key);
+                  // console.log(childSnapshot.key);
                 }
                 else{console.log("22222222222222222222");}
             });

@@ -56,6 +56,7 @@ h3{
   width: 100%; /* Full width */
   height: 100%; /* Full height */
   overflow: auto; /* Enable scroll if needed */
+
   background-color: rgb(0,0,0); /* Fallback color */
   background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
 }
@@ -66,14 +67,34 @@ h3{
   margin: auto;
   padding: 20px;
   border: 1px solid #888;
-  width: 80%;
-  height: 50%;
+  width: fit-content;
+  max-width: 100%;
+  height: 400px;
+  max-height: fit-content;
+  font-family: Arial;
+  color: #000;
 }
 .modal-content p{
-  margin-bottom: 25em;
-  margin-left: 25em;
-  width: fit-content;
+  /* margin-bottom: 25em;
+  margin-left: 25em; */
+  width: max-content;
   color:red;
+  font-family: Arial;
+}
+.modal-content h1 {
+  color: #000;
+  font-family: Arial;
+  text-shadow: none;
+}
+.modal-guts table{
+  border: 1px solid black;
+  font-size: medium;
+}
+.modal-guts td{
+  /* color:pink; */
+  border: 1px solid black;
+  padding-right: 2em;
+  padding-left: 2em;
 }
 
 /* The Close Button */
