@@ -11,18 +11,18 @@
 
     <ImageView
         android:id="@+id/logo_Image"
-        android:layout_width="317dp"
-        android:layout_height="178dp"
+        android:layout_width="375dp"
+        android:layout_height="210dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:src="@drawable/tps_logo_background"
+        android:src="@mipmap/new_logo_background"
         android:transitionName="logo_image"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.595"
+        app:layout_constraintHorizontal_bias="0.611"
         app:layout_constraintStart_toStartOf="parent"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteY="29dp" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints" />
 
     <EditText
         android:id="@+id/fill_report_title"
