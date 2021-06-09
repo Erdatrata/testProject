@@ -43,6 +43,10 @@ public static final String SET_CITY= "city";
     public static final String LastTimeAndDate="lasttimeanddate";
 
 
+    //city VARS
+    public static final String OUTSIDECITY = "לא בעיר";
+
+
 
     
     //TIME VARS

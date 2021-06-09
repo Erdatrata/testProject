@@ -60,6 +60,7 @@ import java.util.Map;
 import java.util.concurrent.ExecutionException;
 
 public class backgroundService extends Service {
+
     final int sec=1000;
     final int TIMETOWAIT=sec*60;
     boolean StopCity=false;
@@ -499,7 +500,7 @@ public class backgroundService extends Service {
                                         public void onDataChange(DataSnapshot dataSnapshot) {
                                             String userCity = dataSnapshot.getValue(String.class);
                                            System.out.println("userCity is : "+userCity +"\n");
-                                            if(userCity!=null){
+                                            if(userCity!=null&&!userCity.equals(constants.OUTSIDECITY)){
                                                 if(userCity.equals(townScenario)) {
                                                if (checkImporent(documentSnapshot) && isItAfterTime(toTimestamp(documentSnapshot.getData().get("timeCreated")), getLastTime())) {
                                                    setLastTime(toTimestamp(documentSnapshot.getData().get("timeCreated")));
