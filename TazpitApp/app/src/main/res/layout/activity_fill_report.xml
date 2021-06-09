@@ -70,11 +70,11 @@
 
     <TextView
         android:id="@+id/fill_report_upload_media_text"
-        android:layout_width="256dp"
-        android:layout_height="45dp"
+        android:layout_width="273dp"
+        android:layout_height="38dp"
         android:fontFamily="sans-serif-black"
         android:gravity="center"
-        android:text="העלה תמונות ווידאו"
+        android:text="העלה סרטונים ותמונות"
         android:textAlignment="center"
         android:textAllCaps="false"
         android:textColor="@color/colorForText"
@@ -82,25 +82,25 @@
         android:textSize="25dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.737"
+        app:layout_constraintHorizontal_bias="0.775"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.552"
+        app:layout_constraintVertical_bias="0.556"
         tools:ignore="HardcodedText,MissingConstraints" />
 
     <ImageButton
         android:id="@+id/fill_report_upload_button"
-        android:layout_width="70dp"
-        android:layout_height="43dp"
+        android:layout_width="66dp"
+        android:layout_height="39dp"
         android:background="@null"
         android:scaleX="1.22"
         android:scaleY="1.38"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.131"
+        app:layout_constraintHorizontal_bias="0.142"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.553"
+        app:layout_constraintVertical_bias="0.557"
         app:srcCompat="@android:drawable/ic_menu_upload" />
 
     <Button
@@ -120,8 +120,8 @@
 
     <CheckBox
         android:id="@+id/fill_report_add_credit"
-        android:layout_width="62dp"
-        android:layout_height="59dp"
+        android:layout_width="54dp"
+        android:layout_height="54dp"
         android:layout_gravity="start"
         android:fontFamily="sans-serif-black"
         android:layoutDirection="rtl"
@@ -159,11 +159,11 @@
 
     <TextView
         android:id="@+id/addcredittext"
-        android:layout_width="173dp"
-        android:layout_height="65dp"
+        android:layout_width="212dp"
+        android:layout_height="49dp"
         android:fontFamily="sans-serif-black"
         android:gravity="center"
-        android:text="הוסף קרדיטים"
+        android:text="הוסף קרדיט צלם"
         android:textColor="@color/colorForText"
         android:textSize="25dp"
         app:layout_constraintBottom_toTopOf="@+id/fill_report_send_button"
@@ -171,7 +171,7 @@
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/fill_report_upload_button"
-        app:layout_constraintVertical_bias="0.34" />
+        app:layout_constraintVertical_bias="0.351" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
