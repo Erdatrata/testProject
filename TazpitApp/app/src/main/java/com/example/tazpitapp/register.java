@@ -179,30 +179,32 @@ class register {
                         String msg = "";
 
                         if(city_eixst==0){
-                            msg = msg + R.string.register_error_city_exists+"\n";
-                            msg = msg + R.string.register_error_city_error+"\n";
+                           // getResources().getString(R.string.register_error_email_error)
+
+                            msg = msg + getResources().getString(R.string.register_error_city_exists)+"\n";
+                            msg = msg + getResources().getString(R.string.register_error_city_error)+"\n";
                         }
                         if(  phone_is_ok==1){
-                            msg = msg +R.string.register_error_phone_short+"\n";
+                            msg = msg +getResources().getString(R.string.register_error_phone_short)+"\n";
                         }
                         if (Integritycheck()) {
-                            msg = msg +R.string.register_error_fields_missing +"\n";
+                            msg = msg +getResources().getString(R.string.register_error_fields_missing) +"\n";
 
                         }
 
                         if (!Patterns.EMAIL_ADDRESS.matcher(Objects.requireNonNull(email.getEditText()).getText().toString()).matches()) {//if the email is proper
-                            msg = msg + R.string.register_error_email_error+"\n";
+                            msg = msg + getResources().getString(R.string.register_error_email_error)+"\n";
 
                         }
                         //if(!mailInUse()){msg=msg+"mail in use";}
                         if (PASSWORD_PATTERN.matcher(Objects.requireNonNull(password1.getEditText())
                                 .getText().toString()).matches()) {
                         } else {//if the password is proper
-                    msg = msg + R.string.register_error_password_policy+"\n";
+                    msg = msg + getResources().getString(R.string.register_error_password_policy)+"\n";
 
                 }
                         if (checkEqualPassword()) {
-                            msg = msg + R.string.register_error_password_mismatch+"\n";
+                            msg = msg + getResources().getString(R.string.register_error_password_mismatch)+"\n";
 
                         }
                         Toast.makeText(view.getContext(), msg, 5000).show();
