@@ -3,6 +3,7 @@ package com.example.tazpitapp;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
 import android.media.Image;
 import android.os.AsyncTask;
 import android.util.Log;
@@ -21,7 +22,10 @@ import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
 import java.net.URL;
+
 
 public class MyAdapter extends RecyclerView.Adapter <MyAdapter.MyViewHolder>{
 
@@ -31,12 +35,12 @@ public class MyAdapter extends RecyclerView.Adapter <MyAdapter.MyViewHolder>{
     String [] data;
     //handle later
     //Image image;
-    String [] imageUrl;
+    Bitmap [] imageUrl;
     String [] type;
     String [] date;
     String [] writer;
     Context context;
-    public MyAdapter(Context ct,String [] title2, String [] data2, String [] date2, String [] image2, String [] type2, String [] writer2){
+    public MyAdapter(Context ct,String [] title2, String [] data2, String [] date2, Bitmap [] image2, String [] type2, String [] writer2){
         context=ct;
         title=title2;
         data=data2;
@@ -47,6 +51,7 @@ public class MyAdapter extends RecyclerView.Adapter <MyAdapter.MyViewHolder>{
 
 
     }
+
     public MyViewHolder onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
         LayoutInflater inflater=LayoutInflater.from(context);
        View view= inflater.inflate(R.layout.my_row,parent,false);
@@ -59,6 +64,7 @@ public class MyAdapter extends RecyclerView.Adapter <MyAdapter.MyViewHolder>{
         holder.dataItem.setText(data[position]);
         holder.timeItem.setText(date[position]);
         holder.writerItem.setText(writer[position]);
+        holder.myImageItem.setImageBitmap(imageUrl[position]);
        // holder.myImageItem.setImageResource(imageUrl[position]);
 
 
