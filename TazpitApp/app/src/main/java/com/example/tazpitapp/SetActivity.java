@@ -42,26 +42,13 @@ public class SetActivity extends AppCompatActivity {
     private RadioGroup locationRadioGroup;
     private RadioButton gpsButton;
     private RadioButton cityButton;
-    private SeekBar seekBar;
     private double range;
     private TextView rangeCont;
 
-    //the buttons for choosing between different days and timepicker
-    private Button daysButton1;//SUN
-    private Button daysButton2;//MON
-    private Button daysButton3;//TUE
-    private Button daysButton4;//WED
-    private Button daysButton5;//THU
-    private Button daysButton6;//FRI
-    private Button daysButton7;//SAT
     private Button timePickerFrom;
     private Button timePickerTo;
-    private Button AllDayPicker;
     private static Button rightNow = null;
 
-    //apply settings button
-    private static int hour = 0;
-    private static int minute = 0;
     private static int hourStart = 0;
     private static int minuteStart = 0;
     private static int hoursEnd = 0;
@@ -97,19 +84,27 @@ public class SetActivity extends AppCompatActivity {
         locationRadioGroup = findViewById(R.id.locationRadioGroup);
         gpsButton = findViewById(R.id.radio_by_gps);
         cityButton = findViewById(R.id.radio_by_city);
-        seekBar=findViewById(R.id.gpsRangeBar);
+        SeekBar seekBar = findViewById(R.id.gpsRangeBar);
         rangeCont=findViewById(R.id.rangeContainer);
         range=Double.parseDouble(""+sharedpreferences.getFloat(constants.rangeChoice,(float)0.5));
 
         //day settings
-        daysButton1 = findViewById(R.id.day_sunday);
-        daysButton2 = findViewById(R.id.day_monday);
-        daysButton3 = findViewById(R.id.day_tuesday);
-        daysButton4 = findViewById(R.id.day_wednesday);
-        daysButton5 = findViewById(R.id.day_thursday);
-        daysButton6 = findViewById(R.id.day_friday);
-        daysButton7 = findViewById(R.id.day_saturday);
-        AllDayPicker = findViewById(R.id.allDayButton);
+        //the buttons for choosing between different days and timepicker
+        //SUN
+        Button daysButton1 = findViewById(R.id.day_sunday);
+        //MON
+        Button daysButton2 = findViewById(R.id.day_monday);
+        //TUE
+        Button daysButton3 = findViewById(R.id.day_tuesday);
+        //WED
+        Button daysButton4 = findViewById(R.id.day_wednesday);
+        //THU
+        Button daysButton5 = findViewById(R.id.day_thursday);
+        //FRI
+        Button daysButton6 = findViewById(R.id.day_friday);
+        //SAT
+        Button daysButton7 = findViewById(R.id.day_saturday);
+        Button allDayPicker = findViewById(R.id.allDayButton);
         //timepicker & apply
         timePickerFrom = findViewById(R.id.timePickerSettingsFrom);
         timePickerTo = findViewById(R.id.timePickerSettingsTo);
@@ -170,7 +165,7 @@ public class SetActivity extends AppCompatActivity {
             b.setOnClickListener(v -> popTimePicker(v));
         }
         //for "all day" button
-        AllDayPicker.setOnClickListener(v -> {
+        allDayPicker.setOnClickListener(v -> {
             if(rightNow==null){
                 Toast.makeText(SetActivity.this, R.string.set_toast_plsChooseDay
                         , Toast.LENGTH_SHORT).show();
@@ -358,6 +353,9 @@ public class SetActivity extends AppCompatActivity {
             Toast.makeText(this, R.string.set_toast_plsChooseDay, Toast.LENGTH_LONG).show();
             return;
         }
+        //apply settings button
+        int hour = 0;
+        int minute = 0;
         if (v.getId() == R.id.timePickerSettingsFrom) {
             hour = hourStart;
             minute = minuteStart;
