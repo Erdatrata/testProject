@@ -13,7 +13,9 @@
     <string name="navigation_drawer_close">סגור את התפריט הצדדי</string>
     <string name="action_settings">Settings</string>
 
-
+    <!--    DUMMY CONTENT-->
+    <string name="makedetails_detail_about"> Details about Item: </string>
+    <string name="details_infromation"> More details information here. </string>
 
 
     <!--    logged in       -->
