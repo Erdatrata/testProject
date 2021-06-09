@@ -3,8 +3,11 @@ import android.app.ActivityManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.media.Image;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
@@ -38,8 +41,13 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import org.json.JSONArray;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 
 public class MainActivity<imageView> extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -151,8 +159,7 @@ public class MainActivity<imageView> extends AppCompatActivity implements Naviga
         });
 
          showNews=(RecyclerView) findViewById(R.id.newsRecycle);
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-        db.collection("news")
+       FirebaseFirestore.getInstance().collection("news")
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
@@ -175,9 +182,12 @@ public class MainActivity<imageView> extends AppCompatActivity implements Naviga
                               titleList.add(document.getId());
                               dataList.add(document.get("data").toString());
                               typeList.add(document.get("type").toString());
-                                dateList.add(document.get("date").toString());
+                               Timestamp time=(Timestamp)document.getTimestamp("date");
+                                Date date=time.toDate();
+                                date.setHours(date.getHours()+3);
+                                dateList.add(date.toLocaleString());
                                 writerList.add(document.get("writer").toString());
-                                imageList.add( document.get("image").toString());
+                                imageList.add(document.get("image").toString());
                                 //System.out.println("the image url is: "+image[0]);
 
 
@@ -192,9 +202,18 @@ public class MainActivity<imageView> extends AppCompatActivity implements Naviga
                             image=imageList.toArray(new String[0]);
 
                             //System.out.println("check the bla another " + title[0]);
-                            MyAdapter myAdapter=new MyAdapter(MainActivity.this, title,data,date,image,type,writer);
-                            showNews.setAdapter(myAdapter);
+//                            MyAdapter myAdapter=new MyAdapter(MainActivity.this, title,data,date,image,type,writer);
+//                            showNews.setAdapter(myAdapter);
+//                            showNews.setLayoutManager(new LinearLayoutManager(MainActivity.this));
+                            try {
+                                MyAdapter myAdapter = new DownloadLink().execute().get();
+                                                            showNews.setAdapter(myAdapter);
                             showNews.setLayoutManager(new LinearLayoutManager(MainActivity.this));
+                            } catch (ExecutionException e) {
+                                e.printStackTrace();
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
                         } else {
                             Log.d("FAILARTICLE", "Error getting documents: ", task.getException());
                         }
@@ -210,7 +229,43 @@ public class MainActivity<imageView> extends AppCompatActivity implements Naviga
 
 
     }
+    class DownloadLink extends AsyncTask<Void, Void, MyAdapter> {
 
+
+        @Override
+        protected MyAdapter doInBackground(Void... params) {
+            Bitmap[] bitmap=imageToBitMapArray(image,image.length);
+            MyAdapter myAdapter=new MyAdapter(MainActivity.this, title,data,date,bitmap,type,writer);
+
+
+            return myAdapter;
+        }
+    }
+    public static Bitmap[] imageToBitMapArray(String[] image,int len){
+        Bitmap[] bitmaps=new Bitmap[len];
+        for(int i=0;i<len;i++){
+            bitmaps[i]=LoadImageFromWebOperations(image[i])[0];
+        }
+
+    return bitmaps;
+    }
+    public static Bitmap[] LoadImageFromWebOperations(String src) {
+
+        try {
+            java.net.URL url = new java.net.URL(src);
+            HttpURLConnection connection = (HttpURLConnection) url
+                    .openConnection();
+            connection.setDoInput(true);
+            connection.connect();
+            InputStream input = connection.getInputStream();
+            Bitmap[] myBitmap=new Bitmap[1];
+            myBitmap[0] = BitmapFactory.decodeStream(input);
+            return myBitmap;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
