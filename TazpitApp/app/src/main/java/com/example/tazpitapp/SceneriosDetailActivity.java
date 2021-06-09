@@ -126,7 +126,7 @@ private void showTheScenarioDetail(DocumentReference docRef){
         type_of_event.setText(getResources().getString(R.string.more_details)+document.get(constants.SCENARIO_TYPE_EVENT).toString());
             type_of_event.setMovementMethod(new ScrollingMovementMethod());
             //presenting the city of the event
-            city_of_event.setText("מקום האירוע: "+document.get(getResources().getString(R.string.detail_scenario_city)).toString());
+            city_of_event.setText(getResources().getString(R.string.place_scenario_city)+document.get(getResources().getString(R.string.detail_scenario_city)).toString());
             //by clicking on "לחץ למיקום" the user can see the location in apps like waze\google maps\moovit...
             gps_event.setOnClickListener(v -> {
                 GeoPoint geoPoint = document.getGeoPoint(constants.SCENARIO_LOCATION);

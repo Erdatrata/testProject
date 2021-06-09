@@ -141,6 +141,8 @@
 <!--    DETAIL SCENARIO  -->
     <string name="more_details"> פרטים נוספים: </string>
     <string name="detail_scenario_city"> עיר </string>
+    <string name="place_scenario_city"> מקום האירוע: </string>
+
 
 
 </resources>
