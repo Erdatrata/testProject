@@ -222,28 +222,28 @@ class register {
                         String msg = "";
 
                         if(city_eixst==0){
-                            msg = msg + "העיר לא קיימת במאגר \n";
-                            msg = msg + "העיר כתובה באופן שגוי\n";
+                            msg = msg + R.string.register_error_city_exists+"\n";
+                            msg = msg + R.string.register_error_city_error+"\n";
                         }
                         if(  phone_is_ok==1){
-                            msg = msg + "מספר הפלאפון קצר מדי \n";
+                            msg = msg +R.string.register_error_phone_short+"\n";
                         }
                         if (!Integritycheck()) {
-                            msg = msg + "חובה למלא את כל השדות \n";
+                            msg = msg +R.string.register_error_fields_missing +"\n";
 
                         }
 
                         if (!Patterns.EMAIL_ADDRESS.matcher(email.getEditText().getText().toString()).matches()) {//if the email is proper
-                            msg = msg + "אימייל לא תקין\n";
+                            msg = msg + R.string.register_error_email_error+"\n";
 
                         }
                         //if(!mailInUse()){msg=msg+"mail in use";}
                         if (!PASSWORD_PATTERN.matcher(password1.getEditText().getText().toString()).matches()) {//if the password is proper
-                            msg = msg + "הסיסמה חייבת להכיל אותיות קטנות, גדולות, תווים מיוחדים ומספרים\n";
+                            msg = msg + R.string.register_error_password_policy+"\n";
 
                         }
                         if (!checkEqualPassword()) {
-                            msg = msg + "סיסמאות לא תואמות\n";
+                            msg = msg + R.string.register_error_password_mismatch+"\n";
 
                         }
                         Toast.makeText(view.getContext(), msg, 5000).show();
@@ -449,7 +449,7 @@ class register {
                         Intent intent = new Intent(v.getContext(), register2.class);
                         startActivity(intent);
                     } else {
-                        Toast.makeText(register1.this, "אנא אשרו את הסכמתכם לחוזה על מנת להירשם"
+                        Toast.makeText(register1.this, R.string.register_confirm_checkbox
                                 , Toast.LENGTH_SHORT).show();
                     }
                 }
@@ -560,7 +560,7 @@ class register {
                         Register(mailSTR, passwordSTR, fNameSTR, LNameSTR, citySTR, phoneNumberSTR);
                         Thread.sleep(2500);
                     } catch (Exception e) {
-                        Toast.makeText(register3.this, "ההרשמה נכשלה", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(register3.this, R.string.register_fail, Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(v.getContext(), register2.class);
                         startActivity(intent);
                     }

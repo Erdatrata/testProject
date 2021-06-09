@@ -10,6 +10,7 @@
     tools:context=".MainActivity">
 
 
+
     <ImageView
         android:layout_width="208dp"
         android:layout_height="72dp"
@@ -43,7 +44,7 @@
         android:id="@+id/page2RegAggre"
         android:layout_width="33dp"
         android:layout_height="32dp"
-
+        android:text="@string/register_p2_accept"
         android:layout_marginBottom="96dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -55,7 +56,7 @@
         android:id="@+id/nextPage2Reg"
         android:layout_width="109dp"
         android:layout_height="46dp"
-        android:text="הבא"
+        android:text="@string/register_p2_next"
         app:cornerRadius="20dp"
         android:fontFamily="sans-serif-black"
         app:layout_constraintBottom_toBottomOf="parent"
