@@ -200,9 +200,12 @@ function Prettify2(toFill,userDoc){
     //table
     let table = document.createElement("table")
     toReturn.appendChild(table)
+    //changes to toFill
     toFill["דחיפות"]=(toFill["דחיפות"] == true) ? "Yes" : "No"
-    let forFilter= ["דחיפות","מיקום","סוג האירוע","עיר","timeCreated"]
-    let forScreen= ["Urgent?","Location","Type of Event","City","Creation Time"]
+    toFill["timeCreated"]=toFill["timeCreated"].toDate()
+    //info arrays
+    let forFilter= ["דחיפות","מיקום","סוג האירוע","עיר","timeCreated"]//for data
+    let forScreen= ["Urgent?","Location","Type of Event","City","Creation Time"]//for descriptors
     for(let i=0;i<forFilter.length;i++){
         let tr=document.createElement("tr")
         let descHead=document.createElement("td")
