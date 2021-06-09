@@ -66,28 +66,39 @@
 
 
 <!--    REGISTER    -->
+    <!--    PAGE 1    -->
+    <string name="register_p1_next">המשך</string>
+    <string name="register_hint_lastname">שם משפחה</string>
+    <string name="register_hint_firstname">שם פרטי</string>
+    <string name="register_hint_email">אימייל</string>
+    <string name="register_hint_password">סיסמא</string>
+    <string name="register_hint_password_confirm">אימות סיסמא</string>
+    <string name="register_hint_phone">מספר טלפון</string>
+    <string name="register_hint_city">עיר</string>
+
+        <!--    ERRORS  -->
+    <string name="register_error_city_exists">העיר לא קיימת במאגר</string>
+    <string name="register_error_city_error">העיר כתובה באופן שגוי</string>
+    <string name="register_error_phone_short">מספר הפלאפון קצר מדי</string>
+    <string name="register_error_fields_missing">חובה למלא את כל השדות </string>
+    <string name="register_error_email_error">אימייל לא תקין</string>
+    <string name="register_error_password_policy">הסיסמה חייבת להכיל אותיות קטנות, גדולות, תווים מיוחדים ומספרים</string>
+    <string name="register_error_password_mismatch">סיסמאות לא תואמות</string>
+    <string name="register_confirm_checkbox">אנא אשרו את הסכמתכם לחוזה על מנת להירשם</string>
+    <string name="register_fail">ההרשמה נכשלה</string>
 
 
+
+
+
+    <!--    PAGE 2    -->
+    <string name="register_p2_accept">מסכים ומאשר</string>
+    <string name="register_p2_next">הבא</string>
+
+
+    <!--    PAGE 3    -->
     <string name="register_toast_success">ההרשמה בוצעה בהצלחה</string>
-    <string name="city_not_exist">העיר לא קיימת במאגר</string>
-    <string name="wrong_written_city">העיר כתובה באופן שגוי</string>
-    <string name="phone_num_short">מספר הפלאפון קצר מדי</string>
-    <string name="not_valid_mail">  אימייל לא תקין</string>
-    <string name="password_rules">     הסיסמה חייבת להכיל אותיות קטנות, גדולות, תווים מיוחדים ומספרים
-</string>
-    <string name="not_same_passwords"> סיסמאות לא תואמות</string>
-    <string name="login_success"> ההתחברות הצליחה</string>
-    <string name="register_fail"> ההרשמה נכשלה</string>
-    <string name="accept_contact"> אנא אשרו את הסכמתכם לחוזה על מנת להירשם</string>
-
-
-
-
-
-
-
-
-
+    <string name="register_p3_send">שלח</string>
 
 
 
@@ -114,14 +125,18 @@
     <!--    NATI      -->
     <string name="about_nat_name">נתנאל חאזי</string>
     <string name="about_nat_job">אחראי עיצוב</string>
+    <!--    OTHER    -->
+    <string name="about_team">על הצוות</string>
+    <string name="about_tazpit">על הארגון</string>
 
-    <!--    FILL REPORT  -->
+
+<!--    FILL REPORT  -->
     <string name="all_fields_must">כל השדות הינם חובה</string>
     <string name="choose_media"> בחר מדיה</string>
     <string name="report_inprocess"> העלאת הדוח בתהליכים</string>
     <string name="succeed_upload_report"> העלאת האירוע בוצעה בהצלחה</string>
 
-    <!--    DETAIL SCENARIO  -->
+<!--    DETAIL SCENARIO  -->
     <string name="more_details"> פרטים נוספים: </string>
     <string name="detail_scenario_city"> עיר </string>
 

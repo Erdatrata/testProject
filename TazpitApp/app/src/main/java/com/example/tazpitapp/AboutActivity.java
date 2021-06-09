@@ -26,14 +26,16 @@ public class AboutActivity extends AppCompatActivity {
                 R.id.about_evy_linkedIn, R.id.about_evy_github,
                 R.id.about_gab_linkedIn, R.id.about_gab_github,
                 R.id.about_rat_linkedIn, R.id.about_rat_github,
-                R.id.about_nat_linkedIn, R.id.about_nat_github
+                R.id.about_nat_linkedIn, R.id.about_nat_github,
+                R.id.about_button_tazpit
         };
         String[] URLs = {
                 "https://www.linkedin.com/in/eliezer-revach-81410a208/","https://github.com/eliezerRevach",
                 "https://www.linkedin.com/in/evyatar-golan-300493195/","https://github.com/EvjaG",
                 "https://www.linkedin.com/in/gabigutkin/","https://github.com/gabigut27",
                 "https://www.linkedin.com/in/erdat-rata-ab92021b5/","https://github.com/Erdatrata",
-                "https://www.linkedin.com/in/netanel-hazi-787386177/","https://github.com/NatiHazi"
+                "https://www.linkedin.com/in/netanel-hazi-787386177/","https://github.com/NatiHazi",
+                "https://tps.co.il/about-us/"
         };
 
         for(int i=0;i<abouts.length;i++){

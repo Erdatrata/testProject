@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.text.method.PasswordTransformationMethod;
 import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.util.Patterns;
@@ -22,15 +21,14 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.security.KeyStore;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 ///////////////////////////
-import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -39,7 +37,6 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.SignInMethodQueryResult;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.annotations.NotNull;
@@ -50,8 +47,6 @@ import com.google.gson.Gson;
 ///////////
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -88,76 +83,46 @@ class register {
                         ".{7,}" +
                         "$");
 
-        private Button back;
-        private Button next;
 
+        private boolean checkPassword() {//call 2 function plus minimum of 8
+            String password = Objects.requireNonNull(password1.getEditText()).getText().toString();
 
-        //logic funcations
-//        private void cleanText() {
-//            Patterns.PHONE.matcher(phone).matches();
-//        }
-
-        private boolean cheakPassword() {//call 2 funcation plus minimum of 8
-            String password = password1.getEditText().getText().toString();
-
-            if (password.length() < 8 || !ContainSpecial(password) || !noUpper(password)) {
-                return false;
-            }
-            return true;
+            return password.length() >= 8 && ContainSpecial(password) && noUpper(password);
         }
 
         private boolean noUpper(String password) {//check if it has upper latters
-            if (password.equals(password.toLowerCase())) {
-                return false;
-            }
-            return true;
+            return !password.equals(password.toLowerCase());
         }
 
         private boolean ContainSpecial(String password) {//check if contain special latters like @!...
             Pattern p = Pattern.compile("[^A-Za-z0-9]");
             Matcher m = p.matcher(password);
-            boolean b = m.find();
-            if (b)
-                return true;
-            return false;
-        }
-
-        private boolean checkEqualPassword() {
-            if (password1.getEditText().getText().toString().equals(password2.getEditText().getText().toString())) {
-                return true;
-            }
-            return false;
-
+            return m.find();
         }
 
         private boolean Integritycheck() {//check all fileds have context
-            String mail = email.getEditText().getText().toString();
-            String password = password1.getEditText().getText().toString();
-            String passwordAgain = password2.getEditText().getText().toString();
+            String mail = Objects.requireNonNull(email.getEditText()).getText().toString();
+            String password = Objects.requireNonNull(password1.getEditText()).getText().toString();
+            String passwordAgain = Objects.requireNonNull(password2.getEditText()).getText().toString();
             String city = this.city.getText().toString();
-            String fname = FName.getEditText().getText().toString();
-            String Lname = this.LName.getEditText().getText().toString();
-            String phone = this.phone.getEditText().getText().toString();
+            String fname = Objects.requireNonNull(FName.getEditText()).getText().toString();
+            String Lname = Objects.requireNonNull(this.LName.getEditText()).getText().toString();
+            String phone = Objects.requireNonNull(this.phone.getEditText()).getText().toString();
 
-            if (mail.length() < 1 || password.length() < 1 || passwordAgain.length() < 1 || city.length() < 1 || fname.length() < 1 || Lname.length() < 1 || phone.length() < 1) {
-                return false;
-            }
-            return true;
+            return mail.length() < 1 || password.length() < 1 || passwordAgain.length() < 1 || city.length() < 1 || fname.length() < 1 || Lname.length() < 1 || phone.length() < 1;
+        }
+
+        private boolean checkEqualPassword() {
+            return !Objects.requireNonNull(password1.getEditText()).getText().toString()
+                    .equals(Objects.requireNonNull(password2.getEditText()).getText().toString());
+
         }
 
 
-        // private boolean cheakPhone() {//if the number is ok
-
-//            if( phone)
-        //  }
-
         private boolean checkMailIntegrity() {//check if it has @
 
-            String mail = email.getEditText().getText().toString();
-            if (!mail.contains("@")) {
-                return false;
-            }
-            return true;
+            String mail = Objects.requireNonNull(email.getEditText()).getText().toString();
+            return mail.contains("@");
         }
 
         TextInputLayout til_city;
@@ -171,35 +136,27 @@ class register {
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             try {
-                this.getSupportActionBar().hide();
-            } catch (NullPointerException e) {
+                Objects.requireNonNull(this.getSupportActionBar()).hide();
+            } catch (NullPointerException ignored) {
             }
             setContentView(R.layout.register);
             mAuth = FirebaseAuth.getInstance();
-            til_city = (TextInputLayout) findViewById((R.id.til_city));
-            act_city = (AutoCompleteTextView) findViewById((R.id.act_city));
+            til_city = findViewById((R.id.til_city));
+            act_city = findViewById((R.id.act_city));
             get_json();
             arrayAdapter_city = new ArrayAdapter<>(getApplicationContext(), R.layout.support_simple_spinner_dropdown_item, ArrList);
             act_city.setAdapter(arrayAdapter_city);
             act_city.setThreshold(1);
 
-            email = (TextInputLayout) findViewById(R.id.Email);
-            city = (AutoCompleteTextView) findViewById(R.id.act_city);
-            FName = (TextInputLayout) findViewById(R.id.FirstName);
-            LName = (TextInputLayout) findViewById(R.id.LastName);
-            password1 = (TextInputLayout) findViewById(R.id.Password);
-            password2 = (TextInputLayout) findViewById(R.id.passwordAgain);
-            phone = (TextInputLayout) findViewById(R.id.PhoneNumber);
+            email = findViewById(R.id.Email);
+            city = findViewById(R.id.act_city);
+            FName = findViewById(R.id.FirstName);
+            LName = findViewById(R.id.LastName);
+            password1 = findViewById(R.id.Password);
+            password2 = findViewById(R.id.passwordAgain);
+            phone = findViewById(R.id.PhoneNumber);
+            Button next = findViewById(R.id.next);
 
-            // back =  (Button)findViewById(R.id.back);
-            next = (Button) findViewById(R.id.next);
-//
-//            back.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View view) {
-//
-//                }
-//            });
 
             next.setOnClickListener(new View.OnClickListener() {
                 @SuppressLint("WrongConstant")
@@ -214,48 +171,48 @@ class register {
                             break;
                         }
                     }
-                    if( phone.getEditText().getText().toString().length()!=10){
+                    if( Objects.requireNonNull(phone.getEditText()).getText().toString().length()!=10){
                         phone_is_ok=1;
                     }
                     Log.d("onComplet","input="+ArrList.get(0));
-                    if (!Integritycheck() || !checkMailIntegrity() || !cheakPassword() || !checkEqualPassword()||city_eixst==0|| phone_is_ok==1) {
+                    if (Integritycheck() || !checkMailIntegrity() || !checkPassword() || checkEqualPassword() ||city_eixst==0|| phone_is_ok==1) {
                         String msg = "";
 
                         if(city_eixst==0){
-                            msg = msg + "\n העיר לא קיימת במאגר";
-                            msg = msg + "\n העיר כתובה באופן שגוי";
+                            msg = msg + R.string.register_error_city_exists+"\n";
+                            msg = msg + R.string.register_error_city_error+"\n";
                         }
                         if(  phone_is_ok==1){
-                            msg = msg + "\n מספר הפלאפון קצר מדי";
+                            msg = msg +R.string.register_error_phone_short+"\n";
                         }
-                        if (!Integritycheck()) {
-                            msg = msg + "\n כל השדות הינם חובה";
+                        if (Integritycheck()) {
+                            msg = msg +R.string.register_error_fields_missing +"\n";
 
                         }
 
-                        if (!Patterns.EMAIL_ADDRESS.matcher(email.getEditText().getText().toString()).matches()) {//if the email is proper
-                            msg = msg + "\n מייל לא חוקי";
+                        if (!Patterns.EMAIL_ADDRESS.matcher(Objects.requireNonNull(email.getEditText()).getText().toString()).matches()) {//if the email is proper
+                            msg = msg + R.string.register_error_email_error+"\n";
 
                         }
                         //if(!mailInUse()){msg=msg+"mail in use";}
-                        if (!PASSWORD_PATTERN.matcher(password1.getEditText().getText().toString()).matches()) {//if the password is proper
-                            msg = msg + "\n הסיסמה חייבת להכיל אותיות קטנות, גדולות, תווים מיוחדים ומספרים";
+                        if (PASSWORD_PATTERN.matcher(Objects.requireNonNull(password1.getEditText())
+                                .getText().toString()).matches()) {
+                        } else {//if the password is proper
+                    msg = msg + R.string.register_error_password_policy+"\n";
 
-
-
-                        }
-                        if (!checkEqualPassword()) {
-                            msg = msg + "\n ססמאות לא תואמות";
+                }
+                        if (checkEqualPassword()) {
+                            msg = msg + R.string.register_error_password_mismatch+"\n";
 
                         }
                         Toast.makeText(view.getContext(), msg, 5000).show();
 
                     }
                     else {
-                        mailSTR = email.getEditText().getText().toString();
-                        passwordSTR = password1.getEditText().getText().toString();
-                        fNameSTR = FName.getEditText().getText().toString();
-                        LNameSTR = LName.getEditText().getText().toString();
+                        mailSTR = Objects.requireNonNull(email.getEditText()).getText().toString();
+                        passwordSTR = Objects.requireNonNull(password1.getEditText()).getText().toString();
+                        fNameSTR = Objects.requireNonNull(FName.getEditText()).getText().toString();
+                        LNameSTR = Objects.requireNonNull(LName.getEditText()).getText().toString();
                         citySTR = city.getText().toString();
                         phoneNumberSTR = phone.getEditText().getText().toString();
                         try {
@@ -316,7 +273,7 @@ class register {
                 byte[] buffer = new byte[size];
                 is.read(buffer);
                 is.close();
-                json = new String(buffer, "UTF-8");
+                json = new String(buffer, StandardCharsets.UTF_8);
                 JSONArray jsonArray = new JSONArray(json);
                 for (int i = 0; i < jsonArray.length(); i++) {
                     JSONObject obj = jsonArray.getJSONObject(i);
@@ -416,7 +373,7 @@ class register {
 
 
     public static class register1 extends AppCompatActivity {
-        private DocumentReference mDocRef = FirebaseFirestore.getInstance().document(constants.DOC_REF_CONTACT);
+        private final DocumentReference mDocRef = FirebaseFirestore.getInstance().document("contact/contact");
         private Button back;
         private Button next;
         private TextView textshow;
@@ -427,10 +384,10 @@ class register {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_register2);
 //            back=(Button) findViewById(R.id.backPage2Reg);
-            next = (Button) findViewById(R.id.nextPage2Reg);
-            textshow = (TextView) findViewById(R.id.textViewRegPage2);
+            next = findViewById(R.id.nextPage2Reg);
+            textshow = findViewById(R.id.textViewRegPage2);
             textshow.setMovementMethod(new ScrollingMovementMethod());
-            Aggre = (CheckBox) findViewById(R.id.page2RegAggre);
+            Aggre = findViewById(R.id.page2RegAggre);
 
             //create file named mDocRef ,get instance from contact/contack ~ path to doc
             //call get ,on succeeds will save the data in dataToSave(comes in map file),then show on textView
@@ -451,7 +408,7 @@ class register {
                         Intent intent = new Intent(v.getContext(), register2.class);
                         startActivity(intent);
                     } else {
-                        Toast.makeText(register1.this, R.string.accept_contact
+                        Toast.makeText(register1.this, R.string.register_confirm_checkbox
                                 , Toast.LENGTH_SHORT).show();
                     }
                 }
@@ -463,7 +420,6 @@ class register {
 
     public static class register3 extends AppCompatActivity {
         private static FirebaseAuth mAuth;
-        private Button test;
 
         private void Register(String mailSTR, String passwordSTR, String fNameSTR, String lNameSTR, String citySTR, String phoneNumberSTR) throws Exception {
             //register,first create user , with email and password, if successful , it will create dataToSave object, then send it to real time database
@@ -554,7 +510,7 @@ class register {
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_register3);
-            test = (Button) findViewById(R.id.testB);
+            Button test = findViewById(R.id.testB);
             mAuth = FirebaseAuth.getInstance();
             test.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -577,6 +533,3 @@ class register {
 
 
 }
-
-
-
