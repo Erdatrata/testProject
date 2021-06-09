@@ -154,7 +154,7 @@ class register {
         private boolean checkMailIntegrity() {//check if it has @
 
             String mail = email.getEditText().getText().toString();
-            if (mail.contains("@") == false) {
+            if (!mail.contains("@")) {
                 return false;
             }
             return true;
@@ -222,28 +222,30 @@ class register {
                         String msg = "";
 
                         if(city_eixst==0){
-                            msg = msg + "העיר לא קיימת במאגר \n";
-                            msg = msg + "העיר כתובה באופן שגוי\n";
+                            msg = msg + "\n העיר לא קיימת במאגר";
+                            msg = msg + "\n העיר כתובה באופן שגוי";
                         }
                         if(  phone_is_ok==1){
-                            msg = msg + "מספר הפלאפון קצר מדי \n";
+                            msg = msg + "\n מספר הפלאפון קצר מדי";
                         }
                         if (!Integritycheck()) {
-                            msg = msg + "חובה למלא את כל השדות \n";
+                            msg = msg + "\n כל השדות הינם חובה";
 
                         }
 
                         if (!Patterns.EMAIL_ADDRESS.matcher(email.getEditText().getText().toString()).matches()) {//if the email is proper
-                            msg = msg + "אימייל לא תקין\n";
+                            msg = msg + "\n מייל לא חוקי";
 
                         }
                         //if(!mailInUse()){msg=msg+"mail in use";}
                         if (!PASSWORD_PATTERN.matcher(password1.getEditText().getText().toString()).matches()) {//if the password is proper
-                            msg = msg + "הסיסמה חייבת להכיל אותיות קטנות, גדולות, תווים מיוחדים ומספרים\n";
+                            msg = msg + "\n הסיסמה חייבת להכיל אותיות קטנות, גדולות, תווים מיוחדים ומספרים";
+
+
 
                         }
                         if (!checkEqualPassword()) {
-                            msg = msg + "סיסמאות לא תואמות\n";
+                            msg = msg + "\n ססמאות לא תואמות";
 
                         }
                         Toast.makeText(view.getContext(), msg, 5000).show();
@@ -259,12 +261,12 @@ class register {
                         try {
                             Register(mailSTR, passwordSTR, fNameSTR, LNameSTR, citySTR, phoneNumberSTR);
                             Thread.sleep(2500);
-                            Toast.makeText(register.register2.this, "ההתחבור הצליחה",
+                            Toast.makeText(register.register2.this, R.string.login_success,
                                     Toast.LENGTH_SHORT).show();
                             Intent intent = new Intent(view.getContext(), MainActivity.class);
                             startActivity(intent);
                         } catch (Exception e) {
-                            Toast.makeText(register2.this, "ההרשמה נכשלה", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(register2.this, R.string.register_fail, Toast.LENGTH_SHORT).show();
                         }
                     }
                 }
@@ -309,7 +311,7 @@ class register {
         public void get_json() {
             String json;
             try {
-                InputStream is = getAssets().open("citys.json");
+                InputStream is = getAssets().open(constants.CITY_LIST_FILE);
                 int size = is.available();
                 byte[] buffer = new byte[size];
                 is.read(buffer);
@@ -318,7 +320,7 @@ class register {
                 JSONArray jsonArray = new JSONArray(json);
                 for (int i = 0; i < jsonArray.length(); i++) {
                     JSONObject obj = jsonArray.getJSONObject(i);
-                    ArrList.add(obj.getString("cityName"));
+                    ArrList.add(obj.getString(constants.CITY_NAME));
 
                 }
 
@@ -335,15 +337,15 @@ class register {
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
                                 final Map<String, Object>[] dataToSave = new Map[]{new HashMap<String, Object>()};
-                                dataToSave[0].put("First Name:", fNameSTR);
-                                dataToSave[0].put("Sec Name:", LNameSTR);
-                                dataToSave[0].put("City:", citySTR);
-                                dataToSave[0].put("Email:", mailSTR);
-                                dataToSave[0].put("Phone:", phoneNumberSTR);
-                                dataToSave[0].put("volunteer", "false");
+                                dataToSave[0].put(constants.FIRST_NAME, fNameSTR);
+                                dataToSave[0].put(constants.SEC_NAME, LNameSTR);
+                                dataToSave[0].put(constants.CITY, citySTR);
+                                dataToSave[0].put(constants.EMAIL, mailSTR);
+                                dataToSave[0].put(constants.PHONE, phoneNumberSTR);
+                                dataToSave[0].put(constants.VOLUNTEER, "false");
 
 
-                                FirebaseDatabase.getInstance().getReference("Users")
+                                FirebaseDatabase.getInstance().getReference(constants.DOC_REF_USERS)
                                         //here we creating users folder in real time data baes , getting uid from user and storing the data in folder named by id
                                         .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
                                         .setValue(dataToSave[0]).addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -364,16 +366,16 @@ class register {
                                                     docData.put(day, dayDEF);
                                                     editor.putString(day, dayDEF);
                                                 }
-                                                docData.put("range", "" + 10.0);
-                                                editor.putFloat("range", (float) 10.0);
+                                                docData.put(constants.rangeChoice, "" + 10.0);
+                                                editor.putFloat(constants.rangeChoice, (float) 10.0);
 
-                                                docData.put("location", "city");
-                                                editor.putString("location", "city");
+                                                docData.put(constants.SHARED_PREFS_LOCATION, constants.SET_CITY);
+                                                editor.putString(constants.SHARED_PREFS_LOCATION, constants.SET_CITY);
 
                                                 FirebaseAuth userIdentifier = FirebaseAuth.getInstance();
                                                 String UID = userIdentifier.getCurrentUser().getUid();
                                                 DocumentReference DRF = FirebaseFirestore.getInstance()
-                                                        .document("Users/" + UID);
+                                                        .document(constants.DOC_REF_USERS+"/" + UID);
                                                 final boolean[] success = {true};
                                                 final Exception[] failToRet = new Exception[1];
                                                 DRF.set(docData).addOnFailureListener(new OnFailureListener() {
@@ -401,7 +403,7 @@ class register {
                 @Override
                 public void onFailure(@NonNull @org.jetbrains.annotations.NotNull Exception e) {
                     try {
-                        throw new Exception("failed to register");
+                        throw new Exception(constants.FAILED_REGISTER);
                     } catch (Exception exception) {
                         exception.printStackTrace();
                     }
@@ -414,7 +416,7 @@ class register {
 
 
     public static class register1 extends AppCompatActivity {
-        private DocumentReference mDocRef = FirebaseFirestore.getInstance().document("contact/contact");
+        private DocumentReference mDocRef = FirebaseFirestore.getInstance().document(constants.DOC_REF_CONTACT);
         private Button back;
         private Button next;
         private TextView textshow;
@@ -438,7 +440,7 @@ class register {
                 @Override
                 public void onSuccess(DocumentSnapshot documentSnapshot) {
                     dataToSave[0] = documentSnapshot.getData();
-                    String str = dataToSave[0].get("contact").toString();
+                    String str = dataToSave[0].get(constants.CONTACT).toString();
                     textshow.setText(str);
                 }
             });
@@ -449,7 +451,7 @@ class register {
                         Intent intent = new Intent(v.getContext(), register2.class);
                         startActivity(intent);
                     } else {
-                        Toast.makeText(register1.this, "אנא אשרו את הסכמתכם לחוזה על מנת להירשם"
+                        Toast.makeText(register1.this, R.string.accept_contact
                                 , Toast.LENGTH_SHORT).show();
                     }
                 }
@@ -471,14 +473,15 @@ class register {
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
                                 final Map<String, Object>[] dataToSave = new Map[]{new HashMap<String, Object>()};
-                                dataToSave[0].put("First Name:", fNameSTR);
-                                dataToSave[0].put("Sec Name:", LNameSTR);
-                                dataToSave[0].put("City:", citySTR);
-                                dataToSave[0].put("Email:", mailSTR);
-                                dataToSave[0].put("Phone:", phoneNumberSTR);
+                                dataToSave[0].put(constants.FIRST_NAME, fNameSTR);
+                                dataToSave[0].put(constants.SEC_NAME, LNameSTR);
+                                dataToSave[0].put(constants.CITY, citySTR);
+                                dataToSave[0].put(constants.EMAIL, mailSTR);
+                                dataToSave[0].put(constants.PHONE, phoneNumberSTR);
 
 
-                                FirebaseDatabase.getInstance().getReference("Users")
+
+                                FirebaseDatabase.getInstance().getReference(constants.DOC_REF_USERS)
                                         //here we creating users folder in real time data baes , getting uid from user and storing the data in folder named by id
                                         .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
                                         .setValue(dataToSave[0]).addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -499,16 +502,16 @@ class register {
                                                     docData.put(day, dayDEF);
                                                     editor.putString(day, dayDEF);
                                                 }
-                                                docData.put("range", "" + 10.0);
-                                                editor.putFloat("range", (float) 10.0);
+                                                docData.put(constants.rangeChoice, "" + 10.0);
+                                                editor.putFloat(constants.rangeChoice, (float) 10.0);
 
-                                                docData.put("location", "city");
-                                                editor.putString("location", "city");
+                                                docData.put(constants.SHARED_PREFS_LOCATION, constants.CITY);
+                                                editor.putString(constants.SHARED_PREFS_LOCATION, constants.CITY);
 
                                                 FirebaseAuth userIdentifier = FirebaseAuth.getInstance();
                                                 String UID = userIdentifier.getCurrentUser().getUid();
                                                 DocumentReference DRF = FirebaseFirestore.getInstance()
-                                                        .document("Users/" + UID);
+                                                        .document(constants.DOC_REF_USERS+"/" + UID);
                                                 final boolean[] success = {true};
                                                 final Exception[] failToRet = new Exception[1];
                                                 DRF.set(docData).addOnFailureListener(new OnFailureListener() {
@@ -536,7 +539,7 @@ class register {
                 @Override
                 public void onFailure(@NonNull @org.jetbrains.annotations.NotNull Exception e) {
                     try {
-                        throw new Exception("failed to register");
+                        throw new Exception(constants.FAILED_REGISTER);
                     } catch (Exception exception) {
                         exception.printStackTrace();
                     }
@@ -560,7 +563,7 @@ class register {
                         Register(mailSTR, passwordSTR, fNameSTR, LNameSTR, citySTR, phoneNumberSTR);
                         Thread.sleep(2500);
                     } catch (Exception e) {
-                        Toast.makeText(register3.this, "ההרשמה נכשלה", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(register3.this, R.string.register_fail, Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(v.getContext(), register2.class);
                         startActivity(intent);
                     }
@@ -576,125 +579,4 @@ class register {
 }
 
 
-//package com.example.testing;
-//
-//import android.content.SharedPreferences;
-//import androidx.appcompat.app.AppCompatActivity;
-//import android.os.Bundle;
-//import android.view.View;
-//import android.widget.Button;
-//import android.widget.EditText;
-//import android.widget.Switch;
-//import android.widget.TextView;
-//import android.widget.Toast;
-//
-//public class MainActivity extends AppCompatActivity {
-//    private TextView textView;
-//    private EditText editText;
-//    private Button applyTextButton;
-//    private Button saveButton;
-//    private Switch switch1;
-//
-//    private Button applyTextButton2;
-//    private Button saveButton2;
-//    private Switch switch2;
-//
-//    private Button LOAD1;
-//    private Button LOAD2;
-//
-//    public static final String SHARED_PREFS = "sharedPrefs";
-//    public static final String TEXT = "text";
-//    public static final String SWITCH1 = "switch1";
-//    public static final String TEXT2 = "text2";
-//    public static final String SWITCH2 = "switch2";
-//
-//    private String text;
-//    private boolean switchOnOff;
-//
-//
-//    @Override
-//    protected void onCreate(Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
-//        setContentView(R.layout.activity_main);
-//
-//        textView = (TextView) findViewById(R.id.textview);
-//        editText = (EditText) findViewById(R.id.edittext);
-//        applyTextButton = (Button) findViewById(R.id.apply_text_button);
-//        saveButton = (Button) findViewById(R.id.save_button);
-//        switch1 = (Switch) findViewById(R.id.switch1);
-//
-//        saveButton2 = (Button) findViewById(R.id.save2);
-//        switch2 = (Switch) findViewById(R.id.switch2);
-//        applyTextButton2 = (Button) findViewById(R.id.apply2);
-//
-//        LOAD1 = (Button) findViewById(R.id.LOAD1);
-//        LOAD2 = (Button) findViewById(R.id.LOAD2);
-//
-//        applyTextButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                textView.setText(editText.getText().toString());
-//            }
-//        });
-//
-//        saveButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                saveData(TEXT,SWITCH1,switch1);
-//            }
-//        });
-//        applyTextButton2.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                textView.setText(editText.getText().toString());
-//            }
-//        });
-//        saveButton2.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                saveData(TEXT2,SWITCH2,switch2);
-//            }
-//        });
-//        LOAD1.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                loadData(TEXT,SWITCH1);
-//            }
-//        });
-//
-//        LOAD2.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                loadData(TEXT2,SWITCH2);
-//            }
-//        });
-//
-//
-//
-//    }
-//
-//    public void saveData(String text,String switchD,Switch switchL) {
-//        SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
-//        SharedPreferences.Editor editor = sharedPreferences.edit();
-//
-//        editor.putString(text, textView.getText().toString());
-//        editor.putBoolean(switchD, switchL.isChecked());
-//
-//        editor.apply();
-//
-//        Toast.makeText(this, "Data saved-"+text, Toast.LENGTH_SHORT).show();
-//    }
-//
-//    public void loadData(String texti,String switchD) {
-//        SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
-//        text = sharedPreferences.getString(texti, "");
-//        switchOnOff = sharedPreferences.getBoolean(switchD, false);
-//    }
-//
-//    public void updateViews() {
-//        textView.setText(text);
-//        switch1.setChecked(switchOnOff);
-//        switch2.setChecked(switchOnOff);
-//    }
-//}
 

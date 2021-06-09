@@ -143,6 +143,22 @@ public static final String ISSIGEND = "isSigned";
     public static final String PM=  "PM" ;
     public static final String setHourStartSetMinutesStartErrors= "beginning times cannot come before end times";
 
+    // belong to register
+    public static final String CITY_LIST_FILE= "citys.json";
+    public static final String CITY_NAME= "cityName";
+    public static final String FIRST_NAME= "First Name:";
+    public static final String SEC_NAME= "Sec Name:";
+    public static final String CITY=  "City:";
+    public static final String EMAIL=  "Email:";
+    public static final String PHONE=  "Phone:";
+    public static final String VOLUNTEER=  "volunteer";
+    public static final String FAILED_REGISTER=  "failed to register";
+    public static final String CONTACT=  "contact";
+
+
+
+
+
 
 
 
@@ -157,6 +173,9 @@ public static final String ISSIGEND = "isSigned";
     public static final String SCENARIO_TYPE_EVENT = "סוג האירוע" ; //type of the event
     public static final String SCENARIO_LOCATION = "מיקום" ; //type of the event
     public static final String DOC_REF_USERS = "Users" ; //USERS setting in firebase
+    public static final String DOC_REF_CONTACT = "contact/contact" ; //contcat location in firebase firestore
+
+
 
 
 

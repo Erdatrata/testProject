@@ -69,6 +69,27 @@
 
 
     <string name="register_toast_success">ההרשמה בוצעה בהצלחה</string>
+    <string name="city_not_exist">העיר לא קיימת במאגר</string>
+    <string name="wrong_written_city">העיר כתובה באופן שגוי</string>
+    <string name="phone_num_short">מספר הפלאפון קצר מדי</string>
+    <string name="not_valid_mail">  אימייל לא תקין</string>
+    <string name="password_rules">     הסיסמה חייבת להכיל אותיות קטנות, גדולות, תווים מיוחדים ומספרים
+</string>
+    <string name="not_same_passwords"> סיסמאות לא תואמות</string>
+    <string name="login_success"> ההתחברות הצליחה</string>
+    <string name="register_fail"> ההרשמה נכשלה</string>
+    <string name="accept_contact"> אנא אשרו את הסכמתכם לחוזה על מנת להירשם</string>
+
+
+
+
+
+
+
+
+
+
+
 
 <!--    SCENARIO    -->
 
