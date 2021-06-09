@@ -59,6 +59,7 @@ public class MainActivity<imageView> extends AppCompatActivity implements Naviga
     String [] date;
     String [] writer;
     String [] image;
+    String [] url;
 
     private DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle aToggle;
@@ -171,6 +172,7 @@ public class MainActivity<imageView> extends AppCompatActivity implements Naviga
                             date=new String[1];
                             writer=new String[1];
                             image=new String[1];
+                            url=new String[1];
                             System.out.println("im here $$$");
                             List<String> titleList = new ArrayList<>();
                             List<String> dataList = new ArrayList<>();
@@ -178,6 +180,7 @@ public class MainActivity<imageView> extends AppCompatActivity implements Naviga
                             List<String> dateList = new ArrayList<>();
                             List<String> writerList = new ArrayList<>();
                             List<String> imageList = new ArrayList<>();
+                            List<String> urlList = new ArrayList<>();
                             for (QueryDocumentSnapshot document : task.getResult()) {
                               titleList.add(document.getId());
                               dataList.add(document.get("data").toString());
@@ -188,6 +191,7 @@ public class MainActivity<imageView> extends AppCompatActivity implements Naviga
                                 dateList.add(date.toLocaleString());
                                 writerList.add(document.get("writer").toString());
                                 imageList.add(document.get("image").toString());
+                                urlList.add(document.get("url").toString());
                                 //System.out.println("the image url is: "+image[0]);
 
 
@@ -200,6 +204,7 @@ public class MainActivity<imageView> extends AppCompatActivity implements Naviga
                             date=dateList.toArray(new String[0]);
                             writer=writerList.toArray(new String[0]);
                             image=imageList.toArray(new String[0]);
+                            url=urlList.toArray(new String[0]);
 
                             //System.out.println("check the bla another " + title[0]);
 //                            MyAdapter myAdapter=new MyAdapter(MainActivity.this, title,data,date,image,type,writer);
@@ -235,7 +240,7 @@ public class MainActivity<imageView> extends AppCompatActivity implements Naviga
         @Override
         protected MyAdapter doInBackground(Void... params) {
             Bitmap[] bitmap=imageToBitMapArray(image,image.length);
-            MyAdapter myAdapter=new MyAdapter(MainActivity.this, title,data,date,bitmap,type,writer);
+            MyAdapter myAdapter=new MyAdapter(MainActivity.this, title,data,date,bitmap,type,writer,url);
 
 
             return myAdapter;
