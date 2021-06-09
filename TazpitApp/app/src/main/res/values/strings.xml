@@ -86,6 +86,8 @@
     <string name="register_error_password_mismatch">סיסמאות לא תואמות</string>
     <string name="register_confirm_checkbox">אנא אשרו את הסכמתכם לחוזה על מנת להירשם</string>
     <string name="register_fail">ההרשמה נכשלה</string>
+    <string name="login_success">ההתחברות הצליחה</string>
+
 
 
 
