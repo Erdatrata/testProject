@@ -9,12 +9,7 @@
     android:padding="20dp"
     tools:context=".MainActivity">
 
-    <!-- Nested Scroll view -->
-    <ScrollView
-        android:id="@+id/registrationContractLayout"
-        android:layout_width="match_parent"
-        android:layout_height="704dp"
-        tools:ignore="UselessParent">
+
 
     <ImageView
         android:layout_width="208dp"
