@@ -11,11 +11,11 @@ public class dayTime {
     //constructor
     public dayTime(int hS, int mS, int hE, int mE){
         if(hS > 23 || hS < 0 || hE > 23 || hE < 0){
-            throw new InvalidParameterException("Hours cannot exceed 23 or fall below 0");
+            throw new InvalidParameterException(constants.CONSTRUCTOR_HOUR_PROBLEM);
         } else if(mS < 0 || mE < 0 || mS > 59 || mE > 59){
-            throw new InvalidParameterException("Minutes cannot exceed 59 or fall below 0");
+            throw new InvalidParameterException(constants.CONSTRUCTOR_MINTUES_PROBLEM);
         } else if((hS>hE) || ((hS==hE)&&(mS>=mE)))
-            throw new InvalidParameterException("End times cannot come before start time");
+            throw new InvalidParameterException(constants.END_BEFORE_START);
         hourStart = hS;
         hourEnd = hE;
         minuteStart = mS;
@@ -31,25 +31,25 @@ public class dayTime {
     //check if start time is earlier than finish time
     public void setHourStart(int hourStart){
         if(hourStart<=this.getHourEnd())this.hourStart = hourStart;
-        else throw new InvalidParameterException("beginning times cannot come before end times");
+        else throw new InvalidParameterException(constants.setHourStartSetMinutesStartErrors);
 
     }
     public void setMinuteStart(int minuteStart){
         if(this.getHourStart()<getHourEnd() ||
                 ((this.getHourStart()==this.getHourEnd())&&(minuteStart<this.getMinuteEnd())))
         this.minuteStart = minuteStart;
-        else throw new InvalidParameterException("beginning times cannot come before end times");
+        else throw new InvalidParameterException(constants.setHourStartSetMinutesStartErrors);
 
     }
     //check that end time is later than start time
     public void setHourEnd(int hourEnd){
         if(hourEnd>=this.getHourStart())this.hourEnd = hourEnd;
-        else throw new InvalidParameterException("End times cannot come before beginning of time");
+        else throw new InvalidParameterException(constants.END_BEFORE_START);
     }
     public void setMinuteEnd(int minuteEnd){if(this.getHourStart()<getHourEnd() ||
             ((this.getHourStart()==this.getHourEnd())&&(this.getMinuteStart()<minuteEnd)))
         this.minuteEnd = minuteEnd;
-    else throw new InvalidParameterException("End times cannot come before beginning of time");
+    else throw new InvalidParameterException(constants.END_BEFORE_START);
     }
 
     //returns time from start of active time to end of active time in minutes
@@ -59,12 +59,12 @@ public class dayTime {
 
 
     public String toString(){
-        String pastNoonStart="AM";
-        String pastNoonEnd="AM";
+        String pastNoonStart=constants.AM;
+        String pastNoonEnd=constants.AM;
         if(this.getHourStart() >= 12)
-            pastNoonStart="PM";
+            pastNoonStart=constants.PM;
         if(this.getHourEnd() >= 12)
-            pastNoonEnd="PM";
+            pastNoonEnd=constants.PM;
         return this.getHourStart()%12+":"+this.getMinuteStart()+pastNoonStart+" to "+
                 this.getHourEnd()%12+":"+this.getMinuteEnd()+pastNoonEnd;
     }
