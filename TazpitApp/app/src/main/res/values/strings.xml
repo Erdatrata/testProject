@@ -66,9 +66,27 @@
 
 
 <!--    REGISTER    -->
+    <!--    PAGE 1    -->
+    <string name="register_p1_next">המשך</string>
+    <string name="register_hint_lastname">שם משפחה</string>
+    <string name="register_hint_firstname">שם פרטי</string>
+    <string name="register_hint_email">אימייל</string>
+    <string name="register_hint_password">סיסמא</string>
+    <string name="register_hint_password_confirm">אימות סיסמא</string>
+    <string name="register_hint_phone">מספר טלפון</string>
+    <string name="register_hint_city">עיר</string>
 
 
+
+    <!--    PAGE 2    -->
+    <string name="register_p2_accept">מסכים ומאשר</string>
+    <string name="register_p2_next">הבא</string>
+
+
+    <!--    PAGE 3    -->
     <string name="register_toast_success">ההרשמה בוצעה בהצלחה</string>
+    <string name="register_p3_send">שלח</string>
+
 
 <!--    SCENARIO    -->
 
