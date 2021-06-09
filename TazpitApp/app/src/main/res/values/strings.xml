@@ -93,14 +93,18 @@
     <!--    NATI      -->
     <string name="about_nat_name">נתנאל חאזי</string>
     <string name="about_nat_job">אחראי עיצוב</string>
+    <!--    OTHER    -->
+    <string name="about_team">על הצוות</string>
+    <string name="about_tazpit">על הארגון</string>
 
-    <!--    FILL REPORT  -->
+
+<!--    FILL REPORT  -->
     <string name="all_fields_must">כל השדות הינם חובה</string>
     <string name="choose_media"> בחר מדיה</string>
     <string name="report_inprocess"> העלאת הדוח בתהליכים</string>
     <string name="succeed_upload_report"> העלאת האירוע בוצעה בהצלחה</string>
 
-    <!--    DETAIL SCENARIO  -->
+<!--    DETAIL SCENARIO  -->
     <string name="more_details"> פרטים נוספים: </string>
     <string name="detail_scenario_city"> עיר </string>
 
