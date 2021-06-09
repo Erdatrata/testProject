@@ -5,7 +5,6 @@ import android.app.ActivityManager;
 import android.app.AlertDialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -17,7 +16,6 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.SeekBar;
 import android.widget.TextView;
-import android.widget.TimePicker;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -25,8 +23,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
+
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -45,26 +42,13 @@ public class SetActivity extends AppCompatActivity {
     private RadioGroup locationRadioGroup;
     private RadioButton gpsButton;
     private RadioButton cityButton;
-    private SeekBar seekBar;
     private double range;
     private TextView rangeCont;
 
-    //the buttons for choosing between different days and timepicker
-    private Button daysButton1;//SUN
-    private Button daysButton2;//MON
-    private Button daysButton3;//TUE
-    private Button daysButton4;//WED
-    private Button daysButton5;//THU
-    private Button daysButton6;//FRI
-    private Button daysButton7;//SAT
     private Button timePickerFrom;
     private Button timePickerTo;
-    private Button AllDayPicker;
     private static Button rightNow = null;
 
-    //apply settings button
-    private static int hour = 0;
-    private static int minute = 0;
     private static int hourStart = 0;
     private static int minuteStart = 0;
     private static int hoursEnd = 0;
@@ -100,19 +84,27 @@ public class SetActivity extends AppCompatActivity {
         locationRadioGroup = findViewById(R.id.locationRadioGroup);
         gpsButton = findViewById(R.id.radio_by_gps);
         cityButton = findViewById(R.id.radio_by_city);
-        seekBar=findViewById(R.id.gpsRangeBar);
+        SeekBar seekBar = findViewById(R.id.gpsRangeBar);
         rangeCont=findViewById(R.id.rangeContainer);
         range=Double.parseDouble(""+sharedpreferences.getFloat(constants.rangeChoice,(float)0.5));
 
         //day settings
-        daysButton1 = findViewById(R.id.day_sunday);
-        daysButton2 = findViewById(R.id.day_monday);
-        daysButton3 = findViewById(R.id.day_tuesday);
-        daysButton4 = findViewById(R.id.day_wednesday);
-        daysButton5 = findViewById(R.id.day_thursday);
-        daysButton6 = findViewById(R.id.day_friday);
-        daysButton7 = findViewById(R.id.day_saturday);
-        AllDayPicker = findViewById(R.id.allDayButton);
+        //the buttons for choosing between different days and timepicker
+        //SUN
+        Button daysButton1 = findViewById(R.id.day_sunday);
+        //MON
+        Button daysButton2 = findViewById(R.id.day_monday);
+        //TUE
+        Button daysButton3 = findViewById(R.id.day_tuesday);
+        //WED
+        Button daysButton4 = findViewById(R.id.day_wednesday);
+        //THU
+        Button daysButton5 = findViewById(R.id.day_thursday);
+        //FRI
+        Button daysButton6 = findViewById(R.id.day_friday);
+        //SAT
+        Button daysButton7 = findViewById(R.id.day_saturday);
+        Button allDayPicker = findViewById(R.id.allDayButton);
         //timepicker & apply
         timePickerFrom = findViewById(R.id.timePickerSettingsFrom);
         timePickerTo = findViewById(R.id.timePickerSettingsTo);
@@ -165,41 +157,30 @@ public class SetActivity extends AppCompatActivity {
 
         //for day listeners
         for (Button day : daysArr) {
-            day.setOnClickListener(new View.OnClickListener() {
-                public void onClick(View v) {
-                    changeDay(v);
-                }
-            });
+            day.setOnClickListener(v -> changeDay(v));
         }
         //for timePickers
         Button[] timers = {timePickerFrom, timePickerTo};
         for (Button b : timers) {
-            b.setOnClickListener(new View.OnClickListener() {
-                public void onClick(View v) {
-                    popTimePicker(v);
-                }
-            });
+            b.setOnClickListener(v -> popTimePicker(v));
         }
         //for "all day" button
-        AllDayPicker.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(rightNow==null){
-                    Toast.makeText(SetActivity.this, R.string.set_toast_plsChooseDay
-                            , Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                String idd = ""+rightNow.getId();
-                String tidd = constants.AllDayPicker_TEMP+idd;
-                dayTime dt = new dayTime(0, 0, 23, 59);//default for first time
-                String toPut = gson.toJson(dt);
-                editor.putString(tidd,toPut).commit();
-                hourStart=0;hoursEnd=23;
-                minuteStart=0;minutesEnd=59;
-                timePickerFrom.setText(R.string.min_time_start);
-                timePickerTo.setText(R.string.max_time_end);
-                saveTemp();
+        allDayPicker.setOnClickListener(v -> {
+            if(rightNow==null){
+                Toast.makeText(SetActivity.this, R.string.set_toast_plsChooseDay
+                        , Toast.LENGTH_SHORT).show();
+                return;
             }
+            String idd = ""+rightNow.getId();
+            String tidd = constants.AllDayPicker_TEMP+idd;
+            dayTime dt = new dayTime(0, 0, 23, 59);//default for first time
+            String toPut = gson.toJson(dt);
+            editor.putString(tidd,toPut).commit();
+            hourStart=0;hoursEnd=23;
+            minuteStart=0;minutesEnd=59;
+            timePickerFrom.setText(R.string.min_time_start);
+            timePickerTo.setText(R.string.max_time_end);
+            saveTemp();
         });
     }
 
@@ -233,12 +214,9 @@ public class SetActivity extends AppCompatActivity {
         for(Map.Entry<String,String> entry: docData.entrySet()){
             String key = entry.getKey();
             String val = entry.getValue();
-            DRF.update(key,val).addOnFailureListener(new OnFailureListener() {
-                @Override
-                public void onFailure(@NonNull @NotNull Exception e) {
-                    success[0] = false;
-                    failToRet[0]=e;
-                }
+            DRF.update(key,val).addOnFailureListener(e -> {
+                success[0] = false;
+                failToRet[0]=e;
             });
             /*DRF.set(docData).addOnFailureListener(new OnFailureListener() {
                 @Override
@@ -309,28 +287,22 @@ public class SetActivity extends AppCompatActivity {
                 new AlertDialog.Builder(SetActivity.this)
                         .setTitle(R.string.set_alert_title)
                         .setMessage(R.string.set_alert_message)
-                        .setPositiveButton(R.string.set_alert_accept, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-                                if(getApplicationContext().checkSelfPermission(Manifest.permission.ACCESS_BACKGROUND_LOCATION)
-                                        == PackageManager.PERMISSION_GRANTED){
-                                    Toast.makeText(SetActivity.this, R.string.set_toast_gpsGranted,
-                                            Toast.LENGTH_SHORT).show();
-                                    if(!RequestPermissionCall())
-                                        startLocationService();
-                                } else {
-                                    requestPermissions(new String[]
-                                            {Manifest.permission.ACCESS_BACKGROUND_LOCATION},105);
-                                }
+                        .setPositiveButton(R.string.set_alert_accept, (dialogInterface, i) -> {
+                            if(getApplicationContext().checkSelfPermission(Manifest.permission.ACCESS_BACKGROUND_LOCATION)
+                                    == PackageManager.PERMISSION_GRANTED){
+                                Toast.makeText(SetActivity.this, R.string.set_toast_gpsGranted,
+                                        Toast.LENGTH_SHORT).show();
+                                if(!RequestPermissionCall())
+                                    startLocationService();
+                            } else {
+                                requestPermissions(new String[]
+                                        {Manifest.permission.ACCESS_BACKGROUND_LOCATION},105);
                             }
-                        }).setNeutralButton(R.string.set_alert_deny, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        //in case user didn't want to authorize us location
-                        cityButton.setChecked(true);
-                        gpsButton.setChecked(!true);
-                    }
-                }).setCancelable(false)
+                        }).setNeutralButton(R.string.set_alert_deny, (dialog, which) -> {
+                            //in case user didn't want to authorize us location
+                            cityButton.setChecked(true);
+                            gpsButton.setChecked(!true);
+                        }).setCancelable(false)
                         .create()
                         .show();
             }
@@ -381,6 +353,9 @@ public class SetActivity extends AppCompatActivity {
             Toast.makeText(this, R.string.set_toast_plsChooseDay, Toast.LENGTH_LONG).show();
             return;
         }
+        //apply settings button
+        int hour = 0;
+        int minute = 0;
         if (v.getId() == R.id.timePickerSettingsFrom) {
             hour = hourStart;
             minute = minuteStart;
@@ -389,40 +364,35 @@ public class SetActivity extends AppCompatActivity {
             minute = minutesEnd;
         }
         String timeString = ((Button) v).getText().toString();
-        TimePickerDialog.OnTimeSetListener onTimeSetListener = new TimePickerDialog.OnTimeSetListener() {
-
-
-            @Override
-            public void onTimeSet(TimePicker view, int hourOfDay, int minutes) {
-                String toPut = "";
+        TimePickerDialog.OnTimeSetListener onTimeSetListener = (view, hourOfDay, minutes) -> {
+            String toPut = "";
 //                if(v.getId()==)
-                view.setHour(1);
-                if (v.getId() == R.id.timePickerSettingsFrom) {//for upper textView
-                    //check for time correctness here (time should be chronological)
-                    if (hourOfDay > hoursEnd || ((hourOfDay == hoursEnd) && (minutes >= minutesEnd))) {
-                        Toast.makeText(SetActivity.this,
-                                R.string.set_toast_cantSetStartLater, Toast.LENGTH_LONG).show();
-                        return;
-                    }
-                    hourStart = hourOfDay;
-                    minuteStart = minutes;
-                    toPut = String.format(Locale.getDefault(), "%02d:%02d", hourStart, minuteStart);
-                } else {//for lower textView
-                    //check for time correctness here also
-                    if (hourOfDay < hourStart || ((hourOfDay == hourStart) && (minutes <= minuteStart))) {
-                        Toast.makeText(SetActivity.this,
-                                R.string.set_toast_cantSetEndFirst, Toast.LENGTH_LONG).show();
-                        return;
-                    }
-                    hoursEnd = hourOfDay;
-                    minutesEnd = minutes;
-                    toPut = String.format(Locale.getDefault(), "%02d:%02d", hoursEnd, minutesEnd);
+            view.setHour(1);
+            if (v.getId() == R.id.timePickerSettingsFrom) {//for upper textView
+                //check for time correctness here (time should be chronological)
+                if (hourOfDay > hoursEnd || ((hourOfDay == hoursEnd) && (minutes >= minutesEnd))) {
+                    Toast.makeText(SetActivity.this,
+                            R.string.set_toast_cantSetStartLater, Toast.LENGTH_LONG).show();
+                    return;
                 }
-                //if changes were made to time, make sure to let it be known in logic
-                if (((Button) v).getText() != toPut)
-                    unsaved = true;
-                ((Button) v).setText(toPut);
+                hourStart = hourOfDay;
+                minuteStart = minutes;
+                toPut = String.format(Locale.getDefault(), "%02d:%02d", hourStart, minuteStart);
+            } else {//for lower textView
+                //check for time correctness here also
+                if (hourOfDay < hourStart || ((hourOfDay == hourStart) && (minutes <= minuteStart))) {
+                    Toast.makeText(SetActivity.this,
+                            R.string.set_toast_cantSetEndFirst, Toast.LENGTH_LONG).show();
+                    return;
+                }
+                hoursEnd = hourOfDay;
+                minutesEnd = minutes;
+                toPut = String.format(Locale.getDefault(), "%02d:%02d", hoursEnd, minutesEnd);
             }
+            //if changes were made to time, make sure to let it be known in logic
+            if (((Button) v).getText() != toPut)
+                unsaved = true;
+            ((Button) v).setText(toPut);
         };
 //        int style= AlertDialog.THEME_HOLO_DARK;
         //int style = R.style.Theme_MaterialComponents_Dialog_Alert;

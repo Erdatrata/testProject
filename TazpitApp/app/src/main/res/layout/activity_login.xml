@@ -17,10 +17,10 @@
         android:layout_marginBottom="548dp"
         android:paddingLeft="10dip"
         android:scaleType="centerCrop"
-        android:src="@drawable/tps_logo_full_foreground"
+        android:src="@mipmap/new_logo_background"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.6"
         app:layout_constraintStart_toStartOf="parent"
         tools:ignore="MissingConstraints" />
 
