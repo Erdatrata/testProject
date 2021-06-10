@@ -181,6 +181,9 @@ public class SetActivity extends AppCompatActivity {
             timePickerFrom.setText(R.string.min_time_start);
             timePickerTo.setText(R.string.max_time_end);
             saveTemp();
+            findViewById(R.id.allDayButton).setBackgroundColor(getColor(R.color.tps_color_blue));
+            ((Button)findViewById(R.id.allDayButton)).setTextColor(getColor(R.color.white));
+
         });
     }
 
@@ -323,7 +326,13 @@ public class SetActivity extends AppCompatActivity {
             //unsave unsaved
             unsaved = false;
         }
+        if(rightNow!=null){
+            rightNow.setBackgroundColor(getColor(R.color.tps_color_gray));
+            rightNow.setTextColor(getColor(R.color.black));
+        }
         rightNow = (Button) v;
+        rightNow.setBackgroundColor(getColor(R.color.tps_color_blue));
+        rightNow.setTextColor(getColor(R.color.white));
         String tidd = constants.id2name(v.getId());
 
         dayTime dtDEF = new dayTime(0, 0, 0, 1);//default for first time
@@ -339,12 +348,18 @@ public class SetActivity extends AppCompatActivity {
         hoursEnd = dtGET.getHourEnd();
         minuteStart = dtGET.getMinuteStart();
         minutesEnd = dtGET.getMinuteEnd();
+        if(hourStart==0&&hoursEnd==23&&minuteStart==00&&minutesEnd==59){
+            findViewById(R.id.allDayButton).setBackgroundColor(getColor(R.color.tps_color_blue));
+            ((Button)findViewById(R.id.allDayButton)).setTextColor(getColor(R.color.white));
+        } else {
+            findViewById(R.id.allDayButton).setBackgroundColor(getColor(R.color.tps_color_gray));
+            ((Button)findViewById(R.id.allDayButton)).setTextColor(getColor(R.color.black));
+        }
 
         ((Button) findViewById(R.id.timePickerSettingsFrom)).setText(
                 String.format(Locale.getDefault(), "%02d:%02d", hourStart, minuteStart));
         ((Button) findViewById(R.id.timePickerSettingsTo)).setText(
                 String.format(Locale.getDefault(), "%02d:%02d", hoursEnd, minutesEnd));
-
     }
 
     //function to call and set the timer hours
@@ -390,8 +405,13 @@ public class SetActivity extends AppCompatActivity {
                 toPut = String.format(Locale.getDefault(), "%02d:%02d", hoursEnd, minutesEnd);
             }
             //if changes were made to time, make sure to let it be known in logic
-            if (((Button) v).getText() != toPut)
+            if (((Button) v).getText() != toPut) {
                 unsaved = true;
+                if(hourStart==0&&hoursEnd==23&&minuteStart==00&&minutesEnd==59){
+                   findViewById(R.id.allDayButton).setBackgroundColor(getColor(R.color.tps_color_blue));
+                    ((Button)findViewById(R.id.allDayButton)).setTextColor(getColor(R.color.white));
+        }
+            }
             ((Button) v).setText(toPut);
         };
 //        int style= AlertDialog.THEME_HOLO_DARK;
