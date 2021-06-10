@@ -17,7 +17,6 @@ nav a {
     text-decoration: none;
     text-transform: none;
     text-align: center;
-    color: white;
     cursor: pointer;
 }
 nav .animation {
@@ -26,26 +25,33 @@ nav .animation {
     top: 0;
     background: #000000;
     width: 100px;
-    z-index: 0;
+    z-index: -1;
     transition: all .5s ease 0s;
     border-radius: 8px;
 }
 a:nth-child(1) {
     width: 100px;
+    color: white;
+    
 }
 a:nth-child(2) {
+    color: white;
     width: 110px;
 }
 a:nth-child(3) {
+    color: white;
     width: 100px;
 }
 a:nth-child(4) {
+    color: white;
     width: 160px;
 }
 a:nth-child(5) {
+    color: white;
     width: 120px;
 }
 a:nth-child(6) {
+    color: white;
     width: 120px;
 }
 
@@ -55,6 +61,7 @@ nav .start-home, a:nth-child(1):hover~.animation {
     background-color: #E40303;
 }
 a:nth-child(1).active{
+    border-radius: 8px;
     background: #E40303;
 }
 nav .start-about, a:nth-child(2):hover~.animation {
@@ -63,6 +70,8 @@ nav .start-about, a:nth-child(2):hover~.animation {
     background-color: #FF8C00;
 }
 a:nth-child(2).active{
+    border-radius: 8px;
+    color:black;
     background: #FF8C00;
 }
 
@@ -74,6 +83,7 @@ nav .start-blog, a:nth-child(3):hover~.animation {
 }
 a:nth-child(3).active{
     background: #ada200;
+    color:black;
     border-radius: 8px;
 }
 nav .start-portefolio, a:nth-child(4):hover~.animation {
@@ -89,9 +99,11 @@ nav .start-contact, a:nth-child(5):hover~.animation {
     width: 120px;
     left: 470px;
     background-color: #004DFF;
+    color: #000000;
 }
 a:nth-child(5).active{
     background: #004DFF;
+    color: #000000;
     border-radius: 8px;
 }
 nav .start-logoff, a:nth-child(6):hover~.animation {
