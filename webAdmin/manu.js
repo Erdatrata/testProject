@@ -957,6 +957,7 @@ document.addEventListener("DOMContentLoaded", () => {
 //createNews
 
     $("#ListOfV").click(function(){
+        contextButton(this);
         $("#data").html(ListEvent());
         ListVolFun();
 
@@ -965,6 +966,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     $("#createNews").click(function(){
+        contextButton(this);
         $("#data").html(newsPage());
         newsFun();
 
@@ -972,17 +974,20 @@ document.addEventListener("DOMContentLoaded", () => {
 
     });
     $("#newEvent").click(function(){
+        contextButton(this);
         $("#data").html(newEvent());
         addButtonToEvent();
         autocomplete(document.getElementById("city"), countries);
 
     });
     $("#newUsers").click(function(){
+        contextButton(this);
         $("#data").html(ListEvent());
         ListUsersFun();
 
     });
     $("#ListEvent").click(function(){
+        contextButton(this);
         $("#data").html(ListEvent());
         ListEventFun();
 
@@ -1088,7 +1093,10 @@ function autocomplete(inp, arr) {
         closeAllLists(e.target);
     });
 }
-
+function contextButton(context){
+    $('.active').removeClass('active');
+        $(context).addClass('active');
+}
 /*An array containing all the country names in the world:*/
 
 var countries=[];
