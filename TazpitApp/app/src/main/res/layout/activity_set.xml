@@ -6,34 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layoutDirection="rtl"
-
     tools:context=".SetActivity">
 
-
-    <!--    <TextView-->
-    <!--        android:id="@+id/textView3"-->
-    <!--        android:layout_width="wrap_content"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:text="לפי מיקום GPS"-->
-    <!--        tools:layout_editor_absoluteX="162dp"-->
-    <!--        tools:layout_editor_absoluteY="53dp" />-->
-
-    <!--    <TextView-->
-    <!--        android:id="@+id/textView"-->
-    <!--        android:layout_width="wrap_content"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:text="לפי עיר"-->
-    <!--        tools:layout_editor_absoluteX="184dp"-->
-    <!--        tools:layout_editor_absoluteY="72dp" />-->
-
-
-    <!--    <TextView-->
-    <!--        android:id="@+id/TimeViewSettings"-->
-    <!--        android:layout_width="wrap_content"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:text="TextView"-->
-    <!--        tools:layout_editor_absoluteX="103dp"-->
-    <!--        tools:layout_editor_absoluteY="117dp" />-->
 
     <ImageView
         android:id="@+id/logo_Image"
@@ -66,7 +40,7 @@
             android:id="@+id/radio_by_gps"
             android:layout_width="108dp"
             android:layout_height="wrap_content"
-            android:layout_gravity="left"
+            android:layout_gravity="start"
 
             android:layout_marginTop="25dp"
 
@@ -83,7 +57,7 @@
             android:id="@+id/radio_by_city"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
-            android:layout_gravity="right"
+            android:layout_gravity="end"
             android:layout_marginTop="-48dp"
 
             android:buttonTint="@color/tps_color_blue"
@@ -128,7 +102,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="35dp"
-                android:text="10km"
+                android:text="@string/settings_10km"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -137,7 +111,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="35dp"
-                android:text="0.5km"
+                android:text="@string/settings_0_5km"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -152,7 +126,7 @@
         android:layout_marginTop="132dp"
         android:fontFamily="sans-serif-black"
         android:text="@string/set_element_dayPrefExp"
-        android:textSize="18dp"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.557"
         app:layout_constraintStart_toStartOf="parent"
@@ -167,7 +141,7 @@
         android:fontFamily="sans-serif-black"
         android:gravity="center"
         android:text="@string/set_element_dayColSet"
-        android:textSize="20dp"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -178,7 +152,7 @@
         android:layout_marginTop="4dp"
         android:layout_marginEnd="16dp"
         android:backgroundTint="@color/tps_color_blue"
-        android:text="א'"
+        android:text="@string/settings_day_1"
         app:cornerRadius="50dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView6" />
@@ -190,7 +164,7 @@
         android:layout_marginTop="56dp"
         android:layout_marginEnd="16dp"
         android:backgroundTint="@color/tps_color_blue"
-        android:text="ב'"
+        android:text="@string/settings_day_2"
         app:cornerRadius="50dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView6" />
@@ -203,7 +177,7 @@
         android:layout_marginTop="104dp"
         android:layout_marginEnd="16dp"
         android:backgroundTint="@color/tps_color_blue"
-        android:text="ג'"
+        android:text="@string/settings_day_3"
         app:cornerRadius="50dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView6" />
@@ -215,7 +189,7 @@
         android:layout_marginTop="156dp"
         android:layout_marginEnd="16dp"
         android:backgroundTint="@color/tps_color_blue"
-        android:text="ד'"
+        android:text="@string/settings_day_4"
         app:cornerRadius="50dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView6" />
@@ -227,7 +201,7 @@
         android:layout_marginTop="204dp"
         android:layout_marginEnd="16dp"
         android:backgroundTint="@color/tps_color_blue"
-        android:text="ה'"
+        android:text="@string/settings_day_5"
         app:cornerRadius="50dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView6" />
@@ -240,7 +214,7 @@
         android:layout_marginTop="256dp"
         android:layout_marginEnd="16dp"
         android:backgroundTint="@color/tps_color_blue"
-        android:text="ו'"
+        android:text="@string/settings_day_6"
         app:cornerRadius="50dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView6" />
@@ -251,7 +225,7 @@
         android:layout_height="58dp"
         android:layout_marginEnd="16dp"
         android:backgroundTint="@color/tps_color_blue"
-        android:text="ש'"
+        android:text="@string/settings_day_7"
         app:cornerRadius="60dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/day_friday"
@@ -263,7 +237,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="100dp"
         android:fontFamily="sans-serif-black"
-        android:gravity="right"
+        android:gravity="end"
         android:text="@string/set_element_toHSet"
         app:layout_constraintBottom_toTopOf="@+id/timePickerSettingsTo"
         app:layout_constraintStart_toStartOf="parent"
@@ -277,7 +251,7 @@
         android:layout_height="50dp"
         android:layout_marginEnd="96dp"
         android:fontFamily="sans-serif-black"
-        android:text="XX:XX"
+        android:text="@string/settings_xx_xx"
         app:cornerRadius="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -290,7 +264,7 @@
         android:layout_width="126dp"
         android:layout_height="50dp"
         android:fontFamily="sans-serif-black"
-        android:text="XX:XX"
+        android:text="@string/settings_xx_xx"
         app:cornerRadius="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/timePickerSettingsFrom"
@@ -320,7 +294,7 @@
         android:layout_marginTop="16dp"
         android:fontFamily="sans-serif-black"
         android:text="@string/set_element_choose_text"
-        android:textSize="20dp"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.333"
         app:layout_constraintStart_toStartOf="parent"

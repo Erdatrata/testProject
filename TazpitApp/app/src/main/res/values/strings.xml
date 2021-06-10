@@ -7,15 +7,16 @@
     <string name="nav_header_desc">Navigation header</string>
     <string name="title_scenerios_list">רשימת האירועים</string>
     <string name="title_scenerios_detail">פרטי אירוע</string>
+<!--    DUMMY CONTENT-->
+    <string name="makedetails_detail_about"> Details about Item: </string>
+    <string name="details_infromation"> More details information here. </string>
+
 <!--    HOME PAGE   -->
     <string name="menu_home">עמוד הבית</string>
     <string name="navigation_drawer_open">פתח את התפריט הצדדי</string>
     <string name="navigation_drawer_close">סגור את התפריט הצדדי</string>
     <string name="action_settings">Settings</string>
 
-    <!--    DUMMY CONTENT-->
-    <string name="makedetails_detail_about"> Details about Item: </string>
-    <string name="details_infromation"> More details information here. </string>
 
 
     <!--    logged in       -->
@@ -40,6 +41,17 @@
     <string name="set_element_rangeExp">טווח אירועים מקסימלי:</string>
     <string name="min_time_start">00:00</string>
     <string name="max_time_end">23:59</string>
+    <string name="settings_10km">10km</string>
+    <string name="settings_0_5km">0.5km</string>
+    <string name="settings_day_1">א\'</string>
+    <string name="settings_day_2">ב\'</string>
+    <string name="settings_day_3">ג\'</string>
+    <string name="settings_day_4">ד\'</string>
+    <string name="settings_day_5">ה\'</string>
+    <string name="settings_day_6">ו\'</string>
+    <string name="settings_day_7">ש\'</string>
+    <string name="settings_xx_xx">XX:XX</string>
+
 
 
     <!--    Messages and debugs    -->
@@ -63,7 +75,11 @@
 
 
 <!--    LOGIN PAGE  -->
-
+    <string name="login_email">כתובת אימייל</string>
+    <string name="login_password">סיסמא</string>
+    <string name="login_connectButton">התחבר</string>
+    <string name="login_register">עוד לא נרשמת? להרשמה לחץ כאן</string>
+    <string name="login_foregotPass">שכחתי סיסמא</string>
 
 <!--    REGISTER    -->
     <!--    PAGE 1    -->
@@ -144,11 +160,18 @@
     <string name="more_details"> פרטים נוספים: </string>
     <string name="detail_scenario_city"> עיר </string>
     <string name="place_scenario_city"> מקום האירוע: </string>
-    <string name="login_email">כתובת אימייל</string>
-    <string name="login_password">סיסמא</string>
-    <string name="login_connectButton">התחבר</string>
-    <string name="login_register">עוד לא נרשמת? להרשמה לחץ כאן</string>
-    <string name="login_foregotPass">שכחתי סיסמא</string>
+    <string name="scenario_details_moreDetails">פרטים נוספים</string>
+    <string name="scenario_details_directions">כוון אותי לאירוע</string>
+    <string name="scenario_details_register">יצאתי לקריאה</string>
+    <string name="scenario_details_cancel">בטל רישום</string>
+    <string name="scenario_details_fillReport">מלא דוח</string>
+
+<!--    NEWS    -->
+    <string name="news_author">הכותב</string>
+    <string name="news_body">גוף הכתבה</string>
+    <string name="news_title">כותרת</string>
+    <string name="news_time">זמן פרסום</string>
+
 
 
 </resources>
