@@ -19,11 +19,20 @@ let filledInScenerio="Will show the list of members who filled the scenerio plus
 let deleteInScenerio="It will be removed from the server";
 let moveReport="Will move the report and give the ability to remove it";
 let userInfo="Will show the information about the user";
-let deleteUser="Will move the user at the bottom with and the option to delete it will open";
+let deleteUser="Will move the user to the bottom and will open the option to delete hem";
 let removeUserFromServer="Will delete the user from the server";
 let approveUser="Will authorize the newely registered user as a volunteer";
 let reportInfo="Will show the information about the report";
 let showInformationAboutEvent="Will show the information about the scenerio";
+
+
+let NEWSFOLDER="news/";
+let DATANAMEINNEWS="data";
+let DATENAMEINNEWS="date";
+let IMAGENAMEINNEWS="image";
+let TYPENAMEINNEWS="type";
+let URLNAMEINNEWS="url";
+let WRITERNAMEINNEWS="writer";
 
 function refreshListOfS() {
     $("#ListOfS").remove();
@@ -157,6 +166,8 @@ function Prettify(toFill){
         descHead.innerText="Media URLs"
         tr.appendChild(descHead);
         let desc =  document.createElement("td")
+        let anchors=document.createElement("div")
+        
         {//looper through file media
             let i=0;
             while(true){
@@ -168,13 +179,23 @@ function Prettify(toFill){
                 else
                     anchor = toFill['media url '+i]
                 desc.innerHTML+=`<a href="${anchor}" target="_blank">Link ${i+1}</a>`
+                anchors.innerHTML+=`<a href="${anchor}" target="_blank" download/>`
 
-                if(toFill['media url'+i] || toFill['media url '+i])
-                    desc.innerHTML+="<br/>"
-                else
+                desc.innerHTML+="<br/>"
+                if(!toFill['media url'+i] || toFill['media url '+i])
                     break
                 i++
             }
+            let dlBTN = document.createElement("button")
+            dlBTN.innerText="Download All"
+            dlBTN.addEventListener('click',function(){
+                let cNodes = desc.childNodes.filter(v=>v.nodeName=='A')
+                for(node in cNodes){
+                    node.click()
+                }
+            })
+            
+            desc.appendChild(dlBTN)
 
         }
         tr.appendChild(desc)
@@ -580,11 +601,14 @@ function newEvent() {
         "      </dl>\n" +
         "      <dl class=\"inputbox\">\n" +
         "        <dt class=\"inputbox-title\">נקודת מיקום</dt>\n" +
+
         "        <dd class=\"inputbox-content\">\n" +
         "          <input id=\"geoCode\" type=\"text\" required/>\n" +
         "          <label for=\"input1\">נקודת מיקום</label><a target=\"_blank\" rel=\"noopener noreferrer\" href=\"https://www.latlong.net/\">כדי לפתוח את המפה ולבחור מיקום</a>\n" +
+        "          <br><a target=\"_blank\" rel=\"noopener noreferrer\" href=\"./img.png\">הסבר לקבלת מיקןם</a>" +
         "          <span class=\"underline\"></span>\n" +
         "        </dd>\n" +
+
         "      </dl>\n" +
         "<div><input type=\"checkbox\" id=\"importentEvent\" name=\"importentEvent\" value=\"Bike\">\n" +
         "<label for=\"vehicle1\"> לעלות כדחוף</label><br></div>"+
@@ -820,29 +844,153 @@ function jsonFileToArray(json) {
 
 }
 
+function newsPage() {
+    let re="<div id=\"newsLoaded\"><div id=\"wrap\" class=\"input\">\n" +
+        "  <header class=\"input-header\">\n" +
+        "    <h1>פרס לאפליקציה חדשות</h1>\n" +
+        "  </header>\n" +
+        "  <section class=\"input-content\">\n" +
+        "    <h2>פרס לאפליקציה חדשות</h2>\n" +
+        "    <div class=\"input-content-wrap\">\n" +
+        "      <dl class=\"inputbox\">\n" +
+        "        <dt class=\"inputbox-title\">כותרת של החדשות</dt>\n" +
+        "        <dd class=\"inputbox-content\">\n" +
+        "          <input id=\"newsTitle\" type=\"text\" required/>\n" +
+        "          <label for=\"input0\">כותרת של החדשות</label>\n" +
+        "          <span class=\"underline\"></span>\n" +
+        "        </dd>\n" +
+        "      </dl>\n" +
+        "      <dl class=\"inputbox\">\n" +
+        "        <dt class=\"inputbox-title\">תקציר</dt>\n" +
+        "        <dd class=\"inputbox-content\">\n" +
+        "          <input id=\"dataForNews\" type=\"text\" required/>\n" +
+        "          <label for=\"input1\">תקציר</label>\n" +
+        "          <span class=\"underline\"></span>\n" +
+        "        </dd>\n" +
+        "      </dl>\n" +
+        "      <dl class=\"inputbox\">\n" +
+        "        <dt class=\"inputbox-title\">סוג</dt>\n" +
+        "        <dd class=\"inputbox-content\">\n" +
+        "          <input id=\"typeNews\" type=\"text\" required/>\n" +
+        "          <label for=\"input1\">סוג</label>\n" +
+        "          <span class=\"underline\"></span>\n" +
+        "        </dd>\n" +
+        "      </dl>\n" +
+        "      <dl class=\"inputbox\">\n" +
+        "        <dt class=\"inputbox-title\">כותב</dt>\n" +
+        "        <dd class=\"inputbox-content\">\n" +
+        "          <input id=\"writerNews\" type=\"text\" required/>\n" +
+        "          <label for=\"input1\">כותב</label>\n" +
+        "          <span class=\"underline\"></span>\n" +
+        "        </dd>\n" +
+        "      </dl>\n" +
+        "      <dl class=\"inputbox\">\n" +
+        "        <dt class=\"inputbox-title\">קישור לתמונה</dt>\n" +
+        "        <dd class=\"inputbox-content\">\n" +
+        "          <input id=\"photoForNews\" type=\"text\" required/>\n" +
+        "          <label for=\"input1\">קישור לתמונה</label>\n" +
+        "          <span class=\"underline\"></span>\n" +
+        "        </dd>\n" +
+        "      </dl>\n" +
+        "      <dl class=\"inputbox\">\n" +
+        "        <dt class=\"inputbox-title\">קישור לעמוד</dt>\n" +
+        "        <dd class=\"inputbox-content\">\n" +
+        "          <input id=\"urlForNews\" type=\"text\" required/>\n" +
+        "          <label for=\"input1\">קישור לעמוד</label>\n" +
+        "          <span class=\"underline\"></span>\n" +
+        "        </dd>\n" +
+        "      </dl>\n" +
+
+        "      <div class=\"btns\">\n" +
+        "          <button class=\"btn btn-confirm\" id=\"btn btn-confirm\">שלח</button>\n" +
+        "          <button class=\"btn btn-cancel\" id=\"btn btn-cancel\">בטל</button>\n" +
+        "      </div>\n" +
+        "  </section>\n" +
+        "</div></div>"
+
+
+    // let form = document.querySelector('#btn btn-confirm');
+    // form.addEventListener('click',sendToDataBaseNewEvent());
+    return re;
+}
+
+function sendToDataBaseNews() {
+    let newsTitle=document.querySelector('#newsTitle').value;
+    let dataForNews=document.querySelector('#dataForNews').value;
+    let typeNews=document.querySelector('#typeNews').value;
+    let writerNews =document.querySelector('#writerNews').value;
+    let photoForNews=document.querySelector('#photoForNews').value;
+    let urlForNews=document.querySelector('#urlForNews').value;
+    if(newsTitle==undefined||dataForNews==undefined||typeNews==undefined||writerNews==undefined||photoForNews==undefined||urlForNews==undefined||
+        newsTitle==""||dataForNews==""||typeNews==""||writerNews==""||photoForNews==""||urlForNews==""
+    ){ window.alert("Error : " + "some field are empty");return;}
+
+    let docRef = db.doc(NEWSFOLDER+newsTitle);
+    docRef.set({
+
+
+        [`${[DATANAMEINNEWS]}`]: dataForNews,
+        [`${[WRITERNAMEINNEWS]}`]: writerNews,
+        [`${[IMAGENAMEINNEWS]}`]: photoForNews,
+        [`${[TYPENAMEINNEWS]}`]: typeNews,
+        [`${[URLNAMEINNEWS]}`]: urlForNews,
+        [`${[DATENAMEINNEWS]}`]:new Date()
+
+    }).then(function (){
+        // console.log("status saved");
+        window.alert("was sended");
+    }).catch(function (error){
+        window.alert("Error : " + error);
+    })
+}
+
+function removeNews() {
+    document.getElementById("newsLoaded").remove();
+
+}
+
+function newsFun() {
+    document.getElementById("btn btn-confirm").addEventListener("click", sendToDataBaseNews);
+    document.getElementById("btn btn-cancel").addEventListener("click",removeNews);
+
+}
+
 document.addEventListener("DOMContentLoaded", () => {
     jsonFileToArray("./citys.json");
-
+//createNews
 
     $("#ListOfV").click(function(){
+        contextButton(this);
         $("#data").html(ListEvent());
         ListVolFun();
 
 
 
     });
+
+    $("#createNews").click(function(){
+        contextButton(this);
+        $("#data").html(newsPage());
+        newsFun();
+
+
+
+    });
     $("#newEvent").click(function(){
+        contextButton(this);
         $("#data").html(newEvent());
         addButtonToEvent();
         autocomplete(document.getElementById("city"), countries);
 
     });
     $("#newUsers").click(function(){
+        contextButton(this);
         $("#data").html(ListEvent());
         ListUsersFun();
 
     });
     $("#ListEvent").click(function(){
+        contextButton(this);
         $("#data").html(ListEvent());
         ListEventFun();
 
@@ -948,7 +1096,10 @@ function autocomplete(inp, arr) {
         closeAllLists(e.target);
     });
 }
-
+function contextButton(context){
+    $('.active').removeClass('active');
+        $(context).addClass('active');
+}
 /*An array containing all the country names in the world:*/
 
 var countries=[];

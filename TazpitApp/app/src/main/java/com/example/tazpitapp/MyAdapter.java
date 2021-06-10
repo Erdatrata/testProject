@@ -3,41 +3,22 @@ package com.example.tazpitapp;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.drawable.Drawable;
-import android.media.Image;
 import android.net.Uri;
-import android.os.AsyncTask;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
-
-import com.google.firebase.Timestamp;
-
 import org.jetbrains.annotations.NotNull;
-
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
-
-
 public class MyAdapter extends RecyclerView.Adapter <MyAdapter.MyViewHolder>{
 
     @NonNull
-    @NotNull
+    @NotNull //the arrrays that we put the different data anout each article
     String [] title;
     String [] data;
-    //handle later
-    //Image image;
     Bitmap [] imageUrl;
     String [] type;
     String [] date;
@@ -45,8 +26,8 @@ public class MyAdapter extends RecyclerView.Adapter <MyAdapter.MyViewHolder>{
     Context context;
     String []urlToWeb;
 
-    String[]link;
-    public MyAdapter(Context ct,String [] title2, String [] data2, String [] date2, Bitmap [] image2, String [] type2, String [] writer2,String[] urlToWeb){
+    //the constructor, which builded in MainActivity
+    public MyAdapter(Context ct, @NotNull String [] title2, String [] data2, String [] date2, Bitmap [] image2, String [] type2, String [] writer2, String[] urlToWeb){
         context=ct;
         title=title2;
         data=data2;
@@ -58,27 +39,25 @@ public class MyAdapter extends RecyclerView.Adapter <MyAdapter.MyViewHolder>{
 
 
     }
-
+//creates the holder
+    @NotNull
     public MyViewHolder onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
         LayoutInflater inflater=LayoutInflater.from(context);
        View view= inflater.inflate(R.layout.my_row,parent,false);
         return new MyViewHolder(view);
     }
 
-    @Override
+    @Override //builds each article to holder
     public void onBindViewHolder(@NonNull @NotNull MyViewHolder holder, int position) {
-    holder.titleItem.setText(title[position]);
-        holder.dataItem.setText(data[position]);
-        holder.timeItem.setText(date[position]);
-        holder.writerItem.setText(writer[position]);
-        holder.myImageItem.setImageBitmap(imageUrl[position]);
-        holder.linkItem.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Uri uri = Uri.parse(urlToWeb[position]); // missing 'http://' will cause crashed
-                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-                context.startActivity(intent);
-            }
+    holder.titleItem.setText(title[title.length-position-1]);
+        holder.dataItem.setText(data[title.length-position-1]);
+        holder.timeItem.setText(date[title.length-position-1]);
+        holder.writerItem.setText(writer[title.length-position-1]);
+        holder.myImageItem.setImageBitmap(imageUrl[title.length-position-1]);
+        holder.linkItem.setOnClickListener(v -> {
+            Uri uri = Uri.parse(urlToWeb[title.length-position-1]); // missing 'http://' will cause crashed
+            Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+            context.startActivity(intent);
         });
        // holder.myImageItem.setImageResource(imageUrl[position]);
 
@@ -86,16 +65,16 @@ public class MyAdapter extends RecyclerView.Adapter <MyAdapter.MyViewHolder>{
 
     }
 
-    @Override
+    @Override //returns the num of articles we have to put
     public int getItemCount() {
         return title.length;
     }
-
-    public class MyViewHolder extends RecyclerView.ViewHolder{
+//creating the elemnts that connected with my_row.xml that contains the design that each article will have
+    public static class MyViewHolder extends RecyclerView.ViewHolder{
         TextView titleItem,dataItem,timeItem,writerItem;
         ImageView myImageItem;
         ConstraintLayout linkItem;
-
+//conecting between the elemnts and the xml
         public MyViewHolder(@NonNull @NotNull View itemView) {
             super(itemView);
             titleItem=itemView.findViewById(R.id.titleArticle);
