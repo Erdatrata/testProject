@@ -29,28 +29,28 @@ nav .animation {
     transition: all .5s ease 0s;
     border-radius: 8px;
 }
-a:nth-child(1) {
+nav a:nth-child(1) {
     width: 100px;
     color: white;
     
 }
-a:nth-child(2) {
+nav a:nth-child(2) {
     color: white;
     width: 110px;
 }
-a:nth-child(3) {
+nav a:nth-child(3) {
     color: white;
     width: 100px;
 }
-a:nth-child(4) {
+nav a:nth-child(4) {
     color: white;
     width: 160px;
 }
-a:nth-child(5) {
+nav a:nth-child(5) {
     color: white;
     width: 120px;
 }
-a:nth-child(6) {
+nav a:nth-child(6) {
     color: white;
     width: 120px;
 }
@@ -139,6 +139,11 @@ p {
 
 span {
     color: #2BD6B4;
+}
+
+td a{
+    color:black;
+    z-index: 1;
 }
 
 
