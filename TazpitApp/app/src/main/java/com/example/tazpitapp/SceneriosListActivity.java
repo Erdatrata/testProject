@@ -374,7 +374,7 @@ public class SceneriosListActivity extends AppCompatActivity {
 
     private static String addRange(DocumentSnapshot documentSnapshot){
         if(gpsState) {
-            return " "+"במרחק"+" " +(Range((GeoPoint) documentSnapshot.getData().get("מיקום")))+" קילומטר";
+            return "\n"+"במרחק"+" " +(Range((GeoPoint) documentSnapshot.getData().get("מיקום")))+" קילומטר";
         }
         return "";
     }
