@@ -314,6 +314,8 @@
         android:fontFamily="sans-serif-black"
         android:text="@string/set_element_allDayButton"
         app:cornerRadius="20dp"
+        android:backgroundTint="@color/tps_color_gray"
+        android:textColor="@color/black"
         app:layout_constraintBottom_toTopOf="@+id/timePickerSettingsFrom"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.4"
