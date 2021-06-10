@@ -46,8 +46,8 @@
 25-->[androidx.core:core:1.2.0] C:\Users\ארדט רטה\.gradle\caches\transforms-2\files-2.1\8a4bac199804e3874c9dbedd9bd159de\core-1.2.0\AndroidManifest.xml:24:18-86
 26        android:debuggable="true"
 27        android:extractNativeLibs="false"
-28        android:icon="@mipmap/tps_icon"
-28-->C:\GIT\new_tazpit\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:13:9-40
+28        android:icon="@mipmap/ic_launcher_foreground"
+28-->C:\GIT\new_tazpit\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:13:9-54
 29        android:label="@string/app_name"
 29-->C:\GIT\new_tazpit\tazpit\TazpitApp\app\src\main\AndroidManifest.xml:14:9-41
 30        android:testOnly="true"
