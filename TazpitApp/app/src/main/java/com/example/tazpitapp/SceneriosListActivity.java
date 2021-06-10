@@ -252,7 +252,7 @@ public class SceneriosListActivity extends AppCompatActivity {
 
                                            //     holder.mIdView.setText(mValues.get(position).id);
 
-                                                String str=mValues.get(position).content+"-Range-"+Range((GeoPoint)documentSnapshot.getData().get("מיקום"));
+                                                String str=mValues.get(position).content+addRange(documentSnapshot);
                                                 Log.d("onComplet","st="+str);
                                                 Spannable spannable = new SpannableString(str);
                                                 spannable.setSpan(new ForegroundColorSpan(Color.GRAY), 0 ,str.length(),     Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
@@ -267,7 +267,7 @@ public class SceneriosListActivity extends AppCompatActivity {
                                                 break;
                                             }
                                          //   holder.mIdView.setText(mValues.get(position).id);
-                                            String str=mValues.get(position).content+"-Range-"+Range((GeoPoint)documentSnapshot.getData().get("מיקום"));
+                                            String str=mValues.get(position).content+addRange(documentSnapshot);
                                             Log.d("onComplet","st="+str);
                                             final SpannableStringBuilder sb = new SpannableStringBuilder(str);
                                             final StyleSpan iss = new StyleSpan(Typeface.BOLD); //Span to make text italic
@@ -293,7 +293,7 @@ public class SceneriosListActivity extends AppCompatActivity {
                         int i=0;
                         for (QueryDocumentSnapshot document : task.getResult()) {
                           //  holder.mIdView.setText(mValues.get(position).id);
-                            String str=mValues.get(position).content+"-Range-"+Range((GeoPoint)document.getData().get("מיקום"));
+                            String str=mValues.get(position).content+addRange(document);
                             Log.d("onComplet","st="+str);
                             final SpannableStringBuilder sb = new SpannableStringBuilder(str);
                             final StyleSpan iss = new StyleSpan(Typeface.BOLD); //Span to make text italic
@@ -353,7 +353,11 @@ public class SceneriosListActivity extends AppCompatActivity {
             double lonScenerio=gpsLocation.getLongitude();
             double result=Math.pow(Math.pow((111*(latCurrent-latScenerio)),2.0)+Math.pow((111*(lonCurrent-lonScenerio)),2.0),0.5);
             System.out.println(result);
-            return String.valueOf(result);
+            int tempint=(int)(result*100);
+            double tempDouble=tempint;
+            tempDouble=tempDouble/100;
+            System.out.println(tempDouble);
+            return String.valueOf(tempDouble);
 
         }
 
@@ -368,6 +372,12 @@ public class SceneriosListActivity extends AppCompatActivity {
         return builder.toString();
     }
 
+    private static String addRange(DocumentSnapshot documentSnapshot){
+        if(gpsState) {
+            return "\n"+"במרחק"+" " +(Range((GeoPoint) documentSnapshot.getData().get("מיקום")))+" קילומטר";
+        }
+        return "";
+    }
 
 }
 
