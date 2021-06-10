@@ -832,13 +832,79 @@ function jsonFileToArray(json) {
 
 }
 
+function newsPage() {
+    let re="<div id=\"newEventLoaded\"><div id=\"wrap\" class=\"input\">\n" +
+        "  <header class=\"input-header\">\n" +
+        "    <h1>הכנס פרטי אירוע</h1>\n" +
+        "  </header>\n" +
+        "  <section class=\"input-content\">\n" +
+        "    <h2>הכנס פרטים על האירוע</h2>\n" +
+        "    <div class=\"input-content-wrap\">\n" +
+        "      <dl class=\"inputbox\">\n" +
+        "        <dt class=\"inputbox-title\">כותרת של החדשות</dt>\n" +
+        "        <dd class=\"inputbox-content\">\n" +
+        "          <input id=\"ScenerioName\" type=\"text\" required/>\n" +
+        "          <label for=\"input0\">כותרת על האירוע</label>\n" +
+        "          <span class=\"underline\"></span>\n" +
+        "        </dd>\n" +
+        "      </dl>\n" +
+        "      <dl class=\"inputbox\">\n" +
+        "        <dt class=\"inputbox-title\">תקציר</dt>\n" +
+        "        <dd class=\"inputbox-content\">\n" +
+        "          <input id=\"des\" type=\"text\" required/>\n" +
+        "          <label for=\"input1\">פירוט מורחב</label>\n" +
+        "          <span class=\"underline\"></span>\n" +
+        "        </dd>\n" +
+        "      </dl>\n" +
+        "      <dl class=\"inputbox\">\n" +
+        "        <dt class=\"inputbox-title\">סוג</dt>\n" +
+        "        <dd class=\"inputbox-content\">\n" +
+        "          <input id=\"des\" type=\"text\" required/>\n" +
+        "          <label for=\"input1\">פירוט מורחב</label>\n" +
+        "          <span class=\"underline\"></span>\n" +
+        "        </dd>\n" +
+        "      </dl>\n" +
+        "      <dl class=\"inputbox\">\n" +
+        "        <dt class=\"inputbox-title\">כותב</dt>\n" +
+        "        <dd class=\"inputbox-content\">\n" +
+        "          <input id=\"des\" type=\"text\" required/>\n" +
+        "          <label for=\"input1\">פירוט מורחב</label>\n" +
+        "          <span class=\"underline\"></span>\n" +
+        "        </dd>\n" +
+        "      </dl>\n" +
+
+        "      <div class=\"btns\">\n" +
+        "          <button class=\"btn btn-confirm\" id=\"btn btn-confirm\">שלח</button>\n" +
+        "          <button class=\"btn btn-cancel\" id=\"btn btn-cancel\">בטל</button>\n" +
+        "      </div>\n" +
+        "  </section>\n" +
+        "</div></div>"
+
+
+    // let form = document.querySelector('#btn btn-confirm');
+    // form.addEventListener('click',sendToDataBaseNewEvent());
+    return re;
+}
+
+function newsFun() {
+
+}
+
 document.addEventListener("DOMContentLoaded", () => {
     jsonFileToArray("./citys.json");
-
+//createNews
 
     $("#ListOfV").click(function(){
         $("#data").html(ListEvent());
         ListVolFun();
+
+
+
+    });
+
+    $("#createNews").click(function(){
+        $("#data").html(newsPage());
+        newsFun();
 
 
 

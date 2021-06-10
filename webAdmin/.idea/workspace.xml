@@ -8,10 +8,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="05ef79ce-543a-4b34-9fdd-4deaa8e4d8f2" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../TazpitApp/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../TazpitApp/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../TazpitApp/local.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../TazpitApp/local.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/manu.css" beforeDir="false" afterPath="$PROJECT_DIR$/manu.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/manu.html" beforeDir="false" afterPath="$PROJECT_DIR$/manu.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/manu.js" beforeDir="false" afterPath="$PROJECT_DIR$/manu.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -206,25 +204,21 @@
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/manu.js</url>
           <line>308</line>
-          <properties lambdaOrdinal="-1" />
           <option name="timeStamp" value="83" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/manu.js</url>
           <line>277</line>
-          <properties lambdaOrdinal="-1" />
           <option name="timeStamp" value="89" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/manu.js</url>
           <line>35</line>
-          <properties lambdaOrdinal="-1" />
           <option name="timeStamp" value="90" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/manu.js</url>
           <line>36</line>
-          <properties lambdaOrdinal="-1" />
           <option name="timeStamp" value="91" />
         </line-breakpoint>
       </breakpoints>
