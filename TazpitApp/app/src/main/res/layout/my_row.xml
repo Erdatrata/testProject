@@ -22,6 +22,7 @@
     </androidx.cardview.widget.CardView>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/blockOfNews"
         android:layout_width="404dp"
         android:layout_height="210dp"
         android:layout_gravity="center"
