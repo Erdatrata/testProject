@@ -185,7 +185,7 @@ public class fillReport extends AppCompatActivity {
 
             }
             else
-Log.d("failed to upload report","failed upload report");
+Log.d("FAILEDUPLOADTOFIRESTORE","failed upload report");
         });
 
     }
