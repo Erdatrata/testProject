@@ -117,9 +117,9 @@ public class SceneriosListActivity extends AppCompatActivity {
             getlatofgps = getlatOfGps();
             getlongofgps = getlongOfGps();
         }
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        toolbar.setTitle(getTitle());
+//        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+//        setSupportActionBar(toolbar);
+//        toolbar.setTitle(getTitle());
 
         if (findViewById(R.id.scenerios_detail_container) != null) {
             // The detail container view will be present only in the
@@ -250,7 +250,7 @@ public class SceneriosListActivity extends AppCompatActivity {
                                         for (QueryDocumentSnapshot document : task.getResult()) {
                                             if(user.getUid().toString().equals(document.getId().toString())) {
 
-                                                holder.mIdView.setText(mValues.get(position).id);
+                                           //     holder.mIdView.setText(mValues.get(position).id);
 
                                                 String str=mValues.get(position).content+"-Range-"+Range((GeoPoint)documentSnapshot.getData().get("מיקום"));
                                                 Log.d("onComplet","st="+str);
@@ -266,13 +266,13 @@ public class SceneriosListActivity extends AppCompatActivity {
                                                 holder.itemView.setOnClickListener(mOnClickListener);
                                                 break;
                                             }
-                                            holder.mIdView.setText(mValues.get(position).id);
+                                         //   holder.mIdView.setText(mValues.get(position).id);
                                             String str=mValues.get(position).content+"-Range-"+Range((GeoPoint)documentSnapshot.getData().get("מיקום"));
                                             Log.d("onComplet","st="+str);
                                             final SpannableStringBuilder sb = new SpannableStringBuilder(str);
                                             final StyleSpan iss = new StyleSpan(Typeface.BOLD); //Span to make text italic
                                             sb.setSpan(iss, 0, str.length(), Spannable.SPAN_INCLUSIVE_INCLUSIVE); // make last 2 characters Italic
-                                            holder.mContentView.setText(sb);//add range with the name of the sceneriro
+                                           holder.mContentView.setText(sb);//add range with the name of the sceneriro
                                             holder.itemView.setTag(mValues.get(position));
                                             Log.d("onComplet","po="+mValues.get(position));
                                             holder.itemView.setOnClickListener(mOnClickListener);
@@ -292,7 +292,7 @@ public class SceneriosListActivity extends AppCompatActivity {
                     if (task.isSuccessful()) {
                         int i=0;
                         for (QueryDocumentSnapshot document : task.getResult()) {
-                            holder.mIdView.setText(mValues.get(position).id);
+                          //  holder.mIdView.setText(mValues.get(position).id);
                             String str=mValues.get(position).content+"-Range-"+Range((GeoPoint)document.getData().get("מיקום"));
                             Log.d("onComplet","st="+str);
                             final SpannableStringBuilder sb = new SpannableStringBuilder(str);
