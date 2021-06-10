@@ -157,6 +157,8 @@ function Prettify(toFill){
         descHead.innerText="Media URLs"
         tr.appendChild(descHead);
         let desc =  document.createElement("td")
+        let anchors=document.createElement("div")
+        
         {//looper through file media
             let i=0;
             while(true){
@@ -168,13 +170,23 @@ function Prettify(toFill){
                 else
                     anchor = toFill['media url '+i]
                 desc.innerHTML+=`<a href="${anchor}" target="_blank">Link ${i+1}</a>`
+                anchors.innerHTML+=`<a href="${anchor}" target="_blank" download/>`
 
-                if(toFill['media url'+i] || toFill['media url '+i])
-                    desc.innerHTML+="<br/>"
-                else
+                desc.innerHTML+="<br/>"
+                if(!toFill['media url'+i] || toFill['media url '+i])
                     break
                 i++
             }
+            let dlBTN = document.createElement("button")
+            dlBTN.innerText="Download All"
+            dlBTN.addEventListener('click',function(){
+                let cNodes = desc.childNodes.filter(v=>v.nodeName=='A')
+                for(node in cNodes){
+                    node.click()
+                }
+            })
+            
+            desc.appendChild(dlBTN)
 
         }
         tr.appendChild(desc)
