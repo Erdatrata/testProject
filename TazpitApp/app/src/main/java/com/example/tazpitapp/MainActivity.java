@@ -210,22 +210,37 @@ public class MainActivity<imageView> extends AppCompatActivity implements Naviga
                             List<String> writerList = new ArrayList<>();
                             List<String> imageList = new ArrayList<>();
                             List<String> urlList = new ArrayList<>();
+
+                            QueryDocumentSnapshot[] documentSort=new QueryDocumentSnapshot[task.getResult().size()];
+                            QueryDocumentSnapshot[] documenttemp=new QueryDocumentSnapshot[task.getResult().size()];
+                            int count =0;
                             for (QueryDocumentSnapshot document : task.getResult()) {
-                              titleList.add(document.getId());
-                              dataList.add(document.get("data").toString());
-                              typeList.add(document.get("type").toString());
-                               Timestamp time=(Timestamp)document.getTimestamp("date");
+                                documenttemp[count]=document;
+                                count++;
+
+
+                            }
+                                    for (int i=0;i<task.getResult().size();i++){
+                                        documentSort[i]=getOldestFrom(documenttemp);
+                                        documenttemp=removeFrom(documenttemp,documentSort[i]);
+                                }
+
+                            for (int i=0;i<task.getResult().size();i++){
+                              titleList.add(documentSort[i].getId());
+                              dataList.add(documentSort[i].get("data").toString());
+                              typeList.add(documentSort[i].get("type").toString());
+                               Timestamp time=(Timestamp)documentSort[i].getTimestamp("date");
                                 Date date=time.toDate();
                                 date.setHours(date.getHours()+3);
                                 dateList.add(date.toLocaleString());
-                                writerList.add(document.get("writer").toString());
-                                imageList.add(document.get("image").toString());
-                                urlList.add(document.get("url").toString());
+                                writerList.add(documentSort[i].get("writer").toString());
+                                imageList.add(documentSort[i].get("image").toString());
+                                urlList.add(documentSort[i].get("url").toString());
                                 //System.out.println("the image url is: "+image[0]);
 
 
 
-                                Log.d("SUCCESARTICLE", document.getId() + " => " + document.getData());
+                                Log.d("SUCCESARTICLE", documentSort[i].getId() + " => " + documentSort[i].getData());
                             }
                             title=titleList.toArray(new String[0]);
                             data=dataList.toArray(new String[0]);
@@ -251,6 +266,38 @@ public class MainActivity<imageView> extends AppCompatActivity implements Naviga
                         } else {
                             Log.d("FAILARTICLE", "Error getting documents: ", task.getException());
                         }
+                    }
+
+                    private QueryDocumentSnapshot[] removeFrom(QueryDocumentSnapshot[] result, QueryDocumentSnapshot queryDocumentSnapshot) {
+                        QueryDocumentSnapshot[]  re=result;
+                        for (int i=0;i<result.length;i++) {
+                            if(result[i]==null||result[i].getId().compareTo(queryDocumentSnapshot.getId())==0){
+                                re[i]=null;
+                            }
+                            else {re[i]=result[i];}
+                        }
+                        return re;
+
+                    }
+
+                    private QueryDocumentSnapshot getOldestFrom(QueryDocumentSnapshot[] result) {
+                        QueryDocumentSnapshot oldest=null;
+                        for (QueryDocumentSnapshot document : result) {
+                            if(document!=null){
+                                if(oldest==null||older((Timestamp)document.getTimestamp("date"),oldest.getTimestamp("date"))){
+
+                                        oldest = document;
+
+                                }
+                            }
+                        }
+                        return oldest;
+                    }
+
+
+
+                    private boolean older(Timestamp date, Timestamp date1) {
+                        if(date1.toDate().before(date.toDate())){return true;}return false;
                     }
 
                 });
