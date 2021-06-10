@@ -319,11 +319,13 @@ public class SetActivity extends AppCompatActivity {
         //if switching between days after changing hours, save into temp
         if (unsaved && rightNow!=null) {
             //take hours from both start and end, put into new dayTime
-            rightNow.setBackgroundColor(getColor(R.color.tps_color_gray));
-            rightNow.setTextColor(getColor(R.color.black));
             saveTemp();
             //unsave unsaved
             unsaved = false;
+        }
+        if(rightNow!=null){
+            rightNow.setBackgroundColor(getColor(R.color.tps_color_gray));
+            rightNow.setTextColor(getColor(R.color.black));
         }
         rightNow = (Button) v;
         rightNow.setBackgroundColor(getColor(R.color.tps_color_blue));
