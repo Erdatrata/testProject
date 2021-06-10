@@ -44,6 +44,7 @@ public class LoginActivity extends AppCompatActivity {
                     "$");
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         if(FirebaseAuth.getInstance().getCurrentUser() != null){
             Toast.makeText(this, getResources().getString(R.string.login_already_in), Toast.LENGTH_SHORT).show();
@@ -89,58 +90,68 @@ public class LoginActivity extends AppCompatActivity {
             progressBar.setVisibility(View.VISIBLE);//show the progressbar
             //if the user exists
             FAuth.signInWithEmailAndPassword(emailInput,passwordnput).addOnCompleteListener(task -> {
-            if(task.isSuccessful()){//if response success than do
-            Toast.makeText(LoginActivity.this, getResources().getString(R.string.login_success),
-                Toast.LENGTH_SHORT).show();
 
-            //                            startActivity(new Intent(getApplicationContext(),MainActivity.class));
 
-            //clear old sp once more
-            //                            FirebaseAuth.getInstance().signOut();
-            SharedPreferences sharedpreferences = getSharedPreferences(constants.SHARED_PREFS,
-                Context.MODE_PRIVATE);
-            SharedPreferences.Editor editor = sharedpreferences.edit();
-            editor.clear().apply();
+                if (task.isSuccessful()) {//if response success than do
+                    Toast.makeText(LoginActivity.this, getResources().getString(R.string.login_success),
+                            Toast.LENGTH_SHORT).show();
 
-            //download settings from server
-            FirebaseFirestore db = FirebaseFirestore.getInstance();
-            DocumentReference docRef = db.collection(constants.DOC_REF_USERS).
-                document(FirebaseAuth.getInstance().getCurrentUser().getUid());
-            docRef.get().addOnCompleteListener(task1 -> {
-                if (task1.isSuccessful()) {
-                    DocumentSnapshot document = task1.getResult();
-                    System.out.println(document);
-                    String loc = Objects.requireNonNull(document.get(constants.SHARED_PREFS_LOCATION)).toString();
-                    editor.putString(constants.SHARED_PREFS_LOCATION,loc);
-                    editor.putFloat(constants.rangeChoice,Float.parseFloat(Objects.requireNonNull(document.get(constants.rangeChoice)).toString()));
+                    //                            startActivity(new Intent(getApplicationContext(),MainActivity.class));
 
-                    for(String d: constants.daysNames){
-                        String toStore = Objects.requireNonNull(document.get(d)).toString();
-                        editor.putString(d,toStore);
-                    }
-                    if (document.exists()) {
-                        Log.d("gabi_test", "Settings updated " + document.getData());
-                        editor.apply();
-                    } else {
-                        Log.d("gabi_test", "Settings not found");
-                        }
-                    } else {
+                    //clear old sp once more
+                    //                            FirebaseAuth.getInstance().signOut();
+                    SharedPreferences sharedpreferences = getSharedPreferences(constants.SHARED_PREFS,
+                            Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sharedpreferences.edit();
+                    editor.clear().apply();
+
+
+                    //download settings from server
+                    FirebaseFirestore db = FirebaseFirestore.getInstance();
+                    DocumentReference docRef = db.collection(constants.DOC_REF_USERS).
+                            document(FirebaseAuth.getInstance().getCurrentUser().getUid());
+                    docRef.get().addOnCompleteListener(task1 -> {
+                        if (task1.isSuccessful()) {
+                            DocumentSnapshot document = task1.getResult();
+                            System.out.println(document);
+                            String loc = "";
+                            if(document.exists()) {
+                                loc = document.get(constants.SHARED_PREFS_LOCATION).toString();
+                                editor.putString(constants.SHARED_PREFS_LOCATION, loc);
+                                editor.putFloat(constants.rangeChoice, Float.parseFloat(Objects.requireNonNull(document.get(constants.rangeChoice)).toString()));
+
+                                for (String d : constants.daysNames) {
+                                    String toStore = Objects.requireNonNull(document.get(d)).toString();
+                                    editor.putString(d, toStore);
+                                }
+                                if (document.exists()) {
+                                    Log.d("gabi_test", "Settings updated " + document.getData());
+                                    editor.apply();
+                                } else {
+                                    Log.d("gabi_test", "Settings not found");
+                                }
+                            }
+                        } else {
                             Log.d("gabi_test", "settings failed with ", task1.getException());
-                    }
+                        }
 
                         //return to main
                         finish();
 
 //                            startActivity(getIntent());
                     });
-            } else {//if the response is filed
+
+                }
+                else {//if the response is filed
                 Toast.makeText(LoginActivity.this, getResources().getString(R.string.login_error) +
                         Objects.requireNonNull(task.getException()).getMessage(), Toast.LENGTH_SHORT).show();
                 progressBar.setVisibility(View.GONE);
             }
+
         });
 
         });
+
         // if the button "הרשמה כאן"
         mCreateBtn.setOnClickListener(v -> startActivity(new Intent(getApplicationContext(),register.register1.class)));
 
