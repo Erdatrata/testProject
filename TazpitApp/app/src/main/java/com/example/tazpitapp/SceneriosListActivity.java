@@ -353,7 +353,11 @@ public class SceneriosListActivity extends AppCompatActivity {
             double lonScenerio=gpsLocation.getLongitude();
             double result=Math.pow(Math.pow((111*(latCurrent-latScenerio)),2.0)+Math.pow((111*(lonCurrent-lonScenerio)),2.0),0.5);
             System.out.println(result);
-            return String.valueOf((int)(result*1000));
+            int tempint=(int)(result*100);
+            double tempDouble=tempint;
+            tempDouble=tempDouble/100;
+            System.out.println(tempDouble);
+            return String.valueOf(tempDouble);
 
         }
 
@@ -370,7 +374,7 @@ public class SceneriosListActivity extends AppCompatActivity {
 
     private static String addRange(DocumentSnapshot documentSnapshot){
         if(gpsState) {
-            return " "+"במרחק"+" " +(Range((GeoPoint) documentSnapshot.getData().get("מיקום")))+" מטר";
+            return " "+"במרחק"+" " +(Range((GeoPoint) documentSnapshot.getData().get("מיקום")))+" קילומטר";
         }
         return "";
     }
