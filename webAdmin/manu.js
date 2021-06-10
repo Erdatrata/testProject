@@ -685,7 +685,7 @@ function ListEvent() {
 
 function logoff() {
     firebase.auth().signOut();
-    window.open("./main.html");
+    window.open("./index.html");
     window.open('','_self').close()
 }
 
