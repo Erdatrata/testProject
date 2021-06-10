@@ -19,11 +19,20 @@ let filledInScenerio="Will show the list of members who filled the scenerio plus
 let deleteInScenerio="It will be removed from the server";
 let moveReport="Will move the report and give the ability to remove it";
 let userInfo="Will show the information about the user";
-let deleteUser="Will move the user at the bottom with and the option to delete it will open";
+let deleteUser="Will move the user to the bottom and will open the option to delete hem";
 let removeUserFromServer="Will delete the user from the server";
 let approveUser="Will authorize the newely registered user as a volunteer";
 let reportInfo="Will show the information about the report";
 let showInformationAboutEvent="Will show the information about the scenerio";
+
+
+let NEWSFOLDER="news/";
+let DATANAMEINNEWS="data";
+let DATENAMEINNEWS="date";
+let IMAGENAMEINNEWS="image";
+let TYPENAMEINNEWS="type";
+let URLNAMEINNEWS="url";
+let WRITERNAMEINNEWS="writer";
 
 function refreshListOfS() {
     $("#ListOfS").remove();
@@ -833,42 +842,58 @@ function jsonFileToArray(json) {
 }
 
 function newsPage() {
-    let re="<div id=\"newEventLoaded\"><div id=\"wrap\" class=\"input\">\n" +
+    let re="<div id=\"newsLoaded\"><div id=\"wrap\" class=\"input\">\n" +
         "  <header class=\"input-header\">\n" +
-        "    <h1>הכנס פרטי אירוע</h1>\n" +
+        "    <h1>פרס לאפליקציה חדשות</h1>\n" +
         "  </header>\n" +
         "  <section class=\"input-content\">\n" +
-        "    <h2>הכנס פרטים על האירוע</h2>\n" +
+        "    <h2>פרס לאפליקציה חדשות</h2>\n" +
         "    <div class=\"input-content-wrap\">\n" +
         "      <dl class=\"inputbox\">\n" +
         "        <dt class=\"inputbox-title\">כותרת של החדשות</dt>\n" +
         "        <dd class=\"inputbox-content\">\n" +
-        "          <input id=\"ScenerioName\" type=\"text\" required/>\n" +
-        "          <label for=\"input0\">כותרת על האירוע</label>\n" +
+        "          <input id=\"newsTitle\" type=\"text\" required/>\n" +
+        "          <label for=\"input0\">כותרת של החדשות</label>\n" +
         "          <span class=\"underline\"></span>\n" +
         "        </dd>\n" +
         "      </dl>\n" +
         "      <dl class=\"inputbox\">\n" +
         "        <dt class=\"inputbox-title\">תקציר</dt>\n" +
         "        <dd class=\"inputbox-content\">\n" +
-        "          <input id=\"des\" type=\"text\" required/>\n" +
-        "          <label for=\"input1\">פירוט מורחב</label>\n" +
+        "          <input id=\"dataForNews\" type=\"text\" required/>\n" +
+        "          <label for=\"input1\">תקציר</label>\n" +
         "          <span class=\"underline\"></span>\n" +
         "        </dd>\n" +
         "      </dl>\n" +
         "      <dl class=\"inputbox\">\n" +
         "        <dt class=\"inputbox-title\">סוג</dt>\n" +
         "        <dd class=\"inputbox-content\">\n" +
-        "          <input id=\"des\" type=\"text\" required/>\n" +
-        "          <label for=\"input1\">פירוט מורחב</label>\n" +
+        "          <input id=\"typeNews\" type=\"text\" required/>\n" +
+        "          <label for=\"input1\">סוג</label>\n" +
         "          <span class=\"underline\"></span>\n" +
         "        </dd>\n" +
         "      </dl>\n" +
         "      <dl class=\"inputbox\">\n" +
         "        <dt class=\"inputbox-title\">כותב</dt>\n" +
         "        <dd class=\"inputbox-content\">\n" +
-        "          <input id=\"des\" type=\"text\" required/>\n" +
-        "          <label for=\"input1\">פירוט מורחב</label>\n" +
+        "          <input id=\"writerNews\" type=\"text\" required/>\n" +
+        "          <label for=\"input1\">כותב</label>\n" +
+        "          <span class=\"underline\"></span>\n" +
+        "        </dd>\n" +
+        "      </dl>\n" +
+        "      <dl class=\"inputbox\">\n" +
+        "        <dt class=\"inputbox-title\">קישור לתמונה</dt>\n" +
+        "        <dd class=\"inputbox-content\">\n" +
+        "          <input id=\"photoForNews\" type=\"text\" required/>\n" +
+        "          <label for=\"input1\">קישור לתמונה</label>\n" +
+        "          <span class=\"underline\"></span>\n" +
+        "        </dd>\n" +
+        "      </dl>\n" +
+        "      <dl class=\"inputbox\">\n" +
+        "        <dt class=\"inputbox-title\">קישור לעמוד</dt>\n" +
+        "        <dd class=\"inputbox-content\">\n" +
+        "          <input id=\"urlForNews\" type=\"text\" required/>\n" +
+        "          <label for=\"input1\">קישור לעמוד</label>\n" +
         "          <span class=\"underline\"></span>\n" +
         "        </dd>\n" +
         "      </dl>\n" +
@@ -886,7 +911,44 @@ function newsPage() {
     return re;
 }
 
+function sendToDataBaseNews() {
+    let newsTitle=document.querySelector('#newsTitle').value;
+    let dataForNews=document.querySelector('#dataForNews').value;
+    let typeNews=document.querySelector('#typeNews').value;
+    let writerNews =document.querySelector('#writerNews').value;
+    let photoForNews=document.querySelector('#photoForNews').value;
+    let urlForNews=document.querySelector('#urlForNews').value;
+    if(newsTitle==undefined||dataForNews==undefined||typeNews==undefined||writerNews==undefined||photoForNews==undefined||urlForNews==undefined||
+        newsTitle==""||dataForNews==""||typeNews==""||writerNews==""||photoForNews==""||urlForNews==""
+    ){ window.alert("Error : " + "some field are empty");return;}
+
+    let docRef = db.doc(NEWSFOLDER+newsTitle);
+    docRef.set({
+
+
+        [`${[DATANAMEINNEWS]}`]: dataForNews,
+        [`${[WRITERNAMEINNEWS]}`]: writerNews,
+        [`${[IMAGENAMEINNEWS]}`]: photoForNews,
+        [`${[TYPENAMEINNEWS]}`]: typeNews,
+        [`${[URLNAMEINNEWS]}`]: urlForNews,
+        [`${[DATENAMEINNEWS]}`]:new Date()
+
+    }).then(function (){
+        // console.log("status saved");
+        window.alert("was sended");
+    }).catch(function (error){
+        window.alert("Error : " + error);
+    })
+}
+
+function removeNews() {
+    document.getElementById("newsLoaded").remove();
+
+}
+
 function newsFun() {
+    document.getElementById("btn btn-confirm").addEventListener("click", sendToDataBaseNews);
+    document.getElementById("btn btn-cancel").addEventListener("click",removeNews);
 
 }
 
