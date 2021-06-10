@@ -461,7 +461,6 @@ public class backgroundService extends Service {
             public void run() {
                 if(!StopCity&&FirebaseAuth.getInstance().getCurrentUser() != null) {
                     AlertifInCity();
-                    Toast.makeText(context, "Service is still running", Toast.LENGTH_LONG).show();
                     handler.postDelayed(runnable, TIMETOWAIT);
                 }
             }
