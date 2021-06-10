@@ -9,6 +9,7 @@ import android.media.Image;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.Gravity;
@@ -26,6 +27,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -67,6 +69,9 @@ public class MainActivity<imageView> extends AppCompatActivity implements Naviga
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
     public ImageView nav_view_image;
+    public ImageView refresh_page;
+    public androidx.swiperefreshlayout.widget.SwipeRefreshLayout swipe;
+
     @Override
     public void onResume()
     {  // After a pause OR at startup
@@ -115,6 +120,7 @@ public class MainActivity<imageView> extends AppCompatActivity implements Naviga
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        refresh_page = (ImageView)findViewById(R.id.sync_button);
         nav_view_image = (ImageView)findViewById(R.id.nav_view_image);
         try
         {
@@ -158,8 +164,31 @@ public class MainActivity<imageView> extends AppCompatActivity implements Naviga
                 drawer.openDrawer(Gravity.RIGHT);
             }
         });
+        // refreshing by pressing the Refresh button
+        ImageView refresh_page = (ImageView) findViewById(R.id.sync_button);
+        refresh_page.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                finish();
+                startActivity(getIntent());
+                overridePendingTransition(0, 0);
+            }
+        });
+        // refreshing by scroll up
+        swipe = (androidx.swiperefreshlayout.widget.SwipeRefreshLayout)findViewById(R.id.swiperefresh);
+        androidx.swiperefreshlayout.widget.SwipeRefreshLayout swipeRefreshLayout = (androidx.swiperefreshlayout.widget.SwipeRefreshLayout) findViewById(R.id.swiperefresh);
+        swipe.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                startActivity(getIntent());
+             swipeRefreshLayout.setRefreshing(false);
 
-         showNews=(RecyclerView) findViewById(R.id.newsRecycle);
+            }
+
+        });
+
+
+        showNews=(RecyclerView) findViewById(R.id.newsRecycle);
        FirebaseFirestore.getInstance().collection("news")
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -227,11 +256,6 @@ public class MainActivity<imageView> extends AppCompatActivity implements Naviga
                 });
 
 //FIREBASE PARTTTTTTTTTTTTTTT
-
-
-
-
-
 
     }
     class DownloadLink extends AsyncTask<Void, Void, MyAdapter> {
