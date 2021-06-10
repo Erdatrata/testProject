@@ -67,30 +67,30 @@ public class LoginActivity extends AppCompatActivity {
             String passwordnput= Objects.requireNonNull(PasswordInputLogin.getEditText()).getText().toString();
 
             if(TextUtils.isEmpty(emailInput)){//if the field of the email is empty
-                EmailAddressInputLogin.setError("המייל חייב להכיל\"");
+                EmailAddressInputLogin.setError(getResources().getString(R.string.login_must_mail));
                 return;
             }
             if(TextUtils.isEmpty(passwordnput)){//if the field of the password is empty
-                PasswordInputLogin.setError("סיסמה צריכה להכיל\"");
+                PasswordInputLogin.setError(getResources().getString(R.string.login_must_password));
                 return;
             }
             if (!Patterns.EMAIL_ADDRESS.matcher(emailInput).matches()) {//if the email is proper
-                EmailAddressInputLogin.setError("מייל לא תקין\"");
+                EmailAddressInputLogin.setError(getResources().getString(R.string.login_mail_incorect));
                 return;
             }
             if(!PASSWORD_PATTERN.matcher(passwordnput).matches()){//if the password is proper
-                PasswordInputLogin.setError("סיסמה לא תקינה\"");
+                PasswordInputLogin.setError(getResources().getString(R.string.login_password_incorect));
                 return;
             }
             if( passwordnput.length()<6){//if the password is not long than 6
-                PasswordInputLogin.setError("סיסמה קצרה\"");
+                PasswordInputLogin.setError(getResources().getString(R.string.login_short_password));
                 return;
             }
             progressBar.setVisibility(View.VISIBLE);//show the progressbar
             //if the user exists
             FAuth.signInWithEmailAndPassword(emailInput,passwordnput).addOnCompleteListener(task -> {
             if(task.isSuccessful()){//if response success than do
-            Toast.makeText(LoginActivity.this, "ההתחבור הצליחה",
+            Toast.makeText(LoginActivity.this, getResources().getString(R.string.login_success),
                 Toast.LENGTH_SHORT).show();
 
             //                            startActivity(new Intent(getApplicationContext(),MainActivity.class));
@@ -104,16 +104,16 @@ public class LoginActivity extends AppCompatActivity {
 
             //download settings from server
             FirebaseFirestore db = FirebaseFirestore.getInstance();
-            DocumentReference docRef = db.collection("Users").
+            DocumentReference docRef = db.collection(constants.DOC_REF_USERS).
                 document(FirebaseAuth.getInstance().getCurrentUser().getUid());
             docRef.get().addOnCompleteListener(task1 -> {
                 if (task1.isSuccessful()) {
                     DocumentSnapshot document = task1.getResult();
                     System.out.println(document);
-                    String loc = Objects.requireNonNull(document.get("location")).toString();
-                    editor.putString("location",loc);
-                    editor.putFloat("range",Float.parseFloat(Objects.requireNonNull(document.get("range")).toString()));
-//                        System.out.println("location "+loc);
+                    String loc = Objects.requireNonNull(document.get(constants.SHARED_PREFS_LOCATION)).toString();
+                    editor.putString(constants.SHARED_PREFS_LOCATION,loc);
+                    editor.putFloat(constants.rangeChoice,Float.parseFloat(Objects.requireNonNull(document.get(constants.rangeChoice)).toString()));
+
                     for(String d: constants.daysNames){
                         String toStore = Objects.requireNonNull(document.get(d)).toString();
                         editor.putString(d,toStore);
@@ -134,7 +134,7 @@ public class LoginActivity extends AppCompatActivity {
 //                            startActivity(getIntent());
                     });
             } else {//if the response is filed
-                Toast.makeText(LoginActivity.this, "שגיאה: " +
+                Toast.makeText(LoginActivity.this, getResources().getString(R.string.login_error) +
                         Objects.requireNonNull(task.getException()).getMessage(), Toast.LENGTH_SHORT).show();
                 progressBar.setVisibility(View.GONE);
             }
@@ -149,19 +149,19 @@ public class LoginActivity extends AppCompatActivity {
 
             final EditText resetMail = new EditText(v.getContext());
             final AlertDialog.Builder passwordResetDialog = new AlertDialog.Builder(v.getContext());
-            passwordResetDialog.setTitle("לשחזר סיסמה?");
-            passwordResetDialog.setMessage("הזן מייל לקבלת לינק לשחזור הסיסמה");
+            passwordResetDialog.setTitle(getResources().getString(R.string.login_reset_password));
+            passwordResetDialog.setMessage(getResources().getString(R.string.login_write_mail));
             passwordResetDialog.setView(resetMail);
 
-            passwordResetDialog.setPositiveButton("כן", (dialog, which) -> {
+            passwordResetDialog.setPositiveButton(getResources().getString(R.string.login_yes), (dialog, which) -> {
                 // extract the email and send reset link
                 String mail = resetMail.getText().toString();
-                FAuth.sendPasswordResetEmail(mail).addOnSuccessListener(aVoid -> Toast.makeText(LoginActivity.this, "קישור לשחזור הסיסמה נשלח למייל",
-                        Toast.LENGTH_SHORT).show()).addOnFailureListener(e -> Toast.makeText(LoginActivity.this, "שגיאה! קישור השחזור לא נשלח" +
+                FAuth.sendPasswordResetEmail(mail).addOnSuccessListener(aVoid -> Toast.makeText(LoginActivity.this, getResources().getString(R.string.login_resetpass_sendtomail),
+                        Toast.LENGTH_SHORT).show()).addOnFailureListener(e -> Toast.makeText(LoginActivity.this, getResources().getString(R.string.login_resetpass_notsent) +
                                 e.getMessage(), Toast.LENGTH_SHORT).show());
 
             });
-            passwordResetDialog.setNegativeButton("לא", (dialog, which) -> {
+            passwordResetDialog.setNegativeButton(getResources().getString(R.string.login_no), (dialog, which) -> {
                 // close the dialog
             });
             passwordResetDialog.create().show();

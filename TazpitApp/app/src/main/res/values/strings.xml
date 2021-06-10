@@ -22,7 +22,7 @@
     <!--    logged in       -->
     <string name="scenerios_button">אירועים</string>
     <string name="settings_button">הגדרות</string>
-    <string name="logout_button">התנקתקות</string>
+    <string name="logout_button">התנתקות</string>
     <!--    unlogged in     -->
     <string name="login_button">התחברות</string>
     <string name="register_button">הרשמו</string>
@@ -76,14 +76,29 @@
 
 <!--    LOGIN PAGE  -->
     <string name="login_email">כתובת אימייל</string>
-    <string name="login_password">סיסמא</string>
+    <string name="login_password">סיסמה</string>
     <string name="login_connectButton">התחבר</string>
     <string name="login_register">עוד לא נרשמת? להרשמה לחץ כאן</string>
-    <string name="login_foregotPass">שכחתי סיסמא</string>
+    <string name="login_foregotPass">שכחתי סיסמה</string>
     <string name="login_already_in">אתם כבר מחוברים!</string>
+    <string name="login_must_mail">חייב להכיל מייל</string>
+    <string name="login_must_password">חייב להכיל סיסמה</string>
+    <string name="login_mail_incorect">מייל לא תקין</string>
+    <string name="login_password_incorect">סיסמה לא תקינה</string>
+    <string name="login_short_password">סיסמה קצרה</string>
+    <string name="login_error">שגיאה:</string>
+    <string name="login_reset_password">לשחזר סיסמה?</string>
+    <string name="login_write_mail">הזן מייל לקבלת לינק לשחזור הסיסמה</string>
+    <string name="login_yes">כן</string>
+    <string name="login_no">לא</string>
+    <string name="login_resetpass_sendtomail">קישור לשחזור הסיסמה נשלח למייל</string>
+    <string name="login_resetpass_notsent">שגיאה! קישור השחזור לא נשלח</string>
 
 
-<!--    REGISTER    -->
+
+
+
+    <!--    REGISTER    -->
     <!--    PAGE 1    -->
     <string name="register_p1_next">המשך</string>
     <string name="register_hint_lastname">שם משפחה</string>
