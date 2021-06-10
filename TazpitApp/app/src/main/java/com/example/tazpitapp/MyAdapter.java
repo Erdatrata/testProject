@@ -49,13 +49,13 @@ public class MyAdapter extends RecyclerView.Adapter <MyAdapter.MyViewHolder>{
 
     @Override //builds each article to holder
     public void onBindViewHolder(@NonNull @NotNull MyViewHolder holder, int position) {
-    holder.titleItem.setText(title[title.length-position-1]);
-        holder.dataItem.setText(data[title.length-position-1]);
-        holder.timeItem.setText(date[title.length-position-1]);
-        holder.writerItem.setText(writer[title.length-position-1]);
-        holder.myImageItem.setImageBitmap(imageUrl[title.length-position-1]);
+    holder.titleItem.setText(title[position]);
+        holder.dataItem.setText(data[position]);
+        holder.timeItem.setText(date[position]);
+        holder.writerItem.setText(writer[position]);
+        holder.myImageItem.setImageBitmap(imageUrl[position]);
         holder.linkItem.setOnClickListener(v -> {
-            Uri uri = Uri.parse(urlToWeb[title.length-position-1]); // missing 'http://' will cause crashed
+            Uri uri = Uri.parse(urlToWeb[position]); // missing 'http://' will cause crashed
             Intent intent = new Intent(Intent.ACTION_VIEW, uri);
             context.startActivity(intent);
         });
