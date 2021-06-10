@@ -601,11 +601,14 @@ function newEvent() {
         "      </dl>\n" +
         "      <dl class=\"inputbox\">\n" +
         "        <dt class=\"inputbox-title\">נקודת מיקום</dt>\n" +
+
         "        <dd class=\"inputbox-content\">\n" +
         "          <input id=\"geoCode\" type=\"text\" required/>\n" +
         "          <label for=\"input1\">נקודת מיקום</label><a target=\"_blank\" rel=\"noopener noreferrer\" href=\"https://www.latlong.net/\">כדי לפתוח את המפה ולבחור מיקום</a>\n" +
+        "          <br><a target=\"_blank\" rel=\"noopener noreferrer\" href=\"./img.png\">הסבר לקבלת מיקןם</a>" +
         "          <span class=\"underline\"></span>\n" +
         "        </dd>\n" +
+
         "      </dl>\n" +
         "<div><input type=\"checkbox\" id=\"importentEvent\" name=\"importentEvent\" value=\"Bike\">\n" +
         "<label for=\"vehicle1\"> לעלות כדחוף</label><br></div>"+
