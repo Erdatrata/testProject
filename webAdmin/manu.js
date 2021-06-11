@@ -171,7 +171,7 @@ function Prettify(toFill){
         {//looper through file media
             let i=0;
             while(true){
-                if(!(toFill['media url'+i] || toFill['media url '+i]))
+                if(!(toFill['media url '+i]))
                     break
                 let anchor = ""
                 if(toFill['media url'+i])
@@ -182,7 +182,7 @@ function Prettify(toFill){
                 anchors.innerHTML+=`<a href="${anchor}" target="_blank" download/>`
 
                 desc.innerHTML+="<br/>"
-                if(!toFill['media url'+i] || toFill['media url '+i])
+                if(!(toFill['media url'+i] || toFill['media url '+i]))
                     break
                 i++
             }
