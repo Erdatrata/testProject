@@ -175,6 +175,9 @@
     <string name="fillReport_send">שלח</string>
     <string name="fillReport_addCredit">הוסף קרדיט צלם</string>
 
+    <string name="fillReport_exit">האם ברצונך לצאת? העלאה לא תתבצע.</string>
+
+
 <!--    DETAIL SCENARIO  -->
     <string name="more_details"> פרטים נוספים: </string>
     <string name="title_of_event"> כותרת: </string>

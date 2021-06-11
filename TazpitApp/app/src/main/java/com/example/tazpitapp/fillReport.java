@@ -3,6 +3,7 @@ package com.example.tazpitapp;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -30,6 +31,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 import static java.lang.Thread.sleep;
 
@@ -40,6 +42,7 @@ public class fillReport extends AppCompatActivity {
     ImageButton pickMedia;
     CheckBox credit;
     ProgressBar progressBar;
+    boolean uploadProgress=false;
 
 
     private final FirebaseStorage storage = FirebaseStorage.getInstance();
@@ -78,6 +81,7 @@ public class fillReport extends AppCompatActivity {
             if (TextUtils.isEmpty(title.getText()) || TextUtils.isEmpty(description.getText()) || mediaHolder.size() == 0)
                 Toast.makeText(getApplicationContext(), getResources().getString(R.string.fillReport_all_fields_must), Toast.LENGTH_LONG).show();
             else {
+                uploadProgress=true;
                 String getTitle = title.getText().toString();
                 String getDescription = description.getText().toString();
                 //uploading the media to storage firebase===============================
@@ -97,9 +101,14 @@ public class fillReport extends AppCompatActivity {
                             Log.d("image fail", "failed upload image");
                         }
                     }).addOnProgressListener((com.google.firebase.storage.OnProgressListener<? super UploadTask.TaskSnapshot>) taskSnapshot -> {
-                        double progress = (100.0 * taskSnapshot.getBytesTransferred()) / taskSnapshot.getTotalByteCount();
-                        progressBar.setProgress((int) progress);
-                        String progressString = ((int) progress) + getResources().getString(R.string.fillReport_report_inprocess);
+//                        double progress = (100.0 * taskSnapshot.getBytesTransferred()) / taskSnapshot.getTotalByteCount();
+//                        progressBar.setProgress((int) progress);
+//                        String progressString = ((int) progress) + getResources().getString(R.string.fillReport_report_inprocess);
+//                        progressTextView.setText(progressString);
+                        //double progress = (100.0 * taskSnapshot.getBytesTransferred()) / taskSnapshot.getTotalByteCount();
+                        progressBar.setProgress(100);
+                        //String s=String.valueOf(i);
+                        String progressString =  getResources().getString(R.string.fillReport_report_inprocess) +String.valueOf((finalI+1)+"מתוך"+String.valueOf(mediaHolder.size()));
                         progressTextView.setText(progressString);
                     });
 
@@ -200,6 +209,26 @@ public class fillReport extends AppCompatActivity {
                 .delete()
                 .addOnSuccessListener(aVoid -> Log.d("test55", "DocumentSnapshot successfully deleted!"))
                 .addOnFailureListener(e -> Log.w("test56", "Error deleting document", e));
+    }
+
+    public void onBackPressed() {
+        if (uploadProgress){
+            new AlertDialog.Builder(fillReport.this)
+                    .setMessage(R.string.fillReport_exit)
+                    .setPositiveButton("כן", (dialogInterface, i) -> {
+                        uploadProgress=false;
+                        finish();
+                    }).setNeutralButton("לא", (dialog, which) -> {
+
+            }).setCancelable(false)
+                    .create()
+                    .show();
+
+        }
+        uploadProgress=false;
+        finish();
+
+
     }
 
 
