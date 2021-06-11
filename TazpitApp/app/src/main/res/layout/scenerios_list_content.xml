@@ -20,8 +20,11 @@
     <TextView
         android:id="@+id/content"
         android:textDirection="rtl"
+        android:ellipsize="end"
+        android:gravity="right"
         android:layout_width="330dp"
         android:layout_height="86dp"
+        android:maxLength="50"
         android:background="@drawable/textview_border"
         android:padding="10dp"
         android:textColor="@color/colorForText"

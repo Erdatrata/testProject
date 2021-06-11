@@ -31,7 +31,6 @@
         android:layout_height="38dp"
         android:layout_marginTop="132dp"
         android:gravity="center"
-        android:textColor="@color/black"
         android:fontFamily="sans-serif-black"
         android:text="רשימת אירועים"
         android:textSize="25dp"
@@ -55,12 +54,14 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.111"
         app:layout_constraintStart_toStartOf="parent"
-        tools:ignore="MissingConstraints">
+        tools:ignore="MissingConstraints,RtlHardcoded">
 
         <include
             layout="@layout/scenerios_list"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:checked="false"
+            android:paddingBottom="15dp"
             android:fontFamily="sans-serif-black"
             tools:ignore="MissingConstraints" />
     </ScrollView>

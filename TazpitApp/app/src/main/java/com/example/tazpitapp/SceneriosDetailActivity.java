@@ -1,6 +1,7 @@
 
 package com.example.tazpitapp;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -30,6 +31,7 @@ public class  SceneriosDetailActivity extends AppCompatActivity {
    // private FirebaseUser user;
     String pressed_scenario = "";
     TextView type_of_event;
+    TextView title_of_event;
     TextView city_of_event;
     Button gps_event;
     public Button button_sign_event;
@@ -43,12 +45,14 @@ public class  SceneriosDetailActivity extends AppCompatActivity {
         btnScenarioCancel = findViewById(R.id.buttonScenarioCancel);
         btnScenarioFillReport = findViewById(R.id.buttonScenarioFillReport);
         type_of_event = findViewById(R.id.eventType);
+        title_of_event = findViewById(R.id.title_event);
         city_of_event = findViewById(R.id.cityGetScenario);
         gps_event = findViewById(R.id.gpsLink);
         button_sign_event.setVisibility(View.INVISIBLE);
            btnScenarioCancel.setVisibility(View.INVISIBLE);
          btnScenarioFillReport.setVisibility(View.INVISIBLE);
         pressed_scenario = getIntent().getStringExtra(SceneriosDetailFragment.ARG_ITEM_CONTENT);
+        System.out.println("gabi and nati" + pressed_scenario.toString());
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -117,14 +121,18 @@ public class  SceneriosDetailActivity extends AppCompatActivity {
 
 
     }
+@SuppressLint("SetTextI18n")
 private void showTheScenarioDetail(DocumentReference docRef){
     docRef.get().addOnCompleteListener(task -> {
         if (task.isSuccessful()) {
 
             DocumentSnapshot document = task.getResult();
             //the user will click on "לפרטים נוספים" to see information about the event and will see alert
-        type_of_event.setText(getResources().getString(R.string.more_details)+document.get(constants.SCENARIO_TYPE_EVENT).toString());
+            type_of_event.setText(getResources().getString(R.string.more_details)+document.get(constants.SCENARIO_TYPE_EVENT).toString());
             type_of_event.setMovementMethod(new ScrollingMovementMethod());
+            //presenting the title of the event
+            title_of_event.setText(pressed_scenario.toString());
+            title_of_event.setMovementMethod(new ScrollingMovementMethod());
             //presenting the city of the event
             city_of_event.setText(getResources().getString(R.string.place_scenario_city)+document.get(getResources().getString(R.string.detail_scenario_city)).toString());
             //by clicking on "לחץ למיקום" the user can see the location in apps like waze\google maps\moovit...

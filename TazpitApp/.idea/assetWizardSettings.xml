@@ -62,11 +62,23 @@
                                 <PersistentState>
                                   <option name="children">
                                     <map>
+                                      <entry key="backgroundImage">
+                                        <value>
+                                          <PersistentState>
+                                            <option name="values">
+                                              <map>
+                                                <entry key="scalingPercent" value="0" />
+                                              </map>
+                                            </option>
+                                          </PersistentState>
+                                        </value>
+                                      </entry>
                                       <entry key="foregroundClipArt">
                                         <value>
                                           <PersistentState>
                                             <option name="values">
                                               <map>
+                                                <entry key="color" value="000000" />
                                                 <entry key="imagePath" value="C:\Users\natih\AppData\Local\Temp\ic_android_black_24dp.xml" />
                                               </map>
                                             </option>
@@ -79,8 +91,8 @@
                                             <option name="values">
                                               <map>
                                                 <entry key="color" value="000000" />
-                                                <entry key="imagePath" value="C:\הנדסת תוכנה\שנה ד\סמסטר ב\הנדסת תוכנה\unnamed.png" />
-                                                <entry key="scalingPercent" value="57" />
+                                                <entry key="imagePath" value="C:\Users\natih\Desktop\png-transparent-computer-icons-refresh-blue-text-logo.png" />
+                                                <entry key="scalingPercent" value="51" />
                                               </map>
                                             </option>
                                           </PersistentState>
@@ -112,9 +124,7 @@
                                   </option>
                                   <option name="values">
                                     <map>
-                                      <entry key="backgroundAssetType" value="COLOR" />
-                                      <entry key="backgroundColor" value="f2faf5" />
-                                      <entry key="foregroundLayerName" value="tps_icon" />
+                                      <entry key="outputName" value="log_re_new" />
                                     </map>
                                   </option>
                                 </PersistentState>

@@ -175,6 +175,7 @@
 
 <!--    DETAIL SCENARIO  -->
     <string name="more_details"> פרטים נוספים: </string>
+    <string name="title_of_event"> כותרת: </string>
     <string name="detail_scenario_city"> עיר </string>
     <string name="place_scenario_city"> מקום האירוע: </string>
     <string name="scenario_details_moreDetails">פרטים נוספים</string>
