@@ -371,7 +371,8 @@ class register {
             }).addOnFailureListener(new OnFailureListener() {
                 @Override
                 public void onFailure(@NonNull @NotNull Exception e) {
-                    System.out.println("FAILLLLLL");
+                    Toast.makeText(register1.this, getResources().getString(R.string.register_contract_not_Availble), Toast.LENGTH_LONG).show();
+                finish();
                 }
             });
             next.setOnClickListener(v -> {

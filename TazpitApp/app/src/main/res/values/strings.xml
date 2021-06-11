@@ -108,6 +108,8 @@
     <string name="register_hint_password_confirm">אימות סיסמא</string>
     <string name="register_hint_phone">מספר טלפון</string>
     <string name="register_hint_city">עיר</string>
+    <string name="register_contract_not_Availble">לא ניתן לטעון את חוזה ההרשמה, נסו שנית מאוחר יותר</string>
+
 
         <!--    ERRORS  -->
     <string name="register_error_city_exists">העיר לא קיימת במאגר</string>
