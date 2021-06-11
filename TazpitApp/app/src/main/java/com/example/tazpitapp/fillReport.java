@@ -171,6 +171,7 @@ public class fillReport extends AppCompatActivity {
                     dataToSave.put(constants.DESCRIPTION_KEY, getDescription);
                     dataToSave.put(constants.TITLE_KEY, getTitle);
                     dataToSave.put(constants.MEDIAURL+numPhoto, returnUrl);
+                    dataToSave.put("amount of media", numPhoto+1);
                     mDocRef.set(dataToSave).addOnSuccessListener(unused -> {
                         Log.d("InspiritingQuote", "DocumentSnapshot successfully written!");
                         Toast.makeText(getApplicationContext(), getResources().getString(R.string.fillReport_succeed_upload_report), Toast.LENGTH_LONG).show();
