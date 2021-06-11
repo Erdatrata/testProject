@@ -9,6 +9,15 @@
     android:layoutDirection="rtl"
     tools:openDrawer="start">
 
+    <ProgressBar
+        android:id="@+id/simpleProgressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:scaleY="0.25"
+        android:scaleX="0.25"
+
+        />
+
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -26,6 +35,9 @@
                 android:layout_height="match_parent" />
 
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+
+
 
         <ImageView
             android:layout_width="261dp"
@@ -73,8 +85,8 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/newsRecycle"
-            android:layout_width="401dp"
-            android:layout_height="562dp"
+            android:layout_width="390dp"
+            android:layout_height="622dp"
             android:layout_marginBottom="4dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

@@ -17,6 +17,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -187,7 +188,10 @@ public class MainActivity<imageView> extends AppCompatActivity implements Naviga
 
         });
 
+        ProgressBar simpleProgressBar=(ProgressBar)findViewById(R.id.simpleProgressBar); // initiate the progress bar
 
+        simpleProgressBar.setMax(100); // 100 maximum value for the progress value
+        //simpleProgressBar.setProgress(50); // 50 default progress value for the progress bar
         showNews=(RecyclerView) findViewById(R.id.newsRecycle);
        FirebaseFirestore.getInstance().collection("news")
                 .get()
@@ -255,6 +259,7 @@ public class MainActivity<imageView> extends AppCompatActivity implements Naviga
 //                            showNews.setAdapter(myAdapter);
 //                            showNews.setLayoutManager(new LinearLayoutManager(MainActivity.this));
                             try {
+                                simpleProgressBar.setVisibility(View.GONE);
                                 MyAdapter myAdapter = new DownloadLink().execute().get();
                                                             showNews.setAdapter(myAdapter);
                             showNews.setLayoutManager(new LinearLayoutManager(MainActivity.this));
@@ -301,6 +306,7 @@ public class MainActivity<imageView> extends AppCompatActivity implements Naviga
                     }
 
                 });
+
 
 //FIREBASE PARTTTTTTTTTTTTTTT
 
