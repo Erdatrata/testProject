@@ -22,6 +22,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.gson.Gson;
 
 import java.util.Objects;
 import java.util.regex.Pattern;
@@ -116,29 +117,34 @@ public class LoginActivity extends AppCompatActivity {
                             System.out.println(document);
                             String loc = "";
                             if(document.exists()) {
+                                //location
                                 loc = document.get(constants.SHARED_PREFS_LOCATION).toString();
+                                if(loc.equals(""))
+                                    loc="city";
                                 editor.putString(constants.SHARED_PREFS_LOCATION, loc);
-                                editor.putFloat(constants.rangeChoice, Float.parseFloat(Objects.requireNonNull(document.get(constants.rangeChoice)).toString()));
+                                //range
+                                float range = Float.parseFloat((document.get(constants.rangeChoice)).toString());
+                                if(range==0)
+                                    range=10;
+                                editor.putFloat(constants.rangeChoice, range);
 
+
+                                //days
+                                String dtDEF = (new Gson()). //will be used in case of null strings
+                                        toJson(new dayTime(0,00,23,59));
                                 for (String d : constants.daysNames) {
-                                    String toStore = Objects.requireNonNull(document.get(d)).toString();
+                                    String toStore = (document.get(d)).toString();
+                                    if(toStore.equals(""))//if string from srv is null
+                                        toStore=dtDEF;//then input default 'all day' state
                                     editor.putString(d, toStore);
                                 }
-                                if (document.exists()) {
-                                    Log.d("gabi_test", "Settings updated " + document.getData());
-                                    editor.apply();
-                                } else {
-                                    Log.d("gabi_test", "Settings not found");
-                                }
+
                             }
                         } else {
                             Log.d("gabi_test", "settings failed with ", task1.getException());
                         }
-
                         //return to main
                         finish();
-
-//                            startActivity(getIntent());
                     });
 
                 }

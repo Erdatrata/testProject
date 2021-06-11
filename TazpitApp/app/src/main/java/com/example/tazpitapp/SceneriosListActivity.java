@@ -211,6 +211,8 @@ public class SceneriosListActivity extends AppCompatActivity {
                                             if(user.getUid().toString().equals(document.getId().toString())) {// if the user is sing to even then
 
                                                 String str=mValues.get(position).content+" "+addRange(documentSnapshot);
+                                                if(str.equals(""))
+                                                    continue;
                                                 Spannable spannable = new SpannableString(str);
                                                 spannable.setSpan(new ForegroundColorSpan(Color.GRAY), 0 ,mValues.get(position).content.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
                                                 ForegroundColorSpan fcsRed=new ForegroundColorSpan(Color.parseColor("#228b22"));
@@ -221,7 +223,7 @@ public class SceneriosListActivity extends AppCompatActivity {
                                                 holder.mContentView.setText(spannable);//gray color on user if he sign and green color the km and set her
                                                                                         //and put the scenrios on the app
                                                 holder.itemView.setTag(mValues.get(position));
-                                                Log.d("onComplet","po="+mValues.get(position));
+                                                Log.d("onComplete","po="+mValues.get(position));
                                                 holder.itemView.setOnClickListener(mOnClickListener);
                                                 break;
                                             }//if the not user is sing to even then
