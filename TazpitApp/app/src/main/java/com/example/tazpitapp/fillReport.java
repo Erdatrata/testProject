@@ -31,6 +31,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
+import static java.lang.Thread.sleep;
+
 public class fillReport extends AppCompatActivity {
     EditText title;
     EditText description;
@@ -161,7 +163,7 @@ public class fillReport extends AppCompatActivity {
         getDownloadUriTask.addOnCompleteListener(fillReport.this, task -> {
             if (task.isSuccessful()) {
                 Uri downloadUri = task.getResult();
-              String returnUrl=downloadUri.toString();
+                String returnUrl=downloadUri.toString();
                 Log.d("downloaduri", returnUrl);
                 if(numPhoto== mediaHolder.size()-1){
                     if (itemClicked(credit))
@@ -183,6 +185,11 @@ public class fillReport extends AppCompatActivity {
                 }
                 else
                     dataToSave.put(constants.MEDIAURL+numPhoto, returnUrl);
+                try {
+                    sleep(60);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
 
             }
             else
