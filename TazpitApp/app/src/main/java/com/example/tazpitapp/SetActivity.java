@@ -206,7 +206,7 @@ public class SetActivity extends AppCompatActivity {
     }
 
     private void saveToServer(){
-        if (unsaved)
+        if (unsaved && rightNow!=null)
             saveTemp();
         FirebaseAuth userIdentifier=FirebaseAuth.getInstance();
         String UID = userIdentifier.getCurrentUser().getUid();
