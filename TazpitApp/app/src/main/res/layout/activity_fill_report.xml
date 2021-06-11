@@ -25,7 +25,7 @@
         tools:ignore="MissingConstraints" />
 
     <EditText
-        android:id="@+id/fill_report_title"
+        android:id="@+id/fill_report_description"
         android:layout_width="366dp"
         android:layout_height="98dp"
         android:ems="10"
@@ -47,7 +47,7 @@
         tools:ignore="HardcodedText,SpUsage" />
 
     <EditText
-        android:id="@+id/fill_report_description"
+        android:id="@+id/fill_report_title"
         android:layout_width="366dp"
         android:layout_height="67dp"
         android:ems="10"
