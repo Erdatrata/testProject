@@ -10,8 +10,10 @@ import android.util.Patterns;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import org.jetbrains.annotations.NotNull;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -27,6 +29,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 ///////////////////////////
 
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
@@ -363,7 +366,13 @@ class register {
             mDocRef.get().addOnSuccessListener(documentSnapshot -> {
                 dataToSave[0] = documentSnapshot.getData();
                 String str = Objects.requireNonNull(dataToSave[0]).get(constants.CONTACT).toString();
+                System.out.println(str);
                 textshow.setText(str);
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull @NotNull Exception e) {
+                    System.out.println("FAILLLLLL");
+                }
             });
             next.setOnClickListener(v -> {
                 if (Aggre.isChecked()) {

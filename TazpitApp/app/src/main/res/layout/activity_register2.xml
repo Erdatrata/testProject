@@ -44,13 +44,14 @@
         android:id="@+id/page2RegAggre"
         android:layout_width="33dp"
         android:layout_height="32dp"
-        android:text="@string/register_p2_accept"
         android:layout_marginBottom="96dp"
+        android:shadowColor="@color/tps_color_blue"
+        android:drawableTint="@color/tps_color_blue"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        tools:ignore="MissingConstraints" />
+        />
 
     <Button
         android:id="@+id/nextPage2Reg"
@@ -68,7 +69,6 @@
 
     <TextView
         android:id="@+id/textView7"
-
         android:layout_width="159dp"
         android:layout_height="20dp"
         android:layout_marginStart="16dp"
