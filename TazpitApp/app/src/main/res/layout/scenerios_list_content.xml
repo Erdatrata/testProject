@@ -16,9 +16,9 @@
     <TextView
         android:id="@+id/content"
         android:layout_width="330dp"
-        android:layout_height="50dp"
-        android:padding="10dp"
+        android:layout_height="86dp"
         android:background="@drawable/textview_border"
+        android:padding="10dp"
         android:textColor="@color/black"
         android:textSize="20dp" />
 
