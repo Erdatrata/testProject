@@ -33,7 +33,7 @@
     <TextView
         android:id="@+id/cityGetScenario"
         android:layout_width="312dp"
-        android:layout_height="40dp"
+        android:layout_height="36dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
@@ -42,16 +42,36 @@
         android:textSize="23sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/guideline4"
-        app:layout_constraintHorizontal_bias="0.513"
+        app:layout_constraintHorizontal_bias="0.487"
         app:layout_constraintStart_toStartOf="@+id/guideline3"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.294"
+        app:layout_constraintVertical_bias="0.414"
+        tools:ignore="HardcodedText" />
+
+    <TextView
+        android:id="@+id/title_event"
+        android:layout_width="331dp"
+        android:layout_height="67dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/line"
+        android:fontFamily="cursive"
+        android:text="כותרת"
+        android:textSize="23sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/guideline4"
+        app:layout_constraintHorizontal_bias="0.545"
+        app:layout_constraintStart_toStartOf="@+id/guideline3"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.305"
         tools:ignore="HardcodedText" />
 
     <TextView
         android:id="@+id/eventType"
-        android:layout_width="315dp"
-        android:layout_height="201dp"
+        android:layout_width="311dp"
+        android:layout_height="124dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
@@ -64,7 +84,7 @@
         app:layout_constraintEnd_toStartOf="@+id/guideline4"
         app:layout_constraintStart_toStartOf="@+id/guideline3"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.443" />
+        app:layout_constraintVertical_bias="0.521" />
 
     <Button
         android:id="@+id/gpsLink"
