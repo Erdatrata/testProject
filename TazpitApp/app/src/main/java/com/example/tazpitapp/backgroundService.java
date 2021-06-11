@@ -60,7 +60,6 @@ import java.util.Map;
 import java.util.concurrent.ExecutionException;
 
 public class backgroundService extends Service {
-
     final int sec=1000;
     final int TIMETOWAIT=sec*60;
     boolean StopCity=false;
@@ -391,6 +390,8 @@ public class backgroundService extends Service {
         return range;
     }//get range that the user put in settings
     private boolean isItAfterTime(Timestamp isIt,Timestamp AfterTHisOne){
+        if(isIt==null || AfterTHisOne==null)
+            return false;
         if(isIt.toDate().after(AfterTHisOne.toDate())){return true;}return false;
 
     }//check if isIt More late in date and time then Atter THisOne
@@ -501,7 +502,9 @@ public class backgroundService extends Service {
                                            System.out.println("userCity is : "+userCity +"\n");
                                             if(userCity!=null&&!userCity.equals(constants.OUTSIDECITY)){
                                                 if(userCity.equals(townScenario)) {
-                                               if (checkImporent(documentSnapshot) && isItAfterTime(toTimestamp(documentSnapshot.getData().get("timeCreated")), getLastTime())) {
+                                               if (checkImporent(documentSnapshot) &&
+                                                       isItAfterTime(toTimestamp(documentSnapshot.getData()
+                                                               .get("timeCreated")), getLastTime())) {
                                                    setLastTime(toTimestamp(documentSnapshot.getData().get("timeCreated")));
                                                    System.out.println("in city mode check2");
                                                    sendNotfication(documentSnapshot.getId(), 0);

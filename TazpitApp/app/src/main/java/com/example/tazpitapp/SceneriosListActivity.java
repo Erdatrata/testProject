@@ -210,7 +210,7 @@ public class SceneriosListActivity extends AppCompatActivity {
                                         for (QueryDocumentSnapshot document : task.getResult()) {
                                             if(user.getUid().toString().equals(document.getId().toString())) {// if the user is sing to even then
 
-                                                String str=mValues.get(position).content+" "+addRange(documentSnapshot);
+                                                String str="\r"+mValues.get(position).content+" "+addRange(documentSnapshot);
                                                 if(str.equals(""))
                                                     continue;
                                                 Spannable spannable = new SpannableString(str);
@@ -255,7 +255,7 @@ public class SceneriosListActivity extends AppCompatActivity {
                     if (task.isSuccessful()) {
                         int i=0;
                         for (QueryDocumentSnapshot document : task.getResult()) {
-                            String str=mValues.get(position).content+" "+addRange(document);
+                            String str="\r"+mValues.get(position).content+" "+addRange(document);
                             ForegroundColorSpan fcsRed=new ForegroundColorSpan(Color.parseColor("#bb1715"));
                             SpannableStringBuilder sb = new SpannableStringBuilder(str);
                             StyleSpan iss = new StyleSpan(Typeface.BOLD); //Span to make text italic
