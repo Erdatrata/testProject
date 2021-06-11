@@ -134,6 +134,8 @@ public static final String TITLE_KEY = "title";
     public static final String PRESSED_SCENARIO = "pressed scenario"; //also belongs to scenario detail
     public static final String CREDIT = "credit";
     public static final String MEDIAURL = "media url ";
+    public static final String AMOUNTMEDIA = "amount of media";
+
 
 //belong to scenario detail
 public static final String ISSIGEND = "isSigned";
