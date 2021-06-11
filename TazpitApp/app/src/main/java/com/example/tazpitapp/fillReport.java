@@ -48,7 +48,7 @@ public class fillReport extends AppCompatActivity {
     Map<String, Object> dataToSave = new HashMap<>();
     ArrayList<Uri> mediaHolder = new ArrayList<>();
     private static final int SELECT_PHOTO = 100;
-   TextView progressTextView;
+    TextView progressTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,15 +56,15 @@ public class fillReport extends AppCompatActivity {
         setContentView(R.layout.activity_fill_report);
         title = findViewById(R.id.fill_report_title);
         description = findViewById(R.id.fill_report_description);
-        progressBar= findViewById(R.id.progressBar);
+        progressBar = findViewById(R.id.progressBar);
         submit = findViewById(R.id.fill_report_send_button);
         pickMedia = findViewById(R.id.fill_report_upload_button);
         credit = findViewById(R.id.fill_report_add_credit);
-        progressTextView= findViewById(R.id.progressTextView);
+        progressTextView = findViewById(R.id.progressTextView);
         mAuth = FirebaseAuth.getInstance();
         String scenarioPressed = getIntent().getStringExtra(constants.PRESSED_SCENARIO);
-        mDocRef = FirebaseFirestore.getInstance().document(constants.DOC_REF_SCENARIOS+"/" + scenarioPressed+"/"+constants.DOC_REF_FILLED+"/"+mAuth.getCurrentUser().getUid());
-        DocumentReference deleteUserFromAccept=FirebaseFirestore.getInstance().document(constants.DOC_REF_SCENARIOS+"/"+scenarioPressed);
+        mDocRef = FirebaseFirestore.getInstance().document(constants.DOC_REF_SCENARIOS + "/" + scenarioPressed + "/" + constants.DOC_REF_FILLED + "/" + mAuth.getCurrentUser().getUid());
+        DocumentReference deleteUserFromAccept = FirebaseFirestore.getInstance().document(constants.DOC_REF_SCENARIOS + "/" + scenarioPressed);
         //when pressing the upload media button we go here
 //and choose media
         pickMedia.setOnClickListener(v -> {
@@ -81,8 +81,8 @@ public class fillReport extends AppCompatActivity {
                 String getTitle = title.getText().toString();
                 String getDescription = description.getText().toString();
                 //uploading the media to storage firebase===============================
-                for(int i=0; i<mediaHolder.size(); i++) {
-                    String path = scenarioPressed+"/" + mAuth.getCurrentUser().getEmail() + "/" + UUID.randomUUID();
+                for (int i = 0; i < mediaHolder.size(); i++) {
+                    String path = scenarioPressed + "/" + mAuth.getCurrentUser().getEmail() + "/" + UUID.randomUUID();
                     StorageReference firememeRef = storage.getReference(path);
                     UploadTask uploadTask = firememeRef.putFile(mediaHolder.get(i));
 
@@ -92,9 +92,8 @@ public class fillReport extends AppCompatActivity {
                     uploadTask.addOnCompleteListener(fillReport.this, task -> {
                         if (task.isSuccessful()) {
                             Log.i("MA", "upload image num " + finalI + "task to storage completed");
-                            uploadReportFirestore(uploadTask, firememeRef, finalI,getDescription,getTitle,deleteUserFromAccept, mAuth.getCurrentUser());
-                        }
-                        else{
+                            uploadReportFirestore(uploadTask, firememeRef, finalI, getDescription, getTitle, deleteUserFromAccept, mAuth.getCurrentUser());
+                        } else {
                             Log.d("image fail", "failed upload image");
                         }
                     }).addOnProgressListener((com.google.firebase.storage.OnProgressListener<? super UploadTask.TaskSnapshot>) taskSnapshot -> {
@@ -111,13 +110,14 @@ public class fillReport extends AppCompatActivity {
         });
 
     }
-//this is func that calls automatic by startActivityForResult after choosing media files
+
+    //this is func that calls automatic by startActivityForResult after choosing media files
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == SELECT_PHOTO) {
-            if(resultCode == Activity.RESULT_OK) {
-                if(data!=null) {
+        if (requestCode == SELECT_PHOTO) {
+            if (resultCode == Activity.RESULT_OK) {
+                if (data != null) {
                     if (data.getClipData() != null) {
                         int count = data.getClipData().getItemCount(); //evaluate the count before the for loop --- otherwise, the count is evaluated every loop.
                         Uri imageUri;
@@ -135,7 +135,7 @@ public class fillReport extends AppCompatActivity {
         }
     }
 
-//function that checks if the user wants to get credit about the report he will upload
+    //function that checks if the user wants to get credit about the report he will upload
     public boolean itemClicked(View v) {
         //code to check if this checkbox is checked!
         boolean indc = false;
@@ -147,57 +147,55 @@ public class fillReport extends AppCompatActivity {
     }
 
 
-
     //this function pushes media, title, descript and credit to a virable that saves the
     //conetnt we will have in the firebase firestore. when the loop of the media ends we push the virable to firebase
     //and upload the report.
-    public void uploadReportFirestore(UploadTask uploadTask,StorageReference firememeRef, int numPhoto,String getDescription,String getTitle, DocumentReference docRef,FirebaseUser user) {
+    public void uploadReportFirestore(UploadTask uploadTask, StorageReference firememeRef, int numPhoto, String getDescription, String getTitle, DocumentReference docRef, FirebaseUser user) {
         Task<Uri> getDownloadUriTask = uploadTask.continueWithTask(task -> {
-           if (!task.isSuccessful()) {
-              throw task.getException();
+                    if (!task.isSuccessful()) {
+                        throw task.getException();
+                    }
+                    return firememeRef.getDownloadUrl();
+                    //Getting media url to store it in firestore
                 }
-                 return firememeRef.getDownloadUrl();
-           //Getting media url to store it in firestore
-                       }
         );
         getDownloadUriTask.addOnCompleteListener(fillReport.this, task -> {
             if (task.isSuccessful()) {
                 Uri downloadUri = task.getResult();
-                String returnUrl=downloadUri.toString();
+                String returnUrl = downloadUri.toString();
                 Log.d("downloaduri", returnUrl);
-                if(numPhoto== mediaHolder.size()-1){
+                if (numPhoto == mediaHolder.size() - 1) {
                     if (itemClicked(credit))
                         dataToSave.put(constants.CREDIT, true);
                     else
                         dataToSave.put(constants.CREDIT, false);
                     dataToSave.put(constants.DESCRIPTION_KEY, getDescription);
                     dataToSave.put(constants.TITLE_KEY, getTitle);
-                    dataToSave.put(constants.MEDIAURL+numPhoto, returnUrl);
-                    dataToSave.put(constants.AMOUNTMEDIA, numPhoto+1);
+                    dataToSave.put(constants.MEDIAURL + numPhoto, returnUrl);
+                    dataToSave.put(constants.AMOUNTMEDIA, numPhoto + 1);
                     mDocRef.set(dataToSave).addOnSuccessListener(unused -> {
                         Log.d("InspiritingQuote", "DocumentSnapshot successfully written!");
                         Toast.makeText(getApplicationContext(), getResources().getString(R.string.fillReport_succeed_upload_report), Toast.LENGTH_LONG).show();
-                        removeUserFromAccept( docRef,  user);
+                        removeUserFromAccept(docRef, user);
                         Intent intent = new Intent(fillReport.this, MainActivity.class);
                         startActivity(intent);
 
                     }).addOnFailureListener(e -> Log.w("InspiritingQuote", "Error writing document", e));
-                }
-                else
-                    dataToSave.put(constants.MEDIAURL+numPhoto, returnUrl);
+                } else
+                    dataToSave.put(constants.MEDIAURL + numPhoto, returnUrl);
                 try {
                     sleep(60);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
 
-            }
-            else
-Log.d("FAILEDUPLOADTOFIRESTORE","failed upload report");
+            } else
+                Log.d("FAILEDUPLOADTOFIRESTORE", "failed upload report");
         });
 
     }
-    private void removeUserFromAccept(  DocumentReference docRef, FirebaseUser user){
+
+    private void removeUserFromAccept(DocumentReference docRef, FirebaseUser user) {
         docRef.collection(constants.DOC_REF_ACCEPTED).document(user.getUid())
                 .delete()
                 .addOnSuccessListener(aVoid -> Log.d("test55", "DocumentSnapshot successfully deleted!"))
