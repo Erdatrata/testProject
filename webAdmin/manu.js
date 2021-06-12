@@ -8,6 +8,8 @@
 
 // Add the Firebase products that you want to use
 
+let USERPERMISSIONFOLDER="userPermissions/";
+
 let SCENARIO='Scenarios';
 let FILLED="filled";
 let ACCEPTED='accepted';
@@ -186,16 +188,16 @@ function Prettify(toFill){
                     break
                 i++
             }
-            let dlBTN = document.createElement("button")
-            dlBTN.innerText="Download All"
-            dlBTN.addEventListener('click',function(){
-                let cNodes = desc.childNodes.filter(v=>v.nodeName=='A')
-                for(node in cNodes){
-                    node.click()
-                }
-            })
-            
-            desc.appendChild(dlBTN)
+            // let dlBTN = document.createElement("button")
+            // dlBTN.innerText="Download All"
+            // dlBTN.addEventListener('click',function(){
+            //     let cNodes = desc.childNodes.filter(v=>v.nodeName=='A')
+            //     for(node in cNodes){
+            //         node.click()
+            //     }
+            // })
+            //
+            // desc.appendChild(dlBTN)
 
         }
         tr.appendChild(desc)
@@ -387,24 +389,60 @@ function openAccepted(userDocid) {
 }
 
 function makeOld(path, name) {
+    let oldNewName=name+"_"+Date.now();
+    let fillpath=path+"/"+FILLED;
+    let acceptpath=path+"/"+ACCEPTED;
+    let colfill =db.collection(fillpath);
+    let colaccept =db.collection(acceptpath);
     let ref=db.doc(path);
-    ref.get().then((doc) => {
-        if (doc.exists) {
-            let save=doc.data();
-            let remove =ref.delete().then(() => {
-              // console.log(name+",Document successfully deleted!\nin path:"+path);
+    console.log(fillpath);
+    colfill.get().then((querySnapshot)=> {
+        console.log(fillpath);
+        if(querySnapshot!=null){
+        querySnapshot.forEach((userDoc) => {
+            userDoc.get().then((doc) => {
+                let id = doc.id;
+                db.collection("OldInfo/"+oldNewName+"/" + FILLED + "/" + id).doc().set(doc.data()).then(() => {
+                    db.doc(fillpath + "/" + id).remove();
+                });
+
+
             });
-            db.collection("OldInfo").doc(name+"_"+Date.now()).set(save).then(() => {
-              // console.log("Document successfully written!");
-            });
-            return remove;
-        } else {
-            // doc.data() will be undefined in this case
-          // console.log(name+",No such document! \nin path:"+path);
-        }
-    }).catch((error) => {
-      // console.log("Error getting document:", error);
+        });
+    }
     });
+    colaccept.get().then((querySnapshot)=>{
+        if(querySnapshot!=null){
+            querySnapshot.forEach((userDoc) => {
+                userDoc.get().then((doc) => {
+                    let id = doc.id;
+                    db.collection("OldInfo/"+oldNewName+"/" + ACCEPTED + "/" + id).doc().set(doc.data()).then(() => {
+                        db.doc(acceptpath + "/" + id).remove();
+                    });
+
+
+                });
+            });
+        }
+
+    });
+    // ref.get().then((doc) => {
+    //     if (doc.exists) {
+    //         let save=doc.data();
+    //         let remove =ref.delete().then(() => {
+    //             // console.log(name+",Document successfully deleted!\nin path:"+path);
+    //         });
+    //         db.collection("OldInfo").doc(oldNewName).set(save).then(() => {
+    //             // console.log("Document successfully written!");
+    //         });
+    //         return remove;
+    //     } else {
+    //         // doc.data() will be undefined in this case
+    //         // console.log(name+",No such document! \nin path:"+path);
+    //     }
+    // }).catch((error) => {
+    //     // console.log("Error getting document:", error);
+    // });
 }
 
 function createEnterFilter() {
@@ -698,21 +736,21 @@ function addButtonToEvent() {
 
 
 function removeUser(userid) {
+    db.doc(USERPERMISSIONFOLDER + userid).set({
+        role: "deleted"
+    });
      firebase.database().ref('Users/' + userid).remove();
-}
-
-function updatePermission(id) {//last thing to do
-
 
 }
+
 
 function RegisterUser(id) {
+    db.doc(USERPERMISSIONFOLDER + id).set({
+        role: "volunteer"
+    });
     firebase.database().ref('Users/' + id).update({
         volunteer: "true"
     });
-
-    updatePermission(id);
-
 }
 
 async function createTabFromUserData(userid,newuser) {
@@ -963,6 +1001,7 @@ document.addEventListener("DOMContentLoaded", () => {
         contextButton(this);
         $("#data").html(ListEvent());
         ListVolFun();
+        downloadAll(links);
 
 
 
@@ -1104,6 +1143,12 @@ function contextButton(context){
 
 var countries=[];
 /*initiate the autocomplete function on the "myInput" element, and pass along the countries array as possible autocomplete values:*/
+
+
+
+
+
+
 
 
 
