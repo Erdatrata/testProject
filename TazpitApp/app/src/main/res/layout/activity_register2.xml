@@ -10,12 +10,11 @@
     tools:context=".MainActivity">
 
 
-
     <ImageView
         android:layout_width="208dp"
         android:layout_height="72dp"
         android:layout_gravity="center"
-        android:layout_marginBottom="628dp"
+        android:layout_marginBottom="616dp"
         android:paddingStart="10dip"
         android:paddingEnd="10dip"
         android:scaleType="centerCrop"
@@ -45,13 +44,12 @@
         android:layout_width="33dp"
         android:layout_height="32dp"
         android:layout_marginBottom="96dp"
-        android:shadowColor="@color/tps_color_blue"
         android:drawableTint="@color/tps_color_blue"
+        android:shadowColor="@color/tps_color_blue"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        />
+        app:layout_constraintHorizontal_bias="0.911"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/nextPage2Reg"
