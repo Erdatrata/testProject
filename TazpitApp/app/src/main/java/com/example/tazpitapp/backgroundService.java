@@ -234,7 +234,7 @@ public class backgroundService extends Service {
                 channlId
         );
         builder.setSmallIcon(R.mipmap.ic_launcher);
-        builder.setContentTitle("Location From City");
+        builder.setContentTitle("Location From GPS");
         builder.setDefaults(NotificationCompat.DEFAULT_ALL);
         builder.setContentText("Running");
         builder.setContentIntent(pendingIntent);
