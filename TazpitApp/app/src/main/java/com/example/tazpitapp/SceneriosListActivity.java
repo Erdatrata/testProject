@@ -21,6 +21,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import androidx.core.content.ContextCompat;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.recyclerview.widget.RecyclerView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -131,7 +133,7 @@ public class SceneriosListActivity extends AppCompatActivity {
     private void setupRecyclerView(@NonNull RecyclerView recyclerView) {//put all scenrios in   recyclerView
         recyclerView.setAdapter(new SimpleItemRecyclerViewAdapter(this,ITEMS, mTwoPane));
     }
-    public static class SimpleItemRecyclerViewAdapter
+    public class SimpleItemRecyclerViewAdapter
             extends RecyclerView.Adapter<SimpleItemRecyclerViewAdapter.ViewHolder> {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         private final SceneriosListActivity mParentActivity;
@@ -198,11 +200,13 @@ public class SceneriosListActivity extends AppCompatActivity {
                                         if(str1.equals(""))
                                             continue;
                                         Spannable spannable = new SpannableString(str1);
-                                        spannable.setSpan(new ForegroundColorSpan(Color.GRAY), 0 ,mValues.get(position).content.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-                                        ForegroundColorSpan fcsRed=new ForegroundColorSpan(Color.parseColor("#228b22"));
-                                        ForegroundColorSpan fcsgray=new ForegroundColorSpan(Color.GRAY);
-                                        spannable.setSpan(fcsgray,0,mValues.get(position).content.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-                                        spannable.setSpan(fcsRed,mValues.get(position).content.length()+1, str1.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                                        spannable.setSpan(new ForegroundColorSpan(Color.GREEN), 0 ,mValues.get(position).content.length()+1, Spannable.SPAN_EXCLUSIVE_INCLUSIVE);
+                                        StyleSpan iss = new StyleSpan(Typeface.BOLD); //Span to make text bold
+                                        ForegroundColorSpan fcsRed=new ForegroundColorSpan(ResourcesCompat.getColor(getResources(), R.color.colorForRegistered, null));
+                                        ForegroundColorSpan fcsgray=new ForegroundColorSpan(ResourcesCompat.getColor(getResources(), R.color.colorForRegistered, null));
+                                        spannable.setSpan(iss,0,mValues.get(position).content.length()+1, Spanned.SPAN_EXCLUSIVE_INCLUSIVE);
+                                        spannable.setSpan(fcsgray,0,mValues.get(position).content.length()+1, Spanned.SPAN_EXCLUSIVE_INCLUSIVE);
+                                        spannable.setSpan(fcsRed,mValues.get(position).content.length(), str1.length(), Spanned.SPAN_EXCLUSIVE_INCLUSIVE);
 //
                                         holder.mContentView.setText(spannable);//gray color on user if he sign and green color the km and set her
                                                                                 //and put the scenrios on the app
@@ -213,10 +217,10 @@ public class SceneriosListActivity extends AppCompatActivity {
                                     }//if the not user is sing to even then
                                     String str1 =mValues.get(position).content+" "+addRange(documentSnapshot);
                                     ForegroundColorSpan fcsgreen=new ForegroundColorSpan(Color.parseColor("#bb1715"));
-                                     SpannableStringBuilder sb = new SpannableStringBuilder(str1);
-                                     StyleSpan iss = new StyleSpan(Typeface.BOLD); //Span to make text italic
+                                    SpannableStringBuilder sb = new SpannableStringBuilder(str1);
+                                    StyleSpan iss = new StyleSpan(Typeface.BOLD); //Span to make text bold
                                     sb.setSpan(iss, 0, mValues.get(position).content.length(), Spannable.SPAN_INCLUSIVE_INCLUSIVE); // make last 2 characters Italic
-                                    sb.setSpan(fcsgreen,mValues.get(position).content.length()+1, str1.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                                    sb.setSpan(fcsgreen,mValues.get(position).content.length()+1, str1.length(), Spanned.SPAN_EXCLUSIVE_INCLUSIVE);
 
                                     holder.mContentView.setText(sb);////Bold color on user if he  not sign and red color the km and set her
                                                                     //and put the scenrios on the app
@@ -237,9 +241,9 @@ public class SceneriosListActivity extends AppCompatActivity {
                         String str12 ="\r"+mValues.get(position).content+" "+addRange(document);
                         ForegroundColorSpan fcsRed=new ForegroundColorSpan(Color.parseColor("#bb1715"));
                         SpannableStringBuilder sb = new SpannableStringBuilder(str12);
-                        StyleSpan iss = new StyleSpan(Typeface.BOLD); //Span to make text italic
-                        sb.setSpan(iss, 0, mValues.get(position).content.length(), Spannable.SPAN_INCLUSIVE_INCLUSIVE); // make last 2 characters Italic
-                        sb.setSpan(fcsRed,mValues.get(position).content.length()+1, str12.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                        StyleSpan iss = new StyleSpan(Typeface.BOLD); //Span to make text bold
+                        sb.setSpan(iss, 0, mValues.get(position).content.length()+1, Spannable.SPAN_INCLUSIVE_INCLUSIVE); // make last 2 characters Italic
+                        sb.setSpan(fcsRed,mValues.get(position).content.length()+1, str12.length(), Spanned.SPAN_EXCLUSIVE_INCLUSIVE);
                         holder.mContentView.setText(sb);/////Bold color on user if he  not sign and red color the km and set her
                                                              //and put the scenrios on the app
                         holder.itemView.setTag(mValues.get(position));

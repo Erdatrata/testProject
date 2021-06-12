@@ -10,5 +10,6 @@
     <color name="white">#FFFFFFFF</color>
     <color name="colorForText">#FFFFFF</color>
     <color name="transparent">#00000000</color>
+    <color name="colorForRegistered">#44FF00</color>
 
 </resources>
