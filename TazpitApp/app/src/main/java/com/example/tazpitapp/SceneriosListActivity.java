@@ -237,17 +237,21 @@ public class SceneriosListActivity extends AppCompatActivity {
             FirebaseFirestore.getInstance() .collection("Scenarios").get().addOnCompleteListener(task -> {//this function is if the scenrios is new and he dont have
                                                                         //accpet in the firebase
                 if (task.isSuccessful()) {
+
                     for (QueryDocumentSnapshot document : task.getResult()) {
-                        String str12 ="\r"+mValues.get(position).content+" "+addRange(document);
-                        ForegroundColorSpan fcsRed=new ForegroundColorSpan(Color.parseColor("#bb1715"));
-                        SpannableStringBuilder sb = new SpannableStringBuilder(str12);
-                        StyleSpan iss = new StyleSpan(Typeface.BOLD); //Span to make text bold
-                        sb.setSpan(iss, 0, mValues.get(position).content.length()+1, Spannable.SPAN_INCLUSIVE_INCLUSIVE); // make last 2 characters Italic
-                        sb.setSpan(fcsRed,mValues.get(position).content.length()+1, str12.length(), Spanned.SPAN_EXCLUSIVE_INCLUSIVE);
-                        holder.mContentView.setText(sb);/////Bold color on user if he  not sign and red color the km and set her
-                                                             //and put the scenrios on the app
-                        holder.itemView.setTag(mValues.get(position));
-                        holder.itemView.setOnClickListener(mOnClickListener);
+                        if(0==document.getId().compareTo(mValues.get(position).content)) {
+                            String str12 = "\r" + mValues.get(position).content + " " + addRange(document);
+                            System.out.println("testTest_" + str12);
+                            ForegroundColorSpan fcsRed = new ForegroundColorSpan(Color.parseColor("#bb1715"));
+                            SpannableStringBuilder sb = new SpannableStringBuilder(str12);
+                            StyleSpan iss = new StyleSpan(Typeface.BOLD); //Span to make text bold
+                            sb.setSpan(iss, 0, mValues.get(position).content.length() + 1, Spannable.SPAN_INCLUSIVE_INCLUSIVE); // make last 2 characters Italic
+                            sb.setSpan(fcsRed, mValues.get(position).content.length() + 1, str12.length(), Spanned.SPAN_EXCLUSIVE_INCLUSIVE);
+                            holder.mContentView.setText(sb);/////Bold color on user if he  not sign and red color the km and set her
+                            //and put the scenrios on the app
+                            holder.itemView.setTag(mValues.get(position));
+                            holder.itemView.setOnClickListener(mOnClickListener);
+                        }
                     }
                 } else {
                     Log.d("onComplet","No data");
@@ -292,9 +296,9 @@ public class SceneriosListActivity extends AppCompatActivity {
             double lonScenerio=gpsLocation.getLongitude();
             double result=Math.pow(Math.pow((111*(latCurrent-latScenerio)),2.0)+Math.pow((111*(lonCurrent-lonScenerio)),2.0),0.5);
             int temp=(int)(result*100);
-            result=((double)temp)/100;
-            System.out.println(result);
-            return String.valueOf(result);
+            double temp2=((double)temp)/100;
+            System.out.println("TestFixedRange_"+temp2);
+            return String.valueOf(temp2);
 
         }
 
@@ -311,7 +315,6 @@ public class SceneriosListActivity extends AppCompatActivity {
     private static String addRange(DocumentSnapshot documentSnapshot){//this function make the gps distanc to to digit after .
         if(gpsState) {
             String str_gps=Range((GeoPoint) Objects.requireNonNull(documentSnapshot.getData()).get("מיקום"));
-
             return "\n" +str_gps+"km";
         }
         return "";
