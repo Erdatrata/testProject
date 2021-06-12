@@ -12,9 +12,11 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.SeekBar;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,6 +28,7 @@ import androidx.core.content.ContextCompat;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.gson.Gson;
 
@@ -45,6 +48,7 @@ public class SetActivity extends AppCompatActivity {
     private RadioButton cityButton;
     private double range;
     private TextView rangeCont;
+    private Switch syncButton;
 
     private Button timePickerFrom;
     private Button timePickerTo;
@@ -88,6 +92,7 @@ public class SetActivity extends AppCompatActivity {
         SeekBar seekBar = findViewById(R.id.gpsRangeBar);
         rangeCont=findViewById(R.id.rangeContainer);
         range=Double.parseDouble(""+sharedpreferences.getFloat(constants.rangeChoice,(float)0.5));
+        syncButton=findViewById(R.id.sync_button2);
 
         //day settings
         //the buttons for choosing between different days and timepicker
@@ -112,6 +117,7 @@ public class SetActivity extends AppCompatActivity {
         rightNow = null;
         Button[] daysArr = {daysButton1, daysButton2, daysButton3, daysButton4,
                 daysButton5, daysButton6, daysButton7};
+        syncButton.setChecked(sharedpreferences.getBoolean("sync",true));
 
         //load location selection
         String gpsPref = sharedpreferences.getString(constants.SHARED_PREFS_LOCATION,constants.SHARED_PREFS_DEAFULT);
@@ -183,24 +189,95 @@ public class SetActivity extends AppCompatActivity {
             ((Button)findViewById(R.id.allDayButton)).setTextColor(getColor(R.color.white));
 
         });
+
+        //for sync button
+        syncButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(!isChecked) {//if user doesn't want to sync settings to server
+                    editor.putBoolean("sync", false);
+                    return;
+                }
+                //otherwise change the state of the boolean and ask user if they'd like to sync to or from server
+                {
+                    editor.putBoolean("sync",true);
+                    new AlertDialog.Builder(SetActivity.this)
+                            .setTitle(R.string.set_alert_title)
+                            .setMessage(R.string.set_alert_sync_message)
+                            .setPositiveButton(R.string.set_alert_sync_accept, (dialogInterface, i) -> {
+                                {//download settings from server
+                                    FirebaseFirestore db = FirebaseFirestore.getInstance();
+                                    DocumentReference docRef = db.collection(constants.DOC_REF_USERS).
+                                            document(FirebaseAuth.getInstance().getCurrentUser().getUid());
+                                    docRef.get().addOnCompleteListener(task1 -> {
+                                        if (task1.isSuccessful()) {
+                                            DocumentSnapshot document = task1.getResult();
+                                            System.out.println(document);
+                                            String loc = "";
+                                            if (document.exists()) {
+                                                //location
+                                                loc = Objects.requireNonNull(document.get(constants.SHARED_PREFS_LOCATION)).toString();
+                                                if (loc.equals(""))
+                                                    loc = "city";
+                                                editor.putString(constants.SHARED_PREFS_LOCATION, loc);
+                                                //range
+                                                float range = Float.parseFloat((Objects.requireNonNull(document.get(constants.rangeChoice))).toString());
+                                                if (range == 0)
+                                                    range = 10;
+                                                editor.putFloat(constants.rangeChoice, range);
+
+
+                                                //days
+                                                String dtDEF = (new Gson()). //will be used in case of null strings
+                                                        toJson(new dayTime(0, 00, 23, 59));
+                                                for (String d : constants.daysNames) {
+                                                    String toStore = (Objects.requireNonNull(document.get(d))).toString();
+                                                    if (toStore.equals(""))//if string from srv is null
+                                                        toStore = dtDEF;//then input default 'all day' state
+                                                    editor.putString(d, toStore);
+                                                }
+                                                editor.putBoolean("sync",true);
+                                                editor.apply();
+
+                                            }
+                                        } else {
+                                            Log.d("gabi_test", "settings failed with ", task1.getException());
+                                        }
+                                        //return to main
+                                    });
+                                }
+                                Toast.makeText(SetActivity.this, R.string.syncToServer, Toast.LENGTH_SHORT).show();
+                                finish();
+                                startActivity(getIntent());
+                            }).setNeutralButton(R.string.set_alert_sync_write, (dialog, which) -> {
+                                saveToServer();
+                    }).setCancelable(false)
+                            .create()
+                            .show();
+                }
+            }
+        });
     }
 
     @Override
     public void onStop(){
         super.onStop();
-        saveToServer();
+        if(sharedpreferences.getBoolean("sync",true))
+            saveToServer();
     }
 
     @Override
     public void onPause(){
         super.onPause();
-        saveToServer();
+        if(sharedpreferences.getBoolean("sync",true))
+            saveToServer();
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        saveToServer();
+        if(sharedpreferences.getBoolean("sync",true))
+            saveToServer();
     }
 
     private void saveToServer(){
@@ -234,6 +311,7 @@ public class SetActivity extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), R.string.set_toast_success, Toast.LENGTH_LONG).show();
         } else {
             Log.w("EVJA", "Error writing settings", failToRet[0]);
+            Toast.makeText(this, R.string.sync_fail, Toast.LENGTH_SHORT).show();
         }
     }
 

@@ -51,6 +51,9 @@
     <string name="settings_day_6">ו\'</string>
     <string name="settings_day_7">ש\'</string>
     <string name="settings_xx_xx">XX:XX</string>
+    <string name="settings_synchronize">סנכרן הגדרות מהשרת</string>
+
+
 
 
 
@@ -69,6 +72,15 @@
     <string name="set_toast_cantSetStartLater">לא ניתן לכוון זמן התחלה מאוחר מזמן סיום</string>
     <string name="set_toast_cantSetEndFirst">לא ניתן לכוון זמן סיום מוקדם מזמן התחלה</string>
     <string name="set_toast_success">שינוי הההגדרות בוצע בהצלחה</string>
+    <!--    SYNC    -->
+    <string name="set_alert_sync_message">האם ברצונכם לקבל את ההגדרות הקיימות בשרת או לכתוב לשרת את ההגדרות החדשות?</string>
+    <string name="set_alert_sync_write">לכתוב</string>
+    <string name="set_alert_sync_accept">לקבל</string>
+    <string name="syncToServer">העלאת ההגדרות לשרת בוצעה בהצלחה</string>
+    <string name="syncFromServer">משיכת ההגדרות מהשרת בוצעה בהצלחה</string>
+    <string name="sync_fail">משיכת ההגדרות מהשרת נכשלה</string>
+
+
 
 
 
