@@ -222,7 +222,9 @@ public class fillReport extends AppCompatActivity {
                     .show();
 
         }
-       
+        else
+            finish();
+
 
     }
 
