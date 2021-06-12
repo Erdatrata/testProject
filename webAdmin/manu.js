@@ -583,7 +583,8 @@ function sendToDataBaseNewEvent() {
     let locationGps=document.querySelector('#geoCode').value;
     let des=document.querySelector('#des').value;
     let city =document.querySelector('#city').value;
-    let importent=document.querySelector('#importentEvent').value;
+    let importent=document.getElementById('importentEvent');
+
     if(importent==undefined||des==undefined||locationGps==undefined||ScenerioName==undefined||
         importent==""||des==""||locationGps==""||ScenerioName==""
     ){ window.alert("Error : " + "some field are empty");return;}
@@ -604,7 +605,7 @@ function sendToDataBaseNewEvent() {
         "מיקום": new firebase.firestore.GeoPoint(Number(latitude), Number(longitude)),
         "סוג האירוע": des,
         "עיר": city,
-        "דחיפות": Boolean(importent),
+        "דחיפות": Boolean(importent.checked),
         "timeCreated":new Date()
 
     }).then(function (){
@@ -663,7 +664,7 @@ function newEvent() {
         "        </dd>\n" +
 
         "      </dl>\n" +
-        "<div><input type=\"checkbox\" id=\"importentEvent\" name=\"importentEvent\" value=\"Bike\">\n" +
+        "<div><input type=\"checkbox\" id=\"importentEvent\" name=\"importentEvent\" >\n" +
         "<label for=\"vehicle1\"> לעלות כדחוף</label><br></div>"+
         "      <div class=\"btns\">\n" +
         "          <button class=\"btn btn-confirm\" id=\"btn btn-confirm\">שלח</button>\n" +

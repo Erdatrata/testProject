@@ -41,6 +41,7 @@ public static final String SET_CITY= "city";
     public static final String gpsState="gpsstate";
     public static final String rangeChoice="range";
     public static final String LastTimeAndDate="lasttimeanddate";
+    public static final String SERVICECREATED = "";
 
 
     //city VARS
@@ -48,7 +49,6 @@ public static final String SET_CITY= "city";
 
 
 
-    
     //TIME VARS
 
 
@@ -166,12 +166,14 @@ public static final String ISSIGEND = "isSigned";
 
 
 //belong to background service
-public static final String BACKGROUND_SERVICE_ISCLOSE=  " is close";
+public static final String BACKGROUND_SERVICE_ISCLOSE=  " קרוב אליך";
     public static final String BACKGROUND_SERVICE_NOTYETIMPEMTED=  "not yet implemted";
     public static final String BACKGROUND_SERVICE_EQUALS_DEFAULT = "default" ;
     public static final String BACKGROUND_SERVICE_ERROR_TIMESTAMP =  "error in toTimeStamp,not an Timestanp type" ;
     public static final String BACKGROUND_SERVICE_TIMECREATED =  "timeCreated" ;
-
+    public static final String INRANGESTRING = "במרחק של ";
+    public static final String DISTANCEFROMU = " מטר ממך, \nלחץ כדי לפתוח";
+    public static final String INURTOWN = " בעיר שלך ";
 
 
 

@@ -291,6 +291,8 @@ public class SceneriosListActivity extends AppCompatActivity {
             double latScenerio=gpsLocation.getLatitude();
             double lonScenerio=gpsLocation.getLongitude();
             double result=Math.pow(Math.pow((111*(latCurrent-latScenerio)),2.0)+Math.pow((111*(lonCurrent-lonScenerio)),2.0),0.5);
+            int temp=(int)(result*100);
+            result=((double)temp)/100;
             System.out.println(result);
             return String.valueOf(result);
 
@@ -309,19 +311,8 @@ public class SceneriosListActivity extends AppCompatActivity {
     private static String addRange(DocumentSnapshot documentSnapshot){//this function make the gps distanc to to digit after .
         if(gpsState) {
             String str_gps=Range((GeoPoint) Objects.requireNonNull(documentSnapshot.getData()).get("מיקום"));
-            String str_res="";
-            for(int i=0;i<str_gps.length();i++){
-                if(!String.valueOf(str_gps.substring(i,i+1)).equals(".")){
-                    str_res+=str_gps.substring(i,i+1);
-                }
-                else if (str_gps.substring(i,i+1).equals(".")){
-                    for(int j=0;j<3;j++){
-                        str_res+=str_gps.substring(i+j,i+j+1);
-                    }
-                    break;
-                }
-            }
-            return "\n" +str_res+"km";
+
+            return "\n" +str_gps+"km";
         }
         return "";
     }

@@ -47,6 +47,7 @@ import java.util.Date;
 import java.util.Objects;
 
 public class backgroundService extends Service {
+
     final int sec=1000;
     final int TIMETOWAIT=sec*60;
     boolean StopCity=false;
@@ -123,10 +124,10 @@ public class backgroundService extends Service {
         String context="";
         String title="";
         if(getStateOfGps()){title=constants.BACKGROUND_SERVICE_ISCLOSE;
-            context="Is Range is :"+(double)((double)location*1000)+" meters from u\nclick to open list";
+            context=constants.INRANGESTRING+(int)((double)location*1000)+constants.DISTANCEFROMU;
         }
         else{
-            title=" is in your town";
+            title=constants.INURTOWN;
         }
 // Create an explicit intent for an Activity in your app
         Intent intent = new Intent(this, MainActivity.class);
@@ -386,11 +387,8 @@ public class backgroundService extends Service {
     public Handler handler = null;
     public static Runnable runnable = null;
     public void onCreate() {
-        Toast.makeText(this, "Service created!", Toast.LENGTH_LONG).show();
-        if(!StopCity)
-            System.out.print("Stopsity is not \n");
-        if(StopCity)
-            System.out.print("Stopsity is yes \n");
+        Toast.makeText(this, constants.SERVICECREATED, Toast.LENGTH_LONG).show();
+
 
         handler = new Handler();
         runnable = () -> {
