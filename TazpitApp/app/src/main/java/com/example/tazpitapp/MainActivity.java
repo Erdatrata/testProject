@@ -5,12 +5,9 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.media.Image;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Handler;
-import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.MenuItem;
@@ -23,7 +20,6 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -35,14 +31,11 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.GeoPoint;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
-import org.json.JSONArray;
+import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -50,6 +43,7 @@ import java.net.HttpURLConnection;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 import java.util.concurrent.ExecutionException;
 
 
@@ -66,9 +60,6 @@ public class MainActivity<imageView> extends AppCompatActivity implements Naviga
 
     private DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle aToggle;
-    private Toolbar toolbar;
-    private RecyclerView recyclerView;
-    private RecyclerView.Adapter adapter;
     public ImageView nav_view_image;
     public ImageView refresh_page;
     public androidx.swiperefreshlayout.widget.SwipeRefreshLayout swipe;
@@ -167,13 +158,10 @@ public class MainActivity<imageView> extends AppCompatActivity implements Naviga
         });
         // refreshing by pressing the Refresh button
         ImageView refresh_page = (ImageView) findViewById(R.id.sync_button);
-        refresh_page.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View view) {
-                finish();
-                startActivity(getIntent());
-                overridePendingTransition(0, 0);
-            }
+        refresh_page.setOnClickListener(view -> {
+            finish();
+            startActivity(getIntent());
+            overridePendingTransition(0, 0);
         });
         // refreshing by scroll up
         swipe = (androidx.swiperefreshlayout.widget.SwipeRefreshLayout)findViewById(R.id.swiperefresh);
@@ -237,9 +225,9 @@ public class MainActivity<imageView> extends AppCompatActivity implements Naviga
                                 Date date=time.toDate();
                                 date.setHours(date.getHours()+3);
                                 dateList.add(date.toLocaleString());
-                                writerList.add(documentSort[i].get("writer").toString());
-                                imageList.add(documentSort[i].get("image").toString());
-                                urlList.add(documentSort[i].get("url").toString());
+                                writerList.add(Objects.requireNonNull(documentSort[i].get("writer")).toString());
+                                imageList.add(Objects.requireNonNull(documentSort[i].get("image")).toString());
+                                urlList.add(Objects.requireNonNull(documentSort[i].get("url")).toString());
                                 //System.out.println("the image url is: "+image[0]);
 
 
@@ -289,7 +277,7 @@ public class MainActivity<imageView> extends AppCompatActivity implements Naviga
                         QueryDocumentSnapshot oldest=null;
                         for (QueryDocumentSnapshot document : result) {
                             if(document!=null){
-                                if(oldest==null||older((Timestamp)document.getTimestamp("date"),oldest.getTimestamp("date"))){
+                                if(oldest==null||older((Timestamp)document.getTimestamp("date"), Objects.requireNonNull(oldest.getTimestamp("date")))){
 
                                         oldest = document;
 
@@ -326,7 +314,7 @@ public class MainActivity<imageView> extends AppCompatActivity implements Naviga
     public static Bitmap[] imageToBitMapArray(String[] image,int len){
         Bitmap[] bitmaps=new Bitmap[len];
         for(int i=0;i<len;i++){
-            bitmaps[i]=LoadImageFromWebOperations(image[i])[0];
+            bitmaps[i]= Objects.requireNonNull(LoadImageFromWebOperations(image[i]))[0];
         }
 
     return bitmaps;
@@ -392,7 +380,7 @@ public class MainActivity<imageView> extends AppCompatActivity implements Naviga
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+    public boolean onOptionsItemSelected(@NotNull MenuItem item) {
         if (aToggle.onOptionsItemSelected(item)) {
             return true;
         }
