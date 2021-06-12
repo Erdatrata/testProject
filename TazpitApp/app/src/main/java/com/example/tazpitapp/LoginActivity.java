@@ -12,17 +12,23 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.gson.Gson;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Objects;
 import java.util.regex.Pattern;
@@ -106,46 +112,59 @@ public class LoginActivity extends AppCompatActivity {
                     SharedPreferences.Editor editor = sharedpreferences.edit();
                     editor.clear().apply();
 
+                    //if user wants to sync settings from server
+                    if(((Switch)(findViewById(R.id.sync_button1))).isChecked())
+                    {//download settings from server
+                        FirebaseFirestore db = FirebaseFirestore.getInstance();
+                        DocumentReference docRef = db.collection(constants.DOC_REF_USERS).
+                                document(FirebaseAuth.getInstance().getCurrentUser().getUid());
+                        docRef.get().addOnCompleteListener(task1 -> {
+                            if (task1.isSuccessful()) {
+                                DocumentSnapshot document = task1.getResult();
+                                System.out.println(document);
+                                String loc = "";
+                                if (document.exists()) {
+                                    //location
+                                    loc = Objects.requireNonNull(document.get(constants.SHARED_PREFS_LOCATION)).toString();
+                                    if (loc.equals(""))
+                                        loc = "city";
+                                    editor.putString(constants.SHARED_PREFS_LOCATION, loc);
+                                    //range
+                                    float range = Float.parseFloat((Objects.requireNonNull(document.get(constants.rangeChoice))).toString());
+                                    if (range == 0)
+                                        range = 10;
+                                    editor.putFloat(constants.rangeChoice, range);
 
-                    //download settings from server
-                    FirebaseFirestore db = FirebaseFirestore.getInstance();
-                    DocumentReference docRef = db.collection(constants.DOC_REF_USERS).
-                            document(FirebaseAuth.getInstance().getCurrentUser().getUid());
-                    docRef.get().addOnCompleteListener(task1 -> {
-                        if (task1.isSuccessful()) {
-                            DocumentSnapshot document = task1.getResult();
-                            System.out.println(document);
-                            String loc = "";
-                            if(document.exists()) {
-                                //location
-                                loc = Objects.requireNonNull(document.get(constants.SHARED_PREFS_LOCATION)).toString();
-                                if(loc.equals(""))
-                                    loc="city";
-                                editor.putString(constants.SHARED_PREFS_LOCATION, loc);
-                                //range
-                                float range = Float.parseFloat((Objects.requireNonNull(document.get(constants.rangeChoice))).toString());
-                                if(range==0)
-                                    range=10;
-                                editor.putFloat(constants.rangeChoice, range);
 
+                                    //days
+                                    String dtDEF = (new Gson()). //will be used in case of null strings
+                                            toJson(new dayTime(0, 00, 23, 59));
+                                    for (String d : constants.daysNames) {
+                                        String toStore = (Objects.requireNonNull(document.get(d))).toString();
+                                        if (toStore.equals(""))//if string from srv is null
+                                            toStore = dtDEF;//then input default 'all day' state
+                                        editor.putString(d, toStore);
+                                    }
+                                    editor.putBoolean("sync",true);
+                                    editor.apply();
 
-                                //days
-                                String dtDEF = (new Gson()). //will be used in case of null strings
-                                        toJson(new dayTime(0,00,23,59));
-                                for (String d : constants.daysNames) {
-                                    String toStore = (Objects.requireNonNull(document.get(d))).toString();
-                                    if(toStore.equals(""))//if string from srv is null
-                                        toStore=dtDEF;//then input default 'all day' state
-                                    editor.putString(d, toStore);
                                 }
-
+                            } else {
+                                Log.d("gabi_test", "settings failed with ", task1.getException());
                             }
-                        } else {
-                            Log.d("gabi_test", "settings failed with ", task1.getException());
-                        }
-                        //return to main
-                        finish();
-                    });
+                            //return to main
+                        }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull @NotNull Exception e) {
+                                Toast.makeText(LoginActivity.this, R.string.sync_fail, Toast.LENGTH_LONG).show();
+                            }
+                        });
+                    } else {
+                        editor.putBoolean("sync",false);
+                        editor.apply();
+
+                    }
+                    finish();
 
                 }
                 else {//if the response is filed

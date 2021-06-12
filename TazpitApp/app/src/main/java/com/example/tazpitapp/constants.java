@@ -165,6 +165,14 @@ public static final String ISSIGEND = "isSigned";
 
 
 
+//belong to background service
+public static final String BACKGROUND_SERVICE_ISCLOSE=  " is close";
+    public static final String BACKGROUND_SERVICE_NOTYETIMPEMTED=  "not yet implemted";
+    public static final String BACKGROUND_SERVICE_EQUALS_DEFAULT = "default" ;
+    public static final String BACKGROUND_SERVICE_ERROR_TIMESTAMP =  "error in toTimeStamp,not an Timestanp type" ;
+    public static final String BACKGROUND_SERVICE_TIMECREATED =  "timeCreated" ;
+
+
 
 
 
@@ -181,6 +189,7 @@ public static final String ISSIGEND = "isSigned";
     public static final String SCENARIO_LOCATION = "מיקום" ; //type of the event
     public static final String DOC_REF_USERS = "Users" ; //USERS setting in firebase
     public static final String DOC_REF_CONTACT = "contact/contact" ; //contcat location in firebase firestore
+
 
 
 
