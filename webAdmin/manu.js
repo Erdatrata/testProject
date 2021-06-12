@@ -394,55 +394,70 @@ function makeOld(path, name) {
     let acceptpath=path+"/"+ACCEPTED;
     let colfill =db.collection(fillpath);
     let colaccept =db.collection(acceptpath);
-    let ref=db.doc(path);
+    //let ref=db.doc(path);
     console.log(fillpath);
-    colfill.get().then((querySnapshot)=> {
+    let ref=db.doc(path);
+
+    colfill.get().then((querySnapshot) => {
         console.log(fillpath);
         if(querySnapshot!=null){
-        querySnapshot.forEach((userDoc) => {
-            userDoc.get().then((doc) => {
-                let id = doc.id;
-                db.collection("OldInfo/"+oldNewName+"/" + FILLED + "/" + id).doc().set(doc.data()).then(() => {
-                    db.doc(fillpath + "/" + id).remove();
-                });
-
-
-            });
-        });
-    }
-    });
-    colaccept.get().then((querySnapshot)=>{
-        if(querySnapshot!=null){
             querySnapshot.forEach((userDoc) => {
-                userDoc.get().then((doc) => {
+                var docRef = db.collection(fillpath).doc(userDoc.id);
+
+                docRef.get().then((doc) => {
                     let id = doc.id;
-                    db.collection("OldInfo/"+oldNewName+"/" + ACCEPTED + "/" + id).doc().set(doc.data()).then(() => {
-                        db.doc(acceptpath + "/" + id).remove();
+                    db.collection("OldInfo/"+oldNewName+"/" + FILLED ).doc().set(doc.data()).then(() => {
+                        db.doc(fillpath+"/"+id).delete().then(() => {
+                            console.log("deleted");
+
+                        });
                     });
 
 
                 });
             });
-        }
 
+        }
     });
-    // ref.get().then((doc) => {
-    //     if (doc.exists) {
-    //         let save=doc.data();
-    //         let remove =ref.delete().then(() => {
-    //             // console.log(name+",Document successfully deleted!\nin path:"+path);
-    //         });
-    //         db.collection("OldInfo").doc(oldNewName).set(save).then(() => {
-    //             // console.log("Document successfully written!");
-    //         });
-    //         return remove;
-    //     } else {
-    //         // doc.data() will be undefined in this case
-    //         // console.log(name+",No such document! \nin path:"+path);
-    //     }
-    // }).catch((error) => {
-    //     // console.log("Error getting document:", error);
-    // });
+    colaccept.get().then((querySnapshot) => {
+        console.log(acceptpath);
+        if(querySnapshot!=null){
+            querySnapshot.forEach((userDoc) => {
+                var docRef = db.collection(acceptpath).doc(userDoc.id);
+
+                docRef.get().then((doc) => {
+                    let id = doc.id;
+                    db.collection("OldInfo/"+oldNewName+"/" + ACCEPTED ).doc().set(doc.data()).then(() => {
+                        db.doc(acceptpath+"/"+id).delete().then(() => {
+                            console.log("deleted");
+
+                        });
+                    });
+
+
+                });
+            });
+
+        }
+    });
+
+    ref.get().then((doc) => {
+        if (doc.exists) {
+            let save=doc.data();
+            let remove =ref.delete().then(() => {
+                // console.log(name+",Document successfully deleted!\nin path:"+path);
+            });
+            db.collection("OldInfo").doc(oldNewName).set(save).then(() => {
+                // console.log("Document successfully written!");
+            });
+            return remove;
+        } else {
+            // doc.data() will be undefined in this case
+            // console.log(name+",No such document! \nin path:"+path);
+        }
+    }).catch((error) => {
+        // console.log("Error getting document:", error);
+    });
 }
 
 function createEnterFilter() {

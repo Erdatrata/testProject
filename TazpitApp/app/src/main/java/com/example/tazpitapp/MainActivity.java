@@ -223,7 +223,7 @@ public class MainActivity<imageView> extends AppCompatActivity implements Naviga
                               typeList.add(documentSort[i].get("type").toString());
                                Timestamp time=(Timestamp)documentSort[i].getTimestamp("date");
                                 Date date=time.toDate();
-                                date.setHours(date.getHours()+3);
+                                date.setHours(date.getHours());
                                 dateList.add(date.toLocaleString());
                                 writerList.add(Objects.requireNonNull(documentSort[i].get("writer")).toString());
                                 imageList.add(Objects.requireNonNull(documentSort[i].get("image")).toString());
