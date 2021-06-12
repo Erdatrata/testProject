@@ -66,6 +66,10 @@
     <string name="set_alert_message">
         על מנת שנוכל ליידע אותך על אירועים באיזור, אנא אשרו לנו לקבל את מיקומכם.
     </string>
+    <string name="set_alert_message_for_location"> אנא ודא שה- GPS שלך פעיל וודא הרשאות לאפליקציה דרך ההגדרות
+    </string>
+    <string name="yes"> כן </string>
+    <string name="no"> לא </string>
     <string name="set_alert_accept">למעבר לאישור</string>
     <string name="set_alert_deny">ביטול</string>
     <string name="set_toast_plsChooseDay">אנא בחרו באחד הימים בכפתורים מימין</string>

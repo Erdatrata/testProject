@@ -1,13 +1,16 @@
 package com.example.tazpitapp;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.ActivityManager;
 import android.app.AlertDialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -68,6 +71,7 @@ public class SetActivity extends AppCompatActivity {
     //----------global variables END----------------------
     //----------global functions--------------------------
 
+    @SuppressLint("ApplySharedPref")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -361,12 +365,26 @@ public class SetActivity extends AppCompatActivity {
             //open dialogue requesting user authorization to use gps location
             if(getApplicationContext().checkSelfPermission(Manifest.permission.ACCESS_BACKGROUND_LOCATION)
                     != PackageManager.PERMISSION_GRANTED){
-
-
                 new AlertDialog.Builder(SetActivity.this)
                         .setTitle(R.string.set_alert_title)
                         .setMessage(R.string.set_alert_message)
                         .setPositiveButton(R.string.set_alert_accept, (dialogInterface, i) -> {
+                            // ask permission from the user about setting location
+                                final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                                builder.setMessage(R.string.set_alert_message_for_location)
+                                        .setCancelable(false)
+                                        .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+                                            public void onClick(final DialogInterface dialog, final int id) {
+                                                startActivity(new Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS));
+                                            }
+                                        })
+                                        .setNeutralButton(R.string.no, new DialogInterface.OnClickListener() {
+                                            public void onClick(final DialogInterface dialog, final int id) {
+                                                dialog.cancel();
+                                            }
+                                        });
+                                final AlertDialog alert = builder.create();
+                                alert.show();
                             if(getApplicationContext().checkSelfPermission(Manifest.permission.ACCESS_BACKGROUND_LOCATION)
                                     == PackageManager.PERMISSION_GRANTED){
                                 Toast.makeText(SetActivity.this, R.string.set_toast_gpsGranted,
@@ -569,6 +587,7 @@ public class SetActivity extends AppCompatActivity {
         editor.apply();
 
     }
+
     public boolean getStateOfGps(){//return true or false if the gps is working
         SharedPreferences sharedPreferences = getSharedPreferences(constants.SHARED_PREFS, MODE_PRIVATE);
         return sharedPreferences.getBoolean(constants.gpsState,false);
