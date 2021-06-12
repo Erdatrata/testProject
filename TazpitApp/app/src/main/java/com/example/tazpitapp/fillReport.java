@@ -222,9 +222,7 @@ public class fillReport extends AppCompatActivity {
                     .show();
 
         }
-        uploadProgress=false;
-        finish();
-
+       
 
     }
 
