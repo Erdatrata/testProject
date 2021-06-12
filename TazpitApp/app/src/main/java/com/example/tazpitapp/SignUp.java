@@ -3,27 +3,25 @@ package com.example.tazpitapp;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.graphics.drawable.Animatable;
-import android.media.Image;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
-import android.widget.TextView;
+
+import java.util.Objects;
 
 public class SignUp extends AppCompatActivity {
-    private  static  int SPLASH_SCREEN=2000;
+    private  static final int SPLASH_SCREEN=2000;
   Animation topAnim,bottomAnim;
   ImageView image;
-  TextView logo,slogan;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         try
         {
-            this.getSupportActionBar().hide();
+            Objects.requireNonNull(this.getSupportActionBar()).hide();
         }
         catch (NullPointerException e){}
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
@@ -34,13 +32,10 @@ public class SignUp extends AppCompatActivity {
         image.setAnimation(topAnim);
 
 
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                Intent intent = new Intent(SignUp.this, MainActivity.class);
-                startActivity(intent);
-                finish();
-            }
+        new Handler().postDelayed(() -> {
+            Intent intent = new Intent(SignUp.this, MainActivity.class);
+            startActivity(intent);
+            finish();
         }, SPLASH_SCREEN);
 
     }

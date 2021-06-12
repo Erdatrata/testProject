@@ -22,10 +22,6 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import androidx.recyclerview.widget.RecyclerView;
-
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
@@ -34,10 +30,10 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.GeoPoint;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * An activity representing a list of Scenarios. This activity
@@ -60,7 +56,7 @@ public class SceneriosListActivity extends AppCompatActivity {
     static boolean isInit = true;
     public   List <String> list = new ArrayList<>();
     CollectionReference itemRef;
-     List<DummyContent.DummyItem> ITEMS = new ArrayList<DummyContent.DummyItem>();
+     List<DummyContent.DummyItem> ITEMS = new ArrayList<>();
     @Override
     public void onResume() {
         super.onResume();
@@ -76,13 +72,10 @@ public class SceneriosListActivity extends AppCompatActivity {
         }
         FirebaseFirestore firestoreRootRef = FirebaseFirestore.getInstance();
         itemRef = firestoreRootRef.collection("Scenarios");
-        readData(new FirestoreCallback() {
-            @Override
-            public void onCallback(List<String> list) {//this function is callback be after  readData function
-                list.isEmpty();
-                assert recyclerView != null;
-                setupRecyclerView((RecyclerView) recyclerView);//send the findViewById(R.id.scenerios_list) to setupRecyclerView function
-            }
+        readData(list -> {//this function is callback be after  readData function
+            list.isEmpty();
+            assert recyclerView != null;
+            setupRecyclerView((RecyclerView) recyclerView);//send the findViewById(R.id.scenerios_list) to setupRecyclerView function
         });
 
         gpsState = getStateOfGps();//start_Scen12
@@ -106,32 +99,29 @@ public class SceneriosListActivity extends AppCompatActivity {
     }
     private  void readData( FirestoreCallback firestoreCallback){//this function connact to firebase and put the scenrios_list in ITEMS
         Log.d("onComplet","readData_1=");
-        itemRef.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+        itemRef.get().addOnCompleteListener(task -> {
 
 
-                if (task.isSuccessful()) {
-                    int p=0;
-                    for(int i=0;i<list.size();i++){//clean list
-                        list.remove(i);
-                    }
-                    for(int i=0;!ITEMS.isEmpty();i++){//clean ITEMS
-                        if(!ITEMS.isEmpty()){
-                            ITEMS.removeAll(ITEMS);
-                        }
-                    }
-                    for (DocumentSnapshot document : task.getResult()) {
-                        list.add(document.getId());
-                        ITEMS.add(new com.example.tazpitapp.DummyContent.DummyItem(String.valueOf(p),document.getId(),makeDetails(p)));
-                        p++;
-
-                    }
-                    firestoreCallback.onCallback(list);// call to callback function
+            if (task.isSuccessful()) {
+                int p=0;
+                for(int i=0;i<list.size();i++){//clean list
+                    list.remove(i);
                 }
-                else{
-                    Log.d("onComplet","inside onComplete () ERRORR");
+                for(int i=0;!ITEMS.isEmpty();i++){//clean ITEMS
+                    if(!ITEMS.isEmpty()){
+                        ITEMS.removeAll(ITEMS);
+                    }
                 }
+                for (DocumentSnapshot document : task.getResult()) {
+                    list.add(document.getId());
+                    ITEMS.add(new DummyContent.DummyItem(String.valueOf(p),document.getId(),makeDetails(p)));
+                    p++;
+
+                }
+                firestoreCallback.onCallback(list);// call to callback function
+            }
+            else{
+                Log.d("onComplet","inside onComplete () ERRORR");
             }
         });
     }
@@ -196,79 +186,67 @@ public class SceneriosListActivity extends AppCompatActivity {
 
         @Override
         public void onBindViewHolder(final ViewHolder holder, int position) {
-            String str="";
             DocumentReference mDocRef= FirebaseFirestore.getInstance().document("Scenarios/"+mValues.get(position).content);
-            mDocRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-                @Override
-                public void onSuccess(DocumentSnapshot documentSnapshot) {
-                    mDocRef.collection("accepted").get()
-                            .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                                @Override
-                                public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                                    if (task.isSuccessful()) {
-                                        int indicator=0;
-                                        for (QueryDocumentSnapshot document : task.getResult()) {
-                                            if(user.getUid().toString().equals(document.getId().toString())) {// if the user is sing to even then
+            mDocRef.get().addOnSuccessListener(documentSnapshot -> {
+                mDocRef.collection("accepted").get()
+                        .addOnCompleteListener(task -> {
+                            if (task.isSuccessful()) {
+                                for (QueryDocumentSnapshot document : task.getResult()) {
+                                    if(user.getUid().toString().equals(document.getId().toString())) {// if the user is sing to even then
 
-                                                String str="\r"+mValues.get(position).content+" "+addRange(documentSnapshot);
-                                                if(str.equals(""))
-                                                    continue;
-                                                Spannable spannable = new SpannableString(str);
-                                                spannable.setSpan(new ForegroundColorSpan(Color.GRAY), 0 ,mValues.get(position).content.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-                                                ForegroundColorSpan fcsRed=new ForegroundColorSpan(Color.parseColor("#228b22"));
-                                                ForegroundColorSpan fcsgray=new ForegroundColorSpan(Color.GRAY);
-                                                spannable.setSpan(fcsgray,0,mValues.get(position).content.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-                                                spannable.setSpan(fcsRed,mValues.get(position).content.length()+1,str.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                                        String str1 ="\r"+mValues.get(position).content+" "+addRange(documentSnapshot);
+                                        if(str1.equals(""))
+                                            continue;
+                                        Spannable spannable = new SpannableString(str1);
+                                        spannable.setSpan(new ForegroundColorSpan(Color.GRAY), 0 ,mValues.get(position).content.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                                        ForegroundColorSpan fcsRed=new ForegroundColorSpan(Color.parseColor("#228b22"));
+                                        ForegroundColorSpan fcsgray=new ForegroundColorSpan(Color.GRAY);
+                                        spannable.setSpan(fcsgray,0,mValues.get(position).content.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                                        spannable.setSpan(fcsRed,mValues.get(position).content.length()+1, str1.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
 //
-                                                holder.mContentView.setText(spannable);//gray color on user if he sign and green color the km and set her
-                                                                                        //and put the scenrios on the app
-                                                holder.itemView.setTag(mValues.get(position));
-                                                Log.d("onComplete","po="+mValues.get(position));
-                                                holder.itemView.setOnClickListener(mOnClickListener);
-                                                break;
-                                            }//if the not user is sing to even then
-                                            String str=mValues.get(position).content+" "+addRange(documentSnapshot);
-                                            ForegroundColorSpan fcsgreen=new ForegroundColorSpan(Color.parseColor("#bb1715"));
-                                             SpannableStringBuilder sb = new SpannableStringBuilder(str);
-                                             StyleSpan iss = new StyleSpan(Typeface.BOLD); //Span to make text italic
-                                            sb.setSpan(iss, 0, mValues.get(position).content.length(), Spannable.SPAN_INCLUSIVE_INCLUSIVE); // make last 2 characters Italic
-                                            sb.setSpan(fcsgreen,mValues.get(position).content.length()+1,str.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                                        holder.mContentView.setText(spannable);//gray color on user if he sign and green color the km and set her
+                                                                                //and put the scenrios on the app
+                                        holder.itemView.setTag(mValues.get(position));
+                                        Log.d("onComplete","po="+mValues.get(position));
+                                        holder.itemView.setOnClickListener(mOnClickListener);
+                                        break;
+                                    }//if the not user is sing to even then
+                                    String str1 =mValues.get(position).content+" "+addRange(documentSnapshot);
+                                    ForegroundColorSpan fcsgreen=new ForegroundColorSpan(Color.parseColor("#bb1715"));
+                                     SpannableStringBuilder sb = new SpannableStringBuilder(str1);
+                                     StyleSpan iss = new StyleSpan(Typeface.BOLD); //Span to make text italic
+                                    sb.setSpan(iss, 0, mValues.get(position).content.length(), Spannable.SPAN_INCLUSIVE_INCLUSIVE); // make last 2 characters Italic
+                                    sb.setSpan(fcsgreen,mValues.get(position).content.length()+1, str1.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
 
-                                            holder.mContentView.setText(sb);////Bold color on user if he  not sign and red color the km and set her
-                                                                            //and put the scenrios on the app
-                                            holder.itemView.setTag(mValues.get(position));
-                                            holder.itemView.setOnClickListener(mOnClickListener);
-                                        }
-                                    }
-                                    else {
-                                        Log.d("output", "Error getting documents: ", task.getException());
-                                    }
+                                    holder.mContentView.setText(sb);////Bold color on user if he  not sign and red color the km and set her
+                                                                    //and put the scenrios on the app
+                                    holder.itemView.setTag(mValues.get(position));
+                                    holder.itemView.setOnClickListener(mOnClickListener);
                                 }
-                            });
-                    return;
-                }
+                            }
+                            else {
+                                Log.d("output", "Error getting documents: ", task.getException());
+                            }
+                        });
+                return;
             });
-            FirebaseFirestore.getInstance() .collection("Scenarios").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                @Override
-                public void onComplete(@NonNull Task<QuerySnapshot> task) {//this function is if the scenrios is new and he dont have
-                                                                            //accpet in the firebase
-                    if (task.isSuccessful()) {
-                        int i=0;
-                        for (QueryDocumentSnapshot document : task.getResult()) {
-                            String str="\r"+mValues.get(position).content+" "+addRange(document);
-                            ForegroundColorSpan fcsRed=new ForegroundColorSpan(Color.parseColor("#bb1715"));
-                            SpannableStringBuilder sb = new SpannableStringBuilder(str);
-                            StyleSpan iss = new StyleSpan(Typeface.BOLD); //Span to make text italic
-                            sb.setSpan(iss, 0, mValues.get(position).content.length(), Spannable.SPAN_INCLUSIVE_INCLUSIVE); // make last 2 characters Italic
-                            sb.setSpan(fcsRed,mValues.get(position).content.length()+1,str.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-                            holder.mContentView.setText(sb);/////Bold color on user if he  not sign and red color the km and set her
-                                                                 //and put the scenrios on the app
-                            holder.itemView.setTag(mValues.get(position));
-                            holder.itemView.setOnClickListener(mOnClickListener);
-                        }
-                    } else {
-                        Log.d("onComplet","No data");
+            FirebaseFirestore.getInstance() .collection("Scenarios").get().addOnCompleteListener(task -> {//this function is if the scenrios is new and he dont have
+                                                                        //accpet in the firebase
+                if (task.isSuccessful()) {
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        String str12 ="\r"+mValues.get(position).content+" "+addRange(document);
+                        ForegroundColorSpan fcsRed=new ForegroundColorSpan(Color.parseColor("#bb1715"));
+                        SpannableStringBuilder sb = new SpannableStringBuilder(str12);
+                        StyleSpan iss = new StyleSpan(Typeface.BOLD); //Span to make text italic
+                        sb.setSpan(iss, 0, mValues.get(position).content.length(), Spannable.SPAN_INCLUSIVE_INCLUSIVE); // make last 2 characters Italic
+                        sb.setSpan(fcsRed,mValues.get(position).content.length()+1, str12.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                        holder.mContentView.setText(sb);/////Bold color on user if he  not sign and red color the km and set her
+                                                             //and put the scenrios on the app
+                        holder.itemView.setTag(mValues.get(position));
+                        holder.itemView.setOnClickListener(mOnClickListener);
                     }
+                } else {
+                    Log.d("onComplet","No data");
                 }
             });
         }
@@ -326,7 +304,7 @@ public class SceneriosListActivity extends AppCompatActivity {
     }
     private static String addRange(DocumentSnapshot documentSnapshot){//this function make the gps distanc to to digit after .
         if(gpsState) {
-            String str_gps=Range((GeoPoint) documentSnapshot.getData().get("מיקום"));
+            String str_gps=Range((GeoPoint) Objects.requireNonNull(documentSnapshot.getData()).get("מיקום"));
             String str_res="";
             for(int i=0;i<str_gps.length();i++){
                 if(!String.valueOf(str_gps.substring(i,i+1)).equals(".")){
