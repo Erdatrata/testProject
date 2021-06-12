@@ -421,7 +421,7 @@ class register {
 
                                                 docData.put(constants.SHARED_PREFS_LOCATION, constants.CITY);
                                                 editor.putString(constants.SHARED_PREFS_LOCATION, constants.CITY);
-
+                                                editor.putBoolean("sync",true);
                                                 FirebaseAuth userIdentifier = FirebaseAuth.getInstance();
                                                 String UID = userIdentifier.getCurrentUser().getUid();
                                                 DocumentReference DRF = FirebaseFirestore.getInstance()

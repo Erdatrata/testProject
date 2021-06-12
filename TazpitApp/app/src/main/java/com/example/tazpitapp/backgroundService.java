@@ -10,7 +10,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
-import android.nfc.Tag;
 import android.os.Build;
 import android.os.Handler;
 import android.os.IBinder;
@@ -28,36 +27,24 @@ import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
-import com.google.android.gms.tasks.Tasks;
 import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.GeoPoint;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
 import com.google.gson.Gson;
-import com.google.type.DateTime;
-
 import org.jetbrains.annotations.NotNull;
-
 import java.io.IOException;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.Map;
-import java.util.concurrent.ExecutionException;
+import java.util.Objects;
 
 public class backgroundService extends Service {
     final int sec=1000;
@@ -66,46 +53,37 @@ public class backgroundService extends Service {
 
     private void AlertIfInRange() {
         if(!checkTimeAndDateIfOn()){return;}
-        System.out.println("Check if in range ");
-        FirebaseFirestore.getInstance() .collection("Scenarios").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+        FirebaseFirestore.getInstance() .collection(constants.DOC_REF_SCENARIOS).get().addOnCompleteListener(task -> {
 
-                if (task.isSuccessful()) {
-                    for (QueryDocumentSnapshot document : task.getResult()) {
+            if (task.isSuccessful()) {
+                for (QueryDocumentSnapshot document : task.getResult()) {
 
-                        System.out.println(document.getId());
-                        DocumentReference mDocRef= FirebaseFirestore.getInstance().document("Scenarios/"+document.getId());
-                        mDocRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-                            @Override
-                            public void onSuccess(DocumentSnapshot documentSnapshot) {
-                                if(!getStateOfGps()){
+                    System.out.println(document.getId());
+                    DocumentReference mDocRef= FirebaseFirestore.getInstance().document("Scenarios/"+document.getId());
+                    mDocRef.get().addOnSuccessListener(documentSnapshot -> {
+                        if(!getStateOfGps()){
 //                                    Object town=documentSnapshot.getData().get("עיר");
 //                                    if(!inTown(town)){Notification(document.getId(), town);}
-                                }
-                                else{
-                                    double Range = 0;
-                                    try {
-                                        if(checkImporent(documentSnapshot)&&isItAfterTime(toTimestamp(documentSnapshot.getData().get("timeCreated")),getLastTime())) {
-                                            System.out.println("calulation range");
-                                            Range = Double.parseDouble(Range((GeoPoint) documentSnapshot.getData().get("מיקום")));
-                                            if (Range < getUserRangeChoice()) {
-                                                setLastTime(toTimestamp(documentSnapshot.getData().get("timeCreated")));
-                                                System.out.println(document.getId() + " IS in range of " + Range);
-                                                Notification(document.getId(), Range);
+                        }
+                        else{
+                            double Range = 0;
+                            try {
+                                if(checkImporent(documentSnapshot)&&isItAfterTime(toTimestamp(Objects.requireNonNull(documentSnapshot.getData()).get("timeCreated")),getLastTime())) {
+                                    Range = Double.parseDouble(Range((GeoPoint) documentSnapshot.getData().get(constants.SCENARIO_LOCATION)));
+                                    if (Range < getUserRangeChoice()) {
+                                        setLastTime(toTimestamp(documentSnapshot.getData().get("timeCreated")));
+                                        Notification(document.getId(), Range);
 
-                                            }
-                                        }
-                                    } catch (IOException e) {
                                     }
                                 }
-
-
+                            } catch (IOException e) {
                             }
-                        });
-                    }
+                        }
 
+
+                    });
                 }
+
             }
         });
 
@@ -130,44 +108,7 @@ public class backgroundService extends Service {
         }
     };
 
-//    private boolean inTown(Object town) { //town from scenerio.. will return if the user town is the same as the scenerio
-//        FirebaseAuth userIdentifier=FirebaseAuth.getInstance();
-//        String UID = userIdentifier.getCurrentUser().getUid();
-//        FirebaseDatabase database = FirebaseDatabase.getInstance();
-//        DatabaseReference ref=database.getReference("Users/"+UID+"/"+"City");
-//       // Tasks.await();
-//       // Object userTown=
-//          Task<FirebaseDatabase>  task=    ref.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-//              private String TAG;
-//
-//              @Override
-//                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-//                        if (task.isSuccessful()) {
-//                            DocumentSnapshot document = task.getResult();
-//                            if (document.exists()) {
-//
-//                            } else {
-//                                Log.d("aadd", "No such document");
-//                            }
-//                        }else {
-//                            Log.d(TAG, "get failed with ", task.getException());
-//                        }
-//                    }
-//                });
-//        Object userTown=null;
-//        try {
-//            Tasks.await(task);
-//            userTown =task.getResult();
-//        } catch (ExecutionException e) {
-//            e.printStackTrace();
-//        } catch (InterruptedException e) {
-//            e.printStackTrace();
-//        }
-//        if(userTown.equals(town)){
-//            System.out.println(town);System.out.println(userTown);
-//            return true;}System.out.println(town);System.out.println(userTown);return false;
-//
-//    }
+
 
     private static final String CHANNEL_ID = "12341234" ;
 
@@ -181,7 +122,7 @@ public class backgroundService extends Service {
         //after that it will create a notification and show to the user for each case, city or gps
         String context="";
         String title="";
-        if(getStateOfGps()){title=" is close";
+        if(getStateOfGps()){title=constants.BACKGROUND_SERVICE_ISCLOSE;
             context="Is Range is :"+(double)((double)location*1000)+" meters from u\nclick to open list";
         }
         else{
@@ -247,13 +188,7 @@ public class backgroundService extends Service {
         SharedPreferences sharedPreferences = getSharedPreferences(constants.SHARED_PREFS, MODE_PRIVATE);
         return sharedPreferences.getString(constants.longOfGps,"");
     }
-    //       try {//must be try and catch,  lat and long for the array in size of 1 , then get into tv_address the address
-    //                List<Address> addresses = geocoder.getFromLocation(location.getLatitude(), location.getLongitude(), 1);
-    //                tv_addressInString=addresses.get(0).getAddressLine(0);
-    //                tv_address.setText(tv_addressInString);
-    //            } catch (Exception e) {
-    //                tv_address.setText("Unale to get address");
-    //            }
+
     public  String Range(GeoPoint gpsLocation) throws IOException {
         String re="";
             if(gpsLocation==null){throw new IOException("");}
@@ -278,7 +213,7 @@ public class backgroundService extends Service {
     @Nullable
     @Override
     public IBinder onBind(Intent intent) {
-        throw new UnsupportedOperationException("not yet implemted");
+        throw new UnsupportedOperationException(constants.BACKGROUND_SERVICE_NOTYETIMPEMTED);
 
     }
 
@@ -376,8 +311,8 @@ public class backgroundService extends Service {
     }//set last time from timestamp in the data
     private Timestamp getLastTime(){
         SharedPreferences sharedPreferences = getSharedPreferences(constants.SHARED_PREFS, MODE_PRIVATE);
-        String inJson = sharedPreferences.getString(constants.LastTimeAndDate,"default");
-        if(inJson.equals("default")){return new Timestamp(new Date(0,0,0));}
+        String inJson = sharedPreferences.getString(constants.LastTimeAndDate,constants.BACKGROUND_SERVICE_EQUALS_DEFAULT);
+        if(inJson.equals(constants.BACKGROUND_SERVICE_EQUALS_DEFAULT)){return new Timestamp(new Date(0,0,0));}
         Gson gson = new Gson();
         Timestamp today = (Timestamp) (gson.fromJson(inJson,Timestamp.class));
         return today;
@@ -399,7 +334,7 @@ public class backgroundService extends Service {
             try{return (Timestamp)time;}
             catch (Exception e){
                 e.printStackTrace();
-                throw new RuntimeException("error in toTimeStamp,not an Timestanp type");
+                throw new RuntimeException(constants.BACKGROUND_SERVICE_ERROR_TIMESTAMP);
             }
     }//cast to Timestamp
         private boolean checkTimeAndDateIfOn(){
@@ -422,7 +357,7 @@ public class backgroundService extends Service {
                 Log.d("time in settings",((String)(i+" "))+getDayTime(constants.daysNames[i-1]).getHourStart()+"->"+getDayTime(constants.daysNames[i-1]).getHourEnd()+",Current time is:"+currentHours+":"+currentMinutes+",day of week is: "+dayOfWeek);
             }
 
-            if(daytime.getHourStart()<=currentHours&&currentHours<=daytime.getHourEnd()){
+            if(Objects.requireNonNull(daytime).getHourStart()<=currentHours&&currentHours<=daytime.getHourEnd()){
                 if(daytime.getHourStart()==currentHours&&daytime.getMinuteStart()>currentHours){return false;}
                 if(daytime.getHourEnd()==currentHours&&daytime.getMinuteEnd()<currentHours){return false;}
                 return true;
@@ -433,8 +368,8 @@ public class backgroundService extends Service {
 
     private dayTime getDayTime(String daysName) {
         SharedPreferences sharedPreferences = getSharedPreferences(constants.SHARED_PREFS, MODE_PRIVATE);
-        String inJson = sharedPreferences.getString(daysName,"default");
-        if(!(inJson.equals("default")))
+        String inJson = sharedPreferences.getString(daysName,constants.BACKGROUND_SERVICE_EQUALS_DEFAULT);
+        if(!(inJson.equals(constants.BACKGROUND_SERVICE_EQUALS_DEFAULT)))
             return ((dayTime) new Gson().fromJson(inJson,dayTime.class));
         return new dayTime(0,0,0,1);
 
@@ -454,16 +389,14 @@ public class backgroundService extends Service {
         Toast.makeText(this, "Service created!", Toast.LENGTH_LONG).show();
         if(!StopCity)
             System.out.print("Stopsity is not \n");
-        if(StopCity==true)
+        if(StopCity)
             System.out.print("Stopsity is yes \n");
 
         handler = new Handler();
-        runnable = new Runnable() {
-            public void run() {
-                if(!StopCity&&FirebaseAuth.getInstance().getCurrentUser() != null) {
-                    AlertifInCity();
-                    handler.postDelayed(runnable, TIMETOWAIT);
-                }
+        runnable = () -> {
+            if(!StopCity&&FirebaseAuth.getInstance().getCurrentUser() != null) {
+                AlertifInCity();
+                handler.postDelayed(runnable, TIMETOWAIT);
             }
         };
 
@@ -473,101 +406,56 @@ public class backgroundService extends Service {
     private void AlertifInCity() {//Check if its in city, if yes ,do a notification
         if(!checkTimeAndDateIfOn()){return;}
         System.out.println("Check if in city ");
-        FirebaseFirestore.getInstance() .collection("Scenarios").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+        FirebaseFirestore.getInstance() .collection(constants.DOC_REF_SCENARIOS).get().addOnCompleteListener(task -> {
 
-                if (task.isSuccessful()) {
-                    for (QueryDocumentSnapshot document : task.getResult()) {
+            if (task.isSuccessful()) {
+                for (QueryDocumentSnapshot document : task.getResult()) {
 
-                        System.out.println(document.getId());
-                        DocumentReference mDocRef= FirebaseFirestore.getInstance().document("Scenarios/"+document.getId());
-                        mDocRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-                            @Override
-                            public void onSuccess(DocumentSnapshot documentSnapshot) {
-                                if(!getStateOfGps()){
-                                  // Object town=documentSnapshot.getData().get("עיר");
-                                    String townScenario=documentSnapshot.getData().get("עיר").toString();
-                                       FirebaseAuth userIdentifier=FirebaseAuth.getInstance();
-                                 String UID = userIdentifier.getCurrentUser().getUid();
-//                         FirebaseDatabase database = FirebaseDatabase.getInstance();
-                      //DatabaseReference ref=FirebaseDatabase.getInstance().getReference("Users").child(UID);
-                                //======================
-                                    DatabaseReference mref = FirebaseDatabase.getInstance().getReference("Users").child(UID).child("City:");
-                                  System.out.println(mref+"\n");
-                                    mref.addListenerForSingleValueEvent(new ValueEventListener() {
-                                        @Override
-                                        public void onDataChange(DataSnapshot dataSnapshot) {
-                                            String userCity = dataSnapshot.getValue(String.class);
-                                           System.out.println("userCity is : "+userCity +"\n");
-                                            if(userCity!=null&&!userCity.equals(constants.OUTSIDECITY)){
-                                                if(userCity.equals(townScenario)) {
-                                               if (checkImporent(documentSnapshot) &&
-                                                       isItAfterTime(toTimestamp(documentSnapshot.getData()
-                                                               .get("timeCreated")), getLastTime())) {
-                                                   setLastTime(toTimestamp(documentSnapshot.getData().get("timeCreated")));
-                                                   System.out.println("in city mode check2");
-                                                   sendNotfication(documentSnapshot.getId(), 0);
+                    System.out.println(document.getId());
+                    DocumentReference mDocRef= FirebaseFirestore.getInstance().document(constants.DOC_REF_SCENARIOS+"/"+document.getId());
+                    mDocRef.get().addOnSuccessListener(documentSnapshot -> {
+                        if(!getStateOfGps()){
+                            String townScenario= Objects.requireNonNull(documentSnapshot.getData()).get("עיר").toString();
+                               FirebaseAuth userIdentifier=FirebaseAuth.getInstance();
+                         String UID = Objects.requireNonNull(userIdentifier.getCurrentUser()).getUid();
+                        //======================
+                            DatabaseReference mref = FirebaseDatabase.getInstance().getReference(constants.DOC_REF_USERS).child(UID).child("City:");
+                          System.out.println(mref+"\n");
+                            mref.addListenerForSingleValueEvent(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(@NotNull DataSnapshot dataSnapshot) {
+                                    String userCity = dataSnapshot.getValue(String.class);
+                                    if(userCity!=null&&!userCity.equals(constants.OUTSIDECITY)){
+                                        if(userCity.equals(townScenario)) {
+                                       if (checkImporent(documentSnapshot) &&
+                                               isItAfterTime(toTimestamp(documentSnapshot.getData()
+                                                       .get(constants.BACKGROUND_SERVICE_TIMECREATED)), getLastTime())) {
+                                           setLastTime(toTimestamp(documentSnapshot.getData().get(constants.BACKGROUND_SERVICE_TIMECREATED)));
+                                           sendNotfication(documentSnapshot.getId(), 0);
 
-                                               }
+                                       }
 
-                                           }}
-                                        }
-
-                                        @Override
-                                        public void onCancelled(DatabaseError databaseError) {
-
-                                        }
-                                    });
-
-
-                                }
-                                else{
-                                    System.out.println("AlertIfInCity gps is on"); //should not happen
-
+                                   }}
                                 }
 
+                                @Override
+                                public void onCancelled(@NotNull DatabaseError databaseError) {
 
-                            }
-                        }).addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-                                Log.e("error33", "Error requesting connection", e);
-                            }
-                        });;
-                    }
+                                }
+                            });
+                        }
+                        else{
+                            System.out.println("AlertIfInCity gps is on"); //should not happen
 
+                        }
+
+                    }).addOnFailureListener(e -> Log.e("error33", "Error requesting connection", e));
                 }
+
             }
         });
 
 
     }
-//
-//        AlertIfInRange();
-//        String channlId = "location_notification_channel";
-//        NotificationCompat.Builder builder = new NotificationCompat.Builder(
-//                getApplicationContext(),
-//                channlId
-//        );
-//        builder.setSmallIcon(R.mipmap.ic_launcher);
-//        builder.setContentTitle("Location From City");
-//        builder.setDefaults(NotificationCompat.DEFAULT_ALL);
-//        builder.setContentText("Running");
-//        builder.setContentIntent(pendingIntent);
-//        builder.setAutoCancel(false);
-//        builder.setPriority(NotificationCompat.PRIORITY_MAX);
+
     }
-
-
-
-
-//    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-//    final FirebaseDatabase database = FirebaseDatabase.getInstance();
-//    DatabaseReference ref = database.getReference("Users/"+ user.getUid()+"/City");
-//
-//    Geocoder gc=new Geocoder(this);
-//    List<Address> ads = gc.getFromLocationName((String) ref.get().getResult().getValue(),1);
-//
-//                    latCurrent=ads.get(0).getLatitude();
-//                            lonCurrent=ads.get(0).getLongitude();

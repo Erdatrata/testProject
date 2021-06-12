@@ -60,6 +60,17 @@
             android:layout_width="match_parent"
             android:layout_height="65dp"
             android:inputType="textPassword" />
+
+        <Switch
+            android:id="@+id/sync_button1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="100dp"
+            android:layout_marginBottom="13dp"
+            android:checked="true"
+            android:text="@string/settings_synchronize"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
