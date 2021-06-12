@@ -45,6 +45,7 @@ public class fillReport extends AppCompatActivity {
     boolean uploadProgress=false;
 
 
+
     private final FirebaseStorage storage = FirebaseStorage.getInstance();
     private DocumentReference mDocRef;
     private FirebaseAuth mAuth;
@@ -101,15 +102,11 @@ public class fillReport extends AppCompatActivity {
                             Log.d("image fail", "failed upload image");
                         }
                     }).addOnProgressListener((com.google.firebase.storage.OnProgressListener<? super UploadTask.TaskSnapshot>) taskSnapshot -> {
-//                        double progress = (100.0 * taskSnapshot.getBytesTransferred()) / taskSnapshot.getTotalByteCount();
-//                        progressBar.setProgress((int) progress);
-//                        String progressString = ((int) progress) + getResources().getString(R.string.fillReport_report_inprocess);
-//                        progressTextView.setText(progressString);
-                        //double progress = (100.0 * taskSnapshot.getBytesTransferred()) / taskSnapshot.getTotalByteCount();
-                        progressBar.setProgress(100);
-                        //String s=String.valueOf(i);
-                        String progressString =  getResources().getString(R.string.fillReport_report_inprocess) +String.valueOf((finalI+1)+"מתוך"+String.valueOf(mediaHolder.size()));
+                        double progress = (100.0 * taskSnapshot.getBytesTransferred()) / taskSnapshot.getTotalByteCount();
+                        progressBar.setProgress((int) progress);
+                        String progressString =  getResources().getString(R.string.fillReport_report_inprocess);
                         progressTextView.setText(progressString);
+
                     });
 
 

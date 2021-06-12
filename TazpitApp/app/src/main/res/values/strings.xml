@@ -170,7 +170,7 @@
 <!--    FILL REPORT  -->
     <string name="fillReport_all_fields_must">כל השדות הינם חובה</string>
     <string name="fillReport_choose_media"> בחר מדיה</string>
-    <string name="fillReport_report_inprocess"> % העלאת הדוח בתהליכים</string>
+    <string name="fillReport_report_inprocess">  מעלה את הדוח, אנא המתן... </string>
     <string name="fillReport_succeed_upload_report"> העלאת האירוע בוצעה בהצלחה</string>
     <string name="fillReport_send">שלח</string>
     <string name="fillReport_addCredit">הוסף קרדיט צלם</string>
