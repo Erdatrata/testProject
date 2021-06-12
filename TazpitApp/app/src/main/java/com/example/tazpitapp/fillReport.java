@@ -30,8 +30,8 @@ import com.google.firebase.storage.UploadTask;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
 import java.util.UUID;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 import static java.lang.Thread.sleep;
 
@@ -67,7 +67,7 @@ public class fillReport extends AppCompatActivity {
         progressTextView = findViewById(R.id.progressTextView);
         mAuth = FirebaseAuth.getInstance();
         String scenarioPressed = getIntent().getStringExtra(constants.PRESSED_SCENARIO);
-        mDocRef = FirebaseFirestore.getInstance().document(constants.DOC_REF_SCENARIOS + "/" + scenarioPressed + "/" + constants.DOC_REF_FILLED + "/" + Objects.requireNonNull(mAuth.getCurrentUser()).getUid());
+        mDocRef = FirebaseFirestore.getInstance().document(constants.DOC_REF_SCENARIOS + "/" + scenarioPressed + "/" + constants.DOC_REF_FILLED + "/" + mAuth.getCurrentUser().getUid());
         DocumentReference deleteUserFromAccept = FirebaseFirestore.getInstance().document(constants.DOC_REF_SCENARIOS + "/" + scenarioPressed);
         //when pressing the upload media button we go here
 //and choose media
@@ -159,7 +159,7 @@ public class fillReport extends AppCompatActivity {
     public void uploadReportFirestore(UploadTask uploadTask, StorageReference firememeRef, int numPhoto, String getDescription, String getTitle, DocumentReference docRef, FirebaseUser user) {
         Task<Uri> getDownloadUriTask = uploadTask.continueWithTask(task -> {
                     if (!task.isSuccessful()) {
-                        throw Objects.requireNonNull(task.getException());
+                        throw task.getException();
                     }
                     return firememeRef.getDownloadUrl();
                     //Getting media url to store it in firestore

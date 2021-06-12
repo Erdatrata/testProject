@@ -6,8 +6,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
-
-import java.util.Objects;
+import android.widget.ImageView;
 
 public class AboutActivity extends AppCompatActivity {
 
@@ -17,7 +16,7 @@ public class AboutActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         try
         {
-            Objects.requireNonNull(this.getSupportActionBar()).hide();
+            this.getSupportActionBar().hide();
         }
         catch (NullPointerException e){}
         setContentView(R.layout.activity_about);
@@ -41,9 +40,12 @@ public class AboutActivity extends AppCompatActivity {
 
         for(int i=0;i<abouts.length;i++){
             int finalI = i;
-            findViewById(abouts[i]).setOnClickListener(v -> {
-                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(URLs[finalI]));
-                startActivity(browserIntent);
+            findViewById(abouts[i]).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(URLs[finalI]));
+                    startActivity(browserIntent);
+                }
             });
         }
 

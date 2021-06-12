@@ -118,12 +118,12 @@ public class LoginActivity extends AppCompatActivity {
                             String loc = "";
                             if(document.exists()) {
                                 //location
-                                loc = Objects.requireNonNull(document.get(constants.SHARED_PREFS_LOCATION)).toString();
+                                loc = document.get(constants.SHARED_PREFS_LOCATION).toString();
                                 if(loc.equals(""))
                                     loc="city";
                                 editor.putString(constants.SHARED_PREFS_LOCATION, loc);
                                 //range
-                                float range = Float.parseFloat((Objects.requireNonNull(document.get(constants.rangeChoice))).toString());
+                                float range = Float.parseFloat((document.get(constants.rangeChoice)).toString());
                                 if(range==0)
                                     range=10;
                                 editor.putFloat(constants.rangeChoice, range);
@@ -133,7 +133,7 @@ public class LoginActivity extends AppCompatActivity {
                                 String dtDEF = (new Gson()). //will be used in case of null strings
                                         toJson(new dayTime(0,00,23,59));
                                 for (String d : constants.daysNames) {
-                                    String toStore = (Objects.requireNonNull(document.get(d))).toString();
+                                    String toStore = (document.get(d)).toString();
                                     if(toStore.equals(""))//if string from srv is null
                                         toStore=dtDEF;//then input default 'all day' state
                                     editor.putString(d, toStore);

@@ -34,7 +34,6 @@ import org.jetbrains.annotations.NotNull;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
-import java.util.Objects;
 
 public class SetActivity extends AppCompatActivity {
     //----------global variables--------------------------
@@ -68,7 +67,7 @@ public class SetActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         try{
-            Objects.requireNonNull(this.getSupportActionBar()).hide();
+            this.getSupportActionBar().hide();
         }
         catch (NullPointerException e){}
         setContentView(R.layout.activity_set);
@@ -128,16 +127,19 @@ public class SetActivity extends AppCompatActivity {
         //setting event listeners
 
         //for location radio group
-        locationRadioGroup.setOnCheckedChangeListener((group, checkedId) -> {
-            locationSettingChecker(group, checkedId);
-            editor.commit();
-            String toChange="";
-            if(cityButton.isChecked())
-                toChange=constants.SET_CITY;
-            else
-                toChange=constants.SET_GPS;
-            editor.putString(constants.SHARED_PREFS_LOCATION,toChange).apply();
-            docData.put(constants.SHARED_PREFS_LOCATION,toChange);
+        locationRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                locationSettingChecker(group, checkedId);
+                editor.commit();
+                String toChange="";
+                if(cityButton.isChecked())
+                    toChange=constants.SET_CITY;
+                else
+                    toChange=constants.SET_GPS;
+                editor.putString(constants.SHARED_PREFS_LOCATION,toChange).apply();
+                docData.put(constants.SHARED_PREFS_LOCATION,toChange);
+            }
         });
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
@@ -207,7 +209,7 @@ public class SetActivity extends AppCompatActivity {
         if (unsaved && rightNow!=null)
             saveTemp();
         FirebaseAuth userIdentifier=FirebaseAuth.getInstance();
-        String UID = Objects.requireNonNull(userIdentifier.getCurrentUser()).getUid();
+        String UID = userIdentifier.getCurrentUser().getUid();
 
         DocumentReference DRF = FirebaseFirestore.getInstance().document(constants.DOC_REF_USERS+"/"+UID);
         final boolean[] success = {true};

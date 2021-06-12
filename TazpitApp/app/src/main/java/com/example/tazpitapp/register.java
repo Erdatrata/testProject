@@ -9,10 +9,15 @@ import android.util.Log;
 import android.util.Patterns;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
+import org.jetbrains.annotations.NotNull;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
@@ -24,6 +29,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 ///////////////////////////
 
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
@@ -362,9 +368,12 @@ class register {
                 String str = Objects.requireNonNull(dataToSave[0]).get(constants.CONTACT).toString();
                 System.out.println(str);
                 textshow.setText(str);
-            }).addOnFailureListener(e -> {
-                Toast.makeText(register1.this, getResources().getString(R.string.register_contract_not_Availble), Toast.LENGTH_LONG).show();
-            finish();
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull @NotNull Exception e) {
+                    Toast.makeText(register1.this, getResources().getString(R.string.register_contract_not_Availble), Toast.LENGTH_LONG).show();
+                finish();
+                }
             });
             next.setOnClickListener(v -> {
                 if (Aggre.isChecked()) {
