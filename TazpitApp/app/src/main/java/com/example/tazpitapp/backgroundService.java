@@ -113,7 +113,7 @@ public class backgroundService extends Service {
 
     private static final String CHANNEL_ID = "12341234" ;
 
-    private void Notification(String id, Object range) {
+    private void Notification(String id, Object range) {//create notfication and send to it data
         createNotificationChannel();
         sendNotfication(id,range);
 
@@ -391,18 +391,25 @@ public class backgroundService extends Service {
 
 
         handler = new Handler();
+        Toast.makeText(context, "Service onCreate", Toast.LENGTH_SHORT).show();
         runnable = () -> {
-            if(!StopCity&&FirebaseAuth.getInstance().getCurrentUser() != null) {
+        try {
+            if((!StopCity||!getStateOfGps())&&FirebaseAuth.getInstance().getCurrentUser() != null) {
                 AlertifInCity();
-                handler.postDelayed(runnable, TIMETOWAIT);
+
             }
+        }
+        catch (Exception e){}
+
+            handler.postDelayed(runnable, TIMETOWAIT);
         };
 
-        handler.postDelayed(runnable, 15000);
+        handler.postDelayed(runnable, 5*sec);
     }
 
     private void AlertifInCity() {//Check if its in city, if yes ,do a notification
         if(!checkTimeAndDateIfOn()){return;}
+
         System.out.println("Check if in city ");
         FirebaseFirestore.getInstance() .collection(constants.DOC_REF_SCENARIOS).get().addOnCompleteListener(task -> {
 
@@ -424,12 +431,12 @@ public class backgroundService extends Service {
                                 public void onDataChange(@NotNull DataSnapshot dataSnapshot) {
                                     String userCity = dataSnapshot.getValue(String.class);
                                     if(userCity!=null&&!userCity.equals(constants.OUTSIDECITY)){
-                                        if(userCity.equals(townScenario)) {
+                                        if(userCity.equals(townScenario)||userCity.compareTo(townScenario)==0) {
                                        if (checkImporent(documentSnapshot) &&
                                                isItAfterTime(toTimestamp(documentSnapshot.getData()
                                                        .get(constants.BACKGROUND_SERVICE_TIMECREATED)), getLastTime())) {
+                                           Notification(documentSnapshot.getId(), 0);
                                            setLastTime(toTimestamp(documentSnapshot.getData().get(constants.BACKGROUND_SERVICE_TIMECREATED)));
-                                           sendNotfication(documentSnapshot.getId(), 0);
 
                                        }
 
