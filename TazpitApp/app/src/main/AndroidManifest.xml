@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.example.tazpitapp">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher_foreground"
+        android:label="@string/app_name"
+        android:theme="@style/Theme.TazpitApp"
+        android:screenOrientation="portrait"
+        tools:ignore="AllowBackup">
+        <activity android:name=".SignUp"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <!-- LOGGED IN -->
+        <activity
+            android:name=".SceneriosListActivity"
+            android:screenOrientation="portrait"
+            android:label="@string/title_scenerios_list"
+            android:parentActivityName=".SignUp"
+            android:theme="@style/Theme.TazpitApp.NoActionBar" />
+        <activity
+            android:name=".SceneriosDetailActivity"
+            android:screenOrientation="portrait"
+            android:label="@string/title_scenerios_detail"
+            android:parentActivityName=".SceneriosListActivity"
+            android:theme="@style/Theme.TazpitApp.NoActionBar"/>
+        <activity
+            android:name=".SetActivity"
+            android:screenOrientation="portrait"
+            android:label="Settings Activity"
+            android:parentActivityName=".SetActivity"
+            android:theme="@style/Theme.TazpitApp.NoActionBar" />
+        <activity android:name=".fillReport"
+            android:screenOrientation="portrait"
+            />
+        <!-- UNLOGGED USER -->
+        <activity android:name=".LoginActivity"
+            android:screenOrientation="portrait"
+            >
+
+        </activity>
+        <activity android:name=".register$register1"
+            android:screenOrientation="portrait"
+            />
+        <activity
+            android:name=".register$register2"
+            android:screenOrientation="portrait"
+
+            android:theme="@style/Theme.TazpitApp.NoActionBar">
+        </activity>
+        <activity
+            android:name=".register$register3"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.TazpitApp.NoActionBar"/>
+        <!--ALL USERS        -->
+        <activity android:name=".AboutActivity"
+            android:screenOrientation="portrait"
+            />
+        <activity android:name=".MainActivity"
+            android:screenOrientation="portrait"
+            >
+        </activity>
+        <service
+            android:name=".backgroundService"
+            android:enabled="true"
+            android:exported="false" />
+
+    </application>
+
+</manifest>

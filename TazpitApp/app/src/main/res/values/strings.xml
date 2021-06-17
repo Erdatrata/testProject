@@ -1,0 +1,216 @@
+<resources>
+<!--    ACTIVITY DESCRIPTORS-->
+    <string name="app_name">תצפית</string>
+
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="title_scenerios_list">רשימת האירועים</string>
+    <string name="title_scenerios_detail">פרטי אירוע</string>
+<!--    DUMMY CONTENT-->
+    <string name="makedetails_detail_about"> Details about Item: </string>
+    <string name="details_infromation"> More details information here. </string>
+
+<!--    HOME PAGE   -->
+    <string name="menu_home">עמוד הבית</string>
+    <string name="navigation_drawer_open">פתח את התפריט הצדדי</string>
+    <string name="navigation_drawer_close">סגור את התפריט הצדדי</string>
+    <string name="action_settings">Settings</string>
+
+
+
+    <!--    logged in       -->
+    <string name="scenerios_button">אירועים</string>
+    <string name="settings_button">הגדרות</string>
+    <string name="logout_button">התנתקות</string>
+    <!--    unlogged in     -->
+    <string name="login_button">התחברות</string>
+    <string name="register_button">הרשמו</string>
+
+<!--  SETTINGS PAGE  -->
+    <!--    Page elements    -->
+    <string name="set_element_dayPrefExp">בחר עדיפות לקבלת אירוע:</string>
+    <string name="set_element_radio_by_gps">לפי מיקום</string>
+    <string name="set_element_radio_by_city">לפי עיר</string>
+    <string name="set_element_choose_text">בחר שעות וימי פעילות רצויים:</string>
+    <string name="set_element_applySettingsButton">החל</string>
+    <string name="set_element_fromHSet">משעה</string>
+    <string name="set_element_toHSet">עד שעה</string>
+    <string name="set_element_dayColSet">יום</string>
+    <string name="set_element_allDayButton">כל היום</string>
+    <string name="set_element_rangeExp">טווח אירועים מקסימלי:</string>
+    <string name="min_time_start">00:00</string>
+    <string name="max_time_end">23:59</string>
+    <string name="settings_10km">10km</string>
+    <string name="settings_0_5km">0.5km</string>
+    <string name="settings_day_1">א\'</string>
+    <string name="settings_day_2">ב\'</string>
+    <string name="settings_day_3">ג\'</string>
+    <string name="settings_day_4">ד\'</string>
+    <string name="settings_day_5">ה\'</string>
+    <string name="settings_day_6">ו\'</string>
+    <string name="settings_day_7">ש\'</string>
+    <string name="settings_xx_xx">XX:XX</string>
+    <string name="settings_synchronize">סנכרן הגדרות מהשרת</string>
+
+
+
+
+
+    <!--    Messages and debugs    -->
+    <string name="set_toast_gpsGranted">ההרשאה התקבלה</string>
+    <string name="set_toast_gpsDenied">ההרשאה נדחתה, אנא אשרו אותה במידה ותרצו להשתמש בתכונה</string>
+    <string name="set_toast_location_service_started"> שירותי מיקום החלו  </string>
+    <string name="set_toast_location_service_stoped"> שירותי מיקום הופסקו  </string>
+    <string name="set_alert_title">צורך בקבלת אישור מיקום</string>
+    <string name="set_alert_message">
+        על מנת שנוכל ליידע אותך על אירועים באיזור, אנא אשרו לנו לקבל את מיקומכם.
+    </string>
+    <string name="set_alert_message_for_location"> אנא ודא שה- GPS שלך פעיל וודא הרשאות לאפליקציה דרך ההגדרות
+    </string>
+    <string name="yes"> כן </string>
+    <string name="no"> לא </string>
+    <string name="set_alert_accept">למעבר לאישור</string>
+    <string name="set_alert_deny">ביטול</string>
+    <string name="set_toast_plsChooseDay">אנא בחרו באחד הימים בכפתורים מימין</string>
+    <string name="set_toast_cantSetStartLater">לא ניתן לכוון זמן התחלה מאוחר מזמן סיום</string>
+    <string name="set_toast_cantSetEndFirst">לא ניתן לכוון זמן סיום מוקדם מזמן התחלה</string>
+    <string name="set_toast_success">שינוי הההגדרות בוצע בהצלחה</string>
+    <!--    SYNC    -->
+    <string name="set_alert_sync_message">האם ברצונכם לקבל את ההגדרות הקיימות בשרת או לכתוב לשרת את ההגדרות החדשות?</string>
+    <string name="set_alert_sync_write">לכתוב</string>
+    <string name="set_alert_sync_accept">לקבל</string>
+    <string name="syncToServer">העלאת ההגדרות לשרת בוצעה בהצלחה</string>
+    <string name="syncFromServer">משיכת ההגדרות מהשרת בוצעה בהצלחה</string>
+    <string name="sync_fail">משיכת ההגדרות מהשרת נכשלה</string>
+
+
+
+
+
+
+
+<!--    LOGIN PAGE  -->
+    <string name="login_email">כתובת אימייל</string>
+    <string name="login_password">סיסמה</string>
+    <string name="login_connectButton">התחבר</string>
+    <string name="login_register">עוד לא נרשמת? להרשמה לחץ כאן</string>
+    <string name="login_foregotPass">שכחתי סיסמה</string>
+    <string name="login_already_in">אתם כבר מחוברים!</string>
+    <string name="login_must_mail">חייב להכיל מייל</string>
+    <string name="login_must_password">חייב להכיל סיסמה</string>
+    <string name="login_mail_incorect">מייל לא תקין</string>
+    <string name="login_password_incorect">סיסמה לא תקינה</string>
+    <string name="login_short_password">סיסמה קצרה</string>
+    <string name="login_error">שגיאה:</string>
+    <string name="login_reset_password">לשחזר סיסמה?</string>
+    <string name="login_write_mail">הזן מייל לקבלת לינק לשחזור הסיסמה</string>
+    <string name="login_yes">כן</string>
+    <string name="login_no">לא</string>
+    <string name="login_resetpass_sendtomail">קישור לשחזור הסיסמה נשלח למייל</string>
+    <string name="login_resetpass_notsent">שגיאה! קישור השחזור לא נשלח</string>
+
+
+
+
+
+    <!--    REGISTER    -->
+    <!--    PAGE 1    -->
+    <string name="register_p1_next">המשך</string>
+    <string name="register_hint_lastname">שם משפחה</string>
+    <string name="register_hint_firstname">שם פרטי</string>
+    <string name="register_hint_email">אימייל</string>
+    <string name="register_hint_password">סיסמא</string>
+    <string name="register_hint_password_confirm">אימות סיסמא</string>
+    <string name="register_hint_phone">מספר טלפון</string>
+    <string name="register_hint_city">עיר</string>
+    <string name="register_contract_not_Availble">לא ניתן לטעון את חוזה ההרשמה, נסו שנית מאוחר יותר</string>
+
+
+        <!--    ERRORS  -->
+    <string name="register_error_city_exists">העיר לא קיימת במאגר</string>
+    <string name="register_error_city_error">העיר כתובה באופן שגוי</string>
+    <string name="register_error_phone_short">מספר הפלאפון קצר מדי</string>
+    <string name="register_error_fields_missing">חובה למלא את כל השדות </string>
+    <string name="register_error_email_error">אימייל לא תקין</string>
+    <string name="register_error_password_policy">הסיסמה חייבת להכיל אותיות קטנות, גדולות, תווים מיוחדים ומספרים</string>
+    <string name="register_error_password_mismatch">סיסמאות לא תואמות</string>
+    <string name="register_confirm_checkbox">אנא אשרו את הסכמתכם לחוזה על מנת להירשם</string>
+    <string name="register_fail">ההרשמה נכשלה</string>
+    <string name="login_success">ההתחברות הצליחה</string>
+
+
+
+
+
+
+    <!--    PAGE 2    -->
+    <string name="register_p2_accept">מסכים ומאשר</string>
+    <string name="register_p2_next">הבא</string>
+
+
+    <!--    PAGE 3    -->
+    <string name="register_toast_success">ההרשמה בוצעה בהצלחה</string>
+    <string name="register_p3_send">שלח</string>
+
+
+
+<!--    SCENARIO    -->
+
+
+<!--    SCENARIO DETAILS    -->
+
+
+<!--    ABOUT       -->
+    <!--    ELI       -->
+    <string name="about_eli_name">אלי רווח</string>
+    <string name="about_eli_job">מנהל צוות</string>
+
+    <!--    GABI      -->
+    <string name="about_gab_name">גבריאל גוטקין</string>
+    <string name="about_gab_job">אחראי בדיקות</string>
+    <!--    EVY       -->
+    <string name="about_evy_name">אביתר גולן</string>
+    <string name="about_evy_job">אחראי תכנות</string>
+    <!--    RATTA     -->
+    <string name="about_rat_name">ארדט ראטה</string>
+    <string name="about_rat_job">קשרי לקוחות</string>
+    <!--    NATI      -->
+    <string name="about_nat_name">נתנאל חאזי</string>
+    <string name="about_nat_job">אחראי עיצוב</string>
+    <!--    OTHER    -->
+    <string name="about_team">על הצוות</string>
+    <string name="about_tazpit">על הארגון</string>
+
+
+<!--    FILL REPORT  -->
+    <string name="fillReport_all_fields_must">כל השדות הינם חובה</string>
+    <string name="fillReport_choose_media"> בחר מדיה</string>
+    <string name="fillReport_report_inprocess">  מעלה את הדוח, אנא המתן... </string>
+    <string name="fillReport_succeed_upload_report"> העלאת האירוע בוצעה בהצלחה</string>
+    <string name="fillReport_send">שלח</string>
+    <string name="fillReport_addCredit">הוסף קרדיט צלם</string>
+
+    <string name="fillReport_exit">האם ברצונך לצאת? העלאה לא תתבצע.</string>
+
+
+<!--    DETAIL SCENARIO  -->
+    <string name="more_details"> פרטים נוספים: </string>
+    <string name="title_of_event"> כותרת: </string>
+    <string name="detail_scenario_city"> עיר </string>
+    <string name="place_scenario_city"> מקום האירוע: </string>
+    <string name="scenario_details_moreDetails">פרטים נוספים</string>
+    <string name="scenario_details_directions">כוון אותי לאירוע</string>
+    <string name="scenario_details_register">יצאתי לקריאה</string>
+    <string name="scenario_details_cancel">בטל רישום</string>
+    <string name="scenario_details_fillReport">מלא דוח</string>
+
+<!--    NEWS    -->
+    <string name="news_author">הכותב</string>
+    <string name="news_body">גוף הכתבה</string>
+    <string name="news_title">כותרת</string>
+    <string name="news_time">זמן פרסום</string>
+
+
+
+</resources>

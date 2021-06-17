@@ -1,0 +1,340 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/makeAllDay"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layoutDirection="rtl"
+    tools:context=".SetActivity">
+
+
+    <ImageView
+        android:id="@+id/logo_Image"
+        android:layout_width="273dp"
+        android:layout_height="151dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:src="@mipmap/new_logo_background"
+        android:transitionName="logo_image"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.562"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="-24dp"
+        tools:ignore="MissingConstraints" />
+
+    <RadioGroup
+        android:id="@+id/locationRadioGroup"
+        android:layout_width="238dp"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.549"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/choose_text">
+
+
+        <RadioButton
+            android:id="@+id/radio_by_gps"
+            android:layout_width="108dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+
+            android:layout_marginTop="25dp"
+
+            android:layout_marginEnd="200dp"
+            android:buttonTint="@color/tps_color_blue"
+            android:layoutDirection="rtl"
+            android:text="@string/set_element_radio_by_gps"
+            app:layout_constraintBottom_toTopOf="@+id/textView5"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/choose_text"
+            app:layout_constraintVertical_bias="0.313" />
+
+        <RadioButton
+            android:id="@+id/radio_by_city"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_marginTop="-48dp"
+
+            android:buttonTint="@color/tps_color_blue"
+            android:layoutDirection="rtl"
+            android:text="@string/set_element_radio_by_city"
+            app:layout_constraintBottom_toTopOf="@+id/textView5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/choose_text"
+            app:layout_constraintVertical_bias="0.313" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:layout_editor_absoluteY="74dp">
+
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/set_element_rangeExp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/rangeContainer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="25dp"
+                app:layout_constraintEnd_toStartOf="@+id/textView4"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <SeekBar
+                android:id="@+id/gpsRangeBar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:thumbTint="@color/tps_color_blue"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/maxRange"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="35dp"
+                android:text="@string/settings_10km"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/minRange"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="35dp"
+                android:text="@string/settings_0_5km"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </RadioGroup>
+
+    <TextView
+        android:id="@+id/choose_text"
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="132dp"
+        android:fontFamily="sans-serif-black"
+        android:text="@string/set_element_dayPrefExp"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.557"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="44dp"
+        android:layout_height="22dp"
+        android:layout_marginTop="316dp"
+        android:layout_marginEnd="16dp"
+        android:fontFamily="sans-serif-black"
+        android:gravity="center"
+        android:text="@string/set_element_dayColSet"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/day_sunday"
+        android:layout_width="47dp"
+        android:layout_height="55dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="16dp"
+        android:backgroundTint="@color/tps_color_gray"
+        android:text="@string/settings_day_1"
+        android:textColor="#000000"
+        app:cornerRadius="50dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView6" />
+
+    <Button
+        android:id="@+id/day_monday"
+        android:layout_width="47dp"
+        android:layout_height="55dp"
+        android:layout_marginTop="56dp"
+        android:layout_marginEnd="16dp"
+        android:backgroundTint="@color/tps_color_gray"
+        android:text="@string/settings_day_2"
+        android:textColor="#000000"
+        app:cornerRadius="50dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView6" />
+
+
+    <Button
+        android:id="@+id/day_tuesday"
+        android:layout_width="47dp"
+        android:layout_height="55dp"
+        android:layout_marginTop="104dp"
+        android:layout_marginEnd="16dp"
+        android:backgroundTint="@color/tps_color_gray"
+        android:text="@string/settings_day_3"
+        android:textColor="#000000"
+        app:cornerRadius="50dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView6" />
+
+    <Button
+        android:id="@+id/day_wednesday"
+        android:layout_width="47dp"
+        android:layout_height="55dp"
+        android:layout_marginTop="156dp"
+        android:layout_marginEnd="16dp"
+        android:backgroundTint="@color/tps_color_gray"
+        android:text="@string/settings_day_4"
+        android:textColor="#000000"
+        app:cornerRadius="50dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView6" />
+
+    <Button
+        android:id="@+id/day_thursday"
+        android:layout_width="47dp"
+        android:layout_height="55dp"
+        android:layout_marginTop="204dp"
+        android:layout_marginEnd="16dp"
+        android:backgroundTint="@color/tps_color_gray"
+        android:text="@string/settings_day_5"
+        android:textColor="#000000"
+        app:cornerRadius="50dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView6" />
+
+
+    <Button
+        android:id="@+id/day_friday"
+        android:layout_width="47dp"
+        android:layout_height="55dp"
+        android:layout_marginTop="256dp"
+        android:layout_marginEnd="16dp"
+        android:backgroundTint="@color/tps_color_gray"
+        android:text="@string/settings_day_6"
+        android:textColor="#000000"
+        app:cornerRadius="50dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView6" />
+
+    <Button
+        android:id="@+id/day_saturday"
+        android:layout_width="48dp"
+        android:layout_height="58dp"
+        android:layout_marginEnd="16dp"
+        android:backgroundTint="@color/tps_color_gray"
+        android:text="@string/settings_day_7"
+        android:textColor="#000000"
+        app:cornerRadius="60dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/day_friday"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="100dp"
+        android:fontFamily="sans-serif-black"
+        android:gravity="end"
+        android:text="@string/set_element_toHSet"
+        app:layout_constraintBottom_toTopOf="@+id/timePickerSettingsTo"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/allDayButton"
+        app:layout_constraintVertical_bias="1.0"
+        tools:ignore="MissingConstraints" />
+
+    <Button
+        android:id="@+id/timePickerSettingsFrom"
+        android:layout_width="125dp"
+        android:layout_height="50dp"
+        android:layout_marginEnd="96dp"
+        android:fontFamily="sans-serif-black"
+        android:text="@string/settings_xx_xx"
+        app:cornerRadius="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.649"
+        tools:ignore="MissingConstraints" />
+
+    <Button
+        android:id="@+id/timePickerSettingsTo"
+        android:layout_width="126dp"
+        android:layout_height="50dp"
+        android:fontFamily="sans-serif-black"
+        android:text="@string/settings_xx_xx"
+        app:cornerRadius="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/timePickerSettingsFrom"
+        app:layout_constraintHorizontal_bias="0.75"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.649"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="47dp"
+        android:layout_height="19dp"
+        android:layout_marginEnd="136dp"
+        android:fontFamily="sans-serif-black"
+        android:text="@string/set_element_fromHSet"
+        app:layout_constraintBottom_toTopOf="@+id/timePickerSettingsFrom"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/allDayButton"
+        app:layout_constraintVertical_bias="1.0"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:fontFamily="sans-serif-black"
+        android:text="@string/set_element_choose_text"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.333"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/locationRadioGroup" />
+
+    <Button
+        android:id="@+id/allDayButton"
+        android:layout_width="174dp"
+        android:layout_height="53dp"
+        android:fontFamily="sans-serif-black"
+        android:text="@string/set_element_allDayButton"
+        app:cornerRadius="20dp"
+        android:backgroundTint="@color/tps_color_gray"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toTopOf="@+id/timePickerSettingsFrom"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.4"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView5"
+        app:layout_constraintVertical_bias="0.388"
+        tools:ignore="MissingConstraints" />
+
+    <Switch
+        android:id="@+id/sync_button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="125dp"
+        android:layout_marginTop="15dp"
+        android:checked="true"
+        android:text="@string/settings_synchronize"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/timePickerSettingsFrom" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+

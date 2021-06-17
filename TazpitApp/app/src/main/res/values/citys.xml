@@ -1,0 +1,10 @@
+<resources>
+    <string-array name="citysOnTest">
+        <item>jerusalem </item>
+        <item>Tel aviv</item>
+        <item>haifa</item>
+        <item>eilat</item>
+        <item>bet shemesh</item>
+    </string-array>
+
+</resources>
