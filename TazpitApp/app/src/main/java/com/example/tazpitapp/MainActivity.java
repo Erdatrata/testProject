@@ -372,8 +372,22 @@ public class MainActivity<imageView> extends AppCompatActivity implements Naviga
             this.recreate();
         }
         if (id == R.id.contact_button) {
-            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://tps.co.il/contact-us/"));
-            startActivity(browserIntent);
+            final Intent emailIntent = new Intent(android.content.Intent.ACTION_SENDTO);
+
+            /* Fill it with Data */
+            emailIntent.setData(Uri.parse("mailto:"));
+//            emailIntent.setType("plain/text");
+            emailIntent.putExtra(android.content.Intent.EXTRA_EMAIL, new String[]{"en@tpsnews.co.il"});
+            emailIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "יצירת קשר");
+//            emailIntent.setType("message/rfc822");
+            if(emailIntent.resolveActivity(getPackageManager())!=null){
+                startActivity(emailIntent);/////////////////////////
+            } else {
+                Toast.makeText(this, "לא קיימת תוכנת דוא\"ל על המכשיר", Toast.LENGTH_SHORT).show();
+            }
+
+            /* Send it off to the Activity-Chooser */
+//            this.startActivity(Intent.createChooser(emailIntent, "Send mail..."));
         }
         return true;
 
