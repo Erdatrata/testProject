@@ -53,6 +53,7 @@ public class SetActivity extends AppCompatActivity {
     private TextView rangeCont;
     private Switch syncButton;
 
+    private boolean[] daysChanged;
     private Button timePickerFrom;
     private Button timePickerTo;
     private static Button rightNow = null;
@@ -122,6 +123,11 @@ public class SetActivity extends AppCompatActivity {
         Button[] daysArr = {daysButton1, daysButton2, daysButton3, daysButton4,
                 daysButton5, daysButton6, daysButton7};
         syncButton.setChecked(sharedpreferences.getBoolean("sync",true));
+
+        //reset the daysChanged array
+        daysChanged=new boolean[7];
+        for(int i=0;i<7;i++)
+            daysChanged[i]=false;
 
         //load location selection
         String gpsPref = sharedpreferences.getString(constants.SHARED_PREFS_LOCATION,constants.SHARED_PREFS_DEAFULT);
@@ -416,13 +422,17 @@ public class SetActivity extends AppCompatActivity {
         //if switching between days after changing hours, save into temp
         if (unsaved && rightNow!=null) {
             //take hours from both start and end, put into new dayTime
+            daysChanged[Integer.parseInt((rightNow.getTag()).toString())]=true;
+
             saveTemp();
             //unsave unsaved
             unsaved = false;
-        }
-        if(rightNow!=null){
-            rightNow.setBackgroundColor(getColor(R.color.tps_color_gray));
-            rightNow.setTextColor(getColor(R.color.black));
+        } else {
+            if (rightNow != null && !(daysChanged[Integer.parseInt((rightNow.getTag()).toString())])) {
+                rightNow.setBackgroundColor(getColor(R.color.tps_color_gray));
+                rightNow.setTextColor(getColor(R.color.black));
+            }
+            v.getTag();
         }
         rightNow = (Button) v;
         rightNow.setBackgroundColor(getColor(R.color.tps_color_blue));
