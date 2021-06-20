@@ -206,13 +206,13 @@ public class SetActivity extends AppCompatActivity {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(!isChecked) {//if user doesn't want to sync settings to server
                     editor.putBoolean("sync", false);
+                    editor.apply();
                     return;
                 }
                 //otherwise change the state of the boolean and ask user if they'd like to sync to or from server
                 {
                     editor.putBoolean("sync",true);
                     new AlertDialog.Builder(SetActivity.this)
-                            .setTitle(R.string.set_alert_title)
                             .setMessage(R.string.set_alert_sync_message)
                             .setPositiveButton(R.string.set_alert_sync_accept, (dialogInterface, i) -> {
                                 {//download settings from server
@@ -246,8 +246,8 @@ public class SetActivity extends AppCompatActivity {
                                                         toStore = dtDEF;//then input default 'all day' state
                                                     editor.putString(d, toStore);
                                                 }
-                                                editor.putBoolean("sync",true);
                                                 editor.apply();
+
 
                                             }
                                         } else {
@@ -256,6 +256,8 @@ public class SetActivity extends AppCompatActivity {
                                         //return to main
                                     });
                                 }
+                                editor.putBoolean("sync",true);
+                                editor.apply();
                                 Toast.makeText(SetActivity.this, R.string.syncToServer, Toast.LENGTH_SHORT).show();
                                 finish();
                                 startActivity(getIntent());
@@ -267,11 +269,14 @@ public class SetActivity extends AppCompatActivity {
                 }
             }
         });
+        editor.apply();
     }
 
     @Override
     public void onStop(){
         super.onStop();
+        if (unsaved && rightNow!=null)
+            saveTemp();
         if(sharedpreferences.getBoolean("sync",true))
             saveToServer();
     }
@@ -279,6 +284,8 @@ public class SetActivity extends AppCompatActivity {
     @Override
     public void onPause(){
         super.onPause();
+        if (unsaved && rightNow!=null)
+            saveTemp();
         if(sharedpreferences.getBoolean("sync",true))
             saveToServer();
     }
@@ -286,6 +293,8 @@ public class SetActivity extends AppCompatActivity {
     @Override
     public void onDestroy() {
         super.onDestroy();
+        if (unsaved && rightNow!=null)
+            saveTemp();
         if(sharedpreferences.getBoolean("sync",true))
             saveToServer();
     }
@@ -537,6 +546,7 @@ public class SetActivity extends AppCompatActivity {
         editor.putString(idd, stringified).apply();
         //write to sendDoc
         docData.put(idd,stringified);
+        editor.apply();
     }
 
     /**********************************
