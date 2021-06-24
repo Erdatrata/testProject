@@ -86,7 +86,7 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/newsRecycle"
-            android:layout_width="390dp"
+            android:layout_width="360dp"
             android:layout_height="622dp"
             android:layout_marginBottom="4dp"
             app:layout_constraintBottom_toBottomOf="parent"
