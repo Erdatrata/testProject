@@ -325,7 +325,7 @@ async function createTab(from,userDoc,filled) {
         });
         task.append( open,checkUser,check);
     } else {
-        task.append(checkUser,check);
+        task.append(checkUser);
     }
     $(".notcomp").append(task);
     //to clear the input
@@ -567,9 +567,7 @@ function removeNewEvent(){
 
 
 }
-function ListOfV() {
-    return undefined;
-}
+
 
 function InList(city,arr) {
     for(let i=0;i<arr.length;i++){
@@ -679,9 +677,7 @@ function newEvent() {
     return re;
 }
 
-function newUsers() {
-    return undefined;
-}
+
 
 function ListEvent() {
     let re="  <div id=\"ListOfS\">\n" +
