@@ -1,15 +1,16 @@
 {
   "project_info": {
     "project_number": "424645773030",
+    "firebase_url": "https://tps-photo-app-default-rtdb.firebaseio.com",
     "project_id": "tps-photo-app",
     "storage_bucket": "tps-photo-app.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:424645773030:android:0f2f9ec9f462c15746dd27",
+        "mobilesdk_app_id": "1:424645773030:android:bdc5cf2c231a266346dd27",
         "android_client_info": {
-          "package_name": "com.example.tazpit"
+          "package_name": "com.example.tazpitapp"
         }
       },
       "oauth_client": [
