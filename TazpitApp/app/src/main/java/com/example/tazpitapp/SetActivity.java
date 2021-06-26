@@ -125,8 +125,8 @@ public class SetActivity extends AppCompatActivity {
         syncButton.setChecked(sharedpreferences.getBoolean("sync",true));
 
         //reset the daysChanged array
-        daysChanged=new boolean[7];
-        for(int i=0;i<7;i++)
+        daysChanged=new boolean[8];
+        for(int i=0;i<8;i++)
             daysChanged[i]=false;
 
         //load location selection
@@ -461,7 +461,7 @@ public class SetActivity extends AppCompatActivity {
         hoursEnd = dtGET.getHourEnd();
         minuteStart = dtGET.getMinuteStart();
         minutesEnd = dtGET.getMinuteEnd();
-        if(hourStart==0&&hoursEnd==23&&minuteStart==00&&minutesEnd==59){
+        if(hourStart==0&&hoursEnd==23&&minuteStart==0&&minutesEnd==59){
             findViewById(R.id.allDayButton).setBackgroundColor(getColor(R.color.tps_color_blue));
             ((Button)findViewById(R.id.allDayButton)).setTextColor(getColor(R.color.white));
         } else {
@@ -520,7 +520,7 @@ public class SetActivity extends AppCompatActivity {
             //if changes were made to time, make sure to let it be known in logic
             if (((Button) v).getText() != toPut) {
                 unsaved = true;
-                if(hourStart==0&&hoursEnd==23&&minuteStart==00&&minutesEnd==59){
+                if(hourStart==0&&hoursEnd==23&&minuteStart==0&&minutesEnd==59){
                    findViewById(R.id.allDayButton).setBackgroundColor(getColor(R.color.tps_color_blue));
                     ((Button)findViewById(R.id.allDayButton)).setTextColor(getColor(R.color.white));
         }
