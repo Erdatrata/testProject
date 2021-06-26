@@ -1,5 +1,6 @@
 {
   "projects": {
-    "default": "tazpit-testingandprototype"
+    "default": "tazpit-testingandprototype",
+    "TPS-Official": "tps-photo-app"
   }
 }
