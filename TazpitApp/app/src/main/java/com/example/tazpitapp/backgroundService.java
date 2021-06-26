@@ -391,7 +391,6 @@ public class backgroundService extends Service {
 
 
         handler = new Handler();
-        Toast.makeText(context, "Service onCreate", Toast.LENGTH_SHORT).show();
         runnable = () -> {
         try {
             if((!StopCity||!getStateOfGps())&&FirebaseAuth.getInstance().getCurrentUser() != null) {
@@ -404,13 +403,13 @@ public class backgroundService extends Service {
             handler.postDelayed(runnable, TIMETOWAIT);
         };
 
-        handler.postDelayed(runnable, 5*sec);
+        handler.postDelayed(runnable, TIMETOWAIT);
     }
 
     private void AlertifInCity() {//Check if its in city, if yes ,do a notification
         if(!checkTimeAndDateIfOn()){return;}
 
-        System.out.println("Check if in city ");
+
         FirebaseFirestore.getInstance() .collection(constants.DOC_REF_SCENARIOS).get().addOnCompleteListener(task -> {
 
             if (task.isSuccessful()) {
