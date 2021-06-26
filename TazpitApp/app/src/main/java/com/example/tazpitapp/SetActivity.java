@@ -523,7 +523,10 @@ public class SetActivity extends AppCompatActivity {
                 if(hourStart==0&&hoursEnd==23&&minuteStart==0&&minutesEnd==59){
                    findViewById(R.id.allDayButton).setBackgroundColor(getColor(R.color.tps_color_blue));
                     ((Button)findViewById(R.id.allDayButton)).setTextColor(getColor(R.color.white));
-        }
+        }else {
+                    findViewById(R.id.allDayButton).setBackgroundColor(getColor(R.color.tps_color_gray));
+                    ((Button)findViewById(R.id.allDayButton)).setTextColor(getColor(R.color.black));
+                }
             }
             ((Button) v).setText(toPut);
         };
