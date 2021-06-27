@@ -314,7 +314,10 @@ public class MainActivity<imageView> extends AppCompatActivity implements Naviga
     public static Bitmap[] imageToBitMapArray(String[] image,int len){
         Bitmap[] bitmaps=new Bitmap[len];
         for(int i=0;i<len;i++){
-            bitmaps[i]= Objects.requireNonNull(LoadImageFromWebOperations(image[i]))[0];
+          try {
+              bitmaps[i]= Objects.requireNonNull(LoadImageFromWebOperations(image[i]))[0];
+          }
+          catch (Exception e){}
         }
 
     return bitmaps;
